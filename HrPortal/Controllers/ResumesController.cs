@@ -12,7 +12,23 @@ namespace HrPortal.Controllers
         {
             return View();
         }
-       
+
+        public IActionResult Details(string id)
+        {
+
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+           
+        }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 
 }
