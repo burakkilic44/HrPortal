@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HrPortal.Controllers
 {
-    public class JobsController : Controller
+    public class CompanysController : Controller
     {
         public IActionResult Index()
         {
             return View();
-
         }
-        public IActionResult Create()
+
+        public IActionResult Details(int id)
         {
             return View();
         }
