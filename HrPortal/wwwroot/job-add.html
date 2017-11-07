@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -123,76 +123,85 @@
     <!-- Page header -->
     <header class="page-header">
       <div class="container page-name">
-        <h1 class="text-center">Add a new job</h1>
-        <p class="lead text-center">Create a new vacancy for your company and put it online.</p>
+        <h1 class="text-center">İş İlanı Ver</h1>
+        <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
       </div>
 
       <div class="container">
 
         <div class="row">
           <div class="form-group col-xs-12 col-sm-6">
-            <input type="text" class="form-control input-lg" placeholder="Job title, e.g. Front-end developer">
+            <input type="text" class="form-control input-lg" placeholder="İlan Başlığı">
           </div>
 
           <div class="form-group col-xs-12 col-sm-6">
             <select class="form-control selectpicker">
-              <option>Select a company</option>
+              <option>Firmalar</option>
               <option>Google</option>
               <option>Microsoft</option>
               <option>Apple</option>
               <option>Facebook</option>
             </select>
-            <a class="help-block" href="company-add.html">Add new company</a>
+            <a class="help-block" href="company-add.html">Yeni Firma Ekle</a>
           </div>
 
           <div class="form-group col-xs-12">
-            <textarea class="form-control" rows="3" placeholder="Short description"></textarea>
+            <textarea class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
           </div>
 
           <div class="form-group col-xs-12">
-            <input type="text" class="form-control" placeholder="Application URL">
+            <input type="text" class="form-control" placeholder="Web Adresi">
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-6 col-md-4">
+              <div class="input-group input-group-sm">
+                  <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                  <select class="form-control selectpicker">
+                      <option>İl</option>
+                  </select>
+              </div>
           </div>
 
           <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-              <input type="text" class="form-control" placeholder="Location, e.g. Melon Park, CA">
-            </div>
-          </div>
-
-          <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-              <select class="form-control selectpicker">
-                <option>Full time</option>
-                <option>Part time</option>
-                <option>Internship</option>
-                <option>Freelance</option>
-                <option>Remote</option>
+              <span class="input-group-addon"><i class="fa fa-briefcase" ></i></span>
+              <select class="form-control selectpicker" >
+                <option>Çalışma Şekli</option>
+                <option>Sürekli/Tam zamanlı</option>
+                <option>Yarı zamanlı/Part Time</option>
+                <option>Dönemsel/Proje Bazlı</option>
+                <option>Stajyer</option>
+                <option>Serbest Zamanlı</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-money"></i></span>
-              <input type="text" class="form-control" placeholder="Salary">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-male"></i></span>
+                    <select class="form-control selectpicker">
+                        <option>Askerlik</option>
+                        <option>Yapıldı</option>
+                        <option>Muaf</option>
+                        <option>Tecilli</option>
+
+                    </select>
+                </div>
             </div>
-          </div>
 
           <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-              <input type="text" class="form-control" placeholder="Working hours, e.g. 40">
-              <span class="input-group-addon">hours / week</span>
+              <input type="text" class="form-control" placeholder="Çalışma Saati">
+              <span class="input-group-addon">Saat / Hafta</span>
             </div>
           </div>
 
           <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-              <input type="text" class="form-control" placeholder="Experience, e.g. 5">
-              <span class="input-group-addon">Years</span>
+              <input type="text" class="form-control" placeholder="Deneyim">
+              <span class="input-group-addon">Yıl</span>
             </div>
           </div>
 
@@ -200,26 +209,25 @@
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
               <select class="form-control selectpicker" multiple>
-                <option>Postdoc</option>
-                <option>Ph.D.</option>
-                <option>Master</option>
-                <option selected>Bachelor</option>
+                <option>Tüm Seviyeler</option>
+                <option>Önlisans</option>
+                <option>Lisans</option>
+                <option>Yüksek Lisans</option>
+                 <option>Doktora</option>
               </select>
             </div>
-          </div>
-
-
-        </div>
+          </div>       
 
         <div class="button-group">
           <div class="action-buttons">
             <div class="upload-button">
-              <button class="btn btn-block btn-primary">Choose a cover image</button>
+              <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
               <input id="cover_img_file" type="file">
             </div>
           </div>
         </div>
 
+      </div>
       </div>
     </header>
     <!-- END Page header -->
@@ -234,9 +242,9 @@
           <div class="container">
 
             <header class="section-header">
-              <span>Description</span>
-              <h2>Job detail</h2>
-              <p>Write about your company, job description, skills required, benefits, etc.</p>
+              <span>AÇIKLAMA</span>
+              <h2>İş Detayı</h2>
+              <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
             </header>
             
             <textarea class="summernote-editor"></textarea>
@@ -250,12 +258,12 @@
         <section class="bg-alt">
           <div class="container">
             <header class="section-header">
-              <span>Are you done?</span>
-              <h2>Submit Job</h2>
-              <p>Please review your information once more and press the below button to put your job online.</p>
+              <span>Tamam mısın?</span>
+              <h2>İşi Gönder</h2>
+              <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
             </header>
 
-            <p class="text-center"><button class="btn btn-success btn-xl btn-round">Submit your job</button></p>
+            <p class="text-center"><button class="btn btn-success btn-xl btn-round">İŞİNİZİ GÖNDERİN</button></p>
 
           </div>
         </section>
