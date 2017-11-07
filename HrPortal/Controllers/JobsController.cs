@@ -17,5 +17,13 @@ namespace HrPortal.Controllers
         {
             return View();
         }
+        public IActionResult Detail()
+        {
+            return View();
+        }
+        public IActionResult Apply()
+        {
+            return View();
+        }
     }
 }
