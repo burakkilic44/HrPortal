@@ -1,26 +1,80 @@
+﻿
 @using Microsoft.AspNetCore.Identity
 @using HrPortal.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+
+
+
+
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+            <li class="pull-right">
+                <button type="submit" class="btn btn-link navbar-btn navbar-link btn-xs">Log out</button>
             </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                <li class="pull-right">
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="login">Hello @UserManager.GetUserName(User)!</a>
+                </li>      
+        </form>
+    }
+
+    else
+    {
+
+
+
+
+
+        
+
+            <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Giriş</b> <span class="caret"></span></a>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="social-buttons">
+                                    <a href="#" class="btn btn-fb btn-xs"><i class="fa fa-facebook"></i> Facebook</a>
+                                    <a href="#" class="btn btn-tw btn-xs"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
+                                </div>
+                                <p>Giriş Yap</p>
+                                <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="exampleInputEmail2">Email</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="exampleInputPassword2">Şifre</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Şifre" required>
+                                        <div class="help-block text-right"><a href="">Şifreni Mi Unuttun?</a></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Beni Hatırla
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="bottom text-center">
+                                Hesabın Yok Mu? <a href="#"><b>Üye Ol</b></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </li>
-        </ul>
-    </form>
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
+       
+                
+
+    @*<ul class="nav navbar-nav navbar-right">
         <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
         <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
-    </ul>
+    </ul>*@
 }
