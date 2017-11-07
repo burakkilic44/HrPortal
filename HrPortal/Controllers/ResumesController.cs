@@ -13,7 +13,7 @@ namespace HrPortal.Controllers
             return View();
         }
 
-        public IActionResult ResumeDetail(string id)
+        public IActionResult Details(string id)
         {
 
             return View();
