@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace HrPortal.Areas.Admin.Controllers
 {
     [Area("admin")]
-    public class DashboardController : Controller
+    [Route("admin/[controller]")]
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {
