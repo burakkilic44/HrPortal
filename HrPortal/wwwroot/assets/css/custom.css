@@ -5,7 +5,7 @@
 }
 .nav-menu2 > li {
     position: relative;
-    display: inline-block;
+  
     padding: 0 2px;
 }
     .nav-menu2 a.menuitem {
@@ -27,6 +27,37 @@
         transition: color .2s linear;
        
     }
+@media (max-width: 991px) {
+    .navbar .nav-menu2 {
+        text-align: left;
+    }
+}
+@media (max-width: 991px) {
+    .navbar .nav-menu2 {
+        position: fixed;
+        left: -80%;
+        top: 0;
+        bottom: 0;
+        z-index: 99;
+        width: 80%;
+        max-width: 300px;
+        height: 100%;
+        overflow-y: auto;
+        background-color: #fff;
+        margin-left: 0;
+        padding: 24px 16px;
+        -webkit-transition: left .5s;
+        -o-transition: left .5s;
+        transition: left .5s;
+    }
+}
+@media (max-width: 991px) {
+    .offcanvas-show .navbar .nav-menu2 {
+        left: 0;
+        -webkit-box-shadow: 8px 0 10px 0 rgba(0,0,0,.05);
+        box-shadow: 8px 0 10px 0 rgba(0,0,0,.05);
+    }
+}
 
 
 
