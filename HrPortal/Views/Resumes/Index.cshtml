@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+    <div class="container page-name">
+        <h1 class="text-center">Özgeçmişler</h1>
+        <p class="lead text-center">Aradığınız pozisyon için özgeçmişler aşağıdadır.</p>
+    </div>
+
+    <div class="container">
+        <form action="#">
+
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-4">
+                    <input type="text" class="form-control" placeholder="Anahtar kelime: isim, yetenekler ya da etiketler">
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <select class="form-control selectpicker" multiple>
+                        <option selected>Tüm Bölgeler</option>
+                        <option>İstanbul(Anadolu)</option>
+                        <option>İstanbul(Avrupa)</option>
+                        <option>İzmir</option>
+                        <option>Ankara</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <select class="form-control selectpicker" multiple>
+                        <option selected>Tüm kategoriler</option>
+                        <option>Yazılım Geliştirici</option>
+                        <option>Tasarımcı</option>
+                        <option>Müşteri Hizmetleri</option>
+                        <option>Finans</option>
+                        <option>Sağlık</option>
+                        <option>Satış</option>
+                        <option>Bilgi Teknolojileri</option>
+                        <option>Diğerleri</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <h6>Askerlik Durumu</h6>
+                    <div class="checkall-group">
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate4" name="rate">
+                            <label for="rate4">N/A<small>(684)</small></label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate1" name="rate">
+                            <label for="rate1">Yapıldı</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate2" name="rate">
+                            <label for="rate2">Muaf<small>(364)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate3" name="rate">
+                            <label for="rate3">Tecilli<small>(684)</small></label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <h6>Eğitim Seviyesi</h6>
+                    <div class="checkall-group">
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree1" name="degree" checked>
+                            <label for="degree1">Tüm Seviyeler</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree2" name="degree">
+                            <label for="degree2">Ön Lisans <small>(216)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree3" name="degree">
+                            <label for="degree3">Lisans <small>(569)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree4" name="degree">
+                            <label for="degree4">Yüksek Lisans <small>(439)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree5" name="degree">
+                            <label for="degree5">Doktora <small>(84)</small></label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <h6>Sort by</h6>
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby1" value="option1" checked>
+                        <label for="sortby1">Sırala</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby2" value="option2">
+                        <label for="sortby2">En yakın</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby3" value="option3">
+                        <label for="sortby3">En uzak</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="button-group">
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Filtrele</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</header>
+<!-- END Page header -->
+
+
