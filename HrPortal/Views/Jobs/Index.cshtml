@@ -1,153 +1,356 @@
-﻿
+﻿@Model IEnumerable<Jobs>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "İş İlanları";
 }
-
 <div class="container page-name">
-    <h1 class="text-center">İş İlanı Ver</h1>
-    <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
+    <h1 class="text-center">İş Ara <span><i class="fa fa-search"></i></span></h1>
+    <p class="lead text-center">Size daha uygun iş bulmak için aşağıdaki arama kutusunu kullanın</p>
 </div>
 
 <div class="container">
+    <form action="#">
 
-    <div class="row">
-        <div class="form-group col-xs-12 col-sm-6">
-            <input type="text" class="form-control input-lg" placeholder="İlan Başlığı">
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6">
-            <select class="form-control selectpicker">
-                <option>Firmalar</option>
-                <option>Google</option>
-                <option>Microsoft</option>
-                <option>Apple</option>
-                <option>Facebook</option>
-            </select>
-            <a class="help-block" href="company-add.html">Yeni Firma Ekle</a>
-        </div>
-
-        <div class="form-group col-xs-12">
-            <textarea class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
-        </div>
-
-        <div class="form-group col-xs-12">
-            <input type="text" class="form-control" placeholder="Web Adresi">
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                <select class="form-control selectpicker">
-                    <option>İl</option>
-                </select>
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-4">
+                <input type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
             </div>
-        </div>
 
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                <select class="form-control selectpicker">
-                    <option>Çalışma Şekli</option>
-                    <option>Sürekli/Tam zamanlı</option>
-                    <option>Yarı zamanlı/Part Time</option>
-                    <option>Dönemsel/Proje Bazlı</option>
-                    <option>Stajyer</option>
-                    <option>Serbest Zamanlı</option>
-                </select>
+            <div class="form-group col-xs-12 col-sm-4">
+                <input type="text" class="form-control" placeholder="Şehir arayın">
             </div>
-        </div>
 
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                <select class="form-control selectpicker">
-                    <option>Askerlik</option>
-                    <option>Yapıldı</option>
-                    <option>Muaf</option>
-                    <option>Tecilli</option>
-
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                <input type="text" class="form-control" placeholder="Çalışma Saati">
-                <span class="input-group-addon">Saat / Hafta</span>
-            </div>
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                <input type="text" class="form-control" placeholder="Deneyim">
-                <span class="input-group-addon">Yıl</span>
-            </div>
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
+            <div class="form-group col-xs-12 col-sm-4">
                 <select class="form-control selectpicker" multiple>
-                    <option>Tüm Seviyeler</option>
-                    <option>Önlisans</option>
-                    <option>Lisans</option>
-                    <option>Yüksek Lisans</option>
-                    <option>Doktora</option>
+                    <option selected>Sektörler</option>
+                    <option>Yazılım Geliştirici</option>
+                    <option>Tasarımcı</option>
+                    <option>Müşteri Hizmetleri</option>
+                    <option>Finans</option>
+                    <option>Sağlık Hizmeti</option>
+                    <option>Satış</option>
+                    <option>Pazarlama</option>
+                    <option>Bilgi Teknolojileri</option>
+                    <option>Diğerleri</option>
                 </select>
             </div>
+
+
+            <div class="form-group col-xs-12 col-sm-4">
+                <h6>Çalışma Şekli</h6>
+                <div class="checkall-group">
+                    <div class="checkbox">
+                        <input type="checkbox" id="contract1" name="contract" checked>
+                        <label for="contract1">Tümü</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="contract2" name="contract">
+                        <label for="contract2">Sürekli / Tam Zamanlı<small>(354)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="contract3" name="contract">
+                        <label for="contract3">Yarı Zamanlı / Part-time <small>(284)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="contract4" name="contract">
+                        <label for="contract4">Dönemsel / Proje Bazlı <small>(169)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="contract4" name="contract">
+                        <label for="contract4">Stajyer <small>(169)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="contract5" name="contract">
+                        <label for="contract5">Serbest Zamanlı <small>(480)</small></label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group col-xs-12 col-sm-4">
+                <h6>Askerlik Durumu</h6>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="rate2" name="rate" checked>
+                    <label for="rate2">Yapıldı</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="rate3" name="rate">
+                    <label for="rate3">Muaf</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="rate4" name="rate">
+                    <label for="rate4">Tecilli</label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="rate4" name="rate">
+                    <label for="rate4">Yok</label>
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group col-xs-12 col-sm-4">
+                <h6>Eğitim Seviyesi</h6>
+                <div class="checkall-group">
+                    <div class="checkbox">
+                        <input type="checkbox" id="degree1" name="degree" checked>
+                        <label for="degree1">Tüm Seviyeler</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="degree2" name="degree">
+                        <label for="degree2">Önlisans<small>(216)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="degree3" name="degree">
+                        <label for="degree3">Lisans <small>(569)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="degree4" name="degree">
+                        <label for="degree4">Yüksek Lisans <small>(439)</small></label>
+                    </div>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="degree5" name="degree">
+                        <label for="degree5">Doktora <small>(84)</small></label>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="button-group">
             <div class="action-buttons">
-                <div class="upload-button">
-                    <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
-                    <input id="cover_img_file" type="file">
-                </div>
+                <button class="btn btn-primary">Filtre Uygula</button>
             </div>
         </div>
 
-    </div>
+    </form>
+
 </div>
-    
+
+   
 <!-- END Page header -->
 <!-- Main container -->
 <main>
-
-
-    <!-- Job detail -->
-    <section>
+    <section class="no-padding-top bg-alt">
         <div class="container">
+            <div class="row item-blocks-connected">
 
-            <header class="section-header">
-                <span>AÇIKLAMA</span>
-                <h2>İş Detayı</h2>
-                <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
-            </header>
+                <div class="col-xs-12">
+                    <br>
+                    <h5>Bulunan <strong>357</strong> kayıttan, <i>10</i> ile <i>20</i> kayıt arasını görüntülüyorsunuz.</h5>
+                    <br>
+                </div>
 
-            <textarea class="summernote-editor"></textarea>
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-google.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Senior front-end developer</h4>
+                                <h5>Google</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Menlo park, CA</span>
+                                <span class="label label-success">Full-time</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-linkedin.png" alt="">
+                            <div class="hgroup">
+                                <h4>Software Engineer (Entry or Senior)</h4>
+                                <h5>Linkedin</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Livermore, CA</span>
+                                <span class="label label-warning">Part-time</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-envato.png" alt="">
+                            <div class="hgroup">
+                                <h4>Full Stack Web Developer</h4>
+                                <h5>Envato</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">San Francisco, CA</span>
+                                <span class="label label-info">Freelance</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-facebook.png" alt="">
+                            <div class="hgroup">
+                                <h4>Web Applications Developer</h4>
+                                <h5>Facebook</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Lexington, MA</span>
+                                <span class="label label-danger">Internship</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-microsoft.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Sr. SQL Server Developer</h4>
+                                <h5>Microsoft</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Palo Alto, CA</span>
+                                <span class="label label-success">Remote</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-google.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Senior front-end developer</h4>
+                                <h5>Google</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Menlo park, CA</span>
+                                <span class="label label-success">Full-time</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-linkedin.png" alt="">
+                            <div class="hgroup">
+                                <h4>Software Engineer (Entry or Senior)</h4>
+                                <h5>Linkedin</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Livermore, CA</span>
+                                <span class="label label-warning">Part-time</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-envato.png" alt="">
+                            <div class="hgroup">
+                                <h4>Full Stack Web Developer</h4>
+                                <h5>Envato</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">San Francisco, CA</span>
+                                <span class="label label-info">Freelance</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-facebook.png" alt="">
+                            <div class="hgroup">
+                                <h4>Web Applications Developer</h4>
+                                <h5>Facebook</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Lexington, MA</span>
+                                <span class="label label-danger">Internship</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+                <!-- Job item -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="job-detail.html">
+                        <header>
+                            <img src="assets/img/logo-microsoft.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Sr. SQL Server Developer</h4>
+                                <h5>Microsoft</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">Palo Alto, CA</span>
+                                <span class="label label-success">Remote</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+                <!-- END Job item -->
+
+            </div>
+
+
+            <!-- Page navigation -->
+            <nav class="text-center">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <i class="ti-angle-left"></i>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <i class="ti-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- END Page navigation -->
+
 
         </div>
     </section>
-
-
-
-    <!-- Submit -->
-    <section class="bg-alt">
-        <div class="container">
-            <header class="section-header">
-                <span>Tamam mısın?</span>
-                <h2>İşi Gönder</h2>
-                <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
-            </header>
-
-            <p class="text-center"><button class="btn btn-success btn-xl btn-round">İŞİNİZİ GÖNDERİN</button></p>
-
-        </div>
-    </section>
-    <!-- END Submit -->
-
-
 </main>
+
 
