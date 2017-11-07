@@ -6,13 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HrPortal.Controllers
 {
-    public class ResumeController : Controller
+    public class ResumesController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-       
+
+        public IActionResult ResumeDetail(string id)
+        {
+
+            return View();
+        }
     }
 
 }
