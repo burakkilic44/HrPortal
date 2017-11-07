@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HrPortal.Controllers
 {
-    public class ResumeController : Controller
+    public class JobsController : Controller
     {
         public IActionResult Index()
         {
             return View();
-        }
-       
-    }
 
+        }
+        
+    }
 }

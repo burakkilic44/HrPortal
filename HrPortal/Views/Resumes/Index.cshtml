@@ -1,0 +1,377 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <div class="container page-name">
+        <h1 class="text-center">Özgeçmişler</h1>
+        <p class="lead text-center">Aradığınız pozisyon için özgeçmişler aşağıdadır.</p>
+    </div>
+
+    <div class="container">
+        <form action="#">
+
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-4">
+                    <input type="text" class="form-control" placeholder="Anahtar kelime: isim, yetenekler ya da etiketler">
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <select class="form-control selectpicker" multiple>
+                        <option selected>Tüm Bölgeler</option>
+                        <option>İstanbul(Anadolu)</option>
+                        <option>İstanbul(Avrupa)</option>
+                        <option>İzmir</option>
+                        <option>Ankara</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <select class="form-control selectpicker" multiple>
+                        <option selected>Tüm kategoriler</option>
+                        <option>Yazılım Geliştirici</option>
+                        <option>Tasarımcı</option>
+                        <option>Müşteri Hizmetleri</option>
+                        <option>Finans</option>
+                        <option>Sağlık</option>
+                        <option>Satış</option>
+                        <option>Bilgi Teknolojileri</option>
+                        <option>Diğerleri</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <h6>Askerlik Durumu</h6>
+                    <div class="checkall-group">
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate4" name="rate">
+                            <label for="rate4">N/A<small>(684)</small></label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate1" name="rate">
+                            <label for="rate1">Yapıldı</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate2" name="rate">
+                            <label for="rate2">Muaf<small>(364)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="rate3" name="rate">
+                            <label for="rate3">Tecilli<small>(684)</small></label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <h6>Eğitim Seviyesi</h6>
+                    <div class="checkall-group">
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree1" name="degree" checked>
+                            <label for="degree1">Tüm Seviyeler</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree2" name="degree">
+                            <label for="degree2">Ön Lisans <small>(216)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree3" name="degree">
+                            <label for="degree3">Lisans <small>(569)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree4" name="degree">
+                            <label for="degree4">Yüksek Lisans <small>(439)</small></label>
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" id="degree5" name="degree">
+                            <label for="degree5">Doktora <small>(84)</small></label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-4">
+                    <h6>Sort by</h6>
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby1" value="option1" checked>
+                        <label for="sortby1">Sırala</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby2" value="option2">
+                        <label for="sortby2">En yakın</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby3" value="option3">
+                        <label for="sortby3">En uzak</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="button-group">
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Filtrele</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+ <!-- Main container -->
+<main>
+    <section class="no-padding-top bg-alt">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <br>
+                    <h5><strong>357</strong> eşleşme bulduk</h5>
+                </div>
+
+                <!-- Resume detail -->
+                <div class="col-xs-12">
+                    <a class="item-block" href="resume-detail.html">
+                        <header>
+                            <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Ezgi Şahin</h4>
+                                <h5>Front-end developer</h5>
+                            </div>
+                        </header>
+
+                        <div class="item-body">
+                            <p>20+ years of experience working on front-end development for major companies. I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee. Experience and success in both agency and major corporate environments.</p>
+
+                            <div class="tag-list">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>Bootstrap</span>
+                                <span>Wordpress</span>
+                            </div>
+                        </div>
+
+                        <footer>
+                            <ul class="details cols-3">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>Menlo Park, CA</span>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-money"></i>
+                                    <span>$55 / hour</span>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-certificate"></i>
+                                    <span>Master of Computer Science</span>
+                                </li>
+                            </ul>
+                        </footer>
+                    </a>
+                </div>
+                <!-- END Resume detail -->
+            </div>
+
+            <div class="row">
+                <!-- Resume detail -->
+                <div class="col-sm-12 col-md-6">
+                    <a class="item-block" href="resume-detail.html">
+                        <header>
+                            <img class="resume-avatar" src="assets/img/avatar-1.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Fatma Taşlıdere</h4>
+                                <h5>Java developer</h5>
+                            </div>
+                        </header>
+
+                        <div class="item-body">
+                            <p>I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee.</p>
+
+                            <div class="tag-list">
+                                <span>J2EE</span>
+                                <span>J2SE</span>
+                                <span>Android</span>
+                            </div>
+                        </div>
+
+                        <footer>
+                            <ul class="details cols-2">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>Fairfield, IA</span>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-money"></i>
+                                    <span>$60 / hour</span>
+                                </li>
+                            </ul>
+                        </footer>
+                    </a>
+                </div>
+                <!-- END Resume detail -->
+                <!-- Resume detail -->
+                <div class="col-sm-12 col-md-6">
+                    <a class="item-block" href="resume-detail.html">
+                        <header>
+                            <img class="resume-avatar" src="assets/img/avatar-2.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Göksel Yüce</h4>
+                                <h5>.Net developer</h5>
+                            </div>
+                        </header>
+
+                        <div class="item-body">
+                            <p>I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee.</p>
+
+                            <div class="tag-list">
+                                <span>VB.Net</span>
+                                <span>C#</span>
+                                <span>WPF</span>
+                                <span>ASP.Net</span>
+                                <span>MVC.Net</span>
+                            </div>
+                        </div>
+
+                        <footer>
+                            <ul class="details cols-2">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>Seattle, WA</span>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-money"></i>
+                                    <span>$50 / hour</span>
+                                </li>
+                            </ul>
+                        </footer>
+                    </a>
+                </div>
+                <!-- END Resume detail -->
+            </div>
+
+            <div class="row">
+                <!-- Resume detail -->
+                <div class="col-sm-12 col-md-6">
+                    <a class="item-block" href="resume-detail.html">
+                        <header>
+                            <img class="resume-avatar" src="assets/img/avatar-3.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>İlkay Burak Uzunali</h4>
+                                <h5>Quality assurance</h5>
+                            </div>
+                        </header>
+
+                        <div class="item-body">
+                            <p>I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee.</p>
+
+                            <div class="tag-list">
+                                <span>Testcase</span>
+                                <span>Unit test</span>
+                                <span>jUnit</span>
+                                <span>Git</span>
+                            </div>
+                        </div>
+
+                        <footer>
+                            <ul class="details cols-2">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>Fremont, CA</span>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-money"></i>
+                                    <span>$70 / hour</span>
+                                </li>
+                            </ul>
+                        </footer>
+                    </a>
+                </div>
+                <!-- END Resume detail -->
+                <!-- Resume detail -->
+                <div class="col-sm-12 col-md-6">
+                    <a class="item-block" href="resume-detail.html">
+                        <header>
+                            <img class="resume-avatar" src="assets/img/avatar-4.jpg" alt="">
+                            <div class="hgroup">
+                                <h4>Osman Arabacı</h4>
+                                <h5>UI/UX developer</h5>
+                            </div>
+                        </header>
+
+                        <div class="item-body">
+                            <p>I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee.</p>
+
+                            <div class="tag-list">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>Bootstrap</span>
+                                <span>Photoshop</span>
+                            </div>
+                        </div>
+
+                        <footer>
+                            <ul class="details cols-2">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>Columbus, OH</span>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-money"></i>
+                                    <span>$45 / hour</span>
+                                </li>
+                            </ul>
+                        </footer>
+                    </a>
+                </div>
+                <!-- END Resume detail -->
+            </div>
+
+
+            <!-- Page navigation -->
+            <nav class="text-center">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <i class="ti-angle-left"></i>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <i class="ti-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- END Page navigation -->
+
+
+        </div>
+    </section>
+</main>
+<!-- END Main container -->
+
+
+
+
+
