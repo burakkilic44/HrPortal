@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Jobs>
+@{
+    ViewData["Title"] = "İş İlanları";
+}
+
+<h2>İş İlanları</h2>
+<a asp-controller="Listing" asp-action="Create" class="btn btn-primary">Yeni İlan</a>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Başlık</th>
+        <th>Açıklama</th>
+        <th>Kategori</th>
+        <th>Eylemler</th>
+
+    </tr>
+    @foreach (var listing in Model)
+    {
+        <tr>
+            <td>@listing.Id</td>
+            <td>@listing.Title</td>
+            <td>@listing.Description</td>
+            <td>@listing.CategoryId</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@listing.Id" class="btn btn-success">Düzenle</a>
+                <a asp-action="Delete" asp-route-id="@listing.Id" onclick="return confirm('Bu kaydı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz');"
+                   class="btn btn-danger">Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+
