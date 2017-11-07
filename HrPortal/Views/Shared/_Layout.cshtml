@@ -33,8 +33,8 @@
                 <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
                 <div class="logo-wrapper">
-                    <a class="logo" href="index.html"><img src="/assets/img/logo.png" alt="logo"></a>
-                    <a class="logo-alt" href="index.html"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
+                    <a class="logo" href="/"><img src="/assets/img/logo.png" alt="logo"></a>
+                    <a class="logo-alt" href="/"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
                 </div>
 
             </div>
@@ -43,32 +43,32 @@
             
             <!-- END User account -->
             <!-- Navigation menu -->
-            <ul class="nav-menu">
+            <ul class="nav-menu2">
                 <li>
-                    <a class="active" asp-controller="Home" asp-action="Index">Anasayfa</a>
+                    <a class="menuitem active" asp-controller="Home" asp-action="Index">Anasayfa</a>
                    
                 </li>
                 <li>
-                    <a asp-controller="Jobs" asp-action="Index">İş ilanları</a>
+                    <a class="menuitem" asp-controller="Jobs" asp-action="Index">İş ilanları</a>
                   
                 </li>
                 <li>
-                    <a asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
+                    <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
                  
                 </li>
                 <li>
-                    <a asp-controller="Companies" asp-action="Index">Firmalar</a>
+                    <a class="menuitem" asp-controller="Companies" asp-action="Index">Firmalar</a>
                 </li>
                 <li>
-                    <a asp-controller="Home" asp-action="About">Hakkımızda</a>
+                    <a class="menuitem" asp-controller="Home" asp-action="About">Hakkımızda</a>
                    
                 </li>
                 <li>
-                    <a asp-controller="Home" asp-action="Contact">İletişim</a>
+                    <a class="menuitem" asp-controller="Home" asp-action="Contact">İletişim</a>
                 </li>
                 <li>
-                    <button class="btn btn-success btn-xs" >İlan Ver</button>
-                    <button class="btn btn-success btn-xs">Özgeçmiş Oluştur</button>
+                    <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
+                    <a class="btn btn-success btn-xs" asp-controller="Resume" asp-action="Create">Özgeçmiş Oluştur</a></button>
                     
                 </li>
                @await Html.PartialAsync("_LoginPartial")
