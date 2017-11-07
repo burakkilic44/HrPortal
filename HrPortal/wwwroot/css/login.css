@@ -1,7 +1,5 @@
-﻿.face{
+﻿
 
-    padding:5px;
-}
 #login-dp {
     min-width: 250px;
     padding: 14px 14px 0;
@@ -21,7 +19,7 @@
     }
 
     #login-dp .social-buttons {
-        margin: 12px;
+        margin: 12px 0
     }
 
         #login-dp .social-buttons a {
