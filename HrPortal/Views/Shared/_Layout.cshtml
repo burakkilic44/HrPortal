@@ -32,7 +32,7 @@
                 <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
                 <div class="logo-wrapper">
-                    <a class="logo" href="/"><img src="/assets/img/logo.png" alt="logo"></a>
+                    <a class="logo" href="/"><img src="/assets/img/logocvhavuzu.png" alt="logo"></a>
                     <a class="logo-alt" href="/"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
                 </div>
 
@@ -68,11 +68,21 @@
                 <li>
                     <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
                     <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">Özgeçmiş Oluştur</a>
-                    
-                </li>
-               @await Html.PartialAsync("_LoginPartial")
-            </ul>
+                 </li>
+             </ul>
+        <ul id="login2">
+            <li>
+                @await Html.PartialAsync("_LoginPartial")
+            </li>
+        </ul>
+               
+               
 
+           
+              
+           
+         
+          
             <!-- END Navigation menu -->
             
         </div>

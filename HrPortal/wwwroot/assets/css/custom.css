@@ -8,10 +8,20 @@
   
     padding: 0 2px;
 }
-    .nav-menu2 a.menuitem {
-        line-height: 60px;
-        color: #7e8890;
-    }
+.dropdown pull-right{
+    margin-top:-42px;
+}
+
+#login2 {
+    margin-top: -42px;
+}
+
+
+
+.nav-menu2 a.menuitem {
+    line-height: 60px;
+    color: #7e8890;
+}
 .nav-menu2 a.active, .nav-menu2 a:focus, .nav-menu2 a:hover {
     color: #29aafe;
     text-decoration: none;
@@ -35,6 +45,17 @@
         text-align: left;
     }
 }
+    @media (max-width: 991px) {
+        .navbar .nav-menu2 li {
+            display: block;
+        }
+    }
+        @media (max-width: 991px) {
+            .navbar .nav-menu2 li a{
+                width:100%;
+            }
+
+        }
 @media (max-width: 991px) {
     .navbar .nav-menu2 {
         position: fixed;
