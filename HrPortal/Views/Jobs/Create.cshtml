@@ -8,114 +8,117 @@
 
 
 
-<div class="container page-name">
-    <h1 class="text-center">İş İlanı Ver</h1>
-    <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
-</div>
+    <!-- Page header -->
+<header class="page-header">
+    <div class="container page-name">
+        <h1 class="text-center">İş İlanı Ver</h1>
+        <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
+    </div>
 
-<div class="container">
+    <div class="container">
 
-    <div class="row">
-        <div class="form-group col-xs-12 col-sm-6">
-            <input type="text" class="form-control input-lg" placeholder="İlan Başlığı">
-        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-6">
+                <input type="text" class="form-control input-lg" placeholder="İlan Başlığı">
+            </div>
 
-        <div class="form-group col-xs-12 col-sm-6">
-            <select class="form-control selectpicker">
-                <option>Firmalar</option>
-                <option>Google</option>
-                <option>Microsoft</option>
-                <option>Apple</option>
-                <option>Facebook</option>
-            </select>
-            <a class="help-block" href="company-add.html">Yeni Firma Ekle</a>
-        </div>
-
-        <div class="form-group col-xs-12">
-            <textarea class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
-        </div>
-
-        <div class="form-group col-xs-12">
-            <input type="text" class="form-control" placeholder="Web Adresi">
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+            <div class="form-group col-xs-12 col-sm-6">
                 <select class="form-control selectpicker">
-                    <option>İl</option>
+                    <option>Firmalar</option>
+                    <option>Google</option>
+                    <option>Microsoft</option>
+                    <option>Apple</option>
+                    <option>Facebook</option>
                 </select>
+                <a class="help-block" href="company-add.html">Yeni Firma Ekle</a>
             </div>
-        </div>
 
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                <select class="form-control selectpicker">
-                    <option>Çalışma Şekli</option>
-                    <option>Sürekli/Tam zamanlı</option>
-                    <option>Yarı zamanlı/Part Time</option>
-                    <option>Dönemsel/Proje Bazlı</option>
-                    <option>Stajyer</option>
-                    <option>Serbest Zamanlı</option>
-                </select>
+            <div class="form-group col-xs-12">
+                <textarea class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
             </div>
-        </div>
 
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                <select class="form-control selectpicker">
-                    <option>Askerlik</option>
-                    <option>Yapıldı</option>
-                    <option>Muaf</option>
-                    <option>Tecilli</option>
-
-                </select>
+            <div class="form-group col-xs-12">
+                <input type="text" class="form-control" placeholder="Web Adresi">
             </div>
-        </div>
 
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                <input type="text" class="form-control" placeholder="Çalışma Saati">
-                <span class="input-group-addon">Saat / Hafta</span>
-            </div>
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                <input type="text" class="form-control" placeholder="Deneyim">
-                <span class="input-group-addon">Yıl</span>
-            </div>
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                <select class="form-control selectpicker" multiple>
-                    <option>Tüm Seviyeler</option>
-                    <option>Önlisans</option>
-                    <option>Lisans</option>
-                    <option>Yüksek Lisans</option>
-                    <option>Doktora</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="button-group">
-            <div class="action-buttons">
-                <div class="upload-button">
-                    <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
-                    <input id="cover_img_file" type="file">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                    <select class="form-control selectpicker">
+                        <option>İl</option>
+                    </select>
                 </div>
             </div>
-        </div>
 
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
+                    <select class="form-control selectpicker">
+                        <option>Çalışma Şekli</option>
+                        <option>Sürekli/Tam zamanlı</option>
+                        <option>Yarı zamanlı/Part Time</option>
+                        <option>Dönemsel/Proje Bazlı</option>
+                        <option>Stajyer</option>
+                        <option>Serbest Zamanlı</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-male"></i></span>
+                    <select class="form-control selectpicker">
+                        <option>Askerlik</option>
+                        <option>Yapıldı</option>
+                        <option>Muaf</option>
+                        <option>Tecilli</option>
+                        <option>Yok</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                    <input type="text" class="form-control" placeholder="Çalışma Saati">
+                    <span class="input-group-addon">Saat / Hafta</span>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-flask"></i></span>
+                    <input type="text" class="form-control" placeholder="Deneyim">
+                    <span class="input-group-addon">Yıl</span>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
+                    <select class="form-control selectpicker" multiple>
+                        <option selected>Tüm Eğitim Seviyeleri</option>
+                        <option>Önlisans</option>
+                        <option>Lisans</option>
+                        <option>Yüksek Lisans</option>
+                        <option>Doktora</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <div class="action-buttons">
+                    <div class="upload-button">
+                        <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
+                        <input id="cover_img_file" type="file">
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
-  
+</header>
 <!-- END Page header -->
 <!-- Main container -->
 <main>
@@ -152,6 +155,10 @@
         </div>
     </section>
     <!-- END Submit -->
+
+
+</main>
+<!-- END Main container -->
 
 
 </main>

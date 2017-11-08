@@ -8,10 +8,24 @@
   
     padding: 0 2px;
 }
-    .nav-menu2 a.menuitem {
-        line-height: 60px;
-        color: #7e8890;
+.dropdown pull-right{
+    margin-top:-42px;
+}
+
+#login2 {
+    margin-top: -42px;
+}
+@media (max-width: 767px) {
+
+    #login2 {
+        background-color: rgba(255,255,255,.8);
+        margin-top: -33px;
     }
+
+}
+.nav-menu2 a.menuitem {
+    line-height: 60px; color: #7e8890;
+}
 .nav-menu2 a.active, .nav-menu2 a:focus, .nav-menu2 a:hover {
     color: #29aafe;
     text-decoration: none;
@@ -30,11 +44,27 @@
     ul.nav-menu2 li{
         display:inline;
     }
+@media (min-width:992px) {
+    .logodiv {
+        float: left;
+    }
+}
 @media (max-width: 991px) {
     .navbar .nav-menu2 {
         text-align: left;
     }
 }
+    @media (max-width: 991px) {
+        .navbar .nav-menu2 li {
+            display: block;
+        }
+    }
+        @media (max-width: 991px) {
+            .navbar .nav-menu2 li a{
+                width:100%;
+            }
+
+        }
 @media (max-width: 991px) {
     .navbar .nav-menu2 {
         position: fixed;
@@ -114,9 +144,10 @@
         background-color: #59b5fa;
     }
 
+
 @media(max-width:768px) {
     #login-dp {
-        background-color: inherit;
+       
         color: #fff;
     }
 
@@ -124,7 +155,9 @@
             background-color: inherit;
             border-top: 0 none;
         }
-}
-
-
+    .logodiv {
+        width: 80px;
+        margin: auto;
+    }
         
+}
