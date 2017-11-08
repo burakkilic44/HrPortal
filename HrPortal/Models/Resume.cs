@@ -57,7 +57,7 @@ namespace HrPortal.Models
         public string Hobbies { get; set; }
         public SmokingStatus SmokingStatus { get; set; }
         public string DrivingLicense { get; set; }
-        public bool IsTravelDisable { get; set; }
+        public bool IsTravelDisabled { get; set; }
         public bool IsApproved { get; set; }
         public DateTime? ApproveDate { get; set; }
         public bool IsActive { get; set; }
