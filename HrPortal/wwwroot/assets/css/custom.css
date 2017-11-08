@@ -43,14 +43,13 @@
 @media (max-width: 991px) {
     .navbar .nav-menu2 {
         text-align: left;
-      
     }
-    @media (max-width: 991px){
-        .navbar .nav-menu2 li{
+}
+    @media (max-width: 991px) {
+        .navbar .nav-menu2 li {
             display: block;
-            
         }
-
+    }
         @media (max-width: 991px) {
             .navbar .nav-menu2 li a{
                 width:100%;
