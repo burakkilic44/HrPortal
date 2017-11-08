@@ -16,21 +16,20 @@ namespace HrPortal.Models.AccountViewModels
         [StringLength(20)]
         [Display(Name = "Soyad")]
         public string LastName { get; set; }
-
+       
         [Required]
         [StringLength(20)]
         [Display(Name = "Kullanıcı Adı")]
         public string UserName { get; set; }
-
-        [Display(Name = "Herhangi Bir Firmada Çalışıyor musunuz?")]
+        
+        [Display(Name = "Firma mı?")]
         public bool IsCompany { get; set; }
 
-
+        
         [Display(Name = "Firma Adı")]
         public string CompanyName { get; set; }
-
-
-
+        
+        
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -43,7 +42,7 @@ namespace HrPortal.Models.AccountViewModels
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = " password")]
+        [Display(Name = "Şifre Doğrula")]
         [Compare("Password", ErrorMessage = "Şifreler eşleştirilemedi !")]
         public string ConfirmPassword { get; set; }
     }
