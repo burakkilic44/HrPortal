@@ -27,6 +27,9 @@
         transition: color .2s linear;
        
     }
+    ul.nav-menu2 li{
+        display:inline;
+    }
 @media (max-width: 991px) {
     .navbar .nav-menu2 {
         text-align: left;
