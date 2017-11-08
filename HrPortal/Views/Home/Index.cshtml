@@ -8,35 +8,11 @@
 
 
     <!-- Site header -->
-    <header class="site-header size-lg text-center" style="background-image: url(http://www.sercantogrul.com/wp-content/uploads/2016/06/kariyer_bg.jpg)">
-        <div class="container">
-            <div class="col-xs-12">
-                <br><br>
-                <h2>Şu an sizlere <mark>1,259</mark> iş ilanı sunuyoruz!</h2>
-                <h5 class="font-alt">Aradığınızı dakikalar içinde bulun</h5>
-                <br><br><br>
-                <form class="header-job-search">
-                    <div class="input-keyword">
-                        <input type="text" class="form-control" placeholder="Meslek, yetkinlik, veya şirket adı">
-                    </div>
-
-                    <div class="input-location">
-                        <input type="text" class="form-control" placeholder="Şehir, konum">
-                    </div>
-
-                    <div class="btn-search">
-                        <button class="btn btn-primary" type="submit">İş İlanı Ara</button>
-                        <a href="">Gelişmiş Arama</a>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </header>
+    
     <!-- END Site header -->
 
-    @*@await Html.PartialAsync("SearchJobs")
-    @await Html.PartialAsync("RecentJobs")*@
+    @await Html.PartialAsync("SearchJobs")
+    @await Html.PartialAsync("RecentJobs")
 
     <!-- Main container -->
     <main>
@@ -44,108 +20,7 @@
 
 
         <!-- Recent jobs -->
-        <section class="bg-alt">
-            <div class="container">
-                <header class="section-header">
-               
-                    <h2>Güncel İlanlar</h2>
-                    <p>Son yayınlanan güncel ilanlar</p>
-                </header>
-
-                <div class="row item-blocks-condensed">
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="job-detail.html">
-                            <header>
-                                <img src="assets/img/logo-google.jpg" alt="">
-                                <div class="hgroup">
-                                    <h4>Senior front-end developer</h4>
-                                    <h5>Google</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Menlo park, CA</span>
-                                    <span class="label label-success">Full-time</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/jobs/detail">
-                            <header>
-                                <img src="assets/img/logo-linkedin.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Software Engineer (Entry or Senior)</h4>
-                                    <h5>Linkedin</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Livermore, CA</span>
-                                    <span class="label label-warning">Part-time</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/jobs/detail">
-                            <header>
-                                <img src="assets/img/logo-envato.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Full Stack Web Developer</h4>
-                                    <h5>Envato</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">San Francisco, CA</span>
-                                    <span class="label label-info">Freelance</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/jobs/detail">
-                            <header>
-                                <img src="assets/img/logo-facebook.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Web Applications Developer</h4>
-                                    <h5>Facebook</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Lexington, MA</span>
-                                    <span class="label label-danger">Internship</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/jobs/detail">
-                            <header>
-                                <img src="assets/img/logo-microsoft.jpg" alt="">
-                                <div class="hgroup">
-                                    <h4>Sr. SQL Server Developer</h4>
-                                    <h5>Microsoft</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Palo Alto, CA</span>
-                                    <span class="label label-success">Remote</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                </div>
-
-                <br><br>
-                <p class="text-center"><a class="btn btn-info" href="job-list.html">Bütün ilanlara gözat</a></p>
-            </div>
-        </section>
+        
         <!-- END Recent jobs -->
         <!-- How it works -->
         @* <section>
