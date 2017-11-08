@@ -8,7 +8,7 @@ namespace HrPortal.Models.AccountViewModels
 {
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Lüften Geçerli Bir Mail Adresi giriniz!")]
         [EmailAddress]
         public string Email { get; set; }
     }

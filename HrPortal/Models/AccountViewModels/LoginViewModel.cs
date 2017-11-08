@@ -8,11 +8,11 @@ namespace HrPortal.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Mail Alanı Gereklidir!")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Şifre Alanı Gereklidir!")]
         [DataType(DataType.Password)]
         [Display(Name ="Şifre")]
         public string Password { get; set; }

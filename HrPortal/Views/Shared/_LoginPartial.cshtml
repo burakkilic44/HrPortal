@@ -4,7 +4,11 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@model LoginViewModel  
 
+
+
+@*login model eklendi checkbox dinamik olması içi*@n
 
 
 
@@ -57,10 +61,13 @@
                                         <button type="submit" class="btn btn-primary btn-block btn-sm">Giriş</button>
                                     </div>
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Beni Hatırla
-                                        </label>
                                         
+                                        <div class="form-group">
+                                            <label asp-for="RememberMe"></label>
+                                            <input asp-for="RememberMe" class="checkbox checkbox-inline"
+                                                   @Html.DisplayNameFor(m=> m.RememberMe) />
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>
