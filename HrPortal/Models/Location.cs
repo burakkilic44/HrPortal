@@ -10,7 +10,7 @@ namespace HrPortal.Models
     public class Location:BaseEntity
     {       
         [StringLength(200)]
-        [Required]
+        [Required (ErrorMessage="Bu alan gereklidir.")]
         public string Name { get; set; }
         public string ParentLocationId { get; set; }
         [ForeignKey("ParentLocationId")]
