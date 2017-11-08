@@ -26,7 +26,7 @@ namespace HrPortal.Models
         [Required]
         [Display(Name = "Mesaj")]
         [StringLength(4000)]
-        public string Message { get; set; }
+        public string Messages { get; set; }
        
 
 
