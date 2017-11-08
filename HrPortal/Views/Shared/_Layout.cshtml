@@ -31,61 +31,54 @@
             <div class="pull-left">
                 <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
-                <div class="logo-wrapper">
-                    <a class="logo" href="/"><img src="/assets/img/logocvhavuzu.png" alt="logo"></a>
-                    <a class="logo-alt" href="/"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
-                </div>
+                
 
+            </div><div class="logodiv">
+    <div class="logo-wrapper">
+        <a class="logo" href="/"><img src="/assets/img/logocvhavuzu.png" alt="logo"></a>
+        <a class="logo-alt" href="/"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
+    </div>
             </div>
-            <!-- END Logo -->
-            <!-- User account -->
-            
-            <!-- END User account -->
-            <!-- Navigation menu -->
-            <ul class="nav-menu2">
-                <li>
-                    <a class="menuitem active" asp-controller="Home" asp-action="Index">Anasayfa</a>
-                   
-                </li>
-                <li>
-                    <a class="menuitem" asp-controller="Jobs" asp-action="Index">İş ilanları</a>
-                  
-                </li>
-                <li>
-                    <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
-                 
-                </li>
-                <li>
-                    <a class="menuitem" asp-controller="Companies" asp-action="Index">Firmalar</a>
-                </li>
-                <li>
-                    <a class="menuitem" asp-controller="Home" asp-action="About">Hakkımızda</a>
-                   
-                </li>
-                <li>
-                    <a class="menuitem" asp-controller="Home" asp-action="Contact">İletişim</a>
-                </li>
-                <li>
-                    <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
-                    <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">Özgeçmiş Oluştur</a>
-                 </li>
-             </ul>
-        <ul id="login2">
-            <li>
-                @await Html.PartialAsync("_LoginPartial")
-            </li>
-        </ul>
-               
-               
+    <!-- END Logo -->
+    <!-- User account -->
+    <!-- END User account -->
+    <!-- Navigation menu -->
+    <ul class="nav-menu2">
+        <li>
+            <a class="menuitem active" asp-controller="Home" asp-action="Index">Anasayfa</a>
 
-           
-              
-           
-         
-          
-            <!-- END Navigation menu -->
-            
-        </div>
+        </li>
+        <li>
+            <a class="menuitem" asp-controller="Jobs" asp-action="Index">İş ilanları</a>
+
+        </li>
+        <li>
+            <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
+
+        </li>
+        <li>
+            <a class="menuitem" asp-controller="Companies" asp-action="Index">Firmalar</a>
+        </li>
+        <li>
+            <a class="menuitem" asp-controller="Home" asp-action="About">Hakkımızda</a>
+
+        </li>
+        <li>
+            <a class="menuitem" asp-controller="Home" asp-action="Contact">İletişim</a>
+        </li>
+        <li>
+            <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
+            <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">Özgeçmiş Oluştur</a>
+        </li>
+    </ul>
+    <ul id="login2">
+        <li>
+            @await Html.PartialAsync("_LoginPartial")
+        </li>
+    </ul>
+    <!-- END Navigation menu -->
+
+</div>
     </nav>
 
     <!-- END Navigation bar -->
@@ -104,7 +97,7 @@
                 </div>
 
                 <div class="col-xs-6 col-md-3">
-                    <h6>Company</h6>
+                    <h6>Bağlantılar</h6>
                     <ul class="footer-links">
                         <li><a href="page-about.html">Hakkımızda</a></li>
                         <li><a href="page-typography.html">Nasıl çalışıyoruz</a></li>
@@ -140,7 +133,7 @@
                     <ul class="social-icons">
                         <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                         <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="youtube" href="#"><i class="fa fa-youtube"></i></a></li>
                         <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
                         <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
                     </ul>
