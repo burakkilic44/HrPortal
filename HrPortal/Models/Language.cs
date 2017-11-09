@@ -8,8 +8,11 @@ namespace HrPortal.Models
 {
     public class Language:BaseEntity
     {
+        [Required(ErrorMessage = "Ad alanı gereklidir")]
         [StringLength(200)]
+        [Display(Name = "Ad")]
         public string Name { get; set; }
+        [Display(Name = "Dil Bilgisi")]
         public ICollection<LanguageInfo> LanguageInfos { get; set; }
     }
 }

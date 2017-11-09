@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-HrPortal-307807C3-E664-453C-9A9A-B81F7A775968</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ModelState\**" />
+    <Content Remove="ModelState\**" />
+    <EmbeddedResource Remove="ModelState\**" />
+    <None Remove="ModelState\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -20,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\NewFolder\" />
-    <Folder Include="ModelState\" />
   </ItemGroup>
 
 </Project>

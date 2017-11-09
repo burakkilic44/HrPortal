@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,10 +27,11 @@ namespace HrPortal.Models
         [StringLength(200)]
         public string Photo { get; set; }
 
-        [Display(Name = "LocationId")]
+        [Display(Name = "Konum")]
         public string LocationId { get; set; }
+        [ForeignKey("LocationId")]
         public Location Location { get; set; }
-
+        [Display(Name="Çalışan Sayısı")]
         public EmployeeCount EmployeeCount { get; set; }
 
 
@@ -56,7 +58,7 @@ namespace HrPortal.Models
         [StringLength(200)]
         public string Twitter { get; set; }
 
-        [Display(Name = "GooglePlus")]
+        [Display(Name = "Google+")]
         [StringLength(200)]
         public string GooglePlus { get; set; }
 
@@ -80,23 +82,25 @@ namespace HrPortal.Models
         [StringLength(200)]
         public string YouTube { get; set; }
 
-        [Display(Name = "Linkedin")]
+        [Display(Name = "LinkedIn")]
         [StringLength(200)]
         public string Linkedin { get; set; }
 
         [Display(Name = "Hakkımızda")]
         public string About { get; set; }
 
-        [Display(Name = "IsApproved")]
+        [Display(Name = "Onaylandı Mı?")]
         public bool IsApproved { get; set; }
 
         [Display(Name = "Onay Tarihi")]
         public DateTime? ApproveDate { get; set; }
 
-        [Display(Name = "IsActive")]
+        [Display(Name = "Aktif Mi?")]
         public bool IsActive { get; set; }
+        [Display(Name = "Gizli Mi?")]
+        public bool IsHidden { get; set; }
 
-
+        public ICollection<Job> Jobs { get; set; }
 
     }
 }

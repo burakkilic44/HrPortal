@@ -35,32 +35,41 @@ namespace HrPortal.Models
         [Display(Name = "SmtpHost")]
         [StringLength(200)]
         public string SmtpHost { get; set; }
-        [Display(Name = "Smtpport")]
+        [Display(Name = "SmtpPort")]
         [StringLength(200)]
         public string SmtpPort { get; set; }
-        public bool SmptpSSLEnabled { get; set; }
+        [Display(Name = "Smtp SSL Aktif Mi?")]
+        public bool SmtpSSLEnabled { get; set; }
+        [Display(Name = "Site SSL Kullansın Mı?")]
         public bool UseSSL { get; set; }
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Linkedin { get; set; }
         public string Instagram { get; set; }
         public string Youtube { get; set; }
-        [Display(Name = "FooterText")]
+        [Display(Name = "Alt Bölüm Metni")]
         [StringLength(4000)]
         public string FooterText { get; set; }
-        [Display(Name = "MetaTitle")]
+        [Display(Name = "Meta Başlık")]
         [StringLength(200)]
         public string MetaTitle { get; set; }
-        [Display(Name = "MetaDescription")]
+        [Display(Name = "Meta Açıklama")]
         [StringLength(200)]
         public string MetaDescription { get; set; }
+        [Display(Name = "Özel Html")]
         public string CustomHtml { get; set; }
+        [Display(Name = "Hakkında")]
         public string About { get; set; }
+        [Display(Name = "Gizlilik Politikası")]
         public string PrivacyPolicy { get; set; }
+        [Display(Name = "Kullanım Koşulları")]
         public string TermsOfUse { get; set; }
+        [Display(Name = "Üyelik Sözleşmesi")]
         public string MembershipAgreement { get; set; }
+        [Display(Name = "Nasıl Çalışır?")]
         public string HowItWorks { get; set; }
-        public string Faq { get; set; }
+        [Display(Name = "Yardım")]
+        public string Help { get; set; }
 
     }
 }
