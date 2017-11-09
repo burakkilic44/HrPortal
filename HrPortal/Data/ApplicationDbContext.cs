@@ -31,6 +31,7 @@ namespace HrPortal.Data
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Occupation> Occupations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
