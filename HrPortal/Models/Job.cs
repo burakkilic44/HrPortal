@@ -15,10 +15,10 @@ namespace HrPortal.Models
         [Display(Name ="Başlık")]
         public string Title { get; set; }
 
-        /*
+        
         public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
-        public Company Company { get; set; }*/
+        public Company Company { get; set; }
 
         [StringLength(4000)]
         [Display(Name ="Kısa Açıklama")]
