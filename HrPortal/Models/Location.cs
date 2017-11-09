@@ -19,5 +19,6 @@ namespace HrPortal.Models
         [ForeignKey("ParentLocationId")]
         public Location ParentLocation { get; set; }
         public ICollection<JobLocation> JobLocations { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
     }
 }
