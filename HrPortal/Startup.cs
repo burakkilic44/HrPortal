@@ -35,7 +35,7 @@ namespace HrPortal
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddMvc();
         }
 
