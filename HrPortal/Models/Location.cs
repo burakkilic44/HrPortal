@@ -10,12 +10,15 @@ namespace HrPortal.Models
     public class Location:BaseEntity
     {       
         [StringLength(200)]
-        [Required (ErrorMessage="İsim alanı gereklidir.")]
-        [Display(Name="İsim")]
+        [Required (ErrorMessage="Ad alanı gereklidir.")]
+        [Display(Name="Ad")]
         public string Name { get; set; }
+        [Display(Name = "Üst Konum")]
         public string ParentLocationId { get; set; }
+        [Display(Name = "Üst Konum")]
         [ForeignKey("ParentLocationId")]
-        [Display(Name = "Ana Konum")]
         public Location ParentLocation { get; set; }
+        public ICollection<JobLocation> JobLocations { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
     }
 }

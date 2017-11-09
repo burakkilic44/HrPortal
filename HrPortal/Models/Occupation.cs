@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace HrPortal.Models
 {
-    public class Language:BaseEntity
+    public class Occupation:BaseEntity
     {
         [Required(ErrorMessage = "Ad alanı gereklidir")]
-        [StringLength(200)]
         [Display(Name = "Ad")]
+        [StringLength(200)]
         public string Name { get; set; }
-        [Display(Name = "Dil Bilgisi")]
-        public ICollection<LanguageInfo> LanguageInfos { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
     }
 }

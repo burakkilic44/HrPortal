@@ -12,9 +12,10 @@ using System;
 namespace HrPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171109072416_createMyModel")]
+    partial class createMyModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,34 +29,13 @@ namespace HrPortal.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<DateTime?>("ApproveDate");
-
-                    b.Property<string>("CompanyName")
-                        .HasMaxLength(200);
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime>("CreateDate");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName")
-                        .HasMaxLength(200);
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<bool>("IsApproved");
-
-                    b.Property<bool>("IsEmployer");
-
-                    b.Property<string>("LastName")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("LocationId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -67,29 +47,20 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("OccupationId");
-
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("Photo")
-                        .HasMaxLength(200);
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<DateTime>("UpdateDate");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -98,8 +69,6 @@ namespace HrPortal.Data.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("OccupationId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -494,28 +463,6 @@ namespace HrPortal.Data.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("HrPortal.Models.Occupation", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CreateBy");
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime>("UpdateDate");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Occupation");
-                });
-
             modelBuilder.Entity("HrPortal.Models.Resume", b =>
                 {
                     b.Property<string>("Id")
@@ -869,17 +816,6 @@ namespace HrPortal.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("HrPortal.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("HrPortal.Models.Location", "Location")
-                        .WithMany("Users")
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("HrPortal.Models.Occupation", "Occupation")
-                        .WithMany("Users")
-                        .HasForeignKey("OccupationId");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Certificate", b =>

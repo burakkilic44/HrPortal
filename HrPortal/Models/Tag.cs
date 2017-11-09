@@ -9,9 +9,11 @@ namespace HrPortal.Models
     public class Tag:BaseEntity
     
     {
-        [Required]
+        [Required(ErrorMessage = "Ad alanı gereklidir")]
         [StringLength(200)]
+        [Display(Name = "Ad")]
         public string Name { get; set; }
+        [Display(Name = "Özgeçmiş Etiketleri")]
         public ICollection<ResumeTag> ResumeTags { get; set; }
     }
 }
