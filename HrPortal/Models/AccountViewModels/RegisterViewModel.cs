@@ -9,31 +9,29 @@ namespace HrPortal.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required (ErrorMessage = "Ad Alanı Gereklidir!")]
-        [StringLength(30)]
+        [StringLength(200)]
         [Display(Name = "Ad")]
         public string FirstName { get; set; }
 
 
         [Required (ErrorMessage = "Soyad Alanı Gereklidir!")]
-        [StringLength(20)]
+        [StringLength(200)]
         [Display(Name = "Soyad")]
         public string LastName { get; set; }
        
-        [Required (ErrorMessage = "Kullanıcı Adı Gereklidir!") ]
-        [StringLength(20)]
-        [Display(Name = "Kullanıcı Adı")]
-        public string UserName { get; set; }
         
-        [Display(Name = "Kurumsal Bir Firma İseniz Belirtiniz.(Firma Eklemek için Üyelik oluşturmalısınız.)")]
-        public bool IsCompany { get; set; }
+        
+        [Display(Name = "İşveren misiniz?")]
+        public bool IsEmployer { get; set; }
 
         
         [Display(Name = "Firma Adı")]
+        [StringLength(200)]
         public string CompanyName { get; set; }
         
         
         [Required (ErrorMessage = "Mail Alanı Gereklidir!")]
-        [StringLength(50)]
+        [StringLength(200)]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
