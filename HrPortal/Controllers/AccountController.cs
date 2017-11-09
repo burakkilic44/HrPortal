@@ -241,7 +241,7 @@ namespace HrPortal.Controllers
                 }
                 if (result.Errors.Where(e => e.Code == "PasswordRequiresUpper").FirstOrDefault() != null)
                 {
-                    result.Errors.Where(e => e.Code == "PasswordRequiresUpper").FirstOrDefault().Description = "Şifre en az br büyük harf içermelidir ('A-Z')";
+                    result.Errors.Where(e => e.Code == "PasswordRequiresUpper").FirstOrDefault().Description = "Şifre en az bir büyük harf içermelidir ('A-Z')";
                 }
                 if (result.Errors.Where(e => e.Code == "PasswordRequiresLower").FirstOrDefault() != null)
                 {
