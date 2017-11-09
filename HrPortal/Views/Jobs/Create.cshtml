@@ -1,166 +1,160 @@
-﻿
+﻿@model Job
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "İlan Ver";
 }
  
 <link href="/assets/vendors/summernote/summernote.css" rel="stylesheet">
 
 
-
+<form asp-action="Create" method="post">
 
     <!-- Page header -->
-<header class="page-header">
-    <div class="container page-name">
-        <h1 class="text-center">İş İlanı Ver</h1>
-        <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
-    </div>
+    <header class="page-header">
+        <div class="container page-name">
+            <h1 class="text-center">İş İlanı Ver</h1>
+            <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
+        </div>
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
-            <div class="form-group col-xs-12 col-sm-6">
-                <input type="text" class="form-control input-lg" placeholder="İlan Başlığı">
-            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6">
+                    <input asp-for="Title" class="form-control input-lg" placeholder="İlan Başlığı">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
 
-            <div class="form-group col-xs-12 col-sm-6">
-                <select class="form-control selectpicker">
-                    <option>Firmalar</option>
-                    <option>Google</option>
-                    <option>Microsoft</option>
-                    <option>Apple</option>
-                    <option>Facebook</option>
-                </select>
-                <a class="help-block" href="company-add.html">Yeni Firma Ekle</a>
-            </div>
-
-            <div class="form-group col-xs-12">
-                <textarea class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
-            </div>
-
-            <div class="form-group col-xs-12">
-                <input type="text" class="form-control" placeholder="Web Adresi">
-            </div>
-
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                    <select class="form-control selectpicker">
-                        <option>İl</option>
+                <div class="form-group col-xs-12 col-sm-6">
+                    <select asp-for="CompanyId" class="form-control selectpicker" asp-items="@ViewBag.Companies">
+                        <option value="">Seçiniz</option>
                     </select>
+                    <span asp-validation-for="CompanyId" class="text-danger"></span>
+                    <a class="help-block" asp-controller="Companies" asp-action="Create">Yeni Firma Ekle</a>
                 </div>
-            </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                    <select class="form-control selectpicker">
-                        <option>Çalışma Şekli</option>
-                        <option>Sürekli/Tam zamanlı</option>
-                        <option>Yarı zamanlı/Part Time</option>
-                        <option>Dönemsel/Proje Bazlı</option>
-                        <option>Stajyer</option>
-                        <option>Serbest Zamanlı</option>
-                    </select>
+                <div class="form-group col-xs-12">
+                    <textarea asp-for="ShortDescription" class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
+                    <span asp-validation-for="ShortDescription" class="text-danger"></span>
                 </div>
-            </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                    <select class="form-control selectpicker">
-                        <option>Askerlik</option>
-                        <option>Yapıldı</option>
-                        <option>Muaf</option>
-                        <option>Tecilli</option>
-                        <option>Yok</option>
-
-                    </select>
+                <div class="form-group col-xs-12">
+                    <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
+                    <span asp-validation-for="WebAddress" class="text-danger"></span>
                 </div>
-            </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                    <input type="text" class="form-control" placeholder="Çalışma Saati">
-                    <span class="input-group-addon">Saat / Hafta</span>
-                </div>
-            </div>
-
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                    <input type="text" class="form-control" placeholder="Deneyim">
-                    <span class="input-group-addon">Yıl</span>
-                </div>
-            </div>
-
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                    <select class="form-control selectpicker" multiple>
-                        <option selected>Tüm Eğitim Seviyeleri</option>
-                        <option>Önlisans</option>
-                        <option>Lisans</option>
-                        <option>Yüksek Lisans</option>
-                        <option>Doktora</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="button-group">
-                <div class="action-buttons">
-                    <div class="upload-button">
-                        <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
-                        <input id="cover_img_file" type="file">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                        <select class="form-control select2-container-multi">
+                            <option value="">Seçiniz</option>
+                            @foreach (var location in (IList<Location>)ViewBag.Locations)
+                        {
+                                <option value="@location.Id">@location.Name</option>
+                        }
+                        </select>
                     </div>
                 </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
+                        <select asp-for="WorkingStyle" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<WorkingStyle>()">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="WorkingStyle" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-male"></i></span>
+                        <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input asp-for="WorkingHours" class="form-control" placeholder="Çalışma Saati">
+                        <span class="input-group-addon">Saat / Hafta</span>
+                        <span asp-validation-for="WorkingHours" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-flask"></i></span>
+                        <input asp-for="Experience" class="form-control" placeholder="Deneyim">
+                        <span class="input-group-addon">Yıl</span>
+                        <span asp-validation-for="Experience" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
+                        <select asp-for="EducationLevel" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="EducationLevel" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*<div class="button-group">
+                        <div class="action-buttons">
+                            <div class="upload-button">
+                                <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
+                                <input id="cover_img_file" type="file">
+                            </div>
+                        </div>
+                    </div>*@
+
             </div>
-
         </div>
-    </div>
-</header>
-<!-- END Page header -->
-<!-- Main container -->
-<main>
+    </header>
+    <!-- END Page header -->
+    <!-- Main container -->
+    <main>
 
 
-    <!-- Job detail -->
-    <section>
-        <div class="container">
+        <!-- Job detail -->
+        <section>
+            <div class="container">
 
-            <header class="section-header">
-                <span>AÇIKLAMA</span>
-                <h2>İş Detayı</h2>
-                <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
-            </header>
+                <header class="section-header">
+                    <span>AÇIKLAMA</span>
+                    <h2>İş Detayı</h2>
+                    <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
+                </header>
 
-            <textarea class="summernote-editor"></textarea>
+                <textarea asp-for="Details" class="summernote-editor"></textarea>
 
-        </div>
-    </section>
-
-
-
-    <!-- Submit -->
-    <section class="bg-alt">
-        <div class="container">
-            <header class="section-header">
-                <span>Tamam mısın?</span>
-                <h2>İşi Gönder</h2>
-                <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
-            </header>
-
-            <p class="text-center"><button class="btn btn-success btn-xl btn-round">İŞİNİZİ GÖNDERİN</button></p>
-
-        </div>
-    </section>
-    <!-- END Submit -->
+            </div>
+        </section>
 
 
-</main>
-<!-- END Main container -->
+
+        <!-- Submit -->
+        <section class="bg-alt">
+            <div class="container">
+                <header class="section-header">
+                    <span>Tamam mısın?</span>
+                    <h2>İLANI YAYINLA</h2>
+                    <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
+                </header>
+
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">İLANI YAYINLA</button></p>
+
+            </div>
+        </section>
+        <!-- END Submit -->
 
 
-</main>
+    </main>
+    <!-- END Main container -->
+
+</form>
 @section scripts{
 <script src="/assets/vendors/summernote/summernote.min.js"></script>}
