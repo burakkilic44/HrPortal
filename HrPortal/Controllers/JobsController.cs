@@ -23,12 +23,29 @@ namespace HrPortal.Controllers
         }
         public IActionResult Create()
         {
+            
             return View();
+
+          
+        }
+        [HttpPost]
+        public IActionResult Create(Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                jobRepository.Insert(job);
+                
+            }
+            return View(job);
+
+
         }
         public IActionResult Detail()
         {
             return View();
         }
+       
+
         public IActionResult Apply()
         {
             return View();
