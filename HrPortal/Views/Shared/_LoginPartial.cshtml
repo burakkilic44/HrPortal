@@ -4,7 +4,7 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@model LoginViewModel  
+
 
 
 
@@ -62,9 +62,8 @@
                                     </div>
                                                                             
                                         <div class="form-group">
-                                            <label asp-for="RememberMe"></label>
-                                            <input asp-for="RememberMe" class="checkbox checkbox-inline"
-                                                   @Html.DisplayNameFor(m=> m.RememberMe) />
+                                            <label for="RememberMe"></label>
+                                            <input name="RememberMe" class="checkbox checkbox-inline" type="checkbox"/> Beni hatırla
 
                                         </div>
                                   

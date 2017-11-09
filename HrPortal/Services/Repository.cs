@@ -34,6 +34,8 @@ namespace HrPortal.Services
             {
                 throw new ArgumentNullException("entity");
             }
+            entity.CreateDate = DateTime.Now;
+            entity.UpdateDate = DateTime.Now;
             entities.Add(entity);
             context.SaveChanges();
         }
@@ -44,6 +46,7 @@ namespace HrPortal.Services
             {
                 throw new ArgumentNullException("entity");
             }
+            entity.UpdateDate = DateTime.Now;
             context.SaveChanges();
         }
 
