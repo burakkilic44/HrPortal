@@ -234,6 +234,20 @@ namespace HrPortal.Controllers
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
                     return RedirectToLocal(returnUrl);
                 }
+                //for Translatig errors en to tr 
+                if (result.Errors.Where(e => e.Code == "PasswordRequiresNonAlphanumeric").FirstOrDefault() != null)
+                {
+                    result.Errors.Where(e => e.Code == "PasswordRequiresNonAlphanumeric").FirstOrDefault().Description = "Şifre en az bir alfanumerik karakter içermelidir!";
+                }
+                if (result.Errors.Where(e => e.Code == "PasswordRequiresUpper").FirstOrDefault() != null)
+                {
+                    result.Errors.Where(e => e.Code == "PasswordRequiresUpper").FirstOrDefault().Description = "Şifre en az br büyük harf içermelidir ('A-Z')";
+                }
+                if (result.Errors.Where(e => e.Code == "PasswordRequiresLower").FirstOrDefault() != null)
+                {
+                    result.Errors.Where(e => e.Code == "PasswordRequiresLower").FirstOrDefault().Description = "Şifre en az bir küçük harf içermelidir ('a-z')";
+                }
+
                 AddErrors(result);
             }
 
