@@ -48,7 +48,6 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 resumeRepository.Insert(resume);
-                return RedirectToAction("Index");
             }
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
