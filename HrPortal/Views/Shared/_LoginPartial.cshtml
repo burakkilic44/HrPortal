@@ -7,24 +7,71 @@
 
 
 
-
 @*login model eklendi checkbox dinamik olması içi*@
 
 
 
-
+<link href="~/assets/css/UserSettings.css" rel="stylesheet" />
 
     @if (SignInManager.IsSignedIn(User))
     {
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-            <li class="pull-right">
-                <button type="submit" class="btn btn-link navbar-btn navbar-link btn-xs">Log out</button>
-            </li>
-                <li class="pull-right">
-                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="login">Hello @UserManager.GetUserName(User)!</a>
-                </li>      
-        </form>
+
+
+        <ul class="nav navbar-nav navbar-right">
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="fa fa-user"></span>
+                        <strong></strong>
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="text-center">
+                                            <span class="fa fa-user icon-size"></span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-left"><strong>@UserManager.GetUserName(User)</strong></p>
+                                        <p class="text-left small">@UserManager.GetUserName(User)</p>
+                                        <p class="text-left">
+                                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"  class="btn btn-primary btn-block btn-sm">Profil</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <button type="submit" class="btn btn-danger btn-block">Çıkış</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+
+
+                    @*<li class="dropdown pull-right">
+                <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><b>Kullanıcı</b><span class="caret"></span></a>
+                <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class=" fa fa-user login"></a></li>
+                <li><a href="submit" class="fa fa-sign-out navbar-btn navbar-link"></a></li>
+            </li>*@
+                </li>
+            </form>
+      
+        </ul>
     }
+
 
     else
     {
@@ -40,14 +87,14 @@
                                     <a href="#" class="btn btn-tw btn-sm"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
                                 </div>
                                 <p>Giriş Yap</p>
-                                <form class="form" role="form" method="post" asp-action="Login" asp-controller="Account" accept-charset="UTF-8" id="login-nav">
+                                <form class="form" role="form" asp-action="login" asp-controller="account" asp-route-returnurl="@Context.Request.Path" method="post" accept-charset="UTF-8" id="login-nav">
                                     <div class="form-group">
-                                        <label class="sr-only" for="exampleInputEmail2">Email</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email" required>
+                                        <label for="Email" class="sr-only" >Email</label>
+                                        <input type="email" name="Email" class="form-control" id="Email" placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
-                                        <label class="sr-only" for="exampleInputPassword2">Şifre</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Şifre" required>
+                                        <label class="sr-only" for="Password">Şifre</label>
+                                        <input type="password" name="Password" class="form-control" id="Password" placeholder="Şifre" required>
                                         <div class="help-block text-right"><a href="/account/forgotpassword">Şifreni mi Unuttun?</a></div>
                                     </div>
                                     <div class="form-group">
