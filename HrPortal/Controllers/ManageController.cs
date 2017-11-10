@@ -56,6 +56,8 @@ namespace HrPortal.Controllers
 
             var model = new IndexViewModel
             {
+                FirstName=user.FirstName,
+                LastName=user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
