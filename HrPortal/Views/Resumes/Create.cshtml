@@ -16,22 +16,26 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
-                        <input type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                        <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
                         <span class="help-block">Please choose a 4:6 profile picture.</span>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-8">
                     <div class="form-group">
                         <input asp-for="FullName" type="text" class="form-control input-lg" placeholder="Ad">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="FullName" type="text" class="form-control" placeholder="Başlık (Bkz. Yazılım Uzmanı)">
+                        <input asp-for="Title" type="text" class="form-control" placeholder="Başlık (Bkz. Yazılım Uzmanı)">
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     
                         <div class="form-group">
                             <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                            <span asp-validation-for="Notes" class="text-danger"></span>
                         </div>
 
                         <hr class="hr-lg">
@@ -84,10 +88,9 @@
                                 </div>
                             </div>
 
-
-
                             <div class="form-group">
                                 <input asp-for="DrivingLicense" type="text" class="form-control" placeholder="Sürücü Belgesi (Bkz. B, A2) ">
+                                <span asp-validation-for="DrivingLicense" class="text-danger"></span>
                             </div>
 
                             <div class="form-group"> 
@@ -103,18 +106,21 @@
                                     <option>Evet</option>
                                     <option>Hayır</option>
                                 </select>
+                                <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <select asp-for="SmokingStatus" class="form-control selectpicker">
                                    
                                     <option selected>Sigara kullanıyor musunuz?</option>
-                                    <option>Evet</option>
-                                    <option>Hayır</option>
+                                    <option >Evet</option>
+                                    <option >Hayır</option>
 
                                 </select>
+                                <span asp-validation-for="SmokingStatus" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
+                                <span asp-validation-for="Hobbies" class="text-danger"></span>
                             </div>
 
                         </div>
@@ -142,7 +148,7 @@
 
                     <div class="upload-button">
                         <button class="btn btn-block btn-primary">Bir resim seçin</button>
-                        <input id="cover_img_file" type="file">
+                        <input  id="cover_img_file" type="file">
                     </div>
 
                     <div class="upload-button">
@@ -236,6 +242,7 @@
 
             </div>
         </section>
+        <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
         <section class=" bg-alt">
