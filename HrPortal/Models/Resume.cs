@@ -9,6 +9,10 @@ namespace HrPortal.Models
 {
     public class Resume:BaseEntity
     {
+        public Resume() : base()
+        {
+            EducationInfos = new HashSet<EducationInfo>();
+        }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
         [Display(Name = "Ad Soyad")]
