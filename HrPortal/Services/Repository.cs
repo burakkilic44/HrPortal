@@ -19,14 +19,20 @@ namespace HrPortal.Services
             this.context = context;
             entities = context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(params string[] navigations)
         {
-            return entities.AsEnumerable();
+            var qEntities = entities.AsQueryable();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            return qEntities.ToList();
         }
 
-        public T Get(string id)
+        public T Get(string id, params string[] navigations)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            var qEntities = entities.AsQueryable();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            return entities.FirstOrDefault(s => s.Id == id);
         }
         public void Insert(T entity)
         {
@@ -67,8 +73,8 @@ namespace HrPortal.Services
     }
     public interface IRepository<T> where T : BaseEntity
     {
-        IEnumerable<T> GetAll();
-        T Get(string id);
+        IEnumerable<T> GetAll(params string[] navigations);
+        T Get(string id, params string[] navigations);
         int Count();
         void Insert(T entity);
         void Update(T entity);

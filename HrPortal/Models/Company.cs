@@ -100,7 +100,7 @@ namespace HrPortal.Models
         [Display(Name = "Gizli Mi?")]
         public bool IsHidden { get; set; }
 
-        public ICollection<Job> Jobs { get; set; }
+        public virtual ICollection<Job> Jobs { get; set; }
 
     }
 }
