@@ -14,8 +14,10 @@ namespace HrPortal.Controllers
         
         private IRepository<Resume> resumeRepository;
         private IRepository<Location> locationRepository;
-        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository)
+        private IRepository<Language> languageRepository;
+        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository)
         {
+            this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
             this.resumeRepository = resumeRepository;
         }
@@ -34,7 +36,8 @@ namespace HrPortal.Controllers
         public IActionResult Create()
         {
             var resume = new Resume();
-            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return View();
 
         }
@@ -47,7 +50,8 @@ namespace HrPortal.Controllers
                 resumeRepository.Insert(resume);
                 return RedirectToAction("Index");
             }
-            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             return View(resume);
 
         }
