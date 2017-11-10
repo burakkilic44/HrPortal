@@ -24,13 +24,13 @@
                 <img src="/uploads/jobs/@Resumeitem.Photo" alt="@Resumeitem.Photo" />
                 <div class="hgroup">
                     <h4>@Resumeitem.FullName</h4>
-                    <h5>@Resumeitem.EducationInfos</h5>
+                    <h5>@Resumeitem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.SchoolName</h5>
                 </div>
                 <div class="header-meta">
                     <span class="location">
                        @Resumeitem.Location?.Name
                     <span class="label label-success">@Resumeitem.Experiences</span>
-                        @*@Resumeitem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault().SchoolName*@
+                        @**@
                         </span>
 </div>
             </header>
@@ -45,6 +45,6 @@
         </div>
 
         <br><br>
-        <p class="text-center"><a class="btn btn-info" href="job-list.html">Bütün özgeçmişlere gözat</a></p>
+        <p class="text-center"><a class="btn btn-info" asp-action="Jobs-list">Bütün özgeçmişlere gözat</a></p>
     </div>
 </section>
