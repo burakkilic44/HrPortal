@@ -42,7 +42,13 @@
                             <div class="form-group col-xs-12 col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                    <input asp-for="Location" type="text" class="form-control" placeholder="Lokasyon, Bkz. İSTANBUL, TR">
+                                    <select class="form-control select2-container-multi">
+                                        <option value="">Seçiniz</option>
+                                        @foreach (var location in (IList<Location>)ViewBag.Locations)
+                                        {
+                                            <option value="@location.Id">@location.Name</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
@@ -82,12 +88,18 @@
                             </div>
                             <div class="form-group">
                                 <select asp-for="IsTravelDisabled" class="form-control selectpicker">
-                                    <option value="">Seyahat engeliniz var mı?</option>
+                                    <option selected>Seyahat engeliniz var mı?</option>
+                                    <option>Evet</option>
+                                    <option>Hayır</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select asp-for="SmokingStatus" class="form-control selectpicker">
-                                    <option value="">Sigara kullanıyor musunuz?</option>
+                                   
+                                    <option selected>Sigara kullanıyor musunuz?</option>
+                                    <option>Evet</option>
+                                    <option>Hayır</option>
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -127,10 +139,6 @@
     <!-- END Page header -->
     <!-- Main container -->
     <main>
-
-        
-
-
         <!-- Social media -->
         <section>
             <div class="container">
