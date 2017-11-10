@@ -13,13 +13,18 @@ namespace HrPortal.Controllers
     public class HomeController : Controller
     {
         private IRepository<Resume> resumeRepository;
-        public HomeController(IRepository<Resume> resumeRepository)
+        private IRepository<Message> messageRepository;
+        private IRepository<Job> jobRepository;
+        public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository)
         {
             this.resumeRepository = resumeRepository;
+            this.messageRepository = messageRepository;
+            this.jobRepository = jobRepository;
         }
         public IActionResult Index()
         {
             ViewBag.ResumeCount = resumeRepository.Count();
+            ViewBag.jobCount = jobRepository.Count();
             return View();
         }
 
@@ -32,9 +37,16 @@ namespace HrPortal.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(Message message)
+        {
+            if (ModelState.IsValid) { 
+            messageRepository.Insert(message);
+            }
+            return View(message);
         }
 
         public IActionResult Error()

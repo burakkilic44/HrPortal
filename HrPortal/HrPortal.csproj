@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\NewFolder\**" />
     <Compile Remove="ModelState\**" />
+    <Content Remove="Areas\NewFolder\**" />
     <Content Remove="ModelState\**" />
+    <EmbeddedResource Remove="Areas\NewFolder\**" />
     <EmbeddedResource Remove="ModelState\**" />
+    <None Remove="Areas\NewFolder\**" />
     <None Remove="ModelState\**" />
   </ItemGroup>
 
@@ -23,10 +27,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\NewFolder\" />
   </ItemGroup>
 
 </Project>

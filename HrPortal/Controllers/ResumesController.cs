@@ -30,8 +30,21 @@ namespace HrPortal.Controllers
 
         public IActionResult Create()
         {
+        
             return View();
            
+        }
+
+        [HttpPost]
+        public IActionResult Create(Resume resume)
+        {
+            if (ModelState.IsValid)
+            {
+                resumeRepository.Insert(resume);
+                return RedirectToAction("Index");
+            }
+            return View(resume);
+
         }
 
         public IActionResult Edit()

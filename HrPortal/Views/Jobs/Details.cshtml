@@ -1,0 +1,84 @@
+﻿@model Job
+@{
+    ViewData["Title"] = "İş İlanı - " + Model.Title;
+}
+    <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
+    <div class="container">
+        <div class="header-detail">
+            <img class="logo" src="assets/img/logo-google.jpg" alt="">
+            <div class="hgroup">
+                <h1>@Model.Title</h1>
+                <h3><a href="#">Google</a></h3>
+            </div>
+            <time datetime="@Model.PublishDate">2 days ago</time>
+            <hr>
+            <p class="lead">@Model.ShortDescription</p>
+
+            <ul class="details cols-3">
+                <li>
+                    <i class="fa fa-map-marker"></i>
+                    <span>@if (Model.JobLocations != null)
+                    {
+                        foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                        {
+                        @location
+                        <text>, </text>
+                        }
+                    }</span>
+                </li>
+
+                <li>
+                    <i class="fa fa-briefcase"></i>
+                    <span>@Model.WorkingStyle</span>
+                </li>
+
+                <li>
+                    <i class="fa fa-money"></i>
+                    <span>Askerlik: @Model.MilitaryStatus</span>
+                </li>
+
+                <li>
+                    <i class="fa fa-clock-o"></i>
+                    <span>@Model.WorkingHours saat/hafta</span>
+                </li>
+
+                <li>
+                    <i class="fa fa-flask"></i>
+                    <span>@Model.Experience+ yıl deneyim</span>
+                </li>
+
+                <li>
+                    <i class="fa fa-certificate"></i>
+                    <a href="#">@Model.EducationLevel</a>
+                </li>
+            </ul>
+
+            <div class="button-group">
+                <ul class="social-icons">
+                    <li class="title">Paylaş:</li>
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+
+                <div class="action-buttons">
+                    <a class="btn btn-success" asp-action="Apply">ŞİMDİ BAŞVUR</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- END Page header -->
+    <!-- Main container -->
+</header>
+        <main>
+
+            <!-- Job detail -->
+            <section>
+                <div class="container">
+                    @Html.Raw(Model.Details)
+                </div>
+            </section>
+        </main>

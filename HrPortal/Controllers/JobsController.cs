@@ -5,30 +5,55 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HrPortal.Services;
 using HrPortal.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HrPortal.Controllers
 {
     public class JobsController : Controller
     {
         private IRepository<Job> jobRepository;
-        public JobsController (IRepository<Job> jobRepository)
+        private IRepository<Company> companyRepository;
+        private IRepository<Location> locationRepository;
+        public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository)
         {
             this.jobRepository = jobRepository;
+            this.companyRepository = companyRepository;
+            this.locationRepository = locationRepository;
         }
         public IActionResult Index()
         {
-            var jobs = jobRepository.GetAll();
+            var jobs = jobRepository.GetAll("Company", "JobLocations", "JobLocations.Location");
             return View(jobs);
 
         }
         public IActionResult Create()
         {
-            return View();
+            var job = new Job();
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(),"Id","Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(job);
+
+          
         }
-        public IActionResult Detail()
+        [HttpPost]
+        public IActionResult Create(Job job)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                jobRepository.Insert(job);
+                return RedirectToAction("SuccessfullyCreated");
+            }
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(job);
         }
+        public IActionResult Details(string id)
+        {
+            var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
+            return View(job);
+        }
+       
+
         public IActionResult Apply()
         {
             return View();
