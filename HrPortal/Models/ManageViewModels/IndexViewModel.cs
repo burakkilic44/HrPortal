@@ -8,8 +8,10 @@ namespace HrPortal.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        [Display(Name = "Kullanıcı Adı")]
         public string Username { get; set; }
 
+        [Display(Name = "Email Doğrulandı")]
         public bool IsEmailConfirmed { get; set; }
 
         [Required]
@@ -17,9 +19,10 @@ namespace HrPortal.Models.ManageViewModels
         public string Email { get; set; }
 
         [Phone]
-        [Display(Name = "Phone number")]
+        [Display(Name = "Telefon Numarası")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "Durum Mesajı")]
         public string StatusMessage { get; set; }
     }
 }
