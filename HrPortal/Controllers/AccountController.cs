@@ -65,7 +65,9 @@ namespace HrPortal.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Başarılı giriş");
+
                     return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
