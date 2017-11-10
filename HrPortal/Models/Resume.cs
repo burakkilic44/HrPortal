@@ -64,6 +64,8 @@ namespace HrPortal.Models
         public string Youtube { get; set; }
         [StringLength(200)]
         public string LinkedIn { get; set; }
+        [Display(Name = "Askerlik Durumu")]
+        public MilitaryStatus MilitaryStatus { get; set; }
         [Display(Name = "Eğitim Bilgisi")]
         public ICollection<EducationInfo> EducationInfos { get; set; }
         [Display(Name = "Deneyim")]
