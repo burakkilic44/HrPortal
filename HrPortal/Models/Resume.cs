@@ -9,6 +9,10 @@ namespace HrPortal.Models
 {
     public class Resume:BaseEntity
     {
+        public Resume() : base()
+        {
+            EducationInfos = new HashSet<EducationInfo>();
+        }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
         [Display(Name = "Ad Soyad")]
@@ -64,6 +68,8 @@ namespace HrPortal.Models
         public string Youtube { get; set; }
         [StringLength(200)]
         public string LinkedIn { get; set; }
+        [Display(Name = "Askerlik Durumu")]
+        public MilitaryStatus MilitaryStatus { get; set; }
         [Display(Name = "Eğitim Bilgisi")]
         public ICollection<EducationInfo> EducationInfos { get; set; }
         [Display(Name = "Deneyim")]
