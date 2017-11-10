@@ -1,4 +1,6 @@
-﻿@*
+﻿@model IEnumerable<Resume>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -12,92 +14,33 @@
         </header>
 
         <div class="row item-blocks-condensed">
+@foreach (Resume Resumeitem in ViewBag.resumes)
+{
 
             <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-google.jpg" alt="">
-                        <div class="hgroup">
-                            <h4>Furkan Doğan Test Engineer</h4>
-                            <h5>Sakarya Üniversitesi</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">Sakarya, TR</span>
-                            <span class="label label-success">Full-time</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
+    <div class="col-xs-12">
+        <a class="item-block"  asp-action="Details" asp-route-id="@Resumeitem.Id">
+            <header>
+                <img src="/uploads/jobs/@Resumeitem.Photo" alt="@Resumeitem.Photo" />
+                <div class="hgroup">
+                    <h4>@Resumeitem.FullName</h4>
+                    <h5>@Resumeitem.EducationInfos</h5>
+                </div>
+                <div class="header-meta">
+                    <span class="location">
+                       @Resumeitem.Location?.Name
+                    <span class="label label-success">@Resumeitem.Experiences</span>
+                        @*@Resumeitem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault().SchoolName*@
+                        </span>
+</div>
+            </header>
+        </a>
+    </div>
+
+}
             <!-- END Job item -->
             <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-linkedin.png" alt="">
-                        <div class="hgroup">
-                            <h4>Ebru Yılmaz Software Engineer (Entry or Senior)</h4>
-                            <h5>Sakarya Üniversitesi</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">İstanbul, TR</span>
-                            <span class="label label-warning">Part-time</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
-            <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-envato.png" alt="">
-                        <div class="hgroup">
-                            <h4>Elif Sevgili Full Stack Web Developer</h4>
-                            <h5>İstanbul Üniversitesi</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">İstanbul, TR</span>
-                            <span class="label label-info">Freelance</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
-            <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-facebook.png" alt="">
-                        <div class="hgroup">
-                            <h4>Murat Atmaca Web Applications Developer</h4>
-                            <h5>Fırat Üniversitesi</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">İstanbul, TR</span>
-                            <span class="label label-danger">Internship</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
-            <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-microsoft.jpg" alt="">
-                        <div class="hgroup">
-                            <h4>İlkaY Burak Sr. SQL Server Developer</h4>
-                            <h5>Ayvansaray Üniversitesi</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">İstanbul, TR</span>
-                            <span class="label label-success">Remote</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
+            
 
         </div>
 

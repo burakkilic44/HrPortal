@@ -20,11 +20,14 @@ namespace HrPortal.Controllers
             this.resumeRepository = resumeRepository;
             this.messageRepository = messageRepository;
             this.jobRepository = jobRepository;
+            
         }
         public IActionResult Index()
         {
             ViewBag.ResumeCount = resumeRepository.Count();
             ViewBag.jobCount = jobRepository.Count();
+            ViewBag.jobs = jobRepository.GetAll("Company","JobLocations","JobLocations.Location");
+            ViewBag.resumes = resumeRepository.GetAll("EducationInfos");
             return View();
         }
 
