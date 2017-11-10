@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HrPortal.Models.ManageViewModels
 {
     public class IndexViewModel
-    {
+    {    [Display(Name ="Kullanıcı Adı")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -17,7 +17,7 @@ namespace HrPortal.Models.ManageViewModels
         public string Email { get; set; }
 
         [Phone]
-        [Display(Name = "Phone number")]
+        [Display(Name = "Telefon Numarası")]
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
