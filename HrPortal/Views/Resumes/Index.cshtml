@@ -160,8 +160,9 @@
                     <p>@resumeItem.Notes</p>
 
                     <div class="tag-list">
-                        <span>@resumeItem.ResumeTags.OrderBy(t=> t.Tag).FirstOrDefault()?.TagId</span>
-                       
+                        @foreach (var tag in resumeItem.ResumeTags.Select(t=>t.Tag).ToList()) { 
+                        <span>@tag.Name</span>
+                        }
                     </div>
                 </div>
 
