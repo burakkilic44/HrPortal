@@ -1,4 +1,6 @@
-﻿@*
+﻿@model IEnumerable<Job>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -12,92 +14,42 @@
         </header>
 
         <div class="row item-blocks-condensed">
+            @foreach (var Jobitem in ViewBag.jobs)
+            {
+                <div class="col-xs-12">
+                    <a class="item-block" asp-action="Details" asp-route-id="@Jobitem.Id">
+                        <header>
+                            <img src="/uploads/jobs/@Jobitem.Company.Photo" alt="@Jobitem.Company.Name">
+                            <div class="hgroup">
+                                <h4>@Jobitem.Title</h4>
+                                <h5>@Jobitem.Company.Name</h5>
+                            </div>
+                            <div class="header-meta">
+                                <span class="location">@if (Jobitem.JobLocations != null)
+                                {
+                                    foreach(var location in Jobitem.JobLocations)
+                                    {
+                                        @location
+                                        <text>, </text>
 
+                                    }
+
+                                }
+                                </span>
+                                <span class="label label-success">@Jobitem.WorkingStyle</span>
+                            </div>
+                        </header>
+                    </a>
+                </div>
+
+
+
+            }
             <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-google.jpg" alt="">
-                        <div class="hgroup">
-                            <h4>Senior front-end developer</h4>
-                            <h5>Google</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">Menlo park, CA</span>
-                            <span class="label label-success">Full-time</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
+       
             <!-- END Job item -->
             <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-linkedin.png" alt="">
-                        <div class="hgroup">
-                            <h4>Software Engineer (Entry or Senior)</h4>
-                            <h5>Linkedin</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">Livermore, CA</span>
-                            <span class="label label-warning">Part-time</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
-            <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-envato.png" alt="">
-                        <div class="hgroup">
-                            <h4>Full Stack Web Developer</h4>
-                            <h5>Envato</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">San Francisco, CA</span>
-                            <span class="label label-info">Freelance</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
-            <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-facebook.png" alt="">
-                        <div class="hgroup">
-                            <h4>Web Applications Developer</h4>
-                            <h5>Facebook</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">Lexington, MA</span>
-                            <span class="label label-danger">Internship</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
-            <!-- Job item -->
-            <div class="col-xs-12">
-                <a class="item-block" href="/jobs/detail">
-                    <header>
-                        <img src="assets/img/logo-microsoft.jpg" alt="">
-                        <div class="hgroup">
-                            <h4>Sr. SQL Server Developer</h4>
-                            <h5>Microsoft</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">Palo Alto, CA</span>
-                            <span class="label label-success">Remote</span>
-                        </div>
-                    </header>
-                </a>
-            </div>
-            <!-- END Job item -->
+          
 
         </div>
 

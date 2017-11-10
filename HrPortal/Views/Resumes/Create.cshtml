@@ -16,33 +16,42 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
-                        <input type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                        <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
                         <span class="help-block">Please choose a 4:6 profile picture.</span>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-8">
                     <div class="form-group">
                         <input asp-for="FullName" type="text" class="form-control input-lg" placeholder="Ad">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input asp-for="Title" type="text" class="form-control" placeholder="Başlık (Bkz. Yazılım Uzmanı)">
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     
                         <div class="form-group">
                             <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                            <span asp-validation-for="Notes" class="text-danger"></span>
                         </div>
 
                         <hr class="hr-lg">
 
                         <h6>Temel Bilgiler</h6>
                         <div class="row">
-
                             <div class="form-group col-xs-12 col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                    <input asp-for="Location" type="text" class="form-control" placeholder="Lokasyon, Bkz. İSTANBUL, TR">
+                                    <select class="form-control select2-container-multi">
+                                        <option value="">Seçiniz</option>
+                                        @foreach (var location in (IList<Location>)ViewBag.Locations)
+                                        {
+                                            <option value="@location.Id">@location.Name</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
@@ -50,15 +59,15 @@
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-globe"></i></span>
                                     <input asp-for="WebAddress" type="text" class="form-control" placeholder="Web Sayfası">
+                                    <span asp-validation-for="WebAddress" class="text-danger"></span>
                                 </div>
                             </div>
-
-
 
                             <div class="form-group col-xs-12 col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                                     <input asp-for="BirthDate" type="text" class="form-control" placeholder="Yaş">
+                                    <span asp-validation-for="BirthDate" class="text-danger"></span>
                                     <span class="input-group-addon">Yaşında</span>
                                 </div>
                             </div>
@@ -67,6 +76,7 @@
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                     <input asp-for="Phone" type="text" class="form-control" placeholder="Telefon Numarası">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -74,24 +84,43 @@
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                     <input asp-for="Email" type="text" class="form-control" placeholder="E-Posta">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <input asp-for="DrivingLicense" type="text" class="form-control" placeholder="Sürücü Belgesi (Bkz. B, A2) ">
+                                <span asp-validation-for="DrivingLicense" class="text-danger"></span>
                             </div>
+
+                            <div class="form-group"> 
+                                <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
+                                    <option value="">Askerlik durumunuz nedir?</option>
+                                </select>
+                                <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+                            </div>
+
                             <div class="form-group">
                                 <select asp-for="IsTravelDisabled" class="form-control selectpicker">
-                                    <option value="">Seyahat engeliniz var mı?</option>
+                                    <option selected>Seyahat engeliniz var mı?</option>
+                                    <option>Evet</option>
+                                    <option>Hayır</option>
                                 </select>
+                                <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <select asp-for="SmokingStatus" class="form-control selectpicker">
-                                    <option value="">Sigara kullanıyor musunuz?</option>
+                                   
+                                    <option selected>Sigara kullanıyor musunuz?</option>
+                                    <option >Evet</option>
+                                    <option >Hayır</option>
+
                                 </select>
+                                <span asp-validation-for="SmokingStatus" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
+                                <span asp-validation-for="Hobbies" class="text-danger"></span>
                             </div>
 
                         </div>
@@ -101,6 +130,7 @@
                         <h6>Etiket Listesi</h6>
                         <div class="form-group">
                             <input asp-for="ResumeTags" type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Etiket">
+                            <span asp-validation-for="ResumeTags" class="text-danger"></span>
                             <span class="help-block">Etiketinizi yazın ve Enter'a basın.</span>
                         </div>
 
@@ -113,13 +143,17 @@
                     <div class="upload-button">
                         <button class="btn btn-block btn-gray">Bir özgeçmiş dosyası seçin</button>
                         <input asp-for="ResumeFile" type="file">
+                        <span asp-validation-for="ResumeFile" class="text-danger"></span>
                     </div>
 
                     <div class="upload-button">
                         <button class="btn btn-block btn-primary">Bir resim seçin</button>
-                        <input id="cover_img_file" type="file">
+                        <input  id="cover_img_file" type="file">
                     </div>
 
+                    <div class="upload-button">
+                        <button class="btn btn-primary btn-duplicator">Özgeçmiş Ekle</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,7 +161,273 @@
     <!-- END Page header -->
     <!-- Main container -->
     <main>
+        <!-- Social media -->
+        <section>
+            <div class="container">
 
+                <header class="section-header">
+                    <span>Bağlantılarınız</span>
+                    <h2>Sosyal Medya</h2>
+                </header>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+                                <input asp-for="Facebook" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Facebook" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
+                                <input asp-for="GooglePlus" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="GooglePlus" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-dribbble"></i></span>
+                                <input asp-for="Dribbble" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Dribbble" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
+                                <input asp-for="Pinterest" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Pinterest" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+                                <input asp-for="Twitter" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Twitter" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-github"></i></span>
+                                <input asp-for="Github" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Github" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-instagram"></i></span>
+                                <input asp-for="Instagram" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Instagram" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-youtube"></i></span>
+                                <input asp-for="Youtube" type="text" class="form-control" placeholder="Profil URL">
+                                <span asp-validation-for="Youtube" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+        <!-- Social media -->
+        <!-- Education -->
+        <section class=" bg-alt">
+            <div class="container">
+
+                <header class="section-header">
+                    <span>Eğitim Durumu</span>
+                    <h2>Eğitim Bilgileri</h2>
+                </header>
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="item-block">
+                            <div class="item-form">
+
+                                <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <input type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                            <span class="help-block">Please choose a square logo</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Eğitim Düzeyi, Bkz. Lisans Mezunu">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Bölüm, Bkz. Bilgisayar Mühendisliği">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Okul Adı, Bkz. Yıldız Teknik Üniversitesi">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Başlangıç tarihi</span>
+                                                <input type="text" class="form-control" placeholder="bkz. 2012">
+                                                <span class="input-group-addon">Biriş tarihi</span>
+                                                <input type="text" class="form-control" placeholder="bkz. 2016">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                 
+
+                    <div class="col-xs-12 text-center">
+                        <br>
+                        <button class="btn btn-primary btn-duplicator">Eğitim Bilgisi Ekle</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        <!-- END Education -->
+        <!-- Work Experience -->
+        <section>
+            <div class="container">
+                <header class="section-header">
+                    <span>Çalıştığınız Firmalar</span>
+                    <h2>İş Deneyimi</h2>
+                </header>
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="item-block">
+                            <div class="item-form">
+
+                                <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <input type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                            <span class="help-block">Lütfen bir fotoğraf seçin</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Firma Adı">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Pozisyon">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Başlangıç tarihi</span>
+                                                <input type="text" class="form-control" placeholder=" 2012">
+                                                <span class="input-group-addon">Bitiş tarihi</span>
+                                                <input type="text" class="form-control" placeholder=" 2016">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12 text-center">
+                        <br>
+                        <button class="btn btn-primary btn-duplicator">Deneyim Ekle</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+        <!-- END Work Experience -->
+        <!-- Skills -->
+        <section class=" bg-alt">
+            <div class="container">
+                <header class="section-header">
+                    <span>Uzmanlık Alanları</span>
+                    <h2>Yetenekler</h2>
+                </header>
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="item-block">
+                            <div class="item-form">
+
+                                <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Yetenek, bkz. HTML">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Yetenek seviyesi, bkz. 90">
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12 text-center">
+                        <br>
+                        <button class="btn btn-primary btn-duplicator">Yetenek Ekle</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+        <!-- END Skills -->
         <!-- Sertifikalar -->
         <section class=" bg-alt">
             <div class="container">
@@ -163,7 +463,7 @@
                                                 <span class="input-group-addon">Sertifika Dosyası</span>
                                                 <input type="file" class="form-control">
                                             </div>
-                                        </div>          
+                                        </div>
                                     </div>
                                 </div>
 
@@ -175,7 +475,7 @@
 
                     <div class="col-xs-12 text-center">
                         <br>
-                        <button class="btn btn-primary btn-duplicator">KAYDET</button>
+                        <button class="btn btn-primary btn-duplicator">Sertifika Ekle</button>
                     </div>
 
 
@@ -251,7 +551,7 @@
 
                     <div class="col-xs-12 text-center">
                         <br>
-                        <button class="btn btn-primary btn-duplicator">KAYDET</button>
+                        <button class="btn btn-primary btn-duplicator">Yabancı Dil Ekle</button>
                     </div>
 
 
@@ -259,267 +559,6 @@
             </div>
         </section>
 
-
-        <!-- Social media -->
-        <section>
-            <div class="container">
-
-                <header class="section-header">
-                    <span>Bağlantılarınız</span>
-                    <h2>Sosyal Medya</h2>
-                </header>
-
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
-                                <input asp-for="Facebook" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
-                                <input asp-for="GooglePlus" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-dribbble"></i></span>
-                                <input asp-for="Dribbble" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
-                                <input asp-for="Pinterest" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
-                                <input asp-for="Twitter" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-github"></i></span>
-                                <input asp-for="Github" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-instagram"></i></span>
-                                <input asp-for="Instagram" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-youtube"></i></span>
-                                <input asp-for="Youtube" type="text" class="form-control" placeholder="Profil URL">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <!-- Social media -->
-        <!-- Education -->
-        <section class=" bg-alt">
-            <div class="container">
-
-                <header class="section-header">
-                    <span>Eğitim Durumu</span>
-                    <h2>Eğitim Bilgileri</h2>
-                </header>
-
-                <div class="row">
-
-                    <div class="col-xs-12">
-                        <div class="item-block">
-                            <div class="item-form">
-
-                                <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-4">
-                                        <div class="form-group">
-                                            <input type="file" class="dropify" data-default-file="assets/img/logo-default.png">
-                                            <span class="help-block">Please choose a square logo</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-8">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Eğitim Düzeyi, Bkz. Lisans Mezunu">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Bölüm, Bkz. Bilgisayar Mühendisliği">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Okul Adı, Bkz. Yıldız Teknik Üniversitesi">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Başlangıç tarihi</span>
-                                                <input type="text" class="form-control" placeholder="bkz. 2012">
-                                                <span class="input-group-addon">Biriş tarihi</span>
-                                                <input type="text" class="form-control" placeholder="bkz. 2016">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                 
-
-                    <div class="col-xs-12 text-center">
-                        <br>
-                        <button class="btn btn-primary btn-duplicator">KAYDET</button>
-                    </div>
-
-
-                </div>
-            </div>
-        </section>
-        <!-- END Education -->
-        <!-- Work Experience -->
-        <section>
-            <div class="container">
-                <header class="section-header">
-                    <span>Past positions</span>
-                    <h2>İş Deneyimi</h2>
-                </header>
-
-                <div class="row">
-
-                    <div class="col-xs-12">
-                        <div class="item-block">
-                            <div class="item-form">
-
-                                <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-4">
-                                        <div class="form-group">
-                                            <input type="file" class="dropify" data-default-file="assets/img/logo-default.png">
-                                            <span class="help-block">Lütfen bir fotoğraf seçin</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-8">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Firma Adı">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Pozisyon">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Başlangıç tarihi</span>
-                                                <input type="text" class="form-control" placeholder=" 2012">
-                                                <span class="input-group-addon">Bitiş tarihi</span>
-                                                <input type="text" class="form-control" placeholder=" 2016">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <div class="form-group">
-                                            <textarea class="summernote-editor"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-12 text-center">
-                        <br>
-                        <button class="btn btn-primary btn-duplicator">KAYDET</button>
-                    </div>
-
-
-                </div>
-
-            </div>
-        </section>
-        <!-- END Work Experience -->
-        <!-- Skills -->
-        <section class=" bg-alt">
-            <div class="container">
-                <header class="section-header">
-                    <span>Uzmanlık Alanları</span>
-                    <h2>Yetenekler</h2>
-                </header>
-
-                <div class="row">
-
-                    <div class="col-xs-12">
-                        <div class="item-block">
-                            <div class="item-form">
-
-                                <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Yetenek, bkz. HTML">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-6">
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Yetenek seviyesi, bkz. 90">
-                                                <span class="input-group-addon">%</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-12 text-center">
-                        <br>
-                        <button class="btn btn-primary btn-duplicator">KAYDET</button>
-                    </div>
-
-
-                </div>
-
-            </div>
-        </section>
-        <!-- END Skills -->
         <!-- Submit -->
         <section class=" bg-img" style="background-image: url(assets/img/bg-facts.jpg);">
             <div class="container">
@@ -529,7 +568,7 @@
                     @*<p>Please review your information once more and press the below button to put your resume online.</p>*@
                 </header>
 
-                <p class="text-center"><button class="btn btn-success btn-xl btn-round">Kaydet</button></p>
+                <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
 
             </div>
         </section>
@@ -539,4 +578,6 @@
     </main>
     <!-- END Main container -->
     </form>
+@section scripts{
+    <script src="/assets/vendors/summernote/summernote.min.js"></script>}
 
