@@ -33,6 +33,7 @@ namespace HrPortal.Controllers
 
         public IActionResult Create()
         {
+            var resume = new Resume();
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View();
 
