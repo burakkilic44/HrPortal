@@ -12,6 +12,7 @@ namespace HrPortal.Models
         public Resume() : base()
         {
             EducationInfos = new HashSet<EducationInfo>();
+            ResumeTags = new HashSet<ResumeTag>();
         }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
