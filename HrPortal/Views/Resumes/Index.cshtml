@@ -160,8 +160,9 @@
                     <p>@resumeItem.Notes</p>
 
                     <div class="tag-list">
-                        <span>@resumeItem.ResumeTags.OrderBy(t=> t.Tag).FirstOrDefault()?.TagId</span>
-                       
+                        @foreach (var tag in resumeItem.ResumeTags.Select(t=>t.Tag).ToList()) { 
+                        <span>@tag.Name</span>
+                        }
                     </div>
                 </div>
 
@@ -174,22 +175,14 @@
 
 
                         <span class="label label-success">@resumeItem.MilitaryStatus</span>
-
                     </div>
 
-                            </footer>
-                        </a>
-                        </div>
-    }
-                    <!-- END Resume detail -->
-                </div>
-
-             
-                   
-
-               
-
-
+                </footer>
+           </a>
+      </div>
+     }
+<!-- END Resume detail -->
+</div>
                 <!-- Page navigation -->
                 <nav class="text-center">
                     <ul class="pagination">

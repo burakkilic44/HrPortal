@@ -27,11 +27,29 @@ namespace HrPortal.Controllers
 
         public IActionResult Details(string id)
         {
-            return View();
+            var comp = companyRepository.Get(id, "Jobs", "Location");
+            return View(comp);
         }
         public IActionResult Create()
         {
+            var compa = new Company();
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Company company)
+        {
+            if (ModelState.IsValid)
+            {
+               companyRepository.Insert(company);
+                return RedirectToAction("SuccessfullyCreated");
+            }
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
+        }
+
     }
 }
