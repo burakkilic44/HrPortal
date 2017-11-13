@@ -12,11 +12,18 @@
             <br><br><br>
             <form class="header-job-search" method="get">
                 <div class="input-keyword">
-                    <input type="text" class="form-control" placeholder="Meslek, yetkinlik, veya şirket adı"  name="keyWords">
+                    <input type="text" class="form-control" placeholder="Meslek, yetkinlik, veya şirket adı" name="keyWords">
                 </div>
 
                 <div class="input-location">
-                    <select class="form-control" name="Location" asp-items="@(SelectList)ViewBag.Locations"></select>
+                    <select class="form-control" name="Location">
+                        <option value="">Konum Seçiniz</option>
+                        @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </select>
                 
                 </div>
 
