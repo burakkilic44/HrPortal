@@ -17,7 +17,8 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<Message> messageRepository;
         private IRepository<Job> jobRepository;
-   
+       
+
         public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository)
         {
    
@@ -25,6 +26,7 @@ namespace HrPortal.Controllers
             this.messageRepository = messageRepository;
             this.jobRepository = jobRepository;
             
+
         }
         public async Task<IActionResult> Index()
         {
@@ -32,14 +34,24 @@ namespace HrPortal.Controllers
             ViewBag.jobCount = jobRepository.Count();
             ViewBag.jobs = jobRepository.GetAll("Company","JobLocations","JobLocations.Location");
             ViewBag.resumes = resumeRepository.GetAll("EducationInfos");
-            
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            return View();
+        }
 
+        public IActionResult HowItWorks()
+        {
+            return View();
+        }
+        public IActionResult Help()
+        {
+            return View();
+        }
+        public IActionResult PrivacyPolicy()
+        {
             return View();
         }
 
