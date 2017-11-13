@@ -12,6 +12,7 @@ namespace HrPortal.Models.ManageViewModels
 
         public bool IsEmailConfirmed { get; set; }
 
+        public string FirstName { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }

@@ -250,6 +250,15 @@ namespace HrPortal.Controllers
                     result.Errors.Where(e => e.Code == "PasswordRequiresLower").FirstOrDefault().Description = "Şifre en az bir küçük harf içermelidir ('a-z')";
                 }
 
+                if (result.Errors.Where(e => e.Code == "PasswordRequiresDigit").FirstOrDefault() != null)
+                {
+                    result.Errors.Where(e => e.Code == "PasswordRequiresDigit").FirstOrDefault().Description = "Şifre en az bir rakam içermelidir ('1-9')";
+                }
+                if (result.Errors.Where(e => e.Code == "DuplicateUserName").FirstOrDefault() != null)
+                {
+                    result.Errors.Where(e => e.Code == "DuplicateUserName").FirstOrDefault().Description = "Kullanıcı adı daha önceden alınmış";
+                }
+
                 AddErrors(result);
             }
 
