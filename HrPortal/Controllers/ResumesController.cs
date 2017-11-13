@@ -23,7 +23,7 @@ namespace HrPortal.Controllers
         }
         public IActionResult Index()
         {
-            var resumes = resumeRepository.GetAll();
+            var resumes = resumeRepository.GetAll("EducationInfos","Location");
             return View(resumes);
         }
 
