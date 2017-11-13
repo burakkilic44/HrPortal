@@ -270,7 +270,7 @@
 
 
         <!-- Language -->
-        <section id="Language" class=" bg-alt">
+        <section id="LanguageInfos" class=" bg-alt">
            
         </section>
 
@@ -302,7 +302,7 @@
         $("#Experience").load("/Resumes/Experience");
         $("#Skill").load("/Resumes/Skill");
         $("#Certificate").load("/Resumes/Certificate");
-        $("#Language").load("/Resumes/Language");
+        $("#LanguageInfos").load("/Resumes/LanguageInfos");
 
     });
 
@@ -368,9 +368,9 @@
 
 
 <script type="text/javascript">
-        function AddLanguage() {
-            $.post("/Resumes/AddLanguage", {
-                Name: $("#Language.Name").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
+        function AddLanguageInfo() {
+            $.post("/Resumes/AddLanguageInfo", {
+                Name: $("#Language_Name").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
             }
                 ,
                 function (data) {

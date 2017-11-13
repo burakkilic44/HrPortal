@@ -86,13 +86,13 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        public IActionResult Language()
+        public IActionResult LanguageInfos()
         {
             return View();
         }
 
         [HttpPost]
-        public JsonResult AddLanguage()
+        public JsonResult AddLanguageInfo()
         {
             return Json("Success");
         }
