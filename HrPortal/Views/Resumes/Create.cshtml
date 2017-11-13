@@ -370,7 +370,7 @@
 <script type="text/javascript">
         function AddLanguageInfo() {
             $.post("/Resumes/AddLanguageInfo", {
-                Name: $("#Language_Name").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
+                Name: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
             }
                 ,
                 function (data) {
