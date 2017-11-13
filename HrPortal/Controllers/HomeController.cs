@@ -8,6 +8,7 @@ using HrPortal.Models;
 using HrPortal.Data;
 using HrPortal.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HrPortal.Controllers
 {
@@ -17,7 +18,8 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<Message> messageRepository;
         private IRepository<Job> jobRepository;
-   
+       
+
         public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository)
         {
    
@@ -25,21 +27,33 @@ namespace HrPortal.Controllers
             this.messageRepository = messageRepository;
             this.jobRepository = jobRepository;
             
+
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewBag.ResumeCount = resumeRepository.Count();
             ViewBag.jobCount = jobRepository.Count();
             ViewBag.jobs = jobRepository.GetAll("Company","JobLocations","JobLocations.Location");
             ViewBag.resumes = resumeRepository.GetAll("EducationInfos");
-            
+            ViewBag.Locations = new SelectList(jobRepository.GetAll().ToList(),"Id","Name");
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            return View();
+        }
 
+        public IActionResult HowItWorks()
+        {
+            return View();
+        }
+        public IActionResult Help()
+        {
+            return View();
+        }
+        public IActionResult PrivacyPolicy()
+        {
             return View();
         }
 
