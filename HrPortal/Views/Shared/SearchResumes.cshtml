@@ -12,15 +12,15 @@
             <br><br><br>
             <form class="header-job-search">
                 <div class="input-keyword">
-                    <input type="text" class="form-control" placeholder="Meslek, Kişi, Alan ">
+                    <input type="text" class="form-control" placeholder="Meslek, Kişi, Alan" formmethod="get" name="keyWords">
                 </div>
 
                 <div class="input-location">
-                    <input type="text" class="form-control" placeholder="Şehir, konum">
+                    <input type="text" class="form-control" placeholder="Şehir, konum" formmethod="get" name="Location">
                 </div>
 
                 <div class="btn-search">
-                    <button class="btn btn-primary" type="submit">Özgeçmiş Ara</button>
+                    <button class="btn btn-primary" type="submit" asp-controller="Resumes" asp-action="Index">Özgeçmiş Ara</button>
                     <a asp-controller="Resumes" asp-action="Index">Detaylı Arama</a>
                 </div>
             </form>
