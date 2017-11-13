@@ -57,6 +57,7 @@
    @foreach (var resumeItem in ViewBag.Resumes)
    {
          <!-- Resume item -->
+       
     <div class="item-block">
         <header>
             <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
@@ -75,7 +76,7 @@
 
             <div class="action-btn">
                 <a class="btn btn-xs btn-gray" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
-                <a class="btn btn-xs btn-success" href="#">Seç</a>               
+                <a class="btn btn-xs btn-success"><input type="radio" name="resume" /></a>               
             </div>
         </footer>
     </div>
