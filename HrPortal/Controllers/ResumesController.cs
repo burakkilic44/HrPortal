@@ -42,6 +42,61 @@ namespace HrPortal.Controllers
 
         }
 
+        public IActionResult EducationInfos()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddEducationInfo(EducationInfo educationinfo)
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Experience()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddExperience()
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Skill()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddSkill()
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Certificate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddCertificate()
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Language()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddLanguage()
+        {
+            return Json("Success");
+        }
+
         [HttpPost]
         public IActionResult Create(Resume resume)
         {
