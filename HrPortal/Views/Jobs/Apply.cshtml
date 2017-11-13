@@ -63,7 +63,8 @@
             <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
             <div class="hgroup">
                 <h4><a href="resume-detail.html"></a></h4>
-                <h5>@resumeItem.FullName</h5>
+                <h4>@resumeItem.FullName</h4>
+                <h5>@resumeItem.Title</h5>
             </div>
             <div class="header-meta">
                 <span class="location">@Model.JobLocations</span>
@@ -75,7 +76,7 @@
             <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate</p>
 
             <div class="action-btn">
-                <a class="btn btn-xs btn-gray" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
+                <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
                 <a class="btn btn-xs btn-success"><input type="radio" name="resume" /></a>               
             </div>
         </footer>
