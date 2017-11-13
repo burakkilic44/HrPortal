@@ -89,6 +89,8 @@ namespace HrPortal.Services
     public interface IRepository<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll(params string[] navigations);
+        IEnumerable<T> GetMany(Expression<Func<T, bool>> where, params string[] navigations);
+        T Get(Expression<Func<T, bool>> where, params string[] navigations);
         T Get(string id, params string[] navigations);
         int Count();
         void Insert(T entity);
