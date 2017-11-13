@@ -54,33 +54,34 @@
 
 
           
-    @foreach (var resumeItem in Model)
-    {
+   @foreach (var resumeItem in ViewBag.Resumes)
+   {
          <!-- Resume item -->
-                <div class="item-block">
-                    <header>
-                        <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
-                        <div class="hgroup">
-                            <h4><a href="resume-detail.html"></a></h4>
-                            <h5>Front-end developer</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">Menlo park, CA</span>
-                            <span class="rate">$55 per hour</span>
-                        </div>
-                    </header>
+       
+    <div class="item-block">
+        <header>
+            <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
+            <div class="hgroup">
+                <h4><a href="resume-detail.html"></a></h4>
+                <h5>@resumeItem.FullName</h5>
+            </div>
+            <div class="header-meta">
+                <span class="location">@Model.JobLocations</span>
+                <span>@Model.MilitaryStatus</span>
+            </div>
+        </header>
 
-                    <footer>
-                        <p class="status"><strong>Son güncelleme:</strong> March 10, 2016</p>
+        <footer>
+            <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate</p>
 
-                        <div class="action-btn">
-                            <a class="btn btn-xs btn-gray" href="#">Düzenle</a>
-                            <a class="btn btn-xs btn-success" href="#">Seç</a>
-                        </div>
-                    </footer>
-                </div>
+            <div class="action-btn">
+                <a class="btn btn-xs btn-gray" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
+                <a class="btn btn-xs btn-success"><input type="radio" name="resume" /></a>               
+            </div>
+        </footer>
+    </div>
                 <!-- END Resume item -->
-    }
+   }
             
             
             
@@ -89,7 +90,7 @@
 
             <div class="row">
                 <div class="col-xs-12 col-md-3">
-                    <a class="btn btn-block btn-primary" href="resume-add.html">Yeni Özgeçmiş Ekle</a>
+                    <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
                 </div>
             </div>
 

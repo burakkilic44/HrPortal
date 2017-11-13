@@ -18,14 +18,15 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<Message> messageRepository;
         private IRepository<Job> jobRepository;
-       
+        private IRepository<Location> locationRepository;
 
-        public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository)
+        public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository, IRepository<Location> locationRepository)
         {
    
             this.resumeRepository = resumeRepository;
             this.messageRepository = messageRepository;
             this.jobRepository = jobRepository;
+            this.locationRepository = locationRepository;
             
 
         }
@@ -35,7 +36,7 @@ namespace HrPortal.Controllers
             ViewBag.jobCount = jobRepository.Count();
             ViewBag.jobs = jobRepository.GetAll("Company","JobLocations","JobLocations.Location");
             ViewBag.resumes = resumeRepository.GetAll("EducationInfos");
-            ViewBag.Locations = new SelectList(jobRepository.GetAll().ToList(),"Id","Name");
+            ViewBag.Locations = locationRepository.GetAll();
             return View();
         }
 
