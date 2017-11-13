@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HrPortal.Services
@@ -27,12 +28,26 @@ namespace HrPortal.Services
             return qEntities.ToList();
         }
 
+        public IEnumerable<T> GetMany(Expression<Func<T, bool>> where, params string[] navigations)
+        {
+            var qEntities = entities.AsQueryable();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            return qEntities.Where(where).ToList();
+        }
         public T Get(string id, params string[] navigations)
         {
             var qEntities = entities.AsQueryable();
             foreach (string nav in navigations)
                 qEntities = qEntities.Include(nav);
             return qEntities.FirstOrDefault(s => s.Id == id);
+        }
+        public T Get(Expression<Func<T, bool>> where, params string[] navigations)
+        {
+            var qEntities = entities.AsQueryable();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            return qEntities.Where(where).FirstOrDefault();
         }
         public void Insert(T entity)
         {
