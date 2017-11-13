@@ -88,6 +88,7 @@ namespace HrPortal.Controllers
 
         public IActionResult LanguageInfos()
         {
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return View();
         }
 

@@ -22,7 +22,10 @@
 
                         <div class="col-xs-12 col-sm-12">
                             <div class="form-group">
-                                <input asp-for="Language.Name" type="text" class="form-control" placeholder="Bir dil giriniz (Bkz. İngilizce)">
+                                <select asp-for="LanguageId" class="form-control selectpicker" asp-items="@ViewBag.Languages">
+                                    <option value="">Bir dil seçiniz</option>
+                                </select>
+                                <span asp-validation-for="Language" class="text-danger"></span>
                             </div>
 
 
