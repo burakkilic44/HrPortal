@@ -72,12 +72,11 @@
                 @foreach (var CompanyItem in Model) {
                 <!-- Company detail -->
                 <div class="col-xs-12">
-                    <a class="item-block" asp-action="Details">
+                    <a class="item-block" asp-action="Details" asp-route-id="@CompanyItem.Id">
                         <header>
-                            <img src="uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Id">
+                            <img src="/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Id">
                             <div class="hgroup">
-                                <h4>@CompanyItem.Title</h4>
-                                <h5>@CompanyItem.Jobs</h5>
+                                <h4>@CompanyItem.Name</h4>
                             </div>
                             <span class="open-position"></span>
                         </header>
