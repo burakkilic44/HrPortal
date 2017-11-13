@@ -62,8 +62,40 @@
                             <div class="col-md-12">
 
                                 <div class="social-buttons">
-                                    <a href="#" class="btn btn-fb btn-sm"><i class="fa fa-facebook"></i> Facebook</a>
-                                    <a href="#" class="btn btn-tw btn-sm"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
+                                    @{
+                                        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                                        if (loginProviders.Count == 0)
+                                        {
+                                            <div class="login-footer">
+                                                <h6></h6>
+                                                <ul class="social-icons">
+                                                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="ExternalLogin"asp-controller="account" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                                <div>
+                                                    <p>
+                                                        @foreach (var provider in loginProviders)
+                                                        {
+                                                         <button type="submit" class="btn btn-fb btn-sm fa fa-facebook" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap ">@provider.Name</button>
+                                                         <button type="submit" class="btn btn-tw btn-sm fa fa-linkedin-square" name="provider" value="@provider.Name" title=" @provider.DisplayName ile giriş yap">Linkedin</button>
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        }
+                                    }
+
+
+
+
+                                    @*<a href="#" class="btn btn-tw btn-sm"><i class="fa fa-linkedin-square"></i> LinkedIn</a>*@
+                                    @*<a href="#" class="btn btn-fb btn-sm"><i class="fa fa-facebook"></i> Facebook</a>*@
+                                  
                                 </div>
                                 <p>Giriş Yap</p>
                                 <form class="form" role="form" asp-action="login" asp-controller="account" asp-route-returnurl="@Context.Request.Path" method="post" accept-charset="UTF-8" id="login-nav">
