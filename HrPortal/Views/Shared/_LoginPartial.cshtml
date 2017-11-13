@@ -16,60 +16,39 @@
     @if (SignInManager.IsSignedIn(User))
     {
 
-
-        <ul class="nav navbar-nav navbar-right">
-            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="fa fa-user"></span>
-                        <strong></strong>
-                        <span class="fa fa-chevron-down"></span>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="navbar-login">
-                                <div class="row">
-                                    <div class="col-lg-4">
+        <li class="dropdown pull-right">
+            <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span><span class="fa fa-chevron-down"></span></a>
+            <ul id="login-dp" class="dropdown-menu">
+                <li>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                                <div class="form-group">
+                                    <div class="col-md-4">
                                         <p class="text-center">
-                                            <span class="fa fa-user icon-size"></span>
+                                            <span class="fa fa-user icon-size" style="color:#29aafe"></span>
                                         </p>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <p class="text-left"><strong>@UserManager.GetUserName(User)</strong></p>
-                                        <p class="text-left small">@UserManager.GetUserName(User)</p>
+                                    <div class="col-md-8" style="color:black">
+                                        @{
+                                            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                                            ViewBag.FullName = user.FirstName + " " + user.LastName;
+                                        }
+                                        <p class="text-left"><strong>@ViewBag.FullName</strong></p>
+                                        <p class="text-left small">@User.Identity.Name</p>
                                         <p class="text-left">
-                                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"  class="btn btn-primary btn-block btn-sm">Profil</a>
+                                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-block btn-sm">Profil</a>
+                                            <button type="submit" class="btn btn-danger btn-block btn-sm">Çıkış</button>
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="navbar-login navbar-login-session">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <p>
-                                            <button type="submit" class="btn btn-danger btn-block">Çıkış</button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-
-
-                    @*<li class="dropdown pull-right">
-                <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><b>Kullanıcı</b><span class="caret"></span></a>
-                <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class=" fa fa-user login"></a></li>
-                <li><a href="submit" class="fa fa-sign-out navbar-btn navbar-link"></a></li>
-            </li>*@
+                            </form>
+                        </div>
+                       
+                    </div>
                 </li>
-            </form>
-      
-        </ul>
+            </ul>
+        </li>
     }
 
 
