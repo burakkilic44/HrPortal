@@ -10,17 +10,25 @@
             <h2>Şu an sizlere <mark>@ViewBag.JobCount</mark> iş ilanı sunuyoruz!</h2>
             <h5 class="font-alt">Aradığınızı dakikalar içinde bulun</h5>
             <br><br><br>
-            <form class="header-job-search">
+            <form class="header-job-search" method="get">
                 <div class="input-keyword">
-                    <input type="text" class="form-control" placeholder="Meslek, yetkinlik, veya şirket adı">
+                    <input type="text" class="form-control" placeholder="Meslek, yetkinlik, veya şirket adı" name="keyWords">
                 </div>
 
                 <div class="input-location">
-                    <input type="text" class="form-control" placeholder="Şehir, konum">
+                    <select class="form-control" name="Location">
+                        <option value="">Konum Seçiniz</option>
+                        @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </select>
+                
                 </div>
 
                 <div class="btn-search">
-                    <button class="btn btn-primary" type="submit">İş İlanı Ara</button>
+                    <button class="btn btn-primary" type="submit" asp-controller="Jobs" asp-action="Index">İş İlanı Ara</button>
                     <a asp-controller="Jobs" asp-action="Index">Gelişmiş Arama</a>
                 </div>
             </form>
