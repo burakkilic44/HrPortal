@@ -1,6 +1,6 @@
-﻿
+﻿@model Job
 @{
-    ViewData["Title"] = "Apply";
+    ViewData["Title"] = "Apply" ;
 }
 
     <!-- Page header -->
@@ -12,15 +12,15 @@
         <hr>
 
         <!-- Job detail -->
-        <a class="item-block item-block-flat" href="job-detail.html">
+        <a class="item-block item-block-flat" href="job-detail.html" >
           <header>
             <img src="assets/img/logo-google.jpg" alt="">
             <div class="hgroup">
-              <h4>Senior front-end developer</h4>
+              <h4>@Model.Title</h4>
               <h5>Google</h5>
             </div>
             <div class="header-meta">
-              <span class="location">Menlo park, CA</span>
+              <span class="location">@Model.JobLocations</span>
               <time datetime="2016-03-10 20:00">34 min ago</time>
             </div>
           </header>
@@ -53,78 +53,37 @@
             </header>
 
 
-            <!-- Resume item -->
-            <div class="item-block">
-                <header>
-                    <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
-                    <div class="hgroup">
-                        <h4><a href="resume-detail.html">John Doe</a></h4>
-                        <h5>Front-end developer</h5>
-                    </div>
-                    <div class="header-meta">
-                        <span class="location">Menlo park, CA</span>
-                        <span class="rate">$55 per hour</span>
-                    </div>
-                </header>
+          
+    @foreach (var resumeItem in Model)
+    {
+         <!-- Resume item -->
+                <div class="item-block">
+                    <header>
+                        <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
+                        <div class="hgroup">
+                            <h4><a href="resume-detail.html"></a></h4>
+                            <h5>Front-end developer</h5>
+                        </div>
+                        <div class="header-meta">
+                            <span class="location">Menlo park, CA</span>
+                            <span class="rate">$55 per hour</span>
+                        </div>
+                    </header>
 
-                <footer>
-                    <p class="status"><strong>Son güncelleme:</strong> March 10, 2016</p>
+                    <footer>
+                        <p class="status"><strong>Son güncelleme:</strong> March 10, 2016</p>
 
-                    <div class="action-btn">
-                        <a class="btn btn-xs btn-gray" href="#">Düzenle</a>
-                        <a class="btn btn-xs btn-success" href="#">Seç</a>
-                    </div>
-                </footer>
-            </div>
-            <!-- END Resume item -->
-            <!-- Resume item -->
-            <div class="item-block">
-                <header>
-                    <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
-                    <div class="hgroup">
-                        <h4><a href="resume-detail.html">John Doe</a></h4>
-                        <h5>Full stack developer</h5>
-                    </div>
-                    <div class="header-meta">
-                        <span class="location">Menlo park, CA</span>
-                        <span class="rate">$85 per hour</span>
-                    </div>
-                </header>
-
-                <footer>
-                    <p class="status"><strong>Son güncelleme:</strong> March 03, 2016</p>
-
-                    <div class="action-btn">
-                        <a class="btn btn-xs btn-gray" href="#">Düzenle</a>
-                        <a class="btn btn-xs btn-success" href="#">Seç</a>
-                    </div>
-                </footer>
-            </div>
-            <!-- END Resume item -->
-            <!-- Resume item -->
-            <div class="item-block">
-                <header>
-                    <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
-                    <div class="hgroup">
-                        <h4><a href="resume-detail.html">John Doe</a></h4>
-                        <h5>PHP developer <span class="label label-info">Hidden</span></h5>
-                    </div>
-                    <div class="header-meta">
-                        <span class="location">Menlo park, CA</span>
-                        <span class="rate">$60 per hour</span>
-                    </div>
-                </header>
-
-                <footer>
-                    <p class="status"><strong>Son güncelleme:</strong> Feb 27, 2016</p>
-
-                    <div class="action-btn">
-                        <a class="btn btn-xs btn-gray" href="#">Düzenle</a>
-                        <a class="btn btn-xs btn-success" href="#">Seç</a>
-                    </div>
-                </footer>
-            </div>
-            <!-- END Resume item -->
+                        <div class="action-btn">
+                            <a class="btn btn-xs btn-gray" href="#">Düzenle</a>
+                            <a class="btn btn-xs btn-success" href="#">Seç</a>
+                        </div>
+                    </footer>
+                </div>
+                <!-- END Resume item -->
+    }
+            
+            
+            
 
             <br>
 
