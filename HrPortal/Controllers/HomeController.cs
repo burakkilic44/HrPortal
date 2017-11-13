@@ -8,6 +8,7 @@ using HrPortal.Models;
 using HrPortal.Data;
 using HrPortal.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HrPortal.Controllers
 {
@@ -28,12 +29,13 @@ namespace HrPortal.Controllers
             
 
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewBag.ResumeCount = resumeRepository.Count();
             ViewBag.jobCount = jobRepository.Count();
             ViewBag.jobs = jobRepository.GetAll("Company","JobLocations","JobLocations.Location");
             ViewBag.resumes = resumeRepository.GetAll("EducationInfos");
+            ViewBag.Locations = new SelectList(jobRepository.GetAll().ToList(),"Id","Name");
             return View();
         }
 
