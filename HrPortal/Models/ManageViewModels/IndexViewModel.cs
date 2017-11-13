@@ -11,6 +11,12 @@ namespace HrPortal.Models.ManageViewModels
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
+        [Required]
+        [Display(Name = "Ad")]
+        public String FirstName { get; set; }
+        [Required]
+        [Display(Name = "Soyad")]
+        public String LastName { get; set; }
 
         [Required]
         [EmailAddress]
@@ -21,7 +27,6 @@ namespace HrPortal.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
-        public string FirstName { get; internal set; }
-        public string LastName { get; internal set; }
+       
     }
 }

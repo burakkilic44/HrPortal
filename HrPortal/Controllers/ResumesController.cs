@@ -23,14 +23,14 @@ namespace HrPortal.Controllers
         }
         public IActionResult Index()
         {
-            var resumes = resumeRepository.GetAll();
+            var resumes = resumeRepository.GetAll("EducationInfos","Location");
             return View(resumes);
         }
 
         public IActionResult Details(string id)
         {
-
-            return View();
+            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos");
+            return View(resume);
         }
 
         public IActionResult Create()
