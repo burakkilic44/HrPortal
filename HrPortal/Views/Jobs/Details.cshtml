@@ -10,7 +10,7 @@
                 <h1>@Model.Title</h1>
                 <h3><a href="#">Google</a></h3>
             </div>
-            <time datetime="@Model.PublishDate">2 days ago</time>
+            <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
             <hr>
             <p class="lead">@Model.ShortDescription</p>
 
@@ -33,7 +33,7 @@
                 </li>
 
                 <li>
-                    <i class="fa fa-money"></i>
+                    <i class="fa fa-male"></i>
                     <span>Askerlik: @Model.MilitaryStatus</span>
                 </li>
 
@@ -51,6 +51,20 @@
                     <i class="fa fa-certificate"></i>
                     <a href="#">@Model.EducationLevel</a>
                 </li>
+
+                <li>
+                    <i class="fa fa-check"></i>
+                    <a href="#">Aktif mi? @(Model.IsActive?"Evet":"Hayır:")</a>
+                </li>
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    <a href="#"> Yayın Tarihi: @Model.PublishDate.ToString("yy.MM.yyyy")</a>
+                </li>
+
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    <a href="#"> Bitiş Tarihi: @Model.EndDate.ToString("yy.MM.yyyy")</a>
+                </li>
             </ul>
 
             <div class="button-group">
@@ -63,7 +77,7 @@
                 </ul>
 
                 <div class="action-buttons">
-                    <a class="btn btn-success" asp-action="Apply">ŞİMDİ BAŞVUR</a>
+                    <a class="btn btn-success" asp-action="Apply" asp-route-id="@Model.Id">ŞİMDİ BAŞVUR</a>
                 </div>
             </div>
 
@@ -82,3 +96,43 @@
                 </div>
             </section>
         </main>
+<script>
+    DisplayAgoFormat();
+    AgoFormat(timeSpan);
+
+        function DisplayAgoFormat() {
+            var inputDate = new Date(document.getElementById("girilenTarih").value);
+            var currentDate = new Date();
+            var differance = currentDate.getTime() - inputDate.getTime();
+            var result = AgoFormat(differance);
+            document.getElementById("sonuc").innerHTML = result;
+        }
+
+        function AgoFormat(timeSpan) {
+            var formatedDateString = "";
+            var day = Math.floor(timeSpan / (1000 * 60 * 60 * 24));
+            var hour = Math.floor(timeSpan / (1000 * 60 * 60) % 24);
+            var minute = Math.floor(timeSpan / (1000 * 60) % 60);
+
+
+
+            if (day > 0) {
+                formatedDateString += day.toString() + " gün ";
+            }
+            if (hour > 0) {
+                formatedDateString += hour.toString() + " saat ";
+            }
+            if (minute > 0) {
+                formatedDateString += minute.toString() + " dakika ";
+            }
+
+            if (formatedDateString == "") {
+                formatedDateString = "biraz ";
+            }
+
+            formatedDateString += "önce";
+
+            return formatedDateString;
+        }
+
+</script>

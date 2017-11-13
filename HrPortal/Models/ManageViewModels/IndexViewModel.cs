@@ -22,5 +22,7 @@ namespace HrPortal.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
+        public string FirstName { get; internal set; }
+        public string LastName { get; internal set; }
     }
 }

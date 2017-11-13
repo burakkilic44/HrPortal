@@ -54,7 +54,13 @@ namespace HrPortal.Controllers
         }
        
 
-        public IActionResult Apply()
+        public IActionResult Apply(string id)
+        {           
+            var job = jobRepository.Get(id, "Company", "Job");
+            return View(job);
+        }
+        
+        public IActionResult SuccessfullyCreated()
         {
             return View();
         }
