@@ -32,7 +32,7 @@ namespace HrPortal.Services
             var qEntities = entities.AsQueryable();
             foreach (string nav in navigations)
                 qEntities = qEntities.Include(nav);
-            return entities.FirstOrDefault(s => s.Id == id);
+            return qEntities.FirstOrDefault(s => s.Id == id);
         }
         public void Insert(T entity)
         {

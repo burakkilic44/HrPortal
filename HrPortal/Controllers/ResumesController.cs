@@ -29,8 +29,8 @@ namespace HrPortal.Controllers
 
         public IActionResult Details(string id)
         {
-
-            return View();
+            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos");
+            return View(resume);
         }
 
         public IActionResult Create()
