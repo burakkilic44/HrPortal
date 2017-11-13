@@ -73,7 +73,7 @@
         </header>
 
         <footer>
-            <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate</p>
+            <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate.ToString("yy.MM.yyyy")</p>
 
             <div class="action-btn">
                 <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
