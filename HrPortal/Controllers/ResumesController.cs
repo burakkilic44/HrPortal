@@ -15,7 +15,7 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Language> languageRepository;
-        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository)
+      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository)
         {
             this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
@@ -23,14 +23,14 @@ namespace HrPortal.Controllers
         }
         public IActionResult Index()
         {
-            var resumes = resumeRepository.GetAll();
+            var resumes = resumeRepository.GetAll("EducationInfos","Location", "ResumeTags", "ResumeTags.Tag");
             return View(resumes);
         }
 
         public IActionResult Details(string id)
         {
-
-            return View();
+            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos");
+            return View(resume);
         }
 
         public IActionResult Create()

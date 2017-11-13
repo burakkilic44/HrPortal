@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HrPortal.Services
@@ -27,12 +28,26 @@ namespace HrPortal.Services
             return qEntities.ToList();
         }
 
+        public IEnumerable<T> GetMany(Expression<Func<T, bool>> where, params string[] navigations)
+        {
+            var qEntities = entities.AsQueryable();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            return qEntities.Where(where).ToList();
+        }
         public T Get(string id, params string[] navigations)
         {
             var qEntities = entities.AsQueryable();
             foreach (string nav in navigations)
                 qEntities = qEntities.Include(nav);
-            return entities.FirstOrDefault(s => s.Id == id);
+            return qEntities.FirstOrDefault(s => s.Id == id);
+        }
+        public T Get(Expression<Func<T, bool>> where, params string[] navigations)
+        {
+            var qEntities = entities.AsQueryable();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            return qEntities.Where(where).FirstOrDefault();
         }
         public void Insert(T entity)
         {
@@ -74,6 +89,8 @@ namespace HrPortal.Services
     public interface IRepository<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll(params string[] navigations);
+        IEnumerable<T> GetMany(Expression<Func<T, bool>> where, params string[] navigations);
+        T Get(Expression<Func<T, bool>> where, params string[] navigations);
         T Get(string id, params string[] navigations);
         int Count();
         void Insert(T entity);

@@ -168,13 +168,20 @@
 
                 <footer>
                     <div class="header-meta">
-                        <span class="location">
-                            @resumeItem.Location?.Name
-                        </span>
-                        <span class="label label-success">@resumeItem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.EducationLevel </span>
+                        <ul class="list-inline">
+                            <li>
+                                <span class="location">
+                                    @resumeItem.Location?.Name
+                                </span>
+                            </li>
+                            <li>
+                                <span class="label label-success">@resumeItem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.EducationLevel </span>
 
-
-                        <span class="label label-success">@resumeItem.MilitaryStatus</span>
+                            </li>
+                            <li>
+                                <span class="label label-success">@resumeItem.MilitaryStatus</span>
+                            </li>
+                        </ul>
                     </div>
 
                 </footer>
