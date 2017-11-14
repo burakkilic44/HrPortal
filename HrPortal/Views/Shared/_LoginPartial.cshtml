@@ -4,134 +4,141 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
-
-
 @*login model eklendi checkbox dinamik olması içi*@
 
 
 
 <link href="~/assets/css/UserSettings.css" rel="stylesheet" />
 
-    @if (SignInManager.IsSignedIn(User))
-    {
-
-        <li class="dropdown pull-right">
-            <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span><span class="fa fa-chevron-down"></span></a>
-            <ul id="login-dp" class="dropdown-menu">
-                <li>
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="dropdown pull-right">
+        <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span><span class="fa fa-chevron-down"></span></a>
+        <ul id="login-dp" class="dropdown-menu">
+            <li>
+                <div class="container-fluid well span6">
                     <div class="row">
-                        <div class="col-md-12">
-                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <p class="text-center">
-                                            <span class="fa fa-user icon-size" style="color:#29aafe"></span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-8" style="color:black">
-                                        @{
-                                            var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                                            ViewBag.FullName = user.FirstName + " " + user.LastName;
-                                        }
-                                        <p class="text-left"><strong>@ViewBag.FullName</strong></p>
-                                        <p class="text-left small">@User.Identity.Name</p>
-                                        <p class="text-left">
-                                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-block btn-sm">Profil</a>
-                                            <button type="submit" class="btn btn-danger btn-block btn-sm">Çıkış</button>
-                                        </p>
-                                    </div>
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
+                           
+                                <div class="span2" style="text-align:center;">
+                                    <span class="fa fa-user icon-size" style="color:darkorange;"></span>
+
                                 </div>
-                            </form>
-                        </div>
-                       
-                    </div>
-                </li>
-            </ul>
-        </li>
-    }
 
-
-    else
-    {
-            <li class="dropdown pull-right">
-                <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><b>Giriş</b> <span class="caret"></span></a>
-                <ul id="login-dp" class="dropdown-menu">
-                    <li>
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <div class="social-buttons">
+                                <div class="span8" style="text-align:center; padding-top:10px; color:black;">
                                     @{
-                                        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-                                        if (loginProviders.Count == 0)
-                                        {
-                                            <div class="login-footer">
-                                                <h6></h6>
-                                                <ul class="social-icons">
-                                                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <form asp-action="ExternalLogin"asp-controller="account" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                                                <div>
-                                                    <p>
-                                                        @foreach (var provider in loginProviders)
-                                                        {
-                                                         <button type="submit" class="btn btn-fb btn-sm fa fa-facebook" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap ">@provider.Name</button>
-                                                         <button type="submit" class="btn btn-tw btn-sm fa fa-linkedin-square" name="provider" value="@provider.Name" title=" @provider.DisplayName ile giriş yap">Linkedin</button>
-                                                        }
-                                                    </p>
-                                                </div>
-                                            </form>
-                                        }
+                                        var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                                        ViewBag.FullName = user.FirstName + " " + user.LastName;
                                     }
-
-
-
-
-                                    @*<a href="#" class="btn btn-tw btn-sm"><i class="fa fa-linkedin-square"></i> LinkedIn</a>*@
-                                    @*<a href="#" class="btn btn-fb btn-sm"><i class="fa fa-facebook"></i> Facebook</a>*@
+                                    <p class="text"><strong>@ViewBag.FullName</strong></p>
+                                    <p class="text-small">@User.Identity.Name</p>
                                   
+                                 
                                 </div>
-                                <p>Giriş Yap</p>
-                                <form class="form" role="form" asp-action="login" asp-controller="account" asp-route-returnurl="@Context.Request.Path" method="post" accept-charset="UTF-8" id="login-nav">
-                                    <div class="form-group">
-                                        <label for="Email" class="sr-only" >Email</label>
-                                        <input type="email" name="Email" class="form-control" id="Email" placeholder="Email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="Password">Şifre</label>
-                                        <input type="password" name="Password" class="form-control" id="Password" placeholder="Şifre" required>
-                                        <div class="help-block text-right"><a href="/account/forgotpassword">Şifreni mi Unuttun?</a></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block btn-sm">Giriş</button>
-                                    </div>
-                                                                            
-                                        <div class="form-group">
-                                            <label for="RememberMe"></label>
-                                            <input name="RememberMe" class="checkbox checkbox-inline" type="checkbox" value="true"/> Beni hatırla
 
-                                        </div>
-                                  
-                                </form>
-                            </div>
-                            <div class="bottom text-center">
-                                Hesabın Yok Mu? <a href="/account/register"><b>Üye Ol</b></a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-       
+                                <div class="span2"style="text-align:center;">
+                                    <div class="btn-group">
+                                        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-sm ">Profil</a>
+                                        <button type="submit" style="margin-left:5px" class="btn btn-danger btn-sm ">Çıkış</button>
+
+                                    </div>
+                                </div>
+                                
+                        </form>
+                        
+                    </div>
+                    
+                </div>
                 
 
-    @*<ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
-    </ul>*@
-}
+
+            </li>
+
+        </ul>
+    </li>
+
+    }
+
+                    else
+                    {
+                    <li class="dropdown pull-right">
+                        <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><b>Giriş</b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="social-buttons">
+                                            @{
+                                                var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                                                if (loginProviders.Count == 0)
+                                                {
+                                                    <div class="login-footer">
+                                                        <h6></h6>
+                                                        <ul class="social-icons">
+                                                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form asp-action="ExternalLogin" asp-controller="account" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                                        <div>
+                                                            <p>
+                                                                @foreach (var provider in loginProviders)
+                                                                {
+                                                                    <button type="submit" class="btn btn-fb btn-sm fa fa-facebook" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap ">@provider.Name</button>
+                                                                    <button type="submit" class="btn btn-tw btn-sm fa fa-linkedin-square" name="provider" value="@provider.Name" title=" @provider.DisplayName ile giriş yap">Linkedin</button>
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                    </form>
+                                                }
+                                            }
+
+
+
+
+                                            @*<a href="#" class="btn btn-tw btn-sm"><i class="fa fa-linkedin-square"></i> LinkedIn</a>*@
+                                            @*<a href="#" class="btn btn-fb btn-sm"><i class="fa fa-facebook"></i> Facebook</a>*@
+
+                                        </div>
+                                        <p>Giriş Yap</p>
+                                        <form class="form" role="form" asp-action="login" asp-controller="account" asp-route-returnurl="@Context.Request.Path" method="post" accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                <label for="Email" class="sr-only">Email</label>
+                                                <input type="email" name="Email" class="form-control" id="Email" placeholder="Email" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="Password">Şifre</label>
+                                                <input type="password" name="Password" class="form-control" id="Password" placeholder="Şifre" required>
+                                                <div class="help-block text-right"><a href="/account/forgotpassword">Şifreni mi Unuttun?</a></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block btn-sm">Giriş</button>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="RememberMe"></label>
+                                                <input name="RememberMe" class="checkbox checkbox-inline" type="checkbox" value="true" /> Beni hatırla
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        Hesabın Yok Mu? <a href="/account/register"><b>Üye Ol</b></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    @*<ul class="nav navbar-nav navbar-right">
+                            <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+                        </ul>*@
+                                                }

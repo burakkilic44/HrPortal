@@ -21,6 +21,7 @@
                         <div class="col-xs-12 col-sm-4">
                             <div class="form-group">
                                 <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                <span asp-validation-for="Photo" class="text-danger"></span>
                                 <span class="help-block">Please choose a square logo</span>
                             </div>
                         </div>
@@ -28,13 +29,16 @@
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
                                 <input asp-for="EducationLevel" type="text" class="form-control" placeholder="Eğitim Düzeyi, Bkz. Lisans Mezunu">
+                                <span asp-validation-for="EducationLevel" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <input asp-for="Department" type="text" class="form-control" placeholder="Bölüm, Bkz. Bilgisayar Mühendisliği">
+                                <span asp-validation-for="Department" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <input asp-for="SchoolName" type="text" class="form-control" placeholder="Okul Adı, Bkz. Yıldız Teknik Üniversitesi">
+                                <span asp-validation-for="SchoolName" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
