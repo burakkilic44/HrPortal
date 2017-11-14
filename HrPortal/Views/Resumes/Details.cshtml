@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-4">
-                <img src="assets/img/avatar.jpg" alt="">
+                <img src="@Model.Photo" alt="photo">
             </div>
 
             <div class="col-xs-12 col-sm-8 header-detail">
@@ -141,51 +141,24 @@
             <div class="row">
                
                 <div class="col-xs-12">
-                  
-                    <div class="item-block ">
+                 @foreach (var item in Model.EducationInfos)
+                 {
+                   <div class="item-block ">
                         <header>
                             <img src="~/assets/img/logo-mit.png" alt="logo">
                             <div class="hgroup">
-                                <h4>Master <small>@if (Model.EducationInfos != null)
-                                {
-                                    foreach (var edus in Model.EducationInfos.Select(s => s.Department).ToList())
-                                    {
-                                        @edus
-                                        <text> </text>
-                                    }
-                                }</small></h4>
-                                <h5>Massachusetts Institute of Technology</h5>
+                                <h4>@item.EducationLevel<small>@item.Department</small></h4>
+                                <h5>@item.SchoolName</h5>
                             </div>
-                            <h6 class="time">2012 - 2014</h6>
+                            <h6 class="time">@item.StartDate - @item.EndDate</h6>
                         </header>
                         <div class="item-body">
-                            <p>The Massachusetts Institute of Technology (MIT) is a private research university in Cambridge, Massachusetts. Founded in 1861 in response to the increasing industrialization of the United States, MIT adopted a European polytechnic university model and stressed laboratory instruction in applied science and engineering.</p>
+                            <p>@item.Notes</p>
                         </div>
-                    </div>
-                   
-                   
-                    
-                </div>
-               
-                
-
-                <div class="col-xs-12">
-                    <div class="item-block">
-                        <header>
-                            <img src="/assets/img/logo-mit.png" alt="logo">
-                            <div class="hgroup">
-                                <h4>Bachelor <small>Computer Science</small></h4>
-                                <h5>University of California, Berkeley</h5>
-                            </div>
-                            <h6 class="time">2008 - 2012</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>The University of California, Berkeley is a public research university located in Berkeley, California. It is the flagship campus of the University of California system, one of three parts in the state's public higher education plan, which also includes the California State University system and the California Community Colleges System.</p>
-                        </div>
-                    </div>
+                    </div>                  
+                  }    
                 </div>
             </div>
-
         </div>
     </section>
     <!-- END Education -->
@@ -193,7 +166,7 @@
     <section class="bg-alt">
         <div class="container">
             <header class="section-header">
-                <span>Past positions</span>
+                <span>ÇALIŞILAN FİRMALAR</span>
                 <h2>İş Deneyimi</h2>
             </header>
 
@@ -201,12 +174,13 @@
 
                 <!-- Work item -->
                 <div class="col-xs-12">
+                    
                     <div class="item-block">
                         <header>
-                            <img src="/assets/img/logo-mit.png" alt="logo">
+                            <img src="" alt="logo">
                             <div class="hgroup">
-                                <h4>Google</h4>
-                                <h5>Senior front-end developer</h5>
+                                <h4></h4>
+                                <h5></h5>
                             </div>
                             <h6 class="time">Jan 2016 - Present</h6>
                         </header>
@@ -223,6 +197,7 @@
                             </ul>
                         </div>
                     </div>
+                    
                 </div>
                 <!-- END Work item -->
                 <!-- Work item -->

@@ -1,6 +1,7 @@
 ﻿using HrPortal.Data;
 using HrPortal.Models;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,20 @@ namespace HrPortal.Services
             foreach (string nav in navigations)
                 qEntities = qEntities.Include(nav);
             return qEntities.Where(where).ToList();
+        }
+        public async Task<PagingList<T>> GetPaged(Expression<Func<T, bool>> where, Expression<Func<T, object>> orderby, bool desc, int pageSize, int pageNo, params string[] navigations)
+        {
+            var qEntities = entities.AsQueryable().AsNoTracking();
+            foreach (string nav in navigations)
+                qEntities = qEntities.Include(nav);
+            if (desc == false) { 
+                var qry = qEntities.Where(where).OrderBy(orderby);
+                return await PagingList.CreateAsync<T>(qry, pageSize, pageNo);
+            } else
+            {
+                var qry = qEntities.Where(where).OrderByDescending(orderby);
+                return await PagingList.CreateAsync<T>(qry, pageSize, pageNo);
+            }
         }
         public T Get(string id, params string[] navigations)
         {
@@ -90,6 +105,7 @@ namespace HrPortal.Services
     {
         IEnumerable<T> GetAll(params string[] navigations);
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where, params string[] navigations);
+        Task<PagingList<T>> GetPaged(Expression<Func<T, bool>> where, Expression<Func<T, object>> orderby, bool desc, int pageSize, int pageNo, params string[] navigations);
         T Get(Expression<Func<T, bool>> where, params string[] navigations);
         T Get(string id, params string[] navigations);
         int Count();
