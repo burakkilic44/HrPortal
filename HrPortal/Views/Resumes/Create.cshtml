@@ -346,9 +346,7 @@
               alert(data);
 
         });
-
 }
-
 
         function AddExperience() {
             $.post("/Resumes/AddExperience", {
@@ -378,7 +376,7 @@
 
         function AddCertificate() {
             $.post("/Resumes/AddCertificate", {
-                Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),  
+                ResumeId: "@Model.Id", Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),  
             }
                 ,
                 function (data) {
