@@ -61,7 +61,8 @@ namespace HrPortal.Controllers
 
         public IActionResult EducationInfos()
         {
-            return View();
+            var EducationInfo = new EducationInfo();
+            return View(EducationInfo);
         }
 
         [HttpPost]
@@ -72,7 +73,8 @@ namespace HrPortal.Controllers
 
         public IActionResult Experience()
         {
-            return View();
+            var Experience = new Experience();
+            return View(Experience);
         }
 
         [HttpPost]
@@ -83,7 +85,8 @@ namespace HrPortal.Controllers
 
         public IActionResult Skill()
         {
-            return View();
+            var Skill = new Skill();
+            return View(Skill);
         }
 
         [HttpPost]
@@ -94,7 +97,8 @@ namespace HrPortal.Controllers
 
         public IActionResult Certificate()
         {
-            return View();
+            var Certificate = new Certificate();
+            return View(Certificate);
         }
 
         [HttpPost]
@@ -105,19 +109,17 @@ namespace HrPortal.Controllers
 
         public IActionResult LanguageInfos()
         {
-            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
+           
             var languageInfo = new LanguageInfo();
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return View(languageInfo);
         }
 
         [HttpPost]
-        public JsonResult AddLanguageInfo()
+        public JsonResult AddLanguageInfo(LanguageInfo languageInfo)
         {
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
-            return Json("Success");
-        }
-
-       
+            return Json("Success");      
+        } 
     }
-
 }
