@@ -322,7 +322,7 @@
 
     function AddEducationInfo() {
         $.post("/Resumes/AddEducationInfo", { ResumeId: "@(Model.Id)",
-            Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(),
+            Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(), SchoolName: $("#SchoolName").val(),
             Department: $("#Department").val(), StartDate: $("#StartDate").val(), EndDate: $("#EndDate").val(), Notes: $("#Notes").val(),
         }
             ,
