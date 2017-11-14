@@ -8,7 +8,7 @@
             <img class="logo" src="assets/img/logo-google.jpg" alt="">
             <div class="hgroup">
                 <h1>@Model.Title</h1>
-                <h3><a href="#">Google</a></h3>
+                <h3><a href="#">@Model.Company.Name</a></h3>
             </div>
             <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
             <hr>
@@ -22,19 +22,19 @@
                         foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
                         {
                         @location
-                        <text>, </text>
+                        <text> </text>
                         }
                     }</span>
                 </li>
 
                 <li>
                     <i class="fa fa-briefcase"></i>
-                    <span>@Model.WorkingStyle</span>
+                    <span>Çalışma Şekli: @Model.WorkingStyle.GetDisplayName()</span>
                 </li>
 
                 <li>
                     <i class="fa fa-male"></i>
-                    <span>Askerlik: @Model.MilitaryStatus</span>
+                    <span>Askerlik: @Model.MilitaryStatus.GetDisplayName()</span>
                 </li>
 
                 <li>
@@ -49,7 +49,7 @@
 
                 <li>
                     <i class="fa fa-certificate"></i>
-                    <a href="#">@Model.EducationLevel</a>
+                    <a href="#">Eğitim Seviyesi: @Model.EducationLevel.GetDisplayName()</a>
                 </li>
 
                 <li>

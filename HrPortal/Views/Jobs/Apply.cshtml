@@ -3,146 +3,160 @@
     ViewData["Title"] = "Apply" ;
 }
 
+<form asp-action="Apply" method="get">
     <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
-      <div class="container no-shadow">
-        <h1 class="text-center">İş başvurusunda bulunun</h1>
-        <p class="lead text-center">Online özgeçmişinizle başvurun, iş için yeni özgeçmiş oluşturun veya özel bir uygulama yapın.</p>
+        <div class="container no-shadow">
+            <h1 class="text-center">İş başvurusunda bulunun</h1>
+            <p class="lead text-center">Online özgeçmişinizle başvurun, iş için yeni özgeçmiş oluşturun veya özel bir uygulama yapın.</p>
 
-        <hr>
+            <hr>
 
-        <!-- Job detail -->
-        <a class="item-block item-block-flat" href="job-detail.html" >
-          <header>
-            <img src="assets/img/logo-google.jpg" alt="">
-            <div class="hgroup">
-              <h4>@Model.Title</h4>
-              <h5>Google</h5>
+            <!-- Job detail -->
+            <a class="item-block item-block-flat" href="job-detail.html">
+                <header>
+                    <img src="assets/img/logo-google.jpg" alt="">
+                    <div class="hgroup">
+                        <h4>@Model.Title</h4>
+                        <h5>@Model.Company.Name</h5>
+                    </div>
+                    <div class="header-meta">
+                        <i class="fa fa-map-marker"></i>
+                        <span>
+
+                            @if (Model.JobLocations != null)
+                            {
+                                foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                                {
+                                    @location
+                                    <text> </text>
+                                }
+                            }
+                        </span><br />
+
+                        <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
+                    </div>
+                </header>
+            </a>
+
+            <!-- END Job detail -->
+
+            <div class="button-group">
+                <div class="action-buttons">
+                    <a class="btn btn-gray" href="#sec-custom">Özel başvuru</a>
+                    <a class="btn btn-primary" href="#sec-resume">Özgeçmiş ile başvurun</a>
+                </div>
             </div>
-            <div class="header-meta">
-              <span class="location">@Model.JobLocations</span>
-              <time datetime="2016-03-10 20:00">34 min ago</time>
-            </div>
-          </header>
-        </a>
-        <!-- END Job detail -->
 
-        <div class="button-group">
-          <div class="action-buttons">
-            <a class="btn btn-gray" href="#sec-custom">Özel başvuru</a>
-            <a class="btn btn-primary" href="#sec-resume">Özgeçmiş ile başvurun</a>
-          </div>
         </div>
-
-      </div>
     </header>
-<!-- END Page header -->
-<!-- Main container -->
-<main>
+    <!-- END Page header -->
+    <!-- Main container -->
+    <main>
 
 
-    <!-- Apply with resume -->
-    <section id="sec-resume">
-        <div class="container">
+        <!-- Apply with resume -->
+        <section id="sec-resume">
+            <div class="container">
 
-            <header class="section-header">
-                <span>Özgeçmiş ile başvurun</span>
-                <h2>Özgeçmiş seçin</h2>
-                <p>Bu iş için mevcut çevrimiçi özgeçmişlerinden birisi ile  başvur</p>
+                <header class="section-header">
+                    <span>Özgeçmiş ile başvurun</span>
+                    <h2>Özgeçmiş seçin</h2>
+                    <p>Bu iş için mevcut çevrimiçi özgeçmişlerinden birisi ile  başvur</p>
 
-            </header>
+                </header>
 
 
-          
-   @foreach (var resumeItem in ViewBag.Resumes)
-   {
+
+                @foreach (var resumeItem in ViewBag.Resumes)
+                {
          <!-- Resume item -->
-       
-    <div class="item-block">
-        <header>
-            <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
-            <div class="hgroup">
-                <h4><a href="resume-detail.html"></a></h4>
-                <h5>@resumeItem.FullName</h5>
-            </div>
-            <div class="header-meta">
-                <span class="location">@Model.JobLocations</span>
-                <span>@Model.MilitaryStatus</span>
-            </div>
-        </header>
 
-        <footer>
-            <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate</p>
+                    <div class="item-block">
+                        <header>
+                            <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
+                            <div class="hgroup">
+                                <h4><a href="resume-detail.html"></a></h4>
+                                <h4>@resumeItem.FullName</h4>
+                                <h5>@resumeItem.Title</h5>
+                            </div>
+                            <div class="header-meta">
+                                <i class="fa fa-map-marker"></i>
+                                <span>
 
-            <div class="action-btn">
-                <a class="btn btn-xs btn-gray" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
-                <a class="btn btn-xs btn-success"><input type="radio" name="resume" /></a>               
-            </div>
-        </footer>
-    </div>
+                                    @if (Model.JobLocations != null)
+                {
+                    foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                    {
+                                            @location
+                                            <text> </text>
+                                        }
+                                    }
+                                </span>
+                            </div>
+                        </header>
+
+                        <footer>
+                            <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate.ToString("yy.MM.yyyy")</p>
+
+                            <div class="action-btn">
+                                <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
+                                <a class="btn btn-xs btn-success"><input type="radio" name="resume" /></a>
+                            </div>
+                        </footer>
+                    </div>
                 <!-- END Resume item -->
-   }
-            
-            
-            
+                }
 
-            <br>
 
-            <div class="row">
-                <div class="col-xs-12 col-md-3">
-                    <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
+
+
+                <br>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                        <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
+                    </div>
                 </div>
+
             </div>
+        </section>
+        <!-- END Apply with resume -->
+        <!-- Custom application -->
+        <section id="sec-custom" class="bg-alt">
+            <div class="container">
+                <header class="section-header">
+                    <span>Özel Başvuru</span>
+                    <h2>Şimdi Uygula</h2>
+                    <p>Bu işi özel bir uygulama ile uygulayın.</p>
+                </header>
 
-        </div>
-    </section>
-    <!-- END Apply with resume -->
-    <!-- Custom application -->
-    <section id="sec-custom" class="bg-alt">
-        <div class="container">
-            <header class="section-header">
-                <span>Özel Başvuru</span>
-                <h2>Şimdi Uygula</h2>
-                <p>Bu işi özel bir uygulama ile uygulayın.</p>
-            </header>
-
-            <form>
-                <div class="row">
-                    <div class="form-group col-xs-12 col-md-6">
-                        <input type="text" class="form-control input-lg" placeholder="İsim">
+                <form>  
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" placeholder="Mesaj"></textarea>
                     </div>
 
-                    <div class="form-group col-xs-12 col-md-6">
-                        <input type="email" class="form-control input-lg" placeholder="E-Posta">
+                    <div class="form-group">
+
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Mesaj"></textarea>
-                </div>
-
-                <div class="form-group">
-
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-6 col-md-3">
-                        <div class="upload-button upload-button-block">
-                            <button class="btn btn-block btn-success">CV EKLE</button>
-                            <input name="cv" type="file">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
+                            <button type="submit" class="btn btn-block btn-primary">BAŞVURUYU GÖNDER</button>
                         </div>
                     </div>
+                </form>
 
-                    <div class="col-xs-6 col-md-3">
-                        <button type="submit" class="btn btn-block btn-primary">BAŞVURUYU GÖNDER</button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </section>
-    <!-- END Custom application -->
+            </div>
+        </section>
+        <!-- END Custom application -->
 
 
-</main>
+    </main>
+    </form>
+    <script>
+
+        DisplayAgoFormat();
+        AgoFormat(timeSpan);
+    </script>
 

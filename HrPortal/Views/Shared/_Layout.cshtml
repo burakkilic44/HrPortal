@@ -21,6 +21,38 @@
     <link rel="icon" href="~/assets/img/cvfavicon.ico">
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <style>
+        .dropify-wrapper, .bootstrap-select, .form-control {
+            border: 1px solid #aaaaaa !important;
+        }
+
+        .help-block {
+            color: grey;
+        }
+
+        :: -webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: grey !important;
+            opacity: 1;
+        }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: grey !important;
+            opacity: 1;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: grey !important;
+            opacity: 1;
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: grey !important;
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: grey !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation bar -->
@@ -115,9 +147,6 @@
                    @foreach (var job in popularJobs)
                    {
                         <li><a asp-controller="Jobs" asp-action="Details" asp-route-id="@job.Id">@job.Title</a></li>
-                       
-                      
-
                    }
                         
                     </ul>

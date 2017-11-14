@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-4">
-                <img src="assets/img/avatar.jpg" alt="">
+                <img src="@Model.Photo" alt="photo">
             </div>
 
             <div class="col-xs-12 col-sm-8 header-detail">
@@ -141,51 +141,24 @@
             <div class="row">
                
                 <div class="col-xs-12">
-                  
-                    <div class="item-block ">
+                 @foreach (var item in Model.EducationInfos)
+                 {
+                   <div class="item-block ">
                         <header>
-                            <img src="~/assets/img/logo-mit.png" alt="logo">
+                            <img src="@item.Photo" alt="logo">
                             <div class="hgroup">
-                                <h4>Master <small>@if (Model.EducationInfos != null)
-                                {
-                                    foreach (var edus in Model.EducationInfos.Select(s => s.Department).ToList())
-                                    {
-                                        @edus
-                                        <text> </text>
-                                    }
-                                }</small></h4>
-                                <h5>Massachusetts Institute of Technology</h5>
+                                <h4>@item.EducationLevel<small>@item.Department</small></h4>
+                                <h5>@item.SchoolName</h5>
                             </div>
-                            <h6 class="time">2012 - 2014</h6>
+                            <h6 class="time">@item.StartDate - @item.EndDate</h6>
                         </header>
                         <div class="item-body">
-                            <p>The Massachusetts Institute of Technology (MIT) is a private research university in Cambridge, Massachusetts. Founded in 1861 in response to the increasing industrialization of the United States, MIT adopted a European polytechnic university model and stressed laboratory instruction in applied science and engineering.</p>
+                            <p>@item.Notes</p>
                         </div>
-                    </div>
-                   
-                   
-                    
-                </div>
-               
-                
-
-                <div class="col-xs-12">
-                    <div class="item-block">
-                        <header>
-                            <img src="/assets/img/logo-mit.png" alt="logo">
-                            <div class="hgroup">
-                                <h4>Bachelor <small>Computer Science</small></h4>
-                                <h5>University of California, Berkeley</h5>
-                            </div>
-                            <h6 class="time">2008 - 2012</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>The University of California, Berkeley is a public research university located in Berkeley, California. It is the flagship campus of the University of California system, one of three parts in the state's public higher education plan, which also includes the California State University system and the California Community Colleges System.</p>
-                        </div>
-                    </div>
+                    </div>                  
+                  }    
                 </div>
             </div>
-
         </div>
     </section>
     <!-- END Education -->
@@ -193,45 +166,24 @@
     <section class="bg-alt">
         <div class="container">
             <header class="section-header">
-                <span>Past positions</span>
+                <span>ÇALIŞILAN FİRMALAR</span>
                 <h2>İş Deneyimi</h2>
             </header>
 
             <div class="row">
 
                 <!-- Work item -->
-                <div class="col-xs-12">
-                    <div class="item-block">
-                        <header>
-                            <img src="/assets/img/logo-mit.png" alt="logo">
-                            <div class="hgroup">
-                                <h4>Google</h4>
-                                <h5>Senior front-end developer</h5>
-                            </div>
-                            <h6 class="time">Jan 2016 - Present</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>Responsibilities:</p>
-                            <ul>
-                                <li>Developed front-end for world-class online social viewing video and chat platform using xHTML, CSS, ActionScript 2-3, Javascript, and XML.</li>
-                                <li>Developed built-in chat application into Flash video player in ActionScript 3.</li>
-                                <li>Built and developed sites for ABC Family properties such as Gilmore Girls, The Middleman, Secret Life of an American Teenager, Greek, and Kyle XY. </li>
-                                <li>Translate designs into responsive web interfaces </li>
-                                <li>Collaboration with the graphic designer on the front-end aspect of development. </li>
-                                <li>Cross-platform cross-browser development. </li>
-                                <li>Some back-end development in collaboration with senior developer.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- END Work item -->
                 <!-- Work item -->
                 <div class="col-xs-12">
+                   @foreach (var workitem in Model.Experiences)
+                   {
                     <div class="item-block">
                         <header>
-                            <img src="assets/img/logo-facebook.png" alt="">
+                            <img src="" alt="">
                             <div class="hgroup">
-                                <h4>Facebook</h4>
+                                <h4></h4>
                                 <h5>Interface developer</h5>
                             </div>
                             <h6 class="time">Aug 2014 - Jan 2016</h6>
@@ -247,6 +199,7 @@
                             </ul>
                         </div>
                     </div>
+                   }
                 </div>
                 <!-- END Work item -->
                 <!-- Work item -->

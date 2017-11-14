@@ -27,7 +27,7 @@
 
                 <div class="form-group col-xs-12 col-sm-4">
                     <select class="form-control selectpicker" multiple>
-                        <option selected>Sektörler</option>
+                        <option selected>Meslekler</option>
                         <option>Yazılım Geliştirici</option>
                         <option>Tasarımcı</option>
                         <option>Müşteri Hizmetleri</option>
@@ -175,7 +175,7 @@
                                                 foreach (var location in jobItem.JobLocations.Select(s => s.Location.Name).ToList())
                                                 {
                                                 @location
-                                                <text>, </text>
+                                                <text> </text>
                                                 }
                                             }</span>
                                             <span class="label label-success">@jobItem.WorkingStyle</span>
