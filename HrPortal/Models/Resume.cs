@@ -106,7 +106,7 @@ namespace HrPortal.Models
 
 
 
-
+        public ICollection<JobApplication> JobApplications { get; set; }
 
 
 
