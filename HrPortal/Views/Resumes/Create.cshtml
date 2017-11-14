@@ -3,6 +3,7 @@
     ViewData["Title"] = "Create";
 }
  <!-- Page header -->
+
 <form asp-action="Create" method="post">
     <header class="page-header">
         <div class="container page-name">
@@ -11,7 +12,20 @@
         </div>
 
         <div class="container">
+            @if (ViewBag.IsModelStateValid == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    <strong>Başarılı!</strong> Özgeçmişiniz başarıyla kaydedildi.
+                </div>
 
+            }
+            else if (ViewBag.IsModelStateValid == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Hata!</strong> Lütfen bilgileri kontrol edip tekrar deneyiniz.
+                </div>
+
+            }
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
@@ -295,7 +309,7 @@
 @section scripts{
     <script src="/assets/vendors/summernote/summernote.min.js"></script>
 
-<script>            $(document).ready(function () {
+<script>                    $(document).ready(function () {
 
         $("#EducationInfos").load("/Resumes/EducationInfos");
         $("#Experience").load("/Resumes/Experience");
@@ -307,7 +321,7 @@
 
 
     function AddEducationInfo() {
-        $.post("/Resumes/AddEducationInfo", { ResumeId: "@Model.Id",
+        $.post("/Resumes/AddEducationInfo", { ResumeId: "@(Model.Id)",
             Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(),
             Department: $("#Department").val(), StartDate: $("#StartDate").val(), EndDate: $("#EndDate").val(), Notes: $("#Notes").val(),
         }
@@ -319,7 +333,7 @@
     }
 
     function AddExperience() {
-        $.post("/Resumes/AddExperience", {ResumeId: "@Model.Id",
+        $.post("/Resumes/AddExperience", {ResumeId: "@(Model.Id)",
             Photo: $("#Photo").val(), CompanyName: $("#CompanyName").val(),
             Position: $("#Position").val(), Notes: $("#Notes").val(),
         }
@@ -334,7 +348,7 @@
 
     function AddSkill() {
         $.post("/Resumes/AddSkill", {
-            ResumeId: "@Model.Id", Name: $("#Name").val(), Level: $("#Level").val(),
+            ResumeId: "@(Model.Id)", Name: $("#Name").val(), Level: $("#Level").val(),
         }
             ,
             function (data) {
@@ -346,7 +360,7 @@
 
     function AddCertificate() {
         $.post("/Resumes/AddCertificate", {
-            ResumeId: "@Model.Id", Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),
+            ResumeId: "@(Model.Id)", Name: $("#CertificateName").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),
             }
                 ,
                 function (data) {
@@ -358,7 +372,7 @@
 
         function AddLanguageInfo() {
             $.post("/Resumes/AddLanguageInfo", {
-                ResumeId: "@Model.Id", LanguageId: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(),
+              ResumeId: "@(Model.Id)", LanguageId: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(),
             }
                 ,
                 function (data) {
