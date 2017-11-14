@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HrPortal.Data;
 using HrPortal.Models;
 using HrPortal.Services;
+using ReflectionIT.Mvc.Paging;
 
 namespace HrPortal
 {
@@ -47,6 +48,7 @@ namespace HrPortal
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddMvc();
+            services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

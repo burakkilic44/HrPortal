@@ -24,10 +24,10 @@ namespace HrPortal.Controllers
             this.locationRepository = locationRepository;
             this.jobApplicationRepository = jobApplicationRepository;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            var jobs = jobRepository.GetAll("Company", "JobLocations", "JobLocations.Location");
-        
+            //var jobs = jobRepository.GetAll("Company", "JobLocations", "JobLocations.Location");
+            var jobs = await jobRepository.GetPaged(c=>true,o=>o.Title,false,10,page, "Company", "JobLocations", "JobLocations.Location");
             return View(jobs);
 
         }

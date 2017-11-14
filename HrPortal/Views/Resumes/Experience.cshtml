@@ -21,33 +21,37 @@
                         <div class="col-xs-12 col-sm-4">
                             <div class="form-group">
                                 <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
-                                <span class="help-block">Lütfen bir fotoğraf seçin</span>
+                                <span asp-validation-for="Photo" class="text-danger"></span>
+                                <span class="help-block">Please choose a square logo</span>
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
                                 <input asp-for="CompanyName" type="text" class="form-control" placeholder="Firma Adı">
+                                <span asp-validation-for="CompanyName" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
-                                <input asp-for="Position" type="text" class="form-control" placeholder="Pozisyon">
+                                <input asp-for="Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
+                                <span asp-validation-for="Position" class="text-danger"></span>
                             </div>
+                        
 
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">Başlangıç tarihi</span>
-                                    <input type="text" class="form-control" placeholder=" 2012">
+                                    <input asp-for="StartYear" type="text" class="form-control" placeholder="bkz. 2012">
+                                    <span asp-validation-for="StartYear" class="text-danger"></span>
                                     <span class="input-group-addon">Bitiş tarihi</span>
-                                    <input type="text" class="form-control" placeholder=" 2016">
+                                    <input asp-for="EndYear" type="text" class="form-control" placeholder="bkz. 2016">
+                                    <span asp-validation-for="EndYear" class="text-danger"></span>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="col-xs-8">
                             <div class="form-group">
                                 <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -56,13 +60,11 @@
             </div>
         </div>
 
-
         <div class="col-xs-12 text-center">
             <br>
-            <button id="btnAdd" type="button" onclick="AddExperience()" class="btn btn-primary btn-duplicator">Deneyim Ekle</button>
+            <button id="btnAdd" type="button" onclick="AddExperience()" class="btn btn-primary btn-duplicator">İş Deneyimi Ekle</button>
         </div>
 
 
     </div>
-
 </div>

@@ -22,7 +22,9 @@ namespace HrPortal.Controllers
         public IActionResult Index()
         {
             var companys = companyRepository.GetAll("Jobs","Location");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
             return View(companys);
+           
         }
 
         public IActionResult Details(string id)

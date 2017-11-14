@@ -145,7 +145,7 @@
                  {
                    <div class="item-block ">
                         <header>
-                            <img src="~/assets/img/logo-mit.png" alt="logo">
+                            <img src="@item.Photo" alt="logo">
                             <div class="hgroup">
                                 <h4>@item.EducationLevel<small>@item.Department</small></h4>
                                 <h5>@item.SchoolName</h5>
@@ -173,80 +173,29 @@
             <div class="row">
 
                 <!-- Work item -->
-                <div class="col-xs-12">
-                    
-                    <div class="item-block">
-                        <header>
-                            <img src="" alt="logo">
-                            <div class="hgroup">
-                                <h4></h4>
-                                <h5></h5>
-                            </div>
-                            <h6 class="time">Jan 2016 - Present</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>Responsibilities:</p>
-                            <ul>
-                                <li>Developed front-end for world-class online social viewing video and chat platform using xHTML, CSS, ActionScript 2-3, Javascript, and XML.</li>
-                                <li>Developed built-in chat application into Flash video player in ActionScript 3.</li>
-                                <li>Built and developed sites for ABC Family properties such as Gilmore Girls, The Middleman, Secret Life of an American Teenager, Greek, and Kyle XY. </li>
-                                <li>Translate designs into responsive web interfaces </li>
-                                <li>Collaboration with the graphic designer on the front-end aspect of development. </li>
-                                <li>Cross-platform cross-browser development. </li>
-                                <li>Some back-end development in collaboration with senior developer.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                </div>
+                
                 <!-- END Work item -->
                 <!-- Work item -->
                 <div class="col-xs-12">
+                   @foreach (var workitem in Model.Experiences)
+                   {
                     <div class="item-block">
                         <header>
-                            <img src="assets/img/logo-facebook.png" alt="">
+                            <img src="@workitem.Photo" alt="">
                             <div class="hgroup">
-                                <h4>Facebook</h4>
-                                <h5>Interface developer</h5>
+                                <h4>@workitem.CompanyName</h4>
+                                <h5>@workitem.Position</h5>
                             </div>
-                            <h6 class="time">Aug 2014 - Jan 2016</h6>
+                            <h6 class="time">@workitem.StartYear - @workitem.EndYear</h6>
                         </header>
                         <div class="item-body">
-                            <p>Responsibilities:</p>
-                            <ul>
-                                <li>Work as a part of a large team on a major corporate project</li>
-                                <li>Responsible for all aspects of presentation layer development including developing templates using HTML, DHTML, Javascript, XML, and XSL.</li>
-                                <li>Rapid-prototyping for usability studies and new business development.</li>
-                                <li>Collaboration with the graphic designer on the front-end aspect of development.</li>
-                                <li>Some back-end development in collaboration with senior developer.</li>
-                            </ul>
+                            <p>@workitem.Notes</p>
                         </div>
                     </div>
+                   }
                 </div>
                 <!-- END Work item -->
-                <!-- Work item -->
-                <div class="col-xs-12">
-                    <div class="item-block">
-                        <header>
-                            <img src="assets/img/logo-envato.png" alt="">
-                            <div class="hgroup">
-                                <h4>Envato</h4>
-                                <h5>Quality assurance engineer</h5>
-                            </div>
-                            <h6 class="time">Mar 2012 - Jun 2014</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>Responsibilities:</p>
-                            <ul>
-                                <li>Software testing in a Web Applications/Mobile environment.</li>
-                                <li>Software Test Plans from Business Requirement Specifications for test engineering group.</li>
-                                <li>Run production tests as part of software implementation; Create, deliver and support test plans for testing group to execute.</li>
-                                <li>Software testing in a Web Applications environment.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- END Work item -->
+               
 
 
             </div>
@@ -264,68 +213,22 @@
             </header>
 
             <br>
+                @foreach (var item in Model.Skills)
+                {
             <ul class="skills cols-3">
                 <li>
                     <div>
-                        <span class="skill-name">HTML</span>
-                        <span class="skill-value">100%</span>
+                        <span class="skill-name">@item.Name</span>
+                        <span class="skill-value">@item.Level</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" style="width: 100%;"></div>
+                        <div class="progress-bar" style="width:@(item.Level)%;"></div>
                     </div>
                 </li>
+                
 
-                <li>
-                    <div>
-                        <span class="skill-name">CSS</span>
-                        <span class="skill-value">95%</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 95%;"></div>
-                    </div>
-                </li>
-
-                <li>
-                    <div>
-                        <span class="skill-name">Javascript</span>
-                        <span class="skill-value">80%</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 80%;"></div>
-                    </div>
-                </li>
-
-                <li>
-                    <div>
-                        <span class="skill-name">Photoshop</span>
-                        <span class="skill-value">60%</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 60%;"></div>
-                    </div>
-                </li>
-
-                <li>
-                    <div>
-                        <span class="skill-name">ReactJS</span>
-                        <span class="skill-value">70%</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%;"></div>
-                    </div>
-                </li>
-
-                <li>
-                    <div>
-                        <span class="skill-name">Team work</span>
-                        <span class="skill-value">90%</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 90%;"></div>
-                    </div>
-                </li>
             </ul>
-
+                }
         </div>
     </section>
     <!-- END Skills -->
@@ -341,26 +244,28 @@
             <div class="row">
 
                 <div class="col-xs-12">
-                    
                         <div class="item-form">
                             <div class="col-xs-12">
+                                @foreach(var item in Model.Certificates) { 
                                 <div class="item-block">
                                     <header>
-                                        <img src="assets/img/logo-envato.png" alt="">
+                                        <img src="" alt="">
                                         <div class="hgroup">
-                                            <h4>Sertifika adı</h4>
-                                            <h5>Alındığı kurum</h5>
+                                            <h4>@item.Name</h4>
+                                            <h5>@item.Issuer</h5>
                                         </div>
-                                        <h6 class="time">Mar 2012 - Jun 2014</h6>
+                                        <h6 class="time">@item.IssueDate</h6>
                                     </header>
                                     <div class="item-body section-header">
                                         <p >Sertifika Dosyası</p>
-                                        <a href="#">C# EĞİTİMİ</a>
+                                        <a href="@item.CertificateFile">C# EĞİTİMİ</a>
                                     </div>
                                 </div>
+                                }
                             </div>
                                     </div>
                                 </div>
+                    
                             </div>
 
                         </div>      
