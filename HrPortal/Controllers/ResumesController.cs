@@ -39,7 +39,7 @@ namespace HrPortal.Controllers
 
         public IActionResult Details(string id)
         {
-            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos");
+            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos","Experiences");
             return View(resume);
         }
 
