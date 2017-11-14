@@ -16,7 +16,15 @@
                 </div>
 
                 <div class="input-location">
-                    <input type="text" class="form-control" placeholder="Şehir, konum" formmethod="get" name="Location">
+                    <select class="form-control" name="Location">
+                        <option value="">Konum Seçiniz</option>
+                        @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </select>
+
                 </div>
 
                 <div class="btn-search">
