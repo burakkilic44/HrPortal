@@ -30,20 +30,15 @@
                 <div class="header-meta">
                     <span class="location">
                        @Resumeitem.Location?.Name
-                    <span class="label label-success">@Resumeitem.Experiences</span>
+                    <span class="label label-success">@Resumeitem.EducationInfos.OrderByDescending(o=>o.CreateDate).FirstOrDefault()?.EducationLevel.GetDisplayName()</span>
                         @**@
                         </span>
-</div>
+                </div>
             </header>
         </a>
     </div>
-
 }
-            <!-- END Job item -->
-            <!-- Job item -->
-            
-
-        </div>
+    </div>
 
         <br><br>
         <p class="text-center"><a class="btn btn-info" asp-controller="Resumes" asp-action="Index">Bütün özgeçmişlere gözat</a></p>

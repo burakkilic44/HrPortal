@@ -57,5 +57,6 @@ namespace HrPortal.Models
         [Display(Name = "Bitiş Tarihi")]
         public DateTime EndDate { get; set; }
 
+        public ICollection<JobApplication> JobApplications { get; set; }
     }
 }
