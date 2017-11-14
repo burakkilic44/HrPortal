@@ -1,4 +1,5 @@
-﻿    @*
+﻿@inject UserManager<ApplicationUser> UserManager
+         @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -8,11 +9,31 @@
 
 
     <!-- Site header -->
-    
-    <!-- END Site header -->
+    @{ if (User.Identity.Name != null)
+        {
+           var user = await UserManager.FindByNameAsync(User.Identity.Name);
+           if(user.IsEmployer)
+          {
+                @await Html.PartialAsync("SearchJobs")
+                @await Html.PartialAsync("RecentJobs")
 
-    @await Html.PartialAsync("SearchJobs")
-    @await Html.PartialAsync("RecentJobs")
+            }
+            else
+            {
+                @await Html.PartialAsync("Searchresumes")
+                @await Html.PartialAsync("Recentresumes")
+
+            }
+        }
+        else
+        {
+            @await Html.PartialAsync("Searchresumes")
+            @await Html.PartialAsync("Recentresumes")
+
+        }
+
+    }
+    <!-- END Site header -->
 
     <!-- Main container -->
     <main>
