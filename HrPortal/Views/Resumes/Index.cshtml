@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Resume>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Resume>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 @{
     ViewData["Title"] = "Özgeçmişler";
 }
@@ -199,7 +201,7 @@
                             </a>
                         </li>
                         <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
+                        <li class="active"><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
                         <li>
