@@ -25,6 +25,7 @@ namespace HrPortal.Controllers
         public IActionResult Index()
         {
             var jobs = jobRepository.GetAll("Company", "JobLocations", "JobLocations.Location");
+        
             return View(jobs);
 
         }
