@@ -307,8 +307,6 @@
     });
 
 
-    </script>
-    <script type="text/javascript">
   function AddEducationInfo() {
       $.post("/Resumes/AddEducationInfo", {
           Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(),
@@ -321,9 +319,8 @@
         });
 
 }
-</script>
 
-<script type="text/javascript">
+
         function AddExperience() {
             $.post("/Resumes/AddExperience", {
                 Photo: $("#Photo").val(), CompanyName: $("#CompanyName").val(),
@@ -336,9 +333,8 @@
                 });
 
         }
-</script>
 
-<script type="text/javascript">
+
         function AddSkill() {
             $.post("/Resumes/AddSkill", {
                 Name: $("#Name").val(), Level: $("#Level").val(),
@@ -350,9 +346,7 @@
                 });
 
         }
-</script>
 
-<script type="text/javascript">
         function AddCertificate() {
             $.post("/Resumes/AddCertificate", {
                 Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),  
@@ -364,13 +358,10 @@
                 });
 
         }
-</script>
 
-
-<script type="text/javascript">
         function AddLanguageInfo() {
             $.post("/Resumes/AddLanguageInfo", {
-                Name: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
+                LanguageId: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
             }
                 ,
                 function (data) {
