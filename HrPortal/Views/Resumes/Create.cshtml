@@ -360,7 +360,7 @@
 
     function AddCertificate() {
         $.post("/Resumes/AddCertificate", {
-            ResumeId: "@(Model.Id)", Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),
+            ResumeId: "@(Model.Id)", Name: $("#CertificateName").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),
             }
                 ,
                 function (data) {

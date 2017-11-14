@@ -28,6 +28,7 @@ namespace HrPortal.Controllers
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
@@ -222,16 +223,25 @@ namespace HrPortal.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName=model.FirstName, LastName=model.LastName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //if (user.IsEmployer == true)
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Employer");
+                    //}
+                    //else
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Candidate");
+                    //}
+
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
+                    
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
                     return RedirectToLocal(returnUrl);
