@@ -48,8 +48,7 @@ namespace HrPortal.Controllers
             var resume = new Resume();
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
-            return View();
-
+            return View(resume);
         }
 
         [HttpPost]
