@@ -295,7 +295,7 @@
 @section scripts{
     <script src="/assets/vendors/summernote/summernote.min.js"></script>
 
-<script>    $(document).ready(function () {
+<script>            $(document).ready(function () {
 
         $("#EducationInfos").load("/Resumes/EducationInfos");
         $("#Experience").load("/Resumes/Experience");
@@ -306,49 +306,47 @@
     });
 
 
-  function AddEducationInfo() {
-      $.post("/Resumes/AddEducationInfo", {
-          Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(),
-          Department: $("#Department").val(), StartDate: $("#StartDate").val(), EndDate: $("#EndDate").val(), Notes: $("#Notes").val(),
-      }
-      ,
-          function (data) {
-              alert(data);
-
-        });
-
-}
-
-
-        function AddExperience() {
-            $.post("/Resumes/AddExperience", {
-                Photo: $("#Photo").val(), CompanyName: $("#CompanyName").val(),
-                Position: $("#Position").val(), Notes: $("#Notes").val(),
-            }
-                ,
-                function (data) {
-                    alert(data);
-
-                });
-
+    function AddEducationInfo() {
+        $.post("/Resumes/AddEducationInfo", { ResumeId: "@Model.Id",
+            Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(),
+            Department: $("#Department").val(), StartDate: $("#StartDate").val(), EndDate: $("#EndDate").val(), Notes: $("#Notes").val(),
         }
+            ,
+            function (data) {
+                alert(data);
 
+            });
+    }
 
-        function AddSkill() {
-            $.post("/Resumes/AddSkill", {
-                Name: $("#Name").val(), Level: $("#Level").val(),
-            }
-                ,
-                function (data) {
-                    alert(data);
-
-                });
-
+    function AddExperience() {
+        $.post("/Resumes/AddExperience", {ResumeId: "@Model.Id",
+            Photo: $("#Photo").val(), CompanyName: $("#CompanyName").val(),
+            Position: $("#Position").val(), Notes: $("#Notes").val(),
         }
+            ,
+            function (data) {
+                alert(data);
 
-        function AddCertificate() {
-            $.post("/Resumes/AddCertificate", {
-                Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),  
+            });
+
+    }
+
+
+    function AddSkill() {
+        $.post("/Resumes/AddSkill", {
+            ResumeId: "@Model.Id", Name: $("#Name").val(), Level: $("#Level").val(),
+        }
+            ,
+            function (data) {
+                alert(data);
+
+            });
+
+    }
+
+    function AddCertificate() {
+        $.post("/Resumes/AddCertificate", {
+            ResumeId: "@Model.Id", Name: $("#Name").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),
             }
                 ,
                 function (data) {
@@ -360,7 +358,7 @@
 
         function AddLanguageInfo() {
             $.post("/Resumes/AddLanguageInfo", {
-                LanguageId: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(), 
+                ResumeId: "@Model.Id", LanguageId: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(),
             }
                 ,
                 function (data) {
