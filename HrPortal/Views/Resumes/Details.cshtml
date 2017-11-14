@@ -145,7 +145,7 @@
                  {
                    <div class="item-block ">
                         <header>
-                            <img src="~/assets/img/logo-mit.png" alt="logo">
+                            <img src="@item.Photo" alt="logo">
                             <div class="hgroup">
                                 <h4>@item.EducationLevel<small>@item.Department</small></h4>
                                 <h5>@item.SchoolName</h5>
@@ -174,12 +174,14 @@
 
                 <!-- Work item -->
                 <div class="col-xs-12">
-                    
-                    <div class="item-block">
+                    @foreach (var workitem in Model.Experiences)
+                     {
+
+                    <div class="item-block"> 
                         <header>
                             <img src="" alt="logo">
                             <div class="hgroup">
-                                <h4></h4>
+                                <h4>@workitem.Position</h4>
                                 <h5></h5>
                             </div>
                             <h6 class="time">Jan 2016 - Present</h6>
@@ -197,7 +199,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+                     }
                 </div>
                 <!-- END Work item -->
                 <!-- Work item -->
