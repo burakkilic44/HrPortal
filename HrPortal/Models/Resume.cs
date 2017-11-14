@@ -14,6 +14,7 @@ namespace HrPortal.Models
             EducationInfos = new HashSet<EducationInfo>();
             ResumeTags = new HashSet<ResumeTag>();
             Experiences = new HashSet<Experience>();
+            Skills = new HashSet<Skill>();
         }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
