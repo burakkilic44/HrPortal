@@ -19,9 +19,13 @@ namespace HrPortal.Controllers
         private IRepository<Experience> experienceRepository;
         private IRepository<Skill> skillRepository;
         private IRepository<Certificate> certificateRepository;
+
+        
+
         
       public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository)
         {
+
             this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
             this.resumeRepository = resumeRepository;
@@ -136,14 +140,15 @@ namespace HrPortal.Controllers
 
         public IActionResult LanguageInfos()
         {
-            var languageInfo = new LanguageInfo();
+            var LanguageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
-            return View(languageInfo);
+            return View();
         }
 
         [HttpPost]
-        public JsonResult AddLanguageInfo(LanguageInfo languageInfo)
+        public JsonResult AddLanguageInfo(LanguageInfo languageinfo)
         {
+                
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");      
         } 
