@@ -39,7 +39,7 @@ namespace HrPortal.Controllers
 
         public IActionResult Details(string id)
         {
-            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos");
+            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos","Experiences","Skills");
             return View(resume);
         }
 
@@ -60,6 +60,7 @@ namespace HrPortal.Controllers
             }
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.IsModelStateValid = ModelState.IsValid;
             return View(resume);
         }
 
@@ -135,7 +136,6 @@ namespace HrPortal.Controllers
 
         public IActionResult LanguageInfos()
         {
-           
             var languageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return View(languageInfo);
