@@ -15,11 +15,21 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Language> languageRepository;
-      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository)
+        private IRepository<EducationInfo> educationInfoRepository;
+        private IRepository<Experience> experienceRepository;
+        private IRepository<Skill> skillRepository;
+        private IRepository<Certificate> certificateRepository;
+        
+      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository)
         {
             this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
             this.resumeRepository = resumeRepository;
+            this.educationInfoRepository = educationInfoRepository;
+            this.experienceRepository = experienceRepository;
+            this.skillRepository = skillRepository;
+            this.certificateRepository = certificateRepository;
+            
         }
         public IActionResult Index()
         {
@@ -68,18 +78,27 @@ namespace HrPortal.Controllers
         [HttpPost]
         public JsonResult AddEducationInfo(EducationInfo educationinfo)
         {
+            if (ModelState.IsValid)
+            {
+                educationInfoRepository.Insert(educationinfo);
+            }
             return Json("Success");
         }
 
         public IActionResult Experience()
         {
+            
             var Experience = new Experience();
             return View(Experience);
         }
 
         [HttpPost]
-        public JsonResult AddExperience()
+        public JsonResult AddExperience(Experience experience)
         {
+            if (ModelState.IsValid)
+            {
+                experienceRepository.Insert(experience);
+            }
             return Json("Success");
         }
 
@@ -90,8 +109,12 @@ namespace HrPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddSkill()
+        public JsonResult AddSkill(Skill skill)
         {
+            if (ModelState.IsValid)
+            {
+               skillRepository.Insert(skill);
+            }
             return Json("Success");
         }
 
@@ -102,8 +125,12 @@ namespace HrPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddCertificate()
+        public JsonResult AddCertificate(Certificate certificate)
         {
+            if (ModelState.IsValid)
+            {
+                certificateRepository.Insert(certificate);
+            }
             return Json("Success");
         }
 
