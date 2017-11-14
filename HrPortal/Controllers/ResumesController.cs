@@ -42,6 +42,23 @@ namespace HrPortal.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult Create(Resume resume)
+        {
+            if (ModelState.IsValid)
+            {
+                resumeRepository.Insert(resume);
+            }
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            return View(resume);
+        }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
         public IActionResult EducationInfos()
         {
             return View();
@@ -95,26 +112,11 @@ namespace HrPortal.Controllers
         [HttpPost]
         public JsonResult AddLanguageInfo()
         {
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");
         }
 
-        [HttpPost]
-        public IActionResult Create(Resume resume)
-        {
-            if (ModelState.IsValid)
-            {
-                resumeRepository.Insert(resume);
-            }
-            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            return View(resume);
-
-        }
-
-        public IActionResult Edit()
-        {
-            return View();
-        }
+       
     }
 
 }
