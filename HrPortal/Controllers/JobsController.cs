@@ -14,8 +14,10 @@ namespace HrPortal.Controllers
         private IRepository<Job> jobRepository;
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
-        public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository)
+        private IRepository<Resume> resumeRepository;
+        public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository)
         {
+            this.resumeRepository = resumeRepository;
             this.jobRepository = jobRepository;
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
@@ -53,11 +55,14 @@ namespace HrPortal.Controllers
             var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
             return View(job);
         }
-       
 
+    
         public IActionResult Apply(string id)
         {           
-            var job = jobRepository.Get(id, "Company", "Job");
+            var job = jobRepository.Get(id, "Company","JobLocations", "JobLocations.Location");
+            ViewBag.Resumes = resumeRepository.GetMany(r => r.CreateBy == User.Identity.Name);
+           
+
             return View(job);
         }
         

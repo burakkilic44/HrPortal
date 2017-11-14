@@ -1,0 +1,68 @@
+﻿@model Experience
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <header class="section-header">
+        <span>Çalıştığınız Firmalar</span>
+        <h2>İş Deneyimi</h2>
+    </header>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="item-block">
+                <div class="item-form">
+
+                    <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group">
+                                <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                <span class="help-block">Lütfen bir fotoğraf seçin</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="form-group">
+                                <input asp-for="CompanyName" type="text" class="form-control" placeholder="Firma Adı">
+                            </div>
+
+                            <div class="form-group">
+                                <input asp-for="Position" type="text" class="form-control" placeholder="Pozisyon">
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Başlangıç tarihi</span>
+                                    <input type="text" class="form-control" placeholder=" 2012">
+                                    <span class="input-group-addon">Bitiş tarihi</span>
+                                    <input type="text" class="form-control" placeholder=" 2016">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-8">
+                            <div class="form-group">
+                                <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12 text-center">
+            <br>
+            <button id="btnAdd" type="button" onclick="AddExperience()" class="btn btn-primary btn-duplicator">Deneyim Ekle</button>
+        </div>
+
+
+    </div>
+
+</div>

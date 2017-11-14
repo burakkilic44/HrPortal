@@ -52,13 +52,71 @@ namespace HrPortal.Controllers
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             return View(resume);
-
         }
 
         public IActionResult Edit()
         {
             return View();
         }
+
+        public IActionResult EducationInfos()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddEducationInfo(EducationInfo educationinfo)
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Experience()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddExperience()
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Skill()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddSkill()
+        {
+            return Json("Success");
+        }
+
+        public IActionResult Certificate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddCertificate()
+        {
+            return Json("Success");
+        }
+
+        public IActionResult LanguageInfos()
+        {
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AddLanguageInfo()
+        {
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
+            return Json("Success");
+        }
+
+       
     }
 
 }
