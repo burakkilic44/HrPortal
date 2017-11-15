@@ -38,7 +38,7 @@ namespace HrPortal.Controllers
             var compa = new Company();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
-            return View();
+            return View(compa);
         }
 
         [HttpPost]
@@ -53,6 +53,11 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
+        public IActionResult SuccessfullyCreated()
+        {
+            return View();
+        }
+
 
     }
 }
