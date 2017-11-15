@@ -1,4 +1,5 @@
-﻿@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Job>
+﻿@model JobSearchViewModel
+@*// @model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Job>*@
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
 @{
@@ -16,15 +17,17 @@
 
 
     <div class="container">
-        <form action="#">
+        <form asp-action="Index" method="get">
 
             <div class="row">
                 <div class="form-group col-xs-12 col-sm-4">
-                    <input type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
+                    <input asp-for="Keywords" type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <input type="text" class="form-control" placeholder="Şehir arayın">
+                    <select class="form-control selectpicker" asp-for="LocationId" asp-items="@ViewBag.Locations">
+                        <option value="">Tüm konumlar</option>
+                    </select>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
@@ -46,34 +49,34 @@
                 <div class="form-group col-xs-12 col-sm-4">
                     <h6>Çalışma Şekli</h6>
                     <div class="checkall-group">
-                        <div class="checkbox">
-                            <input type="checkbox" id="contract1" name="contract" checked>
-                            <label for="contract1">Tümü</label>
+                        <div class="radio">
+                            <input type="radio" id="workingstyle1" name="workingstyle" checked value="">
+                            <label for="workingstyle1">Tümü</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="contract2" name="contract">
-                            <label for="contract2">Sürekli / Tam Zamanlı<small>(354)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="workingstyle2" name="workingstyle" value="1">
+                            <label for="workingstyle2">Sürekli / Tam Zamanlı</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="contract3" name="contract">
-                            <label for="contract3">Yarı Zamanlı / Part-time <small>(284)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="workingstyle3" name="workingstyle" value="2">
+                            <label for="workingstyle3">Yarı Zamanlı / Part-time</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="contract4" name="contract">
-                            <label for="contract4">Dönemsel / Proje Bazlı <small>(169)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="workingstyle4" name="workingstyle" value="3">
+                            <label for="workingstyle4">Dönemsel / Proje Bazlı</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="contract4" name="contract">
-                            <label for="contract4">Stajyer <small>(169)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="workingstyle5" name="workingstyle" value="4">
+                            <label for="workingstyle5">Stajyer</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="contract5" name="contract">
-                            <label for="contract5">Serbest Zamanlı <small>(480)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="workingstyle6" name="workingstyle" value="5">
+                            <label for="workingstyle6">Serbest Zamanlı</label>
                         </div>
                     </div>
                 </div>
@@ -82,23 +85,23 @@
                 <div class="form-group col-xs-12 col-sm-4">
                     <h6>Askerlik Durumu</h6>
 
-                    <div class="checkbox">
-                        <input type="checkbox" id="rate2" name="rate" checked>
+                    <div class="radio">
+                        <input type="radio" id="militarystatus1" name="militarystatus" value="1">
                         <label for="rate2">Yapıldı</label>
                     </div>
 
-                    <div class="checkbox">
-                        <input type="checkbox" id="rate3" name="rate">
-                        <label for="rate3">Muaf</label>
+                    <div class="radio">
+                        <input type="radio" id="militarystatus2" name="militarystatus" value="2">
+                        <label for="militarystatus2">Muaf</label>
                     </div>
 
-                    <div class="checkbox">
-                        <input type="checkbox" id="rate4" name="rate">
-                        <label for="rate4">Tecilli</label>
+                    <div class="radio">
+                        <input type="radio" id="militarystatus3" name="militarystatus" value="3">
+                        <label for="militarystatus3">Tecilli</label>
                     </div>
-                    <div class="checkbox">
-                        <input type="checkbox" id="rate4" name="rate">
-                        <label for="rate4">Yok</label>
+                    <div class="radio">
+                        <input type="radio" id="militarystatus4" name="militarystatus" value="4">
+                        <label for="militarystatus4">Yok</label>
                     </div>
 
                 </div>
@@ -108,29 +111,29 @@
                 <div class="form-group col-xs-12 col-sm-4">
                     <h6>Eğitim Seviyesi</h6>
                     <div class="checkall-group">
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree1" name="degree" checked>
-                            <label for="degree1">Tüm Seviyeler</label>
+                        <div class="radio">
+                            <input type="radio" id="educationlevel1" name="educationlevel" checked value="">
+                            <label for="educationlevel1">Tüm Seviyeler</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree2" name="degree">
-                            <label for="degree2">Önlisans<small>(216)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationlevel2" name="educationlevel" value="1">
+                            <label for="educationlevel2">Önlisans</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree3" name="degree">
-                            <label for="degree3">Lisans <small>(569)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationlevel3" name="educationlevel" value="2">
+                            <label for="educationlevel3">Lisans </label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree4" name="degree">
-                            <label for="degree4">Yüksek Lisans <small>(439)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationlevel4" name="educationlevel" value="3">
+                            <label for="educationlevel4">Yüksek Lisans </label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree5" name="degree">
-                            <label for="degree5">Doktora <small>(84)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationlevel5" name="educationlevel" value="4">
+                            <label for="educationlevel5">Doktora </label>
                         </div>
                     </div>
                 </div>
@@ -139,7 +142,7 @@
 
             <div class="button-group">
                 <div class="action-buttons">
-                    <button class="btn btn-primary">Filtre Uygula</button>
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
                 </div>
             </div>
 
