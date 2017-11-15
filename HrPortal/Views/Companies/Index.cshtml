@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Company>
-
+﻿
+@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Company>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Firmalar";
 }
 <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner3.jpg);">
     <div class="container page-name">
@@ -79,23 +81,8 @@
                 </div>
                 }
                 <!-- Page navigation -->
-                <nav class="text-center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <i class="ti-angle-left"></i>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li class="active"><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <i class="ti-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                <nav aria-label="Job navigation example">
+                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
                 </nav>
                 <!-- END Page navigation -->
 
