@@ -19,13 +19,14 @@ namespace HrPortal.Controllers
         private IRepository<Experience> experienceRepository;
         private IRepository<Skill> skillRepository;
         private IRepository<Certificate> certificateRepository;
+        private IRepository<Tag> tagRepository;
 
         
 
         
-      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository)
+      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository)
         {
-
+            this.tagRepository = tagRepository;
             this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
             this.resumeRepository = resumeRepository;
@@ -152,6 +153,15 @@ namespace HrPortal.Controllers
                 
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");      
-        } 
+        }
+
+
+        public ActionResult TagHelper(string term)
+        {
+            var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(t => t.Name).Take(10);
+            return Json(data);
+
+        }
+
     }
 }

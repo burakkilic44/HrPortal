@@ -83,7 +83,7 @@ namespace HrPortal.Controllers
                     if (!await _userManager.IsEmailConfirmedAsync(user))
                     {
                         ModelState.AddModelError(string.Empty,
-                                      "You must have a confirmed email to log in.");
+                                      "Giriş yapabilmek için mail adresinizin onaylanması gerekmektedir.");
                         return View(model);
                     }
                 }

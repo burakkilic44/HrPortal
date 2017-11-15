@@ -4,17 +4,24 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace HrPortal.Models.ManageViewModels
 {
     public class IndexViewModel
-    {    [Display(Name ="Kullanıcı Adı")]
+
+    {
+        [Display(Name = "Fotoğraf")]
+        public string Photo { get; set; }
+
+
+        [Display(Name ="Kullanıcı Adı")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
-        [Required]
+        [Required (ErrorMessage ="Ad alanı gereklidir.")]
         [Display(Name = "Ad")]
         public String FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Soyad alanı gereklidir.")]
         [Display(Name = "Soyad")]
         public String LastName { get; set; }
 
