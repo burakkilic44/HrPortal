@@ -27,7 +27,7 @@ namespace HrPortal.Controllers
         public async Task<IActionResult> Index(JobSearchViewModel jvm)
         {
             
-            jvm.SearchResults = await jobRepository.GetPaged(s => (!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l=> l.LocationId == jvm.LocationId) : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == jvm.EducationLevel) : true)&& (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true),o=>o.Title,false,10,jvm.Page, "Company", "JobLocations", "JobLocations.Location");
+            jvm.SearchResults = await jobRepository.GetPaged(s => (!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l=> l.LocationId == jvm.LocationId) : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true)&& (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true),o=>o.Title,false,10,jvm.Page, "Company", "JobLocations", "JobLocations.Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", jvm.LocationId);
             return View(jvm);
 

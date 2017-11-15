@@ -20,6 +20,7 @@ namespace HrPortal.Models
         public int Page { get; set; }
         public string Keywords { get; set; }
         public string LocationId { get; set; }
+        public string OccupationId { get; set; }
         public ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Job> SearchResults { get; set; }
     }
 }
