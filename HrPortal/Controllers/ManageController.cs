@@ -102,7 +102,7 @@ namespace HrPortal.Controllers
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Profil güncellendi";
             return RedirectToAction(nameof(Index));
         }
 
@@ -126,7 +126,7 @@ namespace HrPortal.Controllers
             var email = user.Email;
             await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Onay maili gönderilmiştir.Lütfen mail adresinizi kontrol ediniz.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -172,8 +172,8 @@ namespace HrPortal.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            _logger.LogInformation("Kullanıcı şifresi başarılı bir şekilde değiştirildi.");
+            StatusMessage = "Şifre güncellendi.";
 
             return RedirectToAction(nameof(ChangePassword));
         }
@@ -221,7 +221,7 @@ namespace HrPortal.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            StatusMessage = "Your password has been set.";
+            StatusMessage = "Şifre ayarlandı.";
 
             return RedirectToAction(nameof(SetPassword));
         }
@@ -282,7 +282,7 @@ namespace HrPortal.Controllers
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            StatusMessage = "The external login was added.";
+            StatusMessage = "Harici giriş eklendi";
             return RedirectToAction(nameof(ExternalLogins));
         }
 
@@ -303,7 +303,7 @@ namespace HrPortal.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            StatusMessage = "The external login was removed.";
+            StatusMessage = "Harici giriş kaldırıldı.";
             return RedirectToAction(nameof(ExternalLogins));
         }
 

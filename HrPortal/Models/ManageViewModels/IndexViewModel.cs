@@ -29,6 +29,12 @@ namespace HrPortal.Models.ManageViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [Display(Name = "Konum")]
+        public string LocationId { get; set; }
+
+        [Display(Name = "Meslek")]
+        public string OccupationId { get; set; }
+
         [Phone]
         [Display(Name = "Telefon Numarası")]
         public string PhoneNumber { get; set; }
