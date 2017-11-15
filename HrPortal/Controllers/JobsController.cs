@@ -70,9 +70,13 @@ namespace HrPortal.Controllers
         [HttpPost]
         public IActionResult Apply(JobApplication jobApplication)
         {
-          jobApplicationRepository.Insert(jobApplication);
-            return View();
-           
+            if (ModelState.IsValid)
+            {
+              jobApplicationRepository.Insert(jobApplication);
+              return RedirectToAction("SuccessfullyCreated");
+
+            }
+            return View(jobApplication);
         }
 
 
