@@ -12,9 +12,37 @@
         <div class="col-md-6">
             <form method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
+                <div style=" border:1px; width :200px; height:200px" class="form-group">
+                    <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                    <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+             
                 <div class="form-group">
                     <label asp-for="Username"></label>
-                    <input asp-for="Username" class="form-control" disabled />
+                    <input asp-for="Username" class="form-control" disabled/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" class="form-control"  />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LocationId"></label>
+                    <select asp-for="LocationId" class="form-control" asp-items="@ViewBag.Locations">
+                        <option value="">Seçiniz</option>
+                    </select>
+                    <span asp-validation-for="LocationId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OccupationId"></label>
+                    <select asp-for="OccupationId" class="form-control" asp-items="@ViewBag.Occupations">
+                        <option value="">Seçiniz</option>
+                    </select>
+                    <span asp-validation-for="OccupationId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Email"></label>
