@@ -85,7 +85,7 @@ namespace HrPortal.Controllers
             return View();
         }
 
-        public IActionResult SuccessfullyApplicationd()
+        public IActionResult SuccessfullyApplication()
         {
             return View();
         }
