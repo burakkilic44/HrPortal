@@ -20,8 +20,11 @@ namespace HrPortal.Models
         [Display(Name = "Firma")]
         [ForeignKey("CompanyId")]
         public Company Company { get; set; }
-
-        
+        [Display(Name = "Meslek")]
+        public string OccupationId { get; set; }
+        [Display(Name = "Meslek")]
+        [ForeignKey("OccupationId")]
+        public Occupation Occupation { get; set; }
         [StringLength(4000)]
         [Display(Name ="Kısa Açıklama")]
         public string ShortDescription { get; set; }
@@ -45,8 +48,6 @@ namespace HrPortal.Models
 
         [Display(Name = "Eğitim Seviyesi")]
         public EducationLevel EducationLevel { get; set; }
-        [Display(Name = "Eğitim Bilgisi")]
-        public ICollection<EducationInfo> EducationInfos { get; set; }
 
         [Display(Name = "İlan Detayı")]
         [Required(ErrorMessage = "Bu alan gereklidir")]

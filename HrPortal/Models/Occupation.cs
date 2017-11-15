@@ -13,5 +13,7 @@ namespace HrPortal.Models
         [StringLength(200)]
         public string Name { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
+        public ICollection<Resume> Resumes { get; set; }
+        public ICollection<Job> Jobs { get; set; }
     }
 }
