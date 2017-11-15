@@ -21,12 +21,14 @@ namespace HrPortal.Controllers
         private IRepository<Certificate> certificateRepository;
         private IRepository<Occupation> occupationRepository;
         private IRepository<Tag> tagRepository;
+        private IRepository<LanguageInfo> languageInfoRepository;
 
         
 
         
-      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Occupation> occupationRepository, IRepository<Tag> tagRepository)
+      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository)
         {
+            this.languageInfoRepository=languageInfoRepository;
             this.tagRepository = tagRepository;
             this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
@@ -147,13 +149,16 @@ namespace HrPortal.Controllers
         {
             var LanguageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
-            return View();
+            return View(LanguageInfo);
         }
 
         [HttpPost]
         public JsonResult AddLanguageInfo(LanguageInfo languageinfo)
         {
-                
+            if (ModelState.IsValid)
+            {
+                languageInfoRepository.Insert(languageinfo);
+            }
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");      
         }
