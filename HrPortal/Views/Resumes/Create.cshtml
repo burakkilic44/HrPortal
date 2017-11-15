@@ -140,18 +140,15 @@
                                 <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
                                 <span asp-validation-for="Hobbies" class="text-danger"></span>
                             </div>
-
                         </div>
 
                         <hr class="hr-lg">
-
+               
                         <h6>Etiket Listesi</h6>
                         <div class="form-group">
-                            <input asp-for="ResumeTags" type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Etiket">
-                            <span asp-validation-for="ResumeTags" class="text-danger"></span>
+                            <input id="tags" name="tags" type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Etiket">
                             <span class="help-block">Etiketinizi yazın ve Enter'a basın.</span>
-                        </div>
-
+                        </div>       
                     </div>
             </div>
 
@@ -319,6 +316,23 @@
 
     });
 
+    $(document).ready(function () {
+        $('#tags').tagit({
+            tagSource: function (request, response) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Resumes/TagHelper",
+                    data: request,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (choices) {
+                        showChoices(this._subtractArray(choices, this.assignedTags()));
+                    }
+                })
+            }
+        });
+    });
+
 
     function AddEducationInfo() {
         $.post("/Resumes/AddEducationInfo", { ResumeId: "@(Model.Id)",
@@ -365,10 +379,8 @@
                 ,
                 function (data) {
                     alert(data);
-
                 });
-
-        }
+    }
 
         function AddLanguageInfo() {
             $.post("/Resumes/AddLanguageInfo", {
@@ -379,8 +391,9 @@
                     alert(data);
 
                 });
+    }
 
-        }
+       
 </script>
 
 }
