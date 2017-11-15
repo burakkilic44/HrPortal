@@ -17,10 +17,10 @@
                 <div class="alert alert-success" role="alert">
                     <strong>Başarılı!</strong> Özgeçmişiniz başarıyla kaydedildi.
                 </div>
-
             }
             else if (ViewBag.IsModelStateValid == false)
             {
+
                 <div class="alert alert-danger" role="alert">
                     <strong>Hata!</strong> Lütfen bilgileri kontrol edip tekrar deneyiniz.
                 </div>
@@ -40,12 +40,12 @@
                         <input asp-for="FullName" type="text" class="form-control input-lg" placeholder="Ad ve Soyad">
                         <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <input asp-for="Title" type="text" class="form-control" placeholder="Başlık (Bkz. Yazılım Uzmanı)">
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
-                    
                         <div class="form-group">
                             <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
                             <span asp-validation-for="Notes" class="text-danger"></span>
@@ -140,18 +140,15 @@
                                 <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
                                 <span asp-validation-for="Hobbies" class="text-danger"></span>
                             </div>
-
                         </div>
 
                         <hr class="hr-lg">
-
+               
                         <h6>Etiket Listesi</h6>
                         <div class="form-group">
-                            <input asp-for="ResumeTags" type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Etiket">
-                            <span asp-validation-for="ResumeTags" class="text-danger"></span>
+                            <input id="tags" name="tags" type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Etiket">
                             <span class="help-block">Etiketinizi yazın ve Enter'a basın.</span>
-                        </div>
-
+                        </div>       
                     </div>
             </div>
 
@@ -319,6 +316,23 @@
 
     });
 
+    $(document).ready(function () {
+        $('#tags').tagit({
+            tagSource: function (request, response) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Resumes/TagHelper",
+                    data: request,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (choices) {
+                        showChoices(this._subtractArray(choices, this.assignedTags()));
+                    }
+                })
+            }
+        });
+    });
+
 
     function AddEducationInfo() {
         $.post("/Resumes/AddEducationInfo", { ResumeId: "@(Model.Id)",
@@ -365,10 +379,8 @@
                 ,
                 function (data) {
                     alert(data);
-
                 });
-
-        }
+    }
 
         function AddLanguageInfo() {
             $.post("/Resumes/AddLanguageInfo", {
@@ -379,8 +391,9 @@
                     alert(data);
 
                 });
+    }
 
-        }
+       
 </script>
 
 }

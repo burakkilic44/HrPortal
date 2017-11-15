@@ -19,9 +19,10 @@ namespace HrPortal.Controllers
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index(int page=1)
         {
-            var companys = companyRepository.GetAll("Jobs","Location");
+            var companys = await companyRepository.GetPaged(c=>true,o=>o.Title,false,10,page,"Jobs","Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
             return View(companys);
            
@@ -37,7 +38,7 @@ namespace HrPortal.Controllers
             var compa = new Company();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
-            return View();
+            return View(compa);
         }
 
         [HttpPost]
@@ -52,6 +53,11 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
+        public IActionResult SuccessfullyCreated()
+        {
+            return View();
+        }
+
 
     }
 }
