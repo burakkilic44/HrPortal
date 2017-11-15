@@ -18,6 +18,7 @@
     <div class="row">
         <div class="col-md-5 col-sm-4 col-lg-offset-1" >
             <section>
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                     <h4>Hesap Bilgileri ile Giriş</h4>
                     <hr />

@@ -23,7 +23,7 @@
                     <h4>Yeni bir hesap oluşturun.</h4>
 
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div style="width:200px; height:200px" class="form-group">
+                    <div style=" border:1px; width :200px; height:200px" class="form-group">
                         <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
                         <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
                         <span asp-validation-for="Photo" class="text-danger"></span>
@@ -80,10 +80,12 @@
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Kaydol</button>
+                        <a asp-action="Confirm" class="btn btn-primary">Kaydol</a>
+                      
                     </div>
 
                 </form>
+                
             </section>
         </div>
         <div class="col-md-4 col-md-offset-1">
