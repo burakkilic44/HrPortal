@@ -12,9 +12,10 @@ using System;
 namespace HrPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171115060640_jobapplicationAdd")]
+    partial class jobapplicationAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -382,30 +383,29 @@ namespace HrPortal.Data.Migrations
 
             modelBuilder.Entity("HrPortal.Models.JobApplication", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("JobId");
+
+                    b.Property<string>("ResumeId");
 
                     b.Property<string>("CreateBy");
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("JobId");
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Id");
 
                     b.Property<string>("Message");
-
-                    b.Property<string>("ResumeId");
 
                     b.Property<DateTime>("UpdateDate");
 
                     b.Property<string>("UpdatedBy");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobId");
+                    b.HasKey("JobId", "ResumeId");
 
                     b.HasIndex("ResumeId");
 
-                    b.ToTable("JobApplications");
+                    b.ToTable("JobApplication");
                 });
 
             modelBuilder.Entity("HrPortal.Models.JobLocation", b =>
@@ -952,7 +952,8 @@ namespace HrPortal.Data.Migrations
                 {
                     b.HasOne("HrPortal.Models.Job", "Job")
                         .WithMany("JobApplications")
-                        .HasForeignKey("JobId");
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HrPortal.Models.Resume", "Resume")
                         .WithMany("JobApplications")
