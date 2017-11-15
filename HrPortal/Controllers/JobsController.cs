@@ -73,7 +73,7 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
               jobApplicationRepository.Insert(jobApplication);
-              return RedirectToAction("SuccessfullyCreated");
+              return RedirectToAction("SuccessfullyApplication");
 
             }
             return View(jobApplication);
@@ -81,6 +81,11 @@ namespace HrPortal.Controllers
 
 
         public IActionResult SuccessfullyCreated()
+        {
+            return View();
+        }
+
+        public IActionResult SuccessfullyApplicationd()
         {
             return View();
         }
