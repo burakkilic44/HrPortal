@@ -3,7 +3,7 @@
     ViewData["Title"] = "Apply" ;
 }
 
-<form asp-action="Apply" method="get">
+<form asp-action="Apply" method="post">
  
     <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
@@ -103,7 +103,7 @@
 
                             <div class="action-btn">
                                 <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
-                                <a class="btn btn-xs btn-success"><input type="radio" name="resume" value="@Model.Id"/></a>
+                                <a class="btn btn-xs btn-success"><input type="radio" name="resumeId" value="@resumeItem.Id" /></a>
                             </div>
                         </footer>
                     </div>
@@ -120,7 +120,7 @@
                         <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
                     
                     </div>
-                    <input type="hidden" value="@Model.Id" />
+                    <input type="hidden" name="JobId" value="@Model.Id" />
                 </div>
 
             </div>
