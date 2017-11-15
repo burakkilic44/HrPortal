@@ -22,16 +22,22 @@ namespace HrPortal.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private IRepository<Location> locationRepository;
+        private IRepository<Occupation> occupationRepository;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
         public AccountController(
+            IRepository<Location> locationRepository,
+            IRepository<Occupation> occupationRepository,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
+            this.locationRepository = locationRepository;
+            this.occupationRepository = occupationRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -212,6 +218,8 @@ namespace HrPortal.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(),"Id","Name");
+            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().ToList(), "Id", "Name");
             return View();
         }
 
@@ -223,7 +231,7 @@ namespace HrPortal.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId, Photo = model.Photo };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

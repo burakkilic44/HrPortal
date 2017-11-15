@@ -23,6 +23,11 @@
                     <h4>Yeni bir hesap oluşturun.</h4>
 
                     <div asp-validation-summary="All" class="text-danger"></div>
+                    <div style="width:200px; height:200px" class="form-group">
+                        <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                        <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="FirstName"></label>
                         <input asp-for="FirstName" class="form-control" />
@@ -34,10 +39,25 @@
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="LocationId"></label>
+                        <select asp-for="LocationId" class="form-control" asp-items="@ViewBag.Locations">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OccupationId"></label>
+                        <select asp-for="OccupationId" class="form-control" asp-items="@ViewBag.Occupations">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="OccupationId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="IsEmployer"></label>
                         <input asp-for="IsEmployer" class="checkbox checkbox-inline" />
                         <span asp-validation-for="IsEmployer" class="text-danger"></span>
                     </div>
+                    
                     <div class="form-group">
                         <label asp-for="CompanyName"></label>
                         <input asp-for="CompanyName" class="form-control" />

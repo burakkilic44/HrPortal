@@ -15,12 +15,14 @@ namespace HrPortal.Controllers
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Resume> resumeRepository;
-        public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository)
+        private IRepository<JobApplication> jobApplicationRepository;
+        public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository, IRepository<JobApplication> jobApplicationRepository)
         {
             this.resumeRepository = resumeRepository;
             this.jobRepository = jobRepository;
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
+            this.jobApplicationRepository = jobApplicationRepository;
         }
         public async Task<IActionResult> Index(int page=1)
         {
@@ -65,7 +67,15 @@ namespace HrPortal.Controllers
 
             return View(job);
         }
-        
+        [HttpPost]
+        public IActionResult Apply(JobApplication jobApplication)
+        {
+          jobApplicationRepository.Insert(jobApplication);
+            return View();
+           
+        }
+
+
         public IActionResult SuccessfullyCreated()
         {
             return View();

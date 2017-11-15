@@ -46,5 +46,14 @@ namespace HrPortal.Models.AccountViewModels
         [Display(Name = "Şifre Doğrula")]
         [Compare("Password", ErrorMessage = "Şifreler eşleştirilemedi !")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Konum")]
+        public string LocationId { get; set; }
+
+        [Display(Name = "Meslek")]
+        public string OccupationId { get; set; }
+
+        [Display(Name = "Fotoğraf")]
+        public string Photo { get; set; }
     }
 }
