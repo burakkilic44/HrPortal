@@ -35,11 +35,13 @@ namespace HrPortal.Controllers
             this.certificateRepository = certificateRepository;
             
         }
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(EducationLevel educationLevel, MilitaryStatus militaryStatus,int page = 1 ,string keyword="",string location="",string category="",string sortBy="")
         {
             //var resumes = resumeRepository.GetAll("EducationInfos","Location", "ResumeTags", "ResumeTags.Tag");
-            var resumes = await resumeRepository.GetPaged(c => true, o => o.Title, false, 10, page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
+
+            var resumes = await resumeRepository.GetPaged(s => s.FullName.Contains(keyword) && s.LocationId == location && s.MilitaryStatus == militaryStatus && s.EducationInfos.Any(e=>e.EducationLevel == educationLevel), s=>s.Title,false, 10, page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
             return View(resumes);
+        
         }
 
         public IActionResult Details(string id)
