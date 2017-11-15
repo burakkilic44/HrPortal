@@ -316,22 +316,6 @@
 
     });
 
-    $(document).ready(function () {
-        $('#tags').tagit({
-            tagSource: function (request, response) {
-                $.ajax({
-                    type: "GET",
-                    url: "/Resumes/TagHelper",
-                    data: request,
-                    dataType: 'json',
-                    contentType: "application/json",
-                    success: function (choices) {
-                        showChoices(this._subtractArray(choices, this.assignedTags()));
-                    }
-                })
-            }
-        });
-    });
 
 
     function AddEducationInfo() {
