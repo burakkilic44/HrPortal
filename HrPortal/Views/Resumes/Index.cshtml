@@ -45,7 +45,7 @@
                     <div class="checkall-group">
                        
                         <div class="radio">
-                            <input type="radio" id="militaryStatus1" name="militaryStatus" value="1">
+                            <input type="radio" id="militaryStatus1" name="militaryStatus" checked value="1">
                             <label for="militaryStatus1">Yapıldı</label>
                         </div>
 
@@ -102,7 +102,7 @@
                    
 
                     <div class="radio">
-                        <input type="radio" name="sortby" id="sortby1" value="1">
+                        <input type="radio" name="sortby" id="sortby1" checked value="1">
                         <label for="sortby1">Ada göre artan</label>
                     </div>
 
@@ -204,23 +204,8 @@
 <!-- END Resume detail -->
 </div>
                 <!-- Page navigation -->
-                <nav class="text-center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <i class="ti-angle-left"></i>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <i class="ti-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                <nav aria-label="Resume navigation example">
+                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
                 </nav>
                 <!-- END Page navigation -->
 
