@@ -26,16 +26,8 @@
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select class="form-control selectpicker">
-                        <option selected>Tüm meslekler</option>
-                        <option>Yazılım Geliştirici</option>
-                        <option>Tasarımcı</option>
-                        <option>Müşteri Hizmetleri</option>
-                        <option>Finans</option>
-                        <option>Sağlık</option>
-                        <option>Satış</option>
-                        <option>Bilgi Teknolojileri</option>
-                        <option>Diğerleri</option>
+                    <select class="form-control selectpicker" asp-for="OccupationId" asp-items="@ViewBag.Occupations">
+                        <option value="">Tüm meslekler</option>
                     </select>
                 </div>
 

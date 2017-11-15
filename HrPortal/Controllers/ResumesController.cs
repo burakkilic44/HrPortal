@@ -19,6 +19,7 @@ namespace HrPortal.Controllers
         private IRepository<Experience> experienceRepository;
         private IRepository<Skill> skillRepository;
         private IRepository<Certificate> certificateRepository;
+        private IRepository<Occupation> occupationRepository;
         private IRepository<Tag> tagRepository;
         private IRepository<LanguageInfo> languageInfoRepository;
 
@@ -36,12 +37,14 @@ namespace HrPortal.Controllers
             this.experienceRepository = experienceRepository;
             this.skillRepository = skillRepository;
             this.certificateRepository = certificateRepository;
+            this.occupationRepository = occupationRepository;
             
         }
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
             vm.SearchResults = await resumeRepository.GetPaged(s => (!String.IsNullOrEmpty(vm.Keywords)?s.FullName.Contains(vm.Keywords):true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s=>s.Title,false, 10, vm.Page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id","Name", vm.LocationId);
+            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
             return View(vm);
         }
 
