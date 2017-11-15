@@ -33,7 +33,11 @@ namespace HrPortal.Models
         public Location Location { get; set; }
         [Display(Name="Çalışan Sayısı")]
         public EmployeeCount EmployeeCount { get; set; }
-
+        [Display(Name = "Sektör")]
+        public string SectorId { get; set; }
+        [Display(Name = "Sektör")]
+        [ForeignKey("SectorId")]
+        public Sector Sector { get; set; }
 
         [Display(Name = "Web Adresi")]
         [StringLength(200)]

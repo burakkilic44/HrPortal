@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HrPortal.Models
 {
-    public class LanguageInfo
+    public class LanguageInfo:BaseEntity
     {
         public string ResumeId { get; set; }
         public Resume Resume { get; set; }
