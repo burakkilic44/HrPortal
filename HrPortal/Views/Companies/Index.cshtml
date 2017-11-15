@@ -60,14 +60,14 @@
 
                 <div class="col-xs-12">
                     <br>
-                    <h5>Bulunan<strong> @Model.Count()</strong> kayıttan, <i>10</i> ile <i>15</i> kayıt arasını görüntülüyorsunuz.</h5>
+                    <h5><strong> @Model.Count()</strong> eşleşme bulundu</h5>
                 </div>
                 @foreach (var CompanyItem in Model) {
                 <!-- Company detail -->
                 <div class="col-xs-12">
                     <a class="item-block" asp-action="Details" asp-route-id="@CompanyItem.Id">
                         <header>
-                            <img src="/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Id">
+                            <img src="/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Name">
                             <div class="hgroup">
                                 <h4>@CompanyItem.Name</h4>
                             </div>
