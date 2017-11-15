@@ -36,13 +36,11 @@ namespace HrPortal.Controllers
             this.certificateRepository = certificateRepository;
             
         }
-        public async Task<IActionResult> Index(EducationLevel educationLevel, MilitaryStatus militaryStatus,int page = 1 ,string keyword="",string location="",string category="",string sortBy="")
+        public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
-            //var resumes = resumeRepository.GetAll("EducationInfos","Location", "ResumeTags", "ResumeTags.Tag");
-
-            var resumes = await resumeRepository.GetPaged(s => s.FullName.Contains(keyword) && s.LocationId == location && s.MilitaryStatus == militaryStatus && s.EducationInfos.Any(e=>e.EducationLevel == educationLevel), s=>s.Title,false, 10, page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
-            return View(resumes);
-        
+            vm.SearchResults = await resumeRepository.GetPaged(s => (!String.IsNullOrEmpty(vm.Keywords)?s.FullName.Contains(vm.Keywords):true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s=>s.Title,false, 10, vm.Page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id","Name", vm.LocationId);
+            return View(vm);
         }
 
         public IActionResult Details(string id)
