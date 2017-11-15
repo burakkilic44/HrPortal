@@ -177,11 +177,11 @@
                                 </span>
                             </li>
                             <li>
-                                <span class="label label-success">@resumeItem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.EducationLevel </span>
+                                <span class="label label-success">@resumeItem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.EducationLevel.GetDisplayName() </span>
 
                             </li>
                             <li>
-                                <span class="label label-success">@resumeItem.MilitaryStatus</span>
+                                <span class="label label-success">@resumeItem.MilitaryStatus.GetDisplayName()</span>
                             </li>
                         </ul>
                     </div>
