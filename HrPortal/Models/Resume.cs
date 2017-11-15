@@ -16,6 +16,9 @@ namespace HrPortal.Models
             Experiences = new HashSet<Experience>();
             Skills = new HashSet<Skill>();
             Certificates = new HashSet<Certificate>();
+            LanguageInfos = new HashSet<LanguageInfo>();
+            
+
         }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
@@ -109,7 +112,7 @@ namespace HrPortal.Models
 
 
 
-
+        public ICollection<JobApplication> JobApplications { get; set; }
 
 
 

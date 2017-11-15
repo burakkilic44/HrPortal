@@ -28,7 +28,8 @@
 
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
-                                <input asp-for="EducationLevel" type="text" class="form-control" placeholder="Eğitim Düzeyi, Bkz. Lisans Mezunu">
+                                <select asp-for="EducationLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationLevel>()">
+                                </select>
                                 <span asp-validation-for="EducationLevel" class="text-danger"></span>
                             </div>
 
@@ -45,13 +46,16 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Başlangıç tarihi</span>
                                     <input asp-for="StartDate" type="text" class="form-control" placeholder="bkz. 2012">
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
                                     <span class="input-group-addon">Biriş tarihi</span>
                                     <input asp-for="EndDate" type="text" class="form-control" placeholder="bkz. 2016">
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

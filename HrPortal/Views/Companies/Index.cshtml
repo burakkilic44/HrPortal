@@ -18,17 +18,8 @@
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select class="form-control selectpicker" multiple>
-                        <option selected>Bölge</option>
-                        <option>Developer</option>
-                        <option>Designer</option>
-                        <option>Customer service</option>
-                        <option>Finance</option>
-                        <option>Healthcare</option>
-                        <option>Sale</option>
-                        <option>Marketing</option>
-                        <option>Information technology</option>
-                        <option>Others</option>
+                    <select name="LocationId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
+                        <option value="">Seçiniz</option>
                     </select>
                 </div>
 

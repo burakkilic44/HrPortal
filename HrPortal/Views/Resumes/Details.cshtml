@@ -290,24 +290,17 @@
 
 
                                 <div class="col-xs-12 col-sm-12">
+                                   @foreach (var item in Model.LanguageInfos) { 
                                     <div class="form-group ">
-                                        <h5>Dil</h5>
+                                        <h5>@item.Language.Name</h5>
                                     </div>
+                                  
 
-
-                                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                                        <div class="form-group s">
-                                            <div class="input-group input-group-sm">
-                                                <h3 class="label label-success">Konuşma seviyesi:5</h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-4">
                                         <div class="form-group">
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group input-group-sm">
-                                                    <h3 class="label label-warning">Okuma seviyesi:9</h3>
+                                                    <h3 class="label label-default">Konuşma seviyesi:@item.SpeakingLevel</h3>
 
                                                 </div>
                                             </div>
@@ -316,13 +309,24 @@
                                     <div class="form-group col-xs-12 col-sm-6 col-md-4">
                                         <div class="form-group">
                                             <div class="input-group input-group-sm">
-                                                <h3 class="label label-info" >Yazma seviyesi:9</h3>
+                                                <div class="input-group input-group-sm">
+                                                    <h3 class="label label-warning">Okuma seviyesi:@item.ReadingLevel</h3>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <h3 class="label label-info" >Yazma seviyesi:@item.WritingLevel</h3>
                                                 
                                             </div>
                                         </div>
                                     </div>
+                                   }
                                 </div>
-
+                                   
                             </div>
                         </div>
                     </div>

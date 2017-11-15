@@ -32,7 +32,7 @@ namespace HrPortal.Data
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Occupation> Occupations { get; set; }
-
+        public DbSet<JobApplication> JobApplication { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -77,6 +77,22 @@ namespace HrPortal.Data
                 .HasOne(pt => pt.Tag)
                 .WithMany(t => t.ResumeTags)
                 .HasForeignKey(pt => pt.TagId).OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Entity<JobApplication>()
+           .HasKey(t => new { t.JobId, t.ResumeId });
+
+            builder.Entity<JobApplication>()
+                .HasOne(pt => pt.Job)
+                .WithMany(p => p.JobApplications)
+                .HasForeignKey(pt => pt.JobId);
+
+            builder.Entity<JobApplication>()
+                .HasOne(pt => pt.Resume)
+                .WithMany(t => t.JobApplications)
+                .HasForeignKey(pt => pt.ResumeId).OnDelete(DeleteBehavior.Restrict);
+
         }
+
     }
 }

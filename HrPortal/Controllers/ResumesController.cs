@@ -19,9 +19,13 @@ namespace HrPortal.Controllers
         private IRepository<Experience> experienceRepository;
         private IRepository<Skill> skillRepository;
         private IRepository<Certificate> certificateRepository;
+
+        
+
         
       public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository)
         {
+
             this.languageRepository = languageRepository;
             this.locationRepository = locationRepository;
             this.resumeRepository = resumeRepository;
@@ -31,15 +35,16 @@ namespace HrPortal.Controllers
             this.certificateRepository = certificateRepository;
             
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var resumes = resumeRepository.GetAll("EducationInfos","Location", "ResumeTags", "ResumeTags.Tag");
+            //var resumes = resumeRepository.GetAll("EducationInfos","Location", "ResumeTags", "ResumeTags.Tag");
+            var resumes = await resumeRepository.GetPaged(c => true, o => o.Title, false, 10, page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
             return View(resumes);
         }
 
         public IActionResult Details(string id)
         {
-            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos","Experiences","Skills","Certificates");
+            var resume = resumeRepository.Get(id,"ResumeTags","ResumeTags.Tag","EducationInfos","Experiences","Skills","Certificates","LanguageInfos","Language");
             return View(resume);
         }
 
@@ -136,14 +141,15 @@ namespace HrPortal.Controllers
 
         public IActionResult LanguageInfos()
         {
-            var languageInfo = new LanguageInfo();
+            var LanguageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
-            return View(languageInfo);
+            return View();
         }
 
         [HttpPost]
-        public JsonResult AddLanguageInfo(LanguageInfo languageInfo)
+        public JsonResult AddLanguageInfo(LanguageInfo languageinfo)
         {
+                
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");      
         } 
