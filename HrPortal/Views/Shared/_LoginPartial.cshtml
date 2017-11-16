@@ -5,7 +5,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @*login model eklendi checkbox dinamik olması içi*@
-
+@inject UserManager<ApplicationUser> UserManager
 
 
 <link href="~/assets/css/UserSettings.css" rel="stylesheet" />
@@ -38,8 +38,25 @@
 
                                 <div class="span2"style="text-align:center;">
                                     <div class="btn-group">
-                                        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-sm ">Profil</a>
-                                        <button type="submit" style="margin-left:5px" class="btn btn-danger btn-sm ">Çıkış</button>
+                                        @{ if (User.Identity.Name != null)
+                                            {
+                                                var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
+                                                if (user.IsEmployer==true)
+                                                {
+                                                    <a  class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies" >Firmalarım</a><br />
+                                                    <button  class="btn btn-xs btn-success btn-block" >İlanlarım</button>
+                                                    <button  class="btn btn-xs btn-success btn-block">Başvuranlar</button>
+
+                                                }
+                                                else if (user.IsEmployer == false)
+                                                {
+                                                    <button  class="btn btn-xs btn-success btn-block" style="margin:0.5px;height:36px;line-height:36px">Başvurularım</button>
+                                                    <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block"  style="margin:0.5px;height:36px;line-height:36px">Özgeçmişlerim</button>
+                                                }
+                                            }
+                                         }
+                                        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-sm " style="margin-top:5px;margin-left:41px;">Profil</a>
+                                        <button type="submit" style="margin-left:5px;margin-top:5px" class="btn btn-danger btn-sm" >Çıkış</button>
 
                                     </div>
                                 </div>

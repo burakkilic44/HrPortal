@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Controllers
 {
@@ -23,10 +24,10 @@ namespace HrPortal.Controllers
         private IRepository<Tag> tagRepository;
         private IRepository<LanguageInfo> languageInfoRepository;
 
-        
 
-        
-      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
+
+
+        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
         {
             this.languageInfoRepository=languageInfoRepository;
             this.tagRepository = tagRepository;
@@ -39,6 +40,7 @@ namespace HrPortal.Controllers
             this.certificateRepository = certificateRepository;
             this.occupationRepository = occupationRepository;
             
+
         }
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
@@ -54,6 +56,8 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+
+        [Authorize(Roles = "Candidate")]
         public IActionResult Create()
         {
             var resume = new Resume();
@@ -62,6 +66,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Authorize(Roles = "Candidate")]
         [HttpPost]
         public IActionResult Create(Resume resume)
         {
@@ -74,18 +79,20 @@ namespace HrPortal.Controllers
             ViewBag.IsModelStateValid = ModelState.IsValid;
             return View(resume);
         }
-
+        [Authorize(Roles = "Candidate")]
         public IActionResult Edit()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Candidate")]
         public IActionResult EducationInfos()
         {
             var EducationInfo = new EducationInfo();
             return View(EducationInfo);
         }
-
+        [Authorize(Roles = "Candidate")]
         [HttpPost]
         public JsonResult AddEducationInfo(EducationInfo educationinfo)
         {
@@ -95,14 +102,14 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-
+        [Authorize(Roles = "Candidate")]
         public IActionResult Experience()
         {
             
             var Experience = new Experience();
             return View(Experience);
         }
-
+        [Authorize(Roles = "Candidate")]
         [HttpPost]
         public JsonResult AddExperience(Experience experience)
         {
@@ -112,13 +119,13 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-
+        [Authorize(Roles = "Candidate")]
         public IActionResult Skill()
         {
             var Skill = new Skill();
             return View(Skill);
         }
-
+        [Authorize(Roles = "Candidate")]
         [HttpPost]
         public JsonResult AddSkill(Skill skill)
         {
@@ -128,13 +135,13 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-
+        [Authorize(Roles = "Candidate")]
         public IActionResult Certificate()
         {
             var Certificate = new Certificate();
             return View(Certificate);
         }
-
+        [Authorize(Roles = "Candidate")]
         [HttpPost]
         public JsonResult AddCertificate(Certificate certificate)
         {
@@ -144,14 +151,14 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-
+        [Authorize(Roles = "Candidate")]
         public IActionResult LanguageInfos()
         {
             var LanguageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return View(LanguageInfo);
         }
-
+        [Authorize(Roles = "Candidate")]
         [HttpPost]
         public JsonResult AddLanguageInfo(LanguageInfo languageinfo)
         {
@@ -162,12 +169,19 @@ namespace HrPortal.Controllers
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");      
         }
-
-        
+        [Authorize(Roles = "Candidate")]
         public ActionResult TagHelper(string term)
         {
             var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(t => t.Name).Take(10);
             return Json(data);
+        }
+
+        public async Task<IActionResult> MyResumes(ResumeSearchViewModel vm)
+        {
+            vm.SearchResults = await resumeRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Title, false, 10, vm.Page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", vm.LocationId);
+            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
+            return View(vm);
         }
 
     }
