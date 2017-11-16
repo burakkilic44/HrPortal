@@ -1,0 +1,203 @@
+﻿@model HrPortal.Models.Resume
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Resume</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationId" class="control-label"></label>
+                <select asp-for="LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="WebAddress" class="control-label"></label>
+                <input asp-for="WebAddress" class="form-control" />
+                <span asp-validation-for="WebAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResumeFile" class="control-label"></label>
+                <input asp-for="ResumeFile" class="form-control" />
+                <span asp-validation-for="ResumeFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Facebook" class="control-label"></label>
+                <input asp-for="Facebook" class="form-control" />
+                <span asp-validation-for="Facebook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Twitter" class="control-label"></label>
+                <input asp-for="Twitter" class="form-control" />
+                <span asp-validation-for="Twitter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GooglePlus" class="control-label"></label>
+                <input asp-for="GooglePlus" class="form-control" />
+                <span asp-validation-for="GooglePlus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dribbble" class="control-label"></label>
+                <input asp-for="Dribbble" class="form-control" />
+                <span asp-validation-for="Dribbble" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pinterest" class="control-label"></label>
+                <input asp-for="Pinterest" class="form-control" />
+                <span asp-validation-for="Pinterest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Github" class="control-label"></label>
+                <input asp-for="Github" class="form-control" />
+                <span asp-validation-for="Github" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instagram" class="control-label"></label>
+                <input asp-for="Instagram" class="form-control" />
+                <span asp-validation-for="Instagram" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Youtube" class="control-label"></label>
+                <input asp-for="Youtube" class="form-control" />
+                <span asp-validation-for="Youtube" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinkedIn" class="control-label"></label>
+                <input asp-for="LinkedIn" class="form-control" />
+                <span asp-validation-for="LinkedIn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MilitaryStatus" class="control-label"></label>
+                <select asp-for="MilitaryStatus" class="form-control"></select>
+                <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LanguageId" class="control-label"></label>
+                <select asp-for="LanguageId" class ="form-control" asp-items="ViewBag.LanguageId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hobbies" class="control-label"></label>
+                <input asp-for="Hobbies" class="form-control" />
+                <span asp-validation-for="Hobbies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SmokingStatus" class="control-label"></label>
+                <select asp-for="SmokingStatus" class="form-control"></select>
+                <span asp-validation-for="SmokingStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrivingLicense" class="control-label"></label>
+                <input asp-for="DrivingLicense" class="form-control" />
+                <span asp-validation-for="DrivingLicense" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsTravelDisabled" /> @Html.DisplayNameFor(model => model.IsTravelDisabled)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApproveDate" class="control-label"></label>
+                <input asp-for="ApproveDate" class="form-control" />
+                <span asp-validation-for="ApproveDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsEncouraged" /> @Html.DisplayNameFor(model => model.IsEncouraged)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="OccupationId" class="control-label"></label>
+                <select asp-for="OccupationId" class ="form-control" asp-items="ViewBag.OccupationId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdateDate" class="control-label"></label>
+                <input asp-for="UpdateDate" class="form-control" />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedBy" class="control-label"></label>
+                <input asp-for="UpdatedBy" class="form-control" />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

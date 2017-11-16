@@ -16,6 +16,8 @@ namespace HrPortal.Controllers
         private IRepository<Location> locationRepository;
         private IRepository<Resume> resumeRepository;
         private IRepository<JobApplication> jobApplicationRepository;
+        private object context;
+
         public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository, IRepository<JobApplication> jobApplicationRepository)
         {
             this.resumeRepository = resumeRepository;
@@ -80,8 +82,30 @@ namespace HrPortal.Controllers
             return View(jobApplication);
         }
 
+        public IActionResult Edit(string id)
+        {
 
-        public IActionResult SuccessfullyCreated()
+            var job = jobRepository.Get(id);
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(job);
+        }
+        [HttpPost]
+        public IActionResult Edit(Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                jobRepository.Update(job);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(job);
+        }
+
+
+
+            public IActionResult SuccessfullyCreated()
         {
             return View();
         }
