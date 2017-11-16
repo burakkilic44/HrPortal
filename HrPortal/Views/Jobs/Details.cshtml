@@ -12,19 +12,23 @@
             </div>
             <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
             <hr>
-            <p class="lead">@Model.ShortDescription</p>
+            <div class="action-buttons">             
+                
+                <p class="lead">@Model.ShortDescription</p>
 
-            <ul class="details cols-3">
-                <li>
-                    <i class="fa fa-map-marker"></i>
-                    <span>@if (Model.JobLocations != null)
-                    {
-                        foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                <ul class="details cols-3">
+                    <li>
+                        <i class="fa fa-map-marker"></i>
+                        <span>
+                            @if (Model.JobLocations != null)
                         {
-                        @location
-                        <text> </text>
+                            foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                            {
+                                @location
+                                <text> </text>
+                            }
                         }
-                    }</span>
+                    </span>
                 </li>
 
                 <li>
@@ -54,7 +58,7 @@
 
                 <li>
                     <i class="fa fa-check"></i>
-                    <a href="#">Aktif mi? @(Model.IsActive?"Evet":"Hayır:")</a>
+                    <a href="#">Aktif mi? @(Model.IsActive ? "Evet" : "Hayır:")</a>
                 </li>
                 <li>
                     <i class="fa fa-calendar"></i>
@@ -77,6 +81,8 @@
                 </ul>
 
                 <div class="action-buttons">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
+                    <a class="btn btn-danger" asp-action="Remove" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                     <a class="btn btn-success" asp-action="Apply" asp-route-id="@Model.Id">ŞİMDİ BAŞVUR</a>
                 </div>
             </div>
