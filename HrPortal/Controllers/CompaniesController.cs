@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Controllers
 {
@@ -30,12 +31,13 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-
+        [Authorize(Roles = "Employer")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location");
             return View(comp);
         }
+        [Authorize(Roles = "Employer")]
         public IActionResult Create()
         {
             var compa = new Company();
@@ -44,6 +46,7 @@ namespace HrPortal.Controllers
             return View(compa);
         }
 
+        [Authorize(Roles = "Employer")]
         [HttpPost]
         public IActionResult Create(Company company)
         {
@@ -56,6 +59,7 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
+        [Authorize(Roles = "Employer")]
         public IActionResult SuccessfullyCreated()
         {
             return View();

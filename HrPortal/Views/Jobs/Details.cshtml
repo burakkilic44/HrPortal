@@ -9,22 +9,28 @@
             <div class="hgroup">
                 <h1>@Model.Title</h1>
                 <h3><a href="#">@Model.Company.Name</a></h3>
-            </div>
-            <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
-            <hr>
-            <p class="lead">@Model.ShortDescription</p>
 
-            <ul class="details cols-3">
-                <li>
-                    <i class="fa fa-map-marker"></i>
-                    <span>@if (Model.JobLocations != null)
-                    {
-                        foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+
+            </div>
+            <div class="action-buttons">
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
+                <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
+                <hr>
+                <p class="lead">@Model.ShortDescription</p>
+
+                <ul class="details cols-3">
+                    <li>
+                        <i class="fa fa-map-marker"></i>
+                        <span>
+                            @if (Model.JobLocations != null)
                         {
-                        @location
-                        <text> </text>
+                            foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                            {
+                                @location
+                                <text> </text>
+                            }
                         }
-                    }</span>
+                    </span>
                 </li>
 
                 <li>
@@ -54,7 +60,7 @@
 
                 <li>
                     <i class="fa fa-check"></i>
-                    <a href="#">Aktif mi? @(Model.IsActive?"Evet":"Hayır:")</a>
+                    <a href="#">Aktif mi? @(Model.IsActive ? "Evet" : "Hayır:")</a>
                 </li>
                 <li>
                     <i class="fa fa-calendar"></i>
