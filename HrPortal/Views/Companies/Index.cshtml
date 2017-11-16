@@ -65,20 +65,33 @@
                 @foreach (var CompanyItem in Model) {
                 <!-- Company detail -->
                 <div class="col-xs-12">
-                    <a class="item-block" asp-action="Details" asp-route-id="@CompanyItem.Id">
+
+                    <div class="item-block">
                         <header>
-                            <img src="/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Id">
+                            <img src="/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Id" onerror="/assets/img/avatar.jpg">
                             <div class="hgroup">
-                                <h4>@CompanyItem.Name</h4>
+                                <h4><a asp-action="Details" asp-route-id="@CompanyItem.Id">@CompanyItem.Name</a></h4>
                             </div>
                             <span class="open-position"></span>
-                        </header>
 
-                        <div class="item-body">
-                            <p>Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
+                        </header>
+                        <div class="action-buttons">
+                             <a class="btn btn-success pull-right" asp-controller="Companies" asp-action="Index">Firma Ara</a>
+                                </div>
+
+                            <div class="item-body">
+                                
+                                    <p>Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
+                                   
+                            </div>
                         </div>
-                    </a>
+
+                      
+                    
+                    
                 </div>
+               
+
                 }
                 <!-- Page navigation -->
                 <nav aria-label="Job navigation example">
