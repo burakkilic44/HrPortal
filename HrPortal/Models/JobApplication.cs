@@ -17,4 +17,22 @@ namespace HrPortal.Models
         [Display(Name = "Mesaj")]
         public string Message { get; set; }
     }
+
+    public class JobApplicationSearchViewModel 
+    {
+        public JobApplicationSearchViewModel()
+
+        {
+            Page = 1;
+        }
+
+    
+        public int Page { get; set; }
+        public string Keywords { get; set; }
+        
+        public ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.JobApplication> SearchResults { get; set; }
+    }
+
+
+
 }
