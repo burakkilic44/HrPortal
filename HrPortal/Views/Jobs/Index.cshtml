@@ -1,5 +1,5 @@
 ﻿@model JobSearchViewModel
-@*// @model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Job>*@
+@*@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Job>*@
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
 @{
@@ -187,7 +187,7 @@
 
                     <!-- Page navigation -->
                     <nav aria-label="Job navigation example">
-                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
                     </nav>
                     <!-- END Page navigation -->
 
