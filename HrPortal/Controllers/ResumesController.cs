@@ -163,7 +163,6 @@ namespace HrPortal.Controllers
             return Json("Success");      
         }
 
-        
         public ActionResult TagHelper(string term)
         {
             var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(t => t.Name).Take(10);
