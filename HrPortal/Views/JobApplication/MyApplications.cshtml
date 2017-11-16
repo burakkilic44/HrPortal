@@ -1,0 +1,78 @@
+﻿@model JobApplication
+@{
+    ViewData["Title"] = "MyApplication";
+}
+
+<div>
+
+    <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner3.jpg);">
+        <div class="container page-name">
+            <h1 class="text-center">Başvurularım</h1>
+            <p class="lead text-center">Aradığınız pozisyon için başvurular aşağıdadır.</p>
+        </div>
+
+        <div class="container">
+            <form method="get" action="/Resumes">
+
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-12">
+                        <input type="text" class="form-control" placeholder="Başvuru Ara" id="Keywords" name="Keywords" value="">
+                    </div>
+                    
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                </div>
+         </form>
+
+        </div>
+
+    </header>
+
+    <main>
+        <section class="no-padding-top bg-alt">
+            <div class="container">
+                <div class="row item-blocks-connected">
+
+                    <div class="col-xs-12">
+                        <br>
+                        <h5>Bulunan <strong>1</strong> kayıt bulundu..</h5>
+                        <br>
+                    </div>
+                    <!-- Job item -->
+                    <div class="col-xs-12">
+                       
+                        <a class="item-block" href="/Jobs/Details/4346d1fe-6c91-4104-801a-aca3a8c4a612">
+                            <header>
+                                <img src="/uploads/jobs/" alt="google">
+                                <div class="hgroup">
+                                    <h4></h4>
+                                    <h5>google</h5>
+                                </div>
+                                <div class="header-meta">
+                                    <span class="location"></span>
+                                    <span class="label label-success">FullTime</span>
+                                </div>
+                            </header>
+                        </a>
+                        }
+                    </div>
+                    <!-- END Job item -->
+                </div>
+
+
+                <!-- Page navigation -->
+                <nav aria-label="Job navigation example">
+
+
+
+
+                </nav>
+                <!-- END Page navigation -->
+
+
+            </div>
+        </section>
+    </main>
+
+</div>
