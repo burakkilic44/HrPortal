@@ -23,10 +23,10 @@ namespace HrPortal.Controllers
         private IRepository<Tag> tagRepository;
         private IRepository<LanguageInfo> languageInfoRepository;
 
-        
 
-        
-      public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
+
+
+        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
         {
             this.languageInfoRepository=languageInfoRepository;
             this.tagRepository = tagRepository;
@@ -39,6 +39,7 @@ namespace HrPortal.Controllers
             this.certificateRepository = certificateRepository;
             this.occupationRepository = occupationRepository;
             
+
         }
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
@@ -163,11 +164,18 @@ namespace HrPortal.Controllers
             return Json("Success");      
         }
 
-        
         public ActionResult TagHelper(string term)
         {
             var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(t => t.Name).Take(10);
             return Json(data);
+        }
+
+        public async Task<IActionResult> MyResumes(ResumeSearchViewModel vm)
+        {
+            vm.SearchResults = await resumeRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Title, false, 10, vm.Page, "EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", vm.LocationId);
+            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
+            return View(vm);
         }
 
     }
