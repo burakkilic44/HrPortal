@@ -15,7 +15,7 @@ namespace HrPortal.Data
         {
         }
 
-      
+        public DbSet<Sector> Sectors{ get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<EducationInfo> EducationInfos { get; set; }

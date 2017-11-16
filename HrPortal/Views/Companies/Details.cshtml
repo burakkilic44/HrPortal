@@ -14,7 +14,7 @@
             </div>
             <hr>
             <p class="lead">Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
-
+            
             <ul class="details cols-3">
                 <li>
                     <i class="fa fa-map-marker"></i>
@@ -99,9 +99,13 @@
             <div class="row">
                 @foreach(var job in Model.Jobs) { 
                 <!-- Job item -->
+                    <div class="action-buttons">
+                        <a class="btn btn-success pull-right" asp-controller="Companies" asp-action="Index">Firma Ara</a>
+                    </div>
                 <div class="col-xs-12">
                     <a class="item-block" asp-action="Details" asp-controller="Jobs" asp-route-id="@job.Id">
                         <header>
+                           
                             <div class="hgroup">
                                 <h4>Senior front-end developer</h4>
                                 <h5>Google <span class="label label-success">Tam Zamanlı</span></h5>
@@ -112,6 +116,7 @@
                         <div class="item-body">
                             <p>A rapidly growing, well established marketing firm is looking for an experienced web developer for a full-time position. In this role, you will develop websites, apps, emails and other forms of digital electronic media, all while maintaining brand standards across design projects and other marketing communication materials.</p>
                         </div>
+                       
 
                         <footer>
                             <ul class="details cols-3">
