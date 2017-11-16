@@ -83,6 +83,7 @@ namespace HrPortal.Services
                 throw new ArgumentNullException("entity");
             }
             entity.UpdateDate = DateTime.Now;
+            context.Update(entity);
             context.SaveChanges();
         }
 
