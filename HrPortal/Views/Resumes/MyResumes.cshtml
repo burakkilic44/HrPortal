@@ -1,0 +1,105 @@
+﻿@model ResumeSearchViewModel
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@{
+    ViewData["Title"] = "Özgeçmişlerim";
+}
+
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner3.jpg);">
+    <div class="container page-name">
+        <h1 class="text-center">Özgeçmişlerim</h1>
+        <p class="lead text-center">Özgeçmişleriniz aşağıdadır.</p>
+    </div>
+
+    <div class="container">
+        <form asp-action="Index" method="get">
+
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12">
+                    <input asp-for="Keywords" type="text" class="form-control" placeholder="Anahtar kelime: isim, yetenekler ya da etiketler" />
+                </div>
+            </div>
+                
+
+            <div class="button-group">
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</header>
+
+<!-- Main container -->
+<main>
+    <section class="no-padding-top bg-alt">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <br>
+                    <h5><strong>@Model.SearchResults.Count()</strong> eşleşme bulduk</h5>
+                </div>
+
+                <!-- Resume detail -->
+                @foreach (var resumeItem in Model.SearchResults)
+                {
+                    <div class="col-xs-12">
+                        <a class="item-block" asp-action="Details" asp-route-id="@resumeItem.Id">
+                            <header>
+                                <img src="/uploads/resumes/@resumeItem.Photo" alt="@resumeItem.FullName">
+                                <div class="hgroup">
+                                    <h4>@resumeItem.FullName</h4>
+                                    <h5>@resumeItem.Title</h5>
+                                </div>
+                            </header>
+
+                            <div class="item-body">
+                                <p>@resumeItem.Notes</p>
+
+                                <div class="tag-list">
+                                    @foreach (var tag in resumeItem.ResumeTags.Select(t => t.Tag).ToList())
+                                    {
+                                        <span>@tag.Name</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <footer>
+                                <div class="header-meta">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <span class="location">
+                                                @resumeItem.Location?.Name
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="label label-success">@resumeItem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.EducationLevel.GetDisplayName() </span>
+
+                                        </li>
+                                        <li>
+                                            <span class="label label-success">@resumeItem.MilitaryStatus.GetDisplayName()</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </footer>
+                        </a>
+                    </div>
+                }
+                <!-- END Resume detail -->
+            </div>
+            <!-- Page navigation -->
+            <nav aria-label="Resume navigation example">
+                @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
+            </nav>
+            <!-- END Page navigation -->
+
+
+        </div>
+    </section>
+</main>
+<!-- END Main container -->

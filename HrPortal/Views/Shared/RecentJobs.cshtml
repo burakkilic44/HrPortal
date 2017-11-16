@@ -17,7 +17,7 @@
             @foreach (var Jobitem in ViewBag.jobs)
             {
                 <div class="col-xs-12">
-                    <a class="item-block" asp-action="Details" asp-route-id="@Jobitem.Id">
+                    <a class="item-block" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id">
                         <header>
                             <img src="/uploads/jobs/@Jobitem.Company.Photo" alt="@Jobitem.Company.Name">
                             <div class="hgroup">
