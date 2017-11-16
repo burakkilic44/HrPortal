@@ -16,6 +16,8 @@ namespace HrPortal.Controllers
         private IRepository<Location> locationRepository;
         private IRepository<Resume> resumeRepository;
         private IRepository<JobApplication> jobApplicationRepository;
+        private object context;
+
         public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository, IRepository<JobApplication> jobApplicationRepository)
         {
             this.resumeRepository = resumeRepository;
@@ -24,11 +26,12 @@ namespace HrPortal.Controllers
             this.locationRepository = locationRepository;
             this.jobApplicationRepository = jobApplicationRepository;
         }
-        public async Task<IActionResult> Index(int page=1)
+        public async Task<IActionResult> Index(JobSearchViewModel jvm)
         {
-            //var jobs = jobRepository.GetAll("Company", "JobLocations", "JobLocations.Location");
-            var jobs = await jobRepository.GetPaged(c=>true,o=>o.Title,false,10,page, "Company", "JobLocations", "JobLocations.Location");
-            return View(jobs);
+            
+            jvm.SearchResults = await jobRepository.GetPaged(s => (!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l=> l.LocationId == jvm.LocationId) : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true)&& (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true),o=>o.Title,false,10,jvm.Page, "Company", "JobLocations", "JobLocations.Location");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", jvm.LocationId);
+            return View(jvm);
 
         }
         public IActionResult Create()
@@ -62,7 +65,7 @@ namespace HrPortal.Controllers
         public IActionResult Apply(string id)
         {           
             var job = jobRepository.Get(id, "Company","JobLocations", "JobLocations.Location");
-            ViewBag.Resumes = resumeRepository.GetMany(r => r.CreateBy == User.Identity.Name);
+            ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name);
            
 
             return View(job);
@@ -79,8 +82,30 @@ namespace HrPortal.Controllers
             return View(jobApplication);
         }
 
+        public IActionResult Edit(string id)
+        {
 
-        public IActionResult SuccessfullyCreated()
+            var job = jobRepository.Get(id);
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(job);
+        }
+        [HttpPost]
+        public IActionResult Edit(Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                jobRepository.Update(job);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(job);
+        }
+
+
+
+            public IActionResult SuccessfullyCreated()
         {
             return View();
         }

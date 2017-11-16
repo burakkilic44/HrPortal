@@ -3,6 +3,7 @@
     ViewData["Title"] = "Create";
 }
  <!-- Page header -->
+<link href="~/css/tagify.css" rel="stylesheet" />
 
 <form asp-action="Create" method="post">
     <header class="page-header">
@@ -144,11 +145,10 @@
 
                         <hr class="hr-lg">
                
-                        <h6>Etiket Listesi</h6>
-                        <div class="form-group">
-                            <input id="tags" name="tags" type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Etiket">
-                            <span class="help-block">Etiketinizi yazın ve Enter'a basın.</span>
-                        </div>       
+                    <h6>Etiket Listesi</h6>
+                    <div class="form-group">
+                        <input name='tags-jquery' value='try, adding, a tag'> <button class='tags-jquery--removeAllBtn' type='button'>Remove all tags</button> 
+                    </div>
                     </div>
             </div>
 
@@ -164,9 +164,7 @@
                     <div class="upload-button">
                         <button class="btn btn-block btn-primary">Bir resim seçin</button>
                         <input  id="cover_img_file" type="file">
-                    </div>
-
-              
+                    </div>             
                 </div>
             </div>
         </div>
@@ -305,6 +303,8 @@
     </form>
 @section scripts{
     <script src="/assets/vendors/summernote/summernote.min.js"></script>
+    <script src="~/js/jQuery.tagify.min.js"></script>
+    <script src="~/js/tagify.min.js"></script>
 
 <script>                    $(document).ready(function () {
 
@@ -314,24 +314,10 @@
         $("#Certificate").load("/Resumes/Certificate");
         $("#LanguageInfos").load("/Resumes/LanguageInfos");
 
+
     });
 
-    $(document).ready(function () {
-        $('#tags').tagit({
-            tagSource: function (request, response) {
-                $.ajax({
-                    type: "GET",
-                    url: "/Resumes/TagHelper",
-                    data: request,
-                    dataType: 'json',
-                    contentType: "application/json",
-                    success: function (choices) {
-                        showChoices(this._subtractArray(choices, this.assignedTags()));
-                    }
-                })
-            }
-        });
-    });
+
 
 
     function AddEducationInfo() {
@@ -393,7 +379,15 @@
                 });
     }
 
-       
+        var $elm = $('input[name=tags-jquery]')
+            .tagify()
+            .on('add', function (e, tagName) {
+                console.log('added', tagName)
+            });
+
+        $('.tags-jquery--removeAllBtn').on('click', function () {
+            $elm.trigger('tagify.removeAllTags');
+        })
 </script>
 
 }

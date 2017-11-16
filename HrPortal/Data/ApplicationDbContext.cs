@@ -15,7 +15,7 @@ namespace HrPortal.Data
         {
         }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Sector> Sectors{ get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<EducationInfo> EducationInfos { get; set; }
@@ -52,8 +52,6 @@ namespace HrPortal.Data
                 .WithMany(t => t.JobLocations)
                 .HasForeignKey(pt => pt.LocationId).OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<LanguageInfo>()
-           .HasKey(t => new { t.ResumeId, t.LanguageId});
 
             builder.Entity<LanguageInfo>()
                 .HasOne(pt => pt.Resume)

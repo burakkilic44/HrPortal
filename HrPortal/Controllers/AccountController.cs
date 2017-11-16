@@ -77,16 +77,16 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 // Require the user to have a confirmed email before they can log on.
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user != null)
-                {
-                    if (!await _userManager.IsEmailConfirmedAsync(user))
-                    {
-                        ModelState.AddModelError(string.Empty,
-                                      "Giriş yapabilmek için mail adresinizin onaylanması gerekmektedir.");
-                        return View(model);
-                    }
-                }
+                //var user = await _userManager.FindByEmailAsync(model.Email);
+                //if (user != null)
+                //{
+                //    if (!await _userManager.IsEmailConfirmedAsync(user))
+                //    {
+                //        ModelState.AddModelError(string.Empty,
+                //                      "Giriş yapabilmek için mail adresinizin onaylanması gerekmektedir.");
+                //        return View(model);
+                //    }
+                //}
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -256,14 +256,14 @@ namespace HrPortal.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //if (user.IsEmployer == true)
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Employer");
-                    //}
-                    //else
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Candidate");
-                    //}
+                    if (user.IsEmployer == true)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Employer");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Candidate");
+                    }
 
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
 
@@ -271,7 +271,7 @@ namespace HrPortal.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
                     return RedirectToLocal(returnUrl);
                 }

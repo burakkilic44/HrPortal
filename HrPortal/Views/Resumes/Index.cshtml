@@ -1,4 +1,4 @@
-﻿@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Resume>
+﻿@model ResumeSearchViewModel
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
 @{
@@ -12,34 +12,22 @@
     </div>
 
     <div class="container">
-        <form action="#">
+        <form asp-action="Index" method="get">
 
             <div class="row">
                 <div class="form-group col-xs-12 col-sm-4">
-                    <input type="text" class="form-control" placeholder="Anahtar kelime: isim, yetenekler ya da etiketler">
+                    <input asp-for="Keywords" type="text" class="form-control" placeholder="Anahtar kelime: isim, yetenekler ya da etiketler" />
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select class="form-control selectpicker" multiple>
-                        <option selected>Tüm Bölgeler</option>
-                        <option>İstanbul(Anadolu)</option>
-                        <option>İstanbul(Avrupa)</option>
-                        <option>İzmir</option>
-                        <option>Ankara</option>
+                    <select class="form-control selectpicker" asp-for="LocationId" asp-items="@ViewBag.Locations">
+                        <option value="">Tüm konumlar</option>
                     </select>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select class="form-control selectpicker" multiple>
-                        <option selected>Tüm kategoriler</option>
-                        <option>Yazılım Geliştirici</option>
-                        <option>Tasarımcı</option>
-                        <option>Müşteri Hizmetleri</option>
-                        <option>Finans</option>
-                        <option>Sağlık</option>
-                        <option>Satış</option>
-                        <option>Bilgi Teknolojileri</option>
-                        <option>Diğerleri</option>
+                    <select class="form-control selectpicker" asp-for="OccupationId" asp-items="@ViewBag.Occupations">
+                        <option value="">Tüm meslekler</option>
                     </select>
                 </div>
 
@@ -48,23 +36,23 @@
                     <h6>Askerlik Durumu</h6>
                     <div class="checkall-group">
                        
-                        <div class="checkbox">
-                            <input type="checkbox" id="rate1" name="rate">
-                            <label for="rate1">Yapıldı</label>
+                        <div class="radio">
+                            <input type="radio" id="militaryStatus1" name="militaryStatus" checked value="1">
+                            <label for="militaryStatus1">Yapıldı</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="rate2" name="rate">
-                            <label for="rate2">Muaf<small>(364)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="militaryStatus2" name="militaryStatus" value="2">
+                            <label for="militaryStatus2">Muaf</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="rate3" name="rate">
-                            <label for="rate3">Tecilli<small>(684)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="militaryStatus3" name="militaryStatus" value="3">
+                            <label for="militaryStatus3">Tecilli</label>
                         </div>
-                        <div class="checkbox">
-                            <input type="checkbox" id="rate4" name="rate">
-                            <label for="rate4">Yok<small>(684)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="militaryStatus4" name="militaryStatus" value="4">
+                            <label for="militaryStatus4">Yok</label>
                         </div>
                     </div>
                 </div>
@@ -73,49 +61,64 @@
                 <div class="form-group col-xs-12 col-sm-4">
                     <h6>Eğitim Seviyesi</h6>
                     <div class="checkall-group">
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree1" name="degree" checked>
-                            <label for="degree1">Tüm Seviyeler</label>
+                        <div class="radio">
+                            <input type="radio" id="educationLevel1" name="educationLevel" checked value="">
+                            <label for="educationLevel1">Tüm Seviyeler</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree2" name="degree">
-                            <label for="degree2">Ön Lisans <small>(216)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationLevel2" name="educationLevel" value="1" />
+                            <label for="educationLevel2">Ön Lisans</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree3" name="degree">
-                            <label for="degree3">Lisans <small>(569)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationLevel3" name="educationLevel" value="2">
+                            <label for="educationLevel3">Lisans</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree4" name="degree">
-                            <label for="degree4">Yüksek Lisans <small>(439)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationLevel4" name="educationLevel" value="3">
+                            <label for="educationLevel4">Yüksek Lisans</label>
                         </div>
 
-                        <div class="checkbox">
-                            <input type="checkbox" id="degree5" name="degree">
-                            <label for="degree5">Doktora <small>(84)</small></label>
+                        <div class="radio">
+                            <input type="radio" id="educationLevel5" name="educationLevel" value="4">
+                            <label for="educationLevel5">Doktora</label>
                         </div>
                     </div>
                 </div>
 
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <h6>Sort by</h6>
+                    <h6>Sırala</h6>
+                   
+
                     <div class="radio">
-                        <input type="radio" name="sortby" id="sortby1" value="option1" checked>
-                        <label for="sortby1">Sırala</label>
+                        <input type="radio" name="sortby" id="sortby1" checked value="1">
+                        <label for="sortby1">Ada göre artan</label>
                     </div>
 
                     <div class="radio">
-                        <input type="radio" name="sortby" id="sortby2" value="option2">
-                        <label for="sortby2">En yakın</label>
+                        <input type="radio" name="sortby" id="sortby2" value="2">
+                        <label for="sortby2">Ada göre azalan</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby3" value="3">
+                        <label for="sortby3">Mesleğe göre artan</label>
                     </div>
 
                     <div class="radio">
-                        <input type="radio" name="sortby" id="sortby3" value="option3">
-                        <label for="sortby3">En uzak</label>
+                        <input type="radio" name="sortby" id="sortby4" value="4">
+                        <label for="sortby4">Mesleğe göre azalan</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby5" value="5">
+                        <label for="sortby5">Konuma göre artan</label>
+                    </div>
+
+                    <div class="radio">
+                        <input type="radio" name="sortby" id="sortby6" value="6">
+                        <label for="sortby6">Konuma göre azalan</label>
                     </div>
                 </div>
 
@@ -124,7 +127,7 @@
 
             <div class="button-group">
                 <div class="action-buttons">
-                    <button class="btn btn-primary">Filtrele</button>
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
                 </div>
             </div>
 
@@ -142,11 +145,11 @@
 
     <div class="col-xs-12">
         <br>
-        <h5><strong>@Model.Count()</strong> eşleşme bulduk</h5>
+        <h5><strong>@Model.SearchResults.Count()</strong> eşleşme bulduk</h5>
     </div>
 
     <!-- Resume detail -->
-    @foreach (var resumeItem in Model)
+    @foreach (var resumeItem in Model.SearchResults)
     {
         <div class="col-xs-12">
             <a class="item-block" asp-action="Details" asp-route-id="@resumeItem.Id">
@@ -193,23 +196,8 @@
 <!-- END Resume detail -->
 </div>
                 <!-- Page navigation -->
-                <nav class="text-center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <i class="ti-angle-left"></i>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <i class="ti-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                <nav aria-label="Resume navigation example">
+                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
                 </nav>
                 <!-- END Page navigation -->
 

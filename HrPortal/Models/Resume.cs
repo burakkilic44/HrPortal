@@ -109,7 +109,11 @@ namespace HrPortal.Models
         public bool IsActive { get; set; }
         [Display(Name = "Teşvikli Mi?")]
         public bool IsEncouraged { get; set; }
-
+        [Display(Name = "Meslek")]
+        public string OccupationId { get; set; }
+        [Display(Name = "Meslek")]
+        [ForeignKey("OccupationId")]
+        public Occupation Occupation { get; set; }
 
 
         public ICollection<JobApplication> JobApplications { get; set; }

@@ -31,10 +31,11 @@ namespace HrPortal
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = true;
-                config.User.RequireUniqueEmail = true;
                 
+            {
+                //config.SignIn.RequireConfirmedEmail = true;
+                config.User.RequireUniqueEmail = true;
+
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -52,12 +53,13 @@ namespace HrPortal
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<ApplicationDbContextInitializer>();
             services.AddMvc();
             services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContextInitializer applicationDbContextSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +86,7 @@ namespace HrPortal
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            applicationDbContextSeeder.Seed();
         }
     }
 }
