@@ -1,5 +1,5 @@
-﻿
-@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Company>
+﻿@model CompanySearchViewModel
+@*@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Company>*@
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
 @{
@@ -12,31 +12,22 @@
     </div>
 
     <div class="container">
-        <form action="#">
+        <form asp-action="Index" method="get">
 
             <div class="row">
                 <div class="form-group col-xs-12 col-sm-4">
-                    <input type="text" class="form-control" placeholder="Anahtar Kelime">
+                    <input asp-for="Keywords" class="form-control" type="text" placeholder="Anahtar Kelime">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select name="LocationId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
-                        <option value="">Seçiniz</option>
+                    <select asp-for="SectorId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
+                        <option value="">Bölge Seçiniz</option>
                     </select>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select class="form-control selectpicker" multiple>
-                        <option selected>Tüm Kategoriler</option>
-                        <option>Developer</option>
-                        <option>Designer</option>
-                        <option>Customer service</option>
-                        <option>Finance</option>
-                        <option>Healthcare</option>
-                        <option>Sale</option>
-                        <option>Marketing</option>
-                        <option>Information technology</option>
-                        <option>Others</option>
+                    <select class="form-control selectpicker" asp-for="SectorId" asp-items="@ViewBag.Sector">
+                        <option value="">Sektör Seçiniz</option>
                     </select>
                 </div>
 
@@ -60,9 +51,9 @@
 
                 <div class="col-xs-12">
                     <br>
-                    <h5><strong> @Model.Count()</strong> eşleşme bulundu</h5>
+                    <h5><strong> @Model.SearchResults.Count</strong> eşleşme bulundu</h5>
                 </div>
-                @foreach (var CompanyItem in Model) {
+                @foreach (var CompanyItem in Model.SearchResults) {
                 <!-- Company detail -->
                 <div class="col-xs-12">
                     <a class="item-block" asp-action="Details" asp-route-id="@CompanyItem.Id">
@@ -82,7 +73,7 @@
                 }
                 <!-- Page navigation -->
                 <nav aria-label="Job navigation example">
-                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
                 </nav>
                 <!-- END Page navigation -->
 

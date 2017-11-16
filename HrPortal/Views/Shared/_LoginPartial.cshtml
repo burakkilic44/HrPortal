@@ -43,15 +43,15 @@
                                                 var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
                                                 if (user.IsEmployer==true)
                                                 {
-                                                    <button  class="btn btn-success col-sm-4" style="width:100%;margin:0.5px;height:36px;line-height:36px">Firmalarım</button>
-                                                    <button  class="btn btn-success col-sm-4" style="width:100%;margin:0.5px;height:36px;line-height:36px">İlanlarım</button>
-                                                    <button  class="btn btn-success col-sm-4" style="width:100%;margin:0.5px;height:36px;line-height:36px">Başvuranlar</button>
+                                                    <a  class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies" >Firmalarım</a><br />
+                                                    <button  class="btn btn-xs btn-success btn-block" >İlanlarım</button>
+                                                    <button  class="btn btn-xs btn-success btn-block">Başvuranlar</button>
 
                                                 }
                                                 else if (user.IsEmployer == false)
                                                 {
-                                                    <button  class="btn btn-success" style="width:100%; margin:0.5px;height:36px;line-height:36px">Başvurularım</button>
-                                                    <button  class="btn btn-success"  style="width:100%;margin:0.5px;height:36px;line-height:36px">Özgeçmişlerim</button>
+                                                    <button  class="btn btn-xs btn-success btn-block" style="margin:0.5px;height:36px;line-height:36px">Başvurularım</button>
+                                                    <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block"  style="margin:0.5px;height:36px;line-height:36px">Özgeçmişlerim</button>
                                                 }
                                             }
                                          }
