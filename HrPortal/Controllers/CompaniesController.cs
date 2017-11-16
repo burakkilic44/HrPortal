@@ -57,6 +57,10 @@ namespace HrPortal.Controllers
         {
             return View();
         }
+        public IActionResult MyCompanies()
+        {
+            return View();
+        }
 
 
     }
