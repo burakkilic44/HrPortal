@@ -14,6 +14,7 @@
             </div>
             <div class="action-buttons">
                 <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
+                <a class="btn btn-danger" asp-action="Remove" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                 <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
                 <hr>
                 <p class="lead">@Model.ShortDescription</p>

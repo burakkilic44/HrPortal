@@ -103,9 +103,15 @@ namespace HrPortal.Controllers
             return View(job);
         }
 
-
-
-            public IActionResult SuccessfullyCreated()
+        public IActionResult Remove(string id)
+        {
+            var job = jobRepository.Get(id);
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            jobRepository.Delete(job);
+            return RedirectToAction("Index");           
+        }
+        public IActionResult SuccessfullyCreated()
         {
             return View();
         }
