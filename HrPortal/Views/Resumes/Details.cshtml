@@ -71,14 +71,7 @@
                 </ul>
 
                 <div class="tag-list">
-                    <span>@if (Model.ResumeTags != null)
-                    {
-                        foreach (var tags in Model.ResumeTags.Select(s => s.Tag.Name).ToList())
-                        {
-                            @tags
-                            <text> </text>
-                        }
-                    }</span>
+                    <span>@Model.Tags</span>
                     
                 </div>
             </div>
