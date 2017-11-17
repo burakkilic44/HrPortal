@@ -173,7 +173,6 @@ namespace HrPortal.Controllers
         }
 
 
-        public IActionResult TagHelper(string term)
         [Authorize(Roles = "Candidate,Admin")]
         public ActionResult TagHelper(string term)
         {
