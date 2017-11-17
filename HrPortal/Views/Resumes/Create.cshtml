@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create";
 }
  <!-- Page header -->
-<link href="~/css/tagify.css" rel="stylesheet" />
+<link href="~/css/magicsuggest-min.css" rel="stylesheet" />
 
 <form asp-action="Create" method="post">
     <header class="page-header">
@@ -146,8 +146,8 @@
                         <hr class="hr-lg">
                
                     <h6>Etiket Listesi</h6>
-                    <div class="form-group">
-                        <input name='tags-jquery' value='try, adding, a tag'> <button class='tags-jquery--removeAllBtn' type='button'>Remove all tags</button> 
+                    <div id="form-group">
+                        <input class="tags" name="tags" class="form-control" />
                     </div>
                     </div>
             </div>
@@ -303,92 +303,105 @@
     </form>
 @section scripts{
     <script src="/assets/vendors/summernote/summernote.min.js"></script>
-    <script src="~/js/jQuery.tagify.min.js"></script>
-    <script src="~/js/tagify.min.js"></script>
+    <script src="~/js/magicsuggest.js"></script>
 
-<script>                    $(document).ready(function () {
+    <script>
+        $(document).ready(function() {
 
-        $("#EducationInfos").load("/Resumes/EducationInfos");
-        $("#Experience").load("/Resumes/Experience");
-        $("#Skill").load("/Resumes/Skill");
-        $("#Certificate").load("/Resumes/Certificate");
-        $("#LanguageInfos").load("/Resumes/LanguageInfos");
-
-
-    });
-
-
-
-
-    function AddEducationInfo() {
-        $.post("/Resumes/AddEducationInfo", { ResumeId: "@(Model.Id)",
-            Photo: $("#Photo").val(), EducationLevel: $("#EducationLevel").val(), SchoolName: $("#SchoolName").val(),
-            Department: $("#Department").val(), StartDate: $("#StartDate").val(), EndDate: $("#EndDate").val(), Notes: $("#Notes").val(),
-        }
-            ,
-            function (data) {
-                alert(data);
-
-            });
-    }
-
-    function AddExperience() {
-        $.post("/Resumes/AddExperience", {ResumeId: "@(Model.Id)",
-            Photo: $("#Photo").val(), CompanyName: $("#CompanyName").val(),
-            Position: $("#Position").val(), Notes: $("#Notes").val(),
-        }
-            ,
-            function (data) {
-                alert(data);
-
+            $("#EducationInfos").load("/Resumes/EducationInfos");
+            $("#Experience").load("/Resumes/Experience");
+            $("#Skill").load("/Resumes/Skill");
+            $("#Certificate").load("/Resumes/Certificate");
+            $("#LanguageInfos").load("/Resumes/LanguageInfos");
+            $('.tags').magicSuggest({
+                
+                data: '/Resumes/TagHelper',
+                placeholder: 'Etiket'
             });
 
-    }
+        });
 
 
-    function AddSkill() {
-        $.post("/Resumes/AddSkill", {
-            ResumeId: "@(Model.Id)", Name: $("#Name").val(), Level: $("#Level").val(),
+        function AddEducationInfo() {
+            $.post("/Resumes/AddEducationInfo",
+                {
+                    ResumeId: "@(Model.Id)",
+                    Photo: $("#Photo").val(),
+                    EducationLevel: $("#EducationLevel").val(),
+                    SchoolName: $("#SchoolName").val(),
+                    Department: $("#Department").val(),
+                    StartDate: $("#StartDate").val(),
+                    EndDate: $("#EndDate").val(),
+                    Notes: $("#Notes").val(),
+                },
+                function(data) {
+                    alert(data);
+
+                });
         }
-            ,
-            function (data) {
-                alert(data);
 
-            });
+        function AddExperience() {
+            $.post("/Resumes/AddExperience",
+                {
+                    ResumeId: "@(Model.Id)",
+                    Photo: $("#Photo").val(),
+                    CompanyName: $("#CompanyName").val(),
+                    Position: $("#Position").val(),
+                    Notes: $("#Notes").val(),
+                },
+                function(data) {
+                    alert(data);
 
-    }
+                });
 
-    function AddCertificate() {
-        $.post("/Resumes/AddCertificate", {
-            ResumeId: "@(Model.Id)", Name: $("#CertificateName").val(), Issuer: $("#Issuer").val(), Issuer: $("#Issuer").val(), IssueDate: $("#IssueDate").val(), CertificateFile: $("#CertificateFile").val(),
-            }
-                ,
-                function (data) {
+        }
+
+
+        function AddSkill() {
+            $.post("/Resumes/AddSkill",
+                {
+                    ResumeId: "@(Model.Id)",
+                    Name: $("#Name").val(),
+                    Level: $("#Level").val(),
+                },
+                function(data) {
+                    alert(data);
+
+                });
+
+        }
+
+        function AddCertificate() {
+            $.post("/Resumes/AddCertificate",
+                {
+                    ResumeId: "@(Model.Id)",
+                    Name: $("#CertificateName").val(),
+                    Issuer: $("#Issuer").val(),
+                    Issuer: $("#Issuer").val(),
+                    IssueDate: $("#IssueDate").val(),
+                    CertificateFile: $("#CertificateFile").val(),
+                },
+                function(data) {
                     alert(data);
                 });
-    }
+        }
 
         function AddLanguageInfo() {
-            $.post("/Resumes/AddLanguageInfo", {
-              ResumeId: "@(Model.Id)", LanguageId: $("#LanguageId").val(), SpeakingLevel: $("#SpeakingLevel").val(), ReadingLevel: $("#ReadingLevel").val(), WritingLevel: $("#WritingLevel").val(),
-            }
-                ,
-                function (data) {
+            $.post("/Resumes/AddLanguageInfo",
+                {
+                    ResumeId: "@(Model.Id)",
+                    LanguageId: $("#LanguageId").val(),
+                    SpeakingLevel: $("#SpeakingLevel").val(),
+                    ReadingLevel: $("#ReadingLevel").val(),
+                    WritingLevel: $("#WritingLevel").val(),
+                },
+                function(data) {
                     alert(data);
 
                 });
-    }
+        }
 
-        var $elm = $('input[name=tags-jquery]')
-            .tagify()
-            .on('add', function (e, tagName) {
-                console.log('added', tagName)
-            });
-
-        $('.tags-jquery--removeAllBtn').on('click', function () {
-            $elm.trigger('tagify.removeAllTags');
-        })
-</script>
-
+       
+     
+    </script>
 }
-
