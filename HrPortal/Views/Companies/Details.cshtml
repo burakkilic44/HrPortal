@@ -10,40 +10,40 @@
             <img class="logo" src="assets/img/logo-google.jpg" alt="">
             <div class="hgroup">
                 <h1>@Model.Name</h1>
-                <h3>Internet and computer software</h3>
+                <h3>@Model.Sector</h3>
             </div>
             <hr>
-            <p class="lead">Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
+            <p class="lead">@Model.About</p>
             
             <ul class="details cols-3">
                 <li>
                     <i class="fa fa-map-marker"></i>
-                    <span>Menlo Park, CA</span>
+                    <span>@Model.Location.Name</span>
                 </li>
 
                 <li>
                     <i class="fa fa-globe"></i>
-                    <a href="#">Google.com</a>
+                    <a href="#">@Model.GooglePlus</a>
                 </li>
 
                 <li>
                     <i class="fa fa-users"></i>
-                    <span>50,000 - 70,000 employer</span>
+                    <span>@Model.EmployeeCount Employer</span>
                 </li>
 
                 <li>
                     <i class="fa fa-birthday-cake"></i>
-                    <span>From 1998</span>
+                    <span>@Model.CreateDate</span>
                 </li>
 
                 <li>
                     <i class="fa fa-phone"></i>
-                    <span>(+1) 123 456 7890</span>
+                    <span>@Model.Phone</span>
                 </li>
 
                 <li>
                     <i class="fa fa-envelope"></i>
-                    <a href="#">info@google.com</a>
+                    <a href="#">@Model.Email</a>
                 </li>
             </ul>
 
@@ -80,8 +80,8 @@
                 <h2>Firma Detayı</h2>
             </header>
 
-            <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University. Together they own about 14 percent of its shares but control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a privately held company on September 4, 1998. An initial public offering followed on August 19, 2004. Its mission statement from the outset was "to organize the world's information and make it universally accessible and useful," and its unofficial slogan was "Don't be evil". In 2004, Google moved to its new headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its interests as a holding company called Alphabet Inc. When this restructuring took place on October 2, 2015, Google became Alphabet's leading subsidiary, as well as the parent for Google's Internet interests.</p>
-            <p>Rapid growth since incorporation has triggered a chain of products, acquisitions and partnerships beyond Google's core search engine (Google Search). It offers online productivity software (Google Docs) including email (Gmail), a cloud storage service (Google Drive) and a social networking service (Google+). Desktop products include applications for web browsing (Google Chrome), organizing and editing photos (Google Photos), and instant messaging (Hangouts). The company leads the development of the Android mobile operating system and the browser-only Chrome OS for a class of netbooks known as Chromebooks. Google has moved increasingly into communications hardware: it partners with major electronics manufacturers in the production of its "high-quality low-cost" Nexus devices. In 2012, a fiber-optic infrastructure was installed in Kansas City to facilitate a Google Fiber broadband service.</p>
+            <p>@Model.About</p>
+            
 
         </div>
     </section>
