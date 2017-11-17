@@ -314,7 +314,7 @@
             $("#Certificate").load("/Resumes/Certificate");
             $("#LanguageInfos").load("/Resumes/LanguageInfos");
             $('.tags').magicSuggest({
-
+                allowFreeEntries: true,
                 data: '/Resumes/TagHelper',
                 placeholder: 'Etiket',
                 valueField: 'id',
