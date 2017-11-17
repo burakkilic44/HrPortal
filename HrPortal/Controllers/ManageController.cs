@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 using HrPortal.Models;
 using HrPortal.Models.ManageViewModels;
 using HrPortal.Services;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HrPortal.Controllers
 {
@@ -26,22 +25,16 @@ namespace HrPortal.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
-        private IRepository<Location> locationRepository;
-        private IRepository<Occupation> occupationRepository;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ManageController(
-            IRepository<Location> locationRepository,
-            IRepository<Occupation> occupationRepository,
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
-            this.locationRepository = locationRepository;
-            this.occupationRepository = occupationRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -64,20 +57,12 @@ namespace HrPortal.Controllers
             var model = new IndexViewModel
             {
                 FirstName = user.FirstName,
-                LastName= user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage,
-                LocationId=user.LocationId,
-                OccupationId=user.OccupationId};
-            {
-                
-                ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
-                ViewBag.Occupations = new SelectList(occupationRepository.GetAll().ToList(), "Id", "Name");
-           
-            }
+                StatusMessage = StatusMessage
+            };
 
             return View(model);
         }
@@ -117,12 +102,6 @@ namespace HrPortal.Controllers
                 }
             }
 
-            // for updating
-            user.LastName = model.LastName;
-            user.LocationId = model.LocationId;
-            user.OccupationId = model.OccupationId;
-            await _userManager.UpdateAsync(user);
-            
             StatusMessage = "Profil güncellendi";
             return RedirectToAction(nameof(Index));
         }
