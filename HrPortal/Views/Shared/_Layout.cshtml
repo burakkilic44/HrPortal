@@ -101,22 +101,27 @@
             @{ if (User.Identity.Name != null)
                 {
                     var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                    if ((user.IsEmployer==true ) || (User.IsInRole("Employer")))
+                    if ((user.IsEmployer==true ) || (User.IsInRole("Employer")|| (User.IsInRole("Admin"))))
                     {
                         <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
                         <a class="btn btn-success btn-xs" asp-controller="Companies" asp-action="Create">Firma Ekle</a>
+                        if ((User.IsInRole("Admin")))
+                        {
+                            <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">CV Oluştur</a>
+
+                        }
 
                     }
-                    else if ((user.IsEmployer == false) || (User.IsInRole("Candidate")))
+                    else if ((user.IsEmployer == false) || (User.IsInRole("Candidate")) || (User.IsInRole("Admin")))
                     {
-                       
-                        <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">Özgeçmiş Oluştur</a>
+
+                        <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">CV Oluştur</a>
                     }
                 }
                 else
                 {
                   
-                    <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">Özgeçmiş Oluştur</a>
+                    <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">CV Oluştur</a>
                 }
 
             }

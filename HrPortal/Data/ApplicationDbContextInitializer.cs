@@ -59,7 +59,7 @@ namespace HrPortal.Data
         {
             if (!context.Settings.Any())
             {
-                var setting = new Setting() { About = "Hakkımızda" };
+                var setting = new Setting() { About = "Hakkımızda"};
                 context.Add(setting);
                 context.SaveChanges();
             }
@@ -68,12 +68,13 @@ namespace HrPortal.Data
         {
             if (!context.Languages.Any())
             {
-                var l1 = new Language() { Name = "Türkçe" };
+                var l1 = new Language() { Name = "Türkçe", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(l1);
 
-                var l2 = new Language() { Name = "İngilizce" };
+                var l2 = new Language() { Name = "İngilizce",CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(l2);
-
+                var l3 = new Language() { Name = "Almanca", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com", };
+                context.Add(l3);
                 context.SaveChanges();
 
             }
@@ -82,12 +83,14 @@ namespace HrPortal.Data
         {
             if (!context.Locations.Any())
             {
-                var M1 = new Location() { Name = "İstanbul" };
+                var M1 = new Location() { Name="İstanbul", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com", };
                 context.Add(M1);
-                 var M2 = new Location() { Name = "Ankara" };
+                 var M2 = new Location() { Name = "Ankara", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(M2);
-                var M3 = new Location() { Name = "İzmir" };
+                var M3 = new Location() { Name = "İzmir", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(M3);
+                
+              
 
                 context.SaveChanges();
 
@@ -99,11 +102,11 @@ namespace HrPortal.Data
         {
             if (!context.Sectors.Any())
             {
-                var S1 = new Sector() { Name = "Bilişim" };
+                var S1 = new Sector() { Name = "Bilişim", CreateDate=DateTime.Now, UpdateDate=DateTime.Now, CreatedBy="bilisimkariyernet@gmail.com", UpdatedBy= "bilisimkariyernet@gmail.com" };
                 context.Add(S1);
-                var S2 = new Sector() { Name = "Yazılım" };
+                var S2 = new Sector() { Name = "Yazılım", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(S2);
-                var S3 = new Sector() { Name = "Otomasyon" };
+                var S3 = new Sector() { Name = "Otomasyon", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com"};
                 context.Add(S3);
 
                 context.SaveChanges();
@@ -115,11 +118,11 @@ namespace HrPortal.Data
         {
             if (!context.Occupations.Any())
             {
-                var O1 = new Occupation() { Name = "***Elektrik Elektronik Mühendisi***" };
+                var O1 = new Occupation() { Name = "***Elektrik Elektronik Mühendisi***", CreateDate=DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdateDate=DateTime.Now, UpdatedBy="bilisimkariyernet@gmail.com"};
                 context.Add(O1);
-                var O2 = new Occupation() { Name = "Bilgisayar Mühendisi (2 Yıllık)" };
+                var O2 = new Occupation() { Name = "Bilgisayar Mühendisi (2 Yıllık)", CreateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdateDate = DateTime.Now, UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(O2);
-                var O3 = new Occupation() { Name = "Bilgisayar Programcısı" };
+                var O3 = new Occupation() { Name = "Bilgisayar Programcısı", CreateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdateDate = DateTime.Now, UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(O3);
 
                 context.SaveChanges();

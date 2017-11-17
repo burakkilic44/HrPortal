@@ -19,74 +19,77 @@
         <div class="col-md-6 col-sm-4 ">
 
             <section>
+               
                 <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                    <h4>Yeni bir hesap oluşturun.</h4>
-
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div style=" border:1px; width :200px; height:200px" class="form-group">
-                        <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
-                        <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
-                        <span asp-validation-for="Photo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FirstName"></label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LastName"></label>
-                        <input asp-for="LastName" class="form-control" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LocationId"></label>
-                        <select asp-for="LocationId" class="form-control" asp-items="@ViewBag.Locations">
-                            <option value="">Seçiniz</option>
-                        </select>
-                        <span asp-validation-for="LocationId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="OccupationId"></label>
-                        <select asp-for="OccupationId" class="form-control" asp-items="@ViewBag.Occupations">
-                            <option value="">Seçiniz</option>
-                        </select>
-                        <span asp-validation-for="OccupationId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="IsEmployer"></label>
-                        <input asp-for="IsEmployer" class="checkbox checkbox-inline" />
-                        <span asp-validation-for="IsEmployer" class="text-danger"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label asp-for="CompanyName"></label>
-                        <input asp-for="CompanyName" class="form-control" />
-                        <span asp-validation-for="CompanyName" class="text-danger"></span>
-                    </div>
+                        <h4>Yeni bir hesap oluşturun.</h4>
+                          
+                      
+                        <div style=" border:1px; width :200px; height:200px" class="form-group">
+                            <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                            <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LocationId"></label>
+                            <select asp-for="LocationId" class="form-control" asp-items="@ViewBag.Locations">
+                                <option value="">Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="LocationId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="OccupationId"></label>
+                            <select asp-for="OccupationId" class="form-control" asp-items="@ViewBag.Occupations">
+                                <option value="">Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="OccupationId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IsEmployer"></label>
+                            <input asp-for="IsEmployer" class="checkbox checkbox-inline" />
+                            <span asp-validation-for="IsEmployer" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfirmPassword"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Kaydol</button>
-                      @*<a asp-action="Confirm" class="btn btn-primary">Kaydol</a>*@
+                        <div class="form-group">
+                            <label asp-for="CompanyName"></label>
+                            <input asp-for="CompanyName" class="form-control" />
+                            <span asp-validation-for="CompanyName" class="text-danger"></span>
+                        </div>
 
-                    </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Kaydol</button>
+                            @*<a asp-action="Confirm" class="btn btn-primary">Kaydol</a>*@
 
-                </form>
-                
+                        </div>
+
+                    </form>
+               
             </section>
         </div>
         <div class="col-md-4 col-md-offset-1">

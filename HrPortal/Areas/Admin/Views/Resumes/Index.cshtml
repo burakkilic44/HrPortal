@@ -4,257 +4,286 @@
     ViewData["Title"] = "Index";
 }
 <head>
-    <script src="~/maruti/js/bootstrap.min.js"></script>
-    <script src="~/maruti/js/jquery.min.js"></script>
+   
     <link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-    <link href="~/maruti/css/Body.css" rel="stylesheet" />
-  
-    <link href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.9/js/dataTables.jqueryui.min.js"></script>
+    <link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />  
     <link href="https://cdn.datatables.net/1.10.9/css/dataTables.jqueryui.min.css" rel="stylesheet" />
-    <link href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-
-
-
+    <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.0/css/dataTables.responsive.css" rel="stylesheet" />
 
 </head>
 
+<style>
+
+    .table {
+        font-size:small
+    }
+
+</style>
 
 
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WebAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ResumeFile)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facebook)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Twitter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GooglePlus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dribbble)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pinterest)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Github)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Instagram)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Youtube)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LinkedIn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MilitaryStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hobbies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SmokingStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrivingLicense)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsTravelDisabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsApproved)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApproveDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsEncouraged)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Language)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Occupation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Photo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WebAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ResumeFile)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Facebook)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Twitter)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GooglePlus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dribbble)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pinterest)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Github)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Instagram)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Youtube)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LinkedIn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MilitaryStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hobbies)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SmokingStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrivingLicense)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsTravelDisabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsApproved)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApproveDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsEncouraged)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Language.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Occupation.Id)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<a class="btn btn-success" asp-area=""  asp-controller="Resumes"  asp-action="Create"  >Özgeçmiş Ekle</a>
+<br />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="overflow-x:auto;">
+
+            <table class="table"  id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Photo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Notes)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WebAddress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BirthDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ResumeFile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Facebook)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Twitter)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GooglePlus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Dribbble)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Pinterest)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Github)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Instagram)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Youtube)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LinkedIn)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MilitaryStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Hobbies)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SmokingStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DrivingLicense)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsTravelDisabled)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsApproved)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ApproveDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsEncouraged)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpdateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpdatedBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Language)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Occupation)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Photo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Notes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.WebAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BirthDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ResumeFile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Facebook)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Twitter)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GooglePlus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Dribbble)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pinterest)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Github)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instagram)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Youtube)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LinkedIn)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MilitaryStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hobbies)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SmokingStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DrivingLicense)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsTravelDisabled)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsApproved)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ApproveDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsEncouraged)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UpdateDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UpdatedBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Language.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Occupation.Id)
+                            </td>
+                            <td>
+
+                                <a class="btn btn-warning"   asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                                
+                                <a  class="btn btn-primary"  asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                                
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/maruti/js/bootstrap.min.js"></script>
+<script src="~/maruti/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.9/js/dataTables.jqueryui.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+
 
     <script type="text/javascript" charset="utf-8">
 
         $(document).ready(function () {
             $('#myTable').DataTable(
                 {
+                    "responsive": true,
                     "bJQueryUI": true,
                     "sPaginationType": "full_numbers",
                     "language": {
