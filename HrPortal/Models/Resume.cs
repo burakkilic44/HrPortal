@@ -12,13 +12,11 @@ namespace HrPortal.Models
         public Resume() : base()
         {
             EducationInfos = new HashSet<EducationInfo>();
-            ResumeTags = new HashSet<ResumeTag>();
             Experiences = new HashSet<Experience>();
             Skills = new HashSet<Skill>();
             Certificates = new HashSet<Certificate>();
             LanguageInfos = new HashSet<LanguageInfo>();
-            
-
+   
         }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
@@ -51,8 +49,9 @@ namespace HrPortal.Models
         [StringLength(200)]
         [Display(Name = "E-posta")]
         public string Email { get; set; }
+        [StringLength(4000)]
         [Display(Name = "Etiketler")]
-        public ICollection<ResumeTag> ResumeTags { get; set; }
+        public string Tags { get; set; }
         [StringLength(200)]
         [Display(Name = "Özgeçmiş Dosyası")]
         public string ResumeFile { get; set; }
