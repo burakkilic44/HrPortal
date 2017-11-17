@@ -12,9 +12,10 @@ using System;
 namespace HrPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171116095531_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -983,8 +984,7 @@ namespace HrPortal.Migrations
                 {
                     b.HasOne("HrPortal.Models.Job", "Job")
                         .WithMany("JobApplications")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("JobId");
 
                     b.HasOne("HrPortal.Models.Resume", "Resume")
                         .WithMany("JobApplications")

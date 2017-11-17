@@ -256,14 +256,14 @@ namespace HrPortal.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //if (user.IsEmployer == true)
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Employer");
-                    //}
-                    //else
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Candidate");
-                    //}
+                    if (user.IsEmployer == true)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Employer");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Candidate");
+                    }
 
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
 

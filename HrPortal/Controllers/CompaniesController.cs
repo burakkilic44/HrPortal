@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Controllers
 {
@@ -13,26 +14,30 @@ namespace HrPortal.Controllers
     {
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
+        private IRepository<Sector> sectorRepository;
 
-        public CompaniesController(IRepository<Company> companyRepository,IRepository<Location> locationRepository)
+        public CompaniesController(IRepository<Company> companyRepository,IRepository<Location> locationRepository, IRepository<Sector> sectorRepository)
         {
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
+            this.sectorRepository = sectorRepository;
         }
 
-        public async Task<IActionResult> Index(int page=1)
+        public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
-            var companys = await companyRepository.GetPaged(c=>true,o=>o.Title,false,10,page,"Jobs","Location");
-            ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
-            return View(companys);
-           
+            cvm.SearchResults = await companyRepository.GetPaged(s => (!String.IsNullOrEmpty(cvm.Keywords) ? s.Title.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
+            ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
+            return View(cvm);
+          
         }
-
+        [Authorize(Roles = "Employer")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location");
             return View(comp);
         }
+        [Authorize(Roles = "Employer")]
         public IActionResult Create()
         {
             var compa = new Company();
@@ -41,6 +46,7 @@ namespace HrPortal.Controllers
             return View(compa);
         }
 
+        [Authorize(Roles = "Employer")]
         [HttpPost]
         public IActionResult Create(Company company)
         {
@@ -53,7 +59,12 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
+        [Authorize(Roles = "Employer")]
         public IActionResult SuccessfullyCreated()
+        {
+            return View();
+        }
+        public IActionResult MyCompanies()
         {
             return View();
         }
