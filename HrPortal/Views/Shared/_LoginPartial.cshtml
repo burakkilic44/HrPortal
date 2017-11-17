@@ -43,11 +43,24 @@
                                         @{ if (User.Identity.Name != null)
                                             {
                                                 var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
-                                                if (user.IsEmployer==true)
+                                                if (User.IsInRole("Admin"))
+                                                {
+
+                                                    <a class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
+                                                    <button class="btn btn-xs btn-success btn-block">İlanlarım</button>
+                                                    <button class="btn btn-xs btn-success btn-block">Başvuranlar</button>
+                                                    <button class="btn btn-xs btn-success btn-block">Başvurularım</button>
+                                                    <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block">Özgeçmişlerim</button>
+
+
+                                                }
+                                               
+                                              else if (user.IsEmployer == true)
                                                 {
                                                     <a  class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies" >Firmalarım</a><br />
                                                     <button  class="btn btn-xs btn-success btn-block" >İlanlarım</button>
                                                     <button  class="btn btn-xs btn-success btn-block">Başvuranlar</button>
+                                                   
 
                                                 }
                                                 else if (user.IsEmployer == false)
