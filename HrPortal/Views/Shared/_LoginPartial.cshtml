@@ -19,17 +19,19 @@
                 <div class="container-fluid well span6">
                     <div class="row">
                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
-                           
-                                <div class="span2" style="text-align:center;">
-                                    <span class="fa fa-user icon-size" style="color:darkorange;"></span>
+                           @{
 
+                               var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+                               ViewBag.FullName = user.FirstName + " " + user.LastName;
+                        }
+                                <div class="span2" style="text-align:center;">
+                                    <img src="@user.Photo" alt="@(user.FirstName + " " + user.LastName)" />
+                                    
                                 </div>
 
                                 <div class="span8" style="text-align:center; padding-top:10px; color:black;">
-                                    @{
-                                        var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                                        ViewBag.FullName = user.FirstName + " " + user.LastName;
-                                    }
+                                   
                                     <p class="text"><strong>@ViewBag.FullName</strong></p>
                                     <p class="text-small">@User.Identity.Name</p>
                                   
