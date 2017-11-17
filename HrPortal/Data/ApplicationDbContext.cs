@@ -27,7 +27,6 @@ namespace HrPortal.Data
         public DbSet<Location> Locations { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Resume> Resumes { get; set; }
-        public DbSet<ResumeTag> ResumeTags { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Tag> Tags { get; set; }
@@ -63,21 +62,6 @@ namespace HrPortal.Data
                 .WithMany(t => t.LanguageInfos)
                 .HasForeignKey(pt => pt.LanguageId).OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<ResumeTag>()
-           .HasKey(t => new { t.ResumeId, t.TagId });
-
-            builder.Entity<ResumeTag>()
-                .HasOne(pt => pt.Resume)
-                .WithMany(p => p.ResumeTags)
-                .HasForeignKey(pt => pt.ResumeId);
-
-            builder.Entity<ResumeTag>()
-                .HasOne(pt => pt.Tag)
-                .WithMany(t => t.ResumeTags)
-                .HasForeignKey(pt => pt.TagId).OnDelete(DeleteBehavior.Restrict);
-
-
-           
 
             builder.Entity<JobApplication>()
                 .HasOne(pt => pt.Job)
