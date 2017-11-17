@@ -147,7 +147,9 @@
                
                     <h6>Etiket Listesi</h6>
                     <div id="form-group">
-                        <input class="tags" name="tags" class="form-control" />
+                        <input class="tags form-control" onblur="$('#tags').val(ms.getValue())" />
+                        <input type="hidden" asp-for="Tags" />
+                        <span asp-validation-for="Tags" class="text-danger"></span>
                     </div>
                     </div>
             </div>
@@ -313,12 +315,26 @@
             $("#Skill").load("/Resumes/Skill");
             $("#Certificate").load("/Resumes/Certificate");
             $("#LanguageInfos").load("/Resumes/LanguageInfos");
-            $('.tags').magicSuggest({
-                
+           var ms = $('.tags').magicSuggest({
+                allowFreeEntries: true,
                 data: '/Resumes/TagHelper',
-                placeholder: 'Etiket'
+                dataUrlParams: {
+                    init: true,
+                    defaultValues: $(".tags").val().split(',')
+                },
+                placeholder: 'Etiket',
+                valueField: 'id',
+                displayField: 'name',
             });
 
+        });
+
+        $(ms).on('load', function () {
+            if (this._dataSet === undefined) {
+                this._dataSet = true;
+                ms.setValue($(".tags").val().split(','));
+                ms.setDataUrlParams({});
+            }
         });
 
 
@@ -401,7 +417,5 @@
                 });
         }
 
-       
-     
     </script>
 }

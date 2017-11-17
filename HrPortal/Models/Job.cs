@@ -35,7 +35,7 @@ namespace HrPortal.Models
         [Display(Name = "İşin Konumu")]
         public ICollection <JobLocation> JobLocations { get; set; }
         [Display(Name = "Çalışma Şekli")]
-        public WorkingStyle WorkingStyle { get; set; }
+        public WorkingStyle? WorkingStyle { get; set; }
 
         [Display(Name ="Çalışma Saati")]
         public int? WorkingHours { get; set; }
@@ -44,10 +44,10 @@ namespace HrPortal.Models
         public int? Experience { get; set; }
 
         [Display(Name = "Askerlik Durumu")]
-        public MilitaryStatus MilitaryStatus { get; set; }
+        public MilitaryStatus? MilitaryStatus { get; set; }
 
         [Display(Name = "Eğitim Seviyesi")]
-        public EducationLevel EducationLevel { get; set; }
+        public EducationLevel? EducationLevel { get; set; }
 
         [Display(Name = "İlan Detayı")]
         [Required(ErrorMessage = "Bu alan gereklidir")]
@@ -55,6 +55,7 @@ namespace HrPortal.Models
 
         [Display(Name = "Aktif Mi?")]
         public bool IsActive { get; set; }
+        [Required(ErrorMessage = "Bu alan gereklidir")]
         [Display(Name = "Yayın Tarihi")]
         public DateTime PublishDate { get; set; }
 

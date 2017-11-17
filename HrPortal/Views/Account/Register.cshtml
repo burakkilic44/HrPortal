@@ -19,11 +19,11 @@
         <div class="col-md-6 col-sm-4 ">
 
             <section>
-                <div asp-validation-summary="All" class="text-danger"></div>
+               
                 <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                    
+                    <div asp-validation-summary="All" class="text-danger"></div>
                         <h4>Yeni bir hesap oluşturun.</h4>
-
+                          
                       
                         <div style=" border:1px; width :200px; height:200px" class="form-group">
                             <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
@@ -70,6 +70,7 @@
                             <label asp-for="Email"></label>
                             <input asp-for="Email" class="form-control" />
                             <span asp-validation-for="Email" class="text-danger"></span>
+                            
                         </div>
                         <div class="form-group">
                             <label asp-for="Password"></label>

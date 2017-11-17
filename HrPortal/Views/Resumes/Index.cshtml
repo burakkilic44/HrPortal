@@ -37,7 +37,7 @@
                     <div class="checkall-group">
                        
                         <div class="radio">
-                            <input type="radio" id="militaryStatus1" name="militaryStatus" checked value="1">
+                            <input type="radio" id="militaryStatus1" name="militaryStatus" value="1">
                             <label for="militaryStatus1">Yapıldı</label>
                         </div>
 
@@ -165,9 +165,9 @@
                     <p>@resumeItem.Notes</p>
 
                     <div class="tag-list">
-                        @foreach (var tag in resumeItem.ResumeTags.Select(t=>t.Tag).ToList()) { 
-                        <span>@tag.Name</span>
-                        }
+                       
+                        <span>@resumeItem.Tags</span>
+                        
                     </div>
                 </div>
 
