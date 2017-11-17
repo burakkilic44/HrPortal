@@ -43,6 +43,7 @@ namespace HrPortal.Controllers
             var compa = new Company();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(compa);
         }
 
@@ -57,6 +58,7 @@ namespace HrPortal.Controllers
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }
         [Authorize(Roles = "Employer , Admin")]
