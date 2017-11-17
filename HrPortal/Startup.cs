@@ -12,6 +12,7 @@ using HrPortal.Data;
 using HrPortal.Models;
 using HrPortal.Services;
 using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Http;
 
 namespace HrPortal
 {
@@ -47,10 +48,11 @@ namespace HrPortal
                     facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
                 });
             }
-            
+
 
 
             // Add application services.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<ApplicationDbContextInitializer>();

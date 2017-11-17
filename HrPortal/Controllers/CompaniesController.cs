@@ -31,13 +31,13 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location");
             return View(comp);
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult Create()
         {
             var compa = new Company();
@@ -46,7 +46,7 @@ namespace HrPortal.Controllers
             return View(compa);
         }
 
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         [HttpPost]
         public IActionResult Create(Company company)
         {
@@ -59,14 +59,19 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
-        }
-        public IActionResult MyCompanies()
+        }   
+      
+        public async Task<IActionResult> MyCompanies(CompanySearchViewModel cvm)
         {
-            return View();
+            cvm.SearchResults = await companyRepository.GetPaged(s => (s.CreatedBy == User.Identity.Name) && (!String.IsNullOrEmpty(cvm.Keywords) ? s.Title.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId : true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
+            ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
+            return View(cvm);
+
         }
 
 

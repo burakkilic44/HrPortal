@@ -57,7 +57,7 @@ namespace HrPortal.Controllers
         }
 
 
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Create()
         {
             var resume = new Resume();
@@ -67,7 +67,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public IActionResult Create(Resume resume)
         {
@@ -81,20 +81,20 @@ namespace HrPortal.Controllers
             ViewBag.IsModelStateValid = ModelState.IsValid;
             return View(resume);
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit()
         {
             return View();
         }
 
 
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfos()
         {
             var EducationInfo = new EducationInfo();
             return View(EducationInfo);
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult AddEducationInfo(EducationInfo educationinfo)
         {
@@ -104,14 +104,14 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Experience()
         {
             
             var Experience = new Experience();
             return View(Experience);
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult AddExperience(Experience experience)
         {
@@ -121,13 +121,13 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Skill()
         {
             var Skill = new Skill();
             return View(Skill);
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult AddSkill(Skill skill)
         {
@@ -137,13 +137,13 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Certificate()
         {
             var Certificate = new Certificate();
             return View(Certificate);
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult AddCertificate(Certificate certificate)
         {
@@ -153,14 +153,14 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult LanguageInfos()
         {
             var LanguageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return View(LanguageInfo);
         }
-        [Authorize(Roles = "Candidate")]
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult AddLanguageInfo(LanguageInfo languageinfo)
         {
@@ -174,6 +174,8 @@ namespace HrPortal.Controllers
 
 
         public IActionResult TagHelper(string term)
+        [Authorize(Roles = "Candidate,Admin")]
+        public ActionResult TagHelper(string term)
         {
           
             var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(s => new {id=s.Id, name=s.Name}).Take(10).ToList();
