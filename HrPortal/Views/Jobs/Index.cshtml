@@ -141,7 +141,7 @@
 
     </div>
 
-
+        
         <!-- END Page header -->
         <!-- Main container -->
         <main>
@@ -150,30 +150,33 @@
                     <div class="row item-blocks-connected">
 
                         <div class="col-xs-12">
-                            <br
-                            <h5>Bulunan <strong>Model.SearchResults.Count</strong> kayıt listelendi...</h5>
+                            <br>
+                            <h5>Yaklaşık <strong>@Model.SearchResults.Count</strong> kayıt bulundu...</h5>
                             <br>
                         </div>
-                        @foreach (var jobItem in Model.SearchResults)
-                        {
+                        
+                            @foreach (var jobItem in Model.SearchResults)
+                            {
                             <!-- Job item -->
-                            <div class="col-xs-12">
-                                <a class="item-block" asp-action="Details" asp-route-id="@jobItem.Id">
-                                    <header>
-                                        <img src="/uploads/jobs/@jobItem.Company.Photo" alt="@jobItem.Company.Name">
-                                        <div class="hgroup">
-                                            <h4>@jobItem.Title</h4>
-                                            <h5>@jobItem.Company.Name</h5>
-                                        </div>
-                                        <div class="header-meta">
-                                            <span class="location">@if (jobItem.JobLocations != null)
-                                            {
-                                                foreach (var location in jobItem.JobLocations.Select(s => s.Location.Name).ToList())
+                                <div class="col-xs-12">
+                                    <a class="item-block" asp-action="Details" asp-route-id="@jobItem.Id">
+                                        <header>
+                                            <img src="/uploads/jobs/@jobItem.Company.Photo" alt="@jobItem.Company.Name">
+                                            <div class="hgroup">
+                                                <h4>@jobItem.Title</h4>
+                                                <h5>@jobItem.Company.Name</h5>
+                                            </div>
+                                            <div class="header-meta">
+                                                <span class="location">
+                                                    @if (jobItem.JobLocations != null)
                                                 {
-                                                @location
-                                                <text> </text>
+                                                    foreach (var location in jobItem.JobLocations.Select(s => s.Location.Name).ToList())
+                                                    {
+                                                        @location
+                                                        <text> </text>
+                                                    }
                                                 }
-                                            }</span>
+                                            </span>
                                             <span class="label label-success">@jobItem.WorkingStyle</span>
                                         </div>
                                     </header>
@@ -181,8 +184,9 @@
                             </div>
                         <!-- END Job item -->
 
-                        }
-                    </div>
+                            }
+                        </div>
+                   
 
 
                     <!-- Page navigation -->
