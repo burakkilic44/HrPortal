@@ -64,7 +64,7 @@ namespace HrPortal.Controllers
             }
 
             var model = new IndexViewModel
-            {
+            {   Photo=user.Photo,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Username = user.UserName,
@@ -120,6 +120,7 @@ namespace HrPortal.Controllers
                 }
             }
             // for updating
+            user.Photo = model.Photo;
             user.LastName = model.LastName;
             user.LocationId = model.LocationId;
             user.OccupationId = model.OccupationId;

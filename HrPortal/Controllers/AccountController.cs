@@ -295,12 +295,18 @@ namespace HrPortal.Controllers
                 }
                 if (result.Errors.Where(e => e.Code == "DuplicateUserName").FirstOrDefault() != null)
                 {
-                    result.Errors.Where(e => e.Code == "DuplicateUserName").FirstOrDefault().Description = "Kullanıcı adı daha önceden alınmış";
+                    result.Errors.Where(e => e.Code == "DuplicateUserName").FirstOrDefault().Description = "";
                 }
-
+                if    (result.Errors.Where(e=>e.Code== "DuplicateEmail").FirstOrDefault() !=null)
+                { 
+                    result.Errors.Where(e => e.Code == "DuplicateEmail").FirstOrDefault().Description = "Mail adresi daha önceden alınmış";
+                }
                 AddErrors(result);
             }
-
+            // if there is any error for registiring,this code provide to choose location and occupation again.
+            ViewData["ReturnUrl"] = returnUrl;
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
+            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().ToList(), "Id", "Name");
             // If we got this far, something failed, redisplay form
             return View(model);
         }
