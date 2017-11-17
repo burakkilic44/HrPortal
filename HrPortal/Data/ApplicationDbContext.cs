@@ -82,7 +82,7 @@ namespace HrPortal.Data
             builder.Entity<JobApplication>()
                 .HasOne(pt => pt.Job)
                 .WithMany(p => p.JobApplications)
-                .HasForeignKey(pt => pt.JobId).OnDelete(DeleteBehavior.Cascade); 
+                .HasForeignKey(pt => pt.JobId);
 
             builder.Entity<JobApplication>()
                 .HasOne(pt => pt.Resume)

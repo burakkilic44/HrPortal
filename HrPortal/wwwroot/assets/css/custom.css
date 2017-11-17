@@ -2,6 +2,7 @@
 .nav-menu2 {
     display: block;
     text-align: center;
+margin-right:22px;
 }
 .nav-menu2 > li {
     position: relative;
