@@ -17,6 +17,7 @@ namespace HrPortal.Models
         public string Keywords { get; set; }
         public string LocationId { get; set; }
         public string SectorId { get; set; }
+        public int SortBy { get; set; }
         public ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Company> SearchResults { get; set; }
     }
 }
