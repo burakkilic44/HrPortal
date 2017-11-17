@@ -1,5 +1,6 @@
 ﻿using HrPortal.Data;
 using HrPortal.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 using System;
@@ -13,12 +14,14 @@ namespace HrPortal.Services
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly ApplicationDbContext context;
+        private readonly string userName;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
 
-        public Repository(ApplicationDbContext context)
+        public Repository(ApplicationDbContext context, IHttpContextAccessor contextAccessor)
         {
             this.context = context;
+            this.userName = contextAccessor.HttpContext.User.Identity.Name;
             entities = context.Set<T>();
         }
         public IEnumerable<T> GetAll(params string[] navigations)
@@ -71,7 +74,9 @@ namespace HrPortal.Services
                 throw new ArgumentNullException("entity");
             }
             entity.CreateDate = DateTime.Now;
+            entity.CreatedBy = userName;
             entity.UpdateDate = DateTime.Now;
+            entity.UpdatedBy = userName;
             entities.Add(entity);
             context.SaveChanges();
         }
@@ -83,6 +88,7 @@ namespace HrPortal.Services
                 throw new ArgumentNullException("entity");
             }
             entity.UpdateDate = DateTime.Now;
+            entity.UpdatedBy = userName;
             context.Update(entity);
             context.SaveChanges();
         }

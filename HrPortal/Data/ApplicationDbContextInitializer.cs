@@ -30,9 +30,9 @@ namespace HrPortal.Data
             CreateDefaultUsers();
             CreateSettings();
             CreateLanguages();
-            CreateLocations();
-            CreateSectors();
-            CreateOccupations();
+            //CreateLocations();
+            //CreateSectors();
+            //CreateOccupations();
         }
         private void CreateRoles()
         {

@@ -983,8 +983,7 @@ namespace HrPortal.Migrations
                 {
                     b.HasOne("HrPortal.Models.Job", "Job")
                         .WithMany("JobApplications")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("JobId");
 
                     b.HasOne("HrPortal.Models.Resume", "Resume")
                         .WithMany("JobApplications")
