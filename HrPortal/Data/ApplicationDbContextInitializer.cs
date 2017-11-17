@@ -68,7 +68,7 @@ namespace HrPortal.Data
         {
             if (!context.Languages.Any())
             {
-                var l1 = new Language() { Name = "Türkçe" };
+                var l1 = new Language() { Name = "Türkçe", };
                 context.Add(l1);
 
                 var l2 = new Language() { Name = "İngilizce" };
@@ -82,12 +82,14 @@ namespace HrPortal.Data
         {
             if (!context.Locations.Any())
             {
-                var M1 = new Location() { Name = "İstanbul" };
+                var M1 = new Location() { Name="İstanbul"};
                 context.Add(M1);
                  var M2 = new Location() { Name = "Ankara" };
                 context.Add(M2);
                 var M3 = new Location() { Name = "İzmir" };
                 context.Add(M3);
+                var M4 = new Location() { Name = "Bursa", CreatedBy = "Admin" } ;
+                context.Add(M4);
 
                 context.SaveChanges();
 
@@ -99,7 +101,7 @@ namespace HrPortal.Data
         {
             if (!context.Sectors.Any())
             {
-                var S1 = new Sector() { Name = "Bilişim" };
+                var S1 = new Sector() { Name = "Bilişim", };
                 context.Add(S1);
                 var S2 = new Sector() { Name = "Yazılım" };
                 context.Add(S2);

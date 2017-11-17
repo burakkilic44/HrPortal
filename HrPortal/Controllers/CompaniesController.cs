@@ -31,13 +31,13 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location");
             return View(comp);
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult Create()
         {
             var compa = new Company();
@@ -46,7 +46,7 @@ namespace HrPortal.Controllers
             return View(compa);
         }
 
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         [HttpPost]
         public IActionResult Create(Company company)
         {
@@ -59,7 +59,7 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
