@@ -314,9 +314,11 @@
             $("#Certificate").load("/Resumes/Certificate");
             $("#LanguageInfos").load("/Resumes/LanguageInfos");
             $('.tags').magicSuggest({
-                
+
                 data: '/Resumes/TagHelper',
-                placeholder: 'Etiket'
+                placeholder: 'Etiket',
+                valueField: 'id',
+                displayField: 'name',
             });
 
         });
@@ -401,7 +403,5 @@
                 });
         }
 
-       
-     
     </script>
 }

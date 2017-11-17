@@ -63,6 +63,7 @@ namespace HrPortal.Controllers
             var resume = new Resume();
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
+            ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             return View(resume);
         }
 
@@ -76,6 +77,7 @@ namespace HrPortal.Controllers
             }
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.IsModelStateValid = ModelState.IsValid;
             return View(resume);
         }
@@ -169,10 +171,12 @@ namespace HrPortal.Controllers
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             return Json("Success");      
         }
-        [Authorize(Roles = "Candidate")]
-        public ActionResult TagHelper(string term)
+
+
+        public IActionResult TagHelper(string term)
         {
-            var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(t => t.Name).Take(10);
+          
+            var data = tagRepository.GetMany(t => t.Name.StartsWith(term)).Select(s => new {id=s.Id, name=s.Name}).Take(10).ToList();
             return Json(data);
         }
 
