@@ -53,7 +53,7 @@
                                                     <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block">Özgeçmişlerim</button>
 
 
-                                                }
+                                                } 
                                                
                                               else if (user.IsEmployer == true)
                                                 {
@@ -64,10 +64,11 @@
 
                                                 }
                                                 else if (user.IsEmployer == false)
-                                                { <div style="text-align:center">
+                                                { 
+                                             <div style="text-align:center">
                                             <button style="margin-bottom:5px;" class="btn btn-sm btn-success ">Başvurularım</button>
-                                            <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-warning">Özgeçmişlerim</button>
-                                        </div>
+                                            <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-success">Özgeçmişlerim</button>
+                                            </div>
                                                 }
                                             }
                                         }
