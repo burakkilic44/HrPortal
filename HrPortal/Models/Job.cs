@@ -33,21 +33,22 @@ namespace HrPortal.Models
         [Display(Name ="Web Adresi")]
         public string WebAddress { get; set; }
         [Display(Name = "İşin Konumu")]
+        [Required(ErrorMessage = "Firma alanı gereklidir")]
         public ICollection <JobLocation> JobLocations { get; set; }
         [Display(Name = "Çalışma Şekli")]
-        public WorkingStyle? WorkingStyle { get; set; }
+        public WorkingStyle WorkingStyle { get; set; }
 
         [Display(Name ="Çalışma Saati")]
-        public int? WorkingHours { get; set; }
+        public int WorkingHours { get; set; }
 
         [Display(Name = "Minimum Deneyim")]
-        public int? Experience { get; set; }
+        public int Experience { get; set; }
 
         [Display(Name = "Askerlik Durumu")]
-        public MilitaryStatus? MilitaryStatus { get; set; }
+        public MilitaryStatus MilitaryStatus { get; set; }
 
         [Display(Name = "Eğitim Seviyesi")]
-        public EducationLevel? EducationLevel { get; set; }
+        public EducationLevel EducationLevel { get; set; }
 
         [Display(Name = "İlan Detayı")]
         [Required(ErrorMessage = "Bu alan gereklidir")]
