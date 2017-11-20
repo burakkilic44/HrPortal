@@ -147,7 +147,7 @@
                
                     <h6>Etiket Listesi</h6>
                     <div id="form-group">
-                        <input class="tags form-control" onblur="$('#tags').val(ms.getValue())" />
+                        <input class="tags form-control"/>
                         <input type="hidden" asp-for="Tags" />
                         <span asp-validation-for="Tags" class="text-danger"></span>
                     </div>
@@ -308,6 +308,8 @@
     <script src="~/js/magicsuggest.js"></script>
 
     <script>
+
+
         $(document).ready(function() {
 
             $("#EducationInfos").load("/Resumes/EducationInfos");
@@ -315,27 +317,43 @@
             $("#Skill").load("/Resumes/Skill");
             $("#Certificate").load("/Resumes/Certificate");
             $("#LanguageInfos").load("/Resumes/LanguageInfos");
-           var ms = $('.tags').magicSuggest({
+            var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
+                toggleOnClick: true,
                 data: '/Resumes/TagHelper',
                 dataUrlParams: {
                     init: true,
                     defaultValues: $(".tags").val().split(',')
                 },
                 placeholder: 'Etiket',
-                valueField: 'id',
-                displayField: 'name',
+           
+
+            });
+
+            $(ms).on('blur', function (c) {
+                
+                $.each(ms.getValue(), function (index, key) {
+                    $("#Tags").val($("#Tags").val() + "," + key);
+                });
+                alert($("#Tags").val());
+
             });
 
         });
 
+
+
         $(ms).on('load', function () {
             if (this._dataSet === undefined) {
                 this._dataSet = true;
+                ms.getValue($(".tags").val().split(','));
                 ms.setValue($(".tags").val().split(','));
                 ms.setDataUrlParams({});
             }
         });
+
+
+
 
 
         function AddEducationInfo() {

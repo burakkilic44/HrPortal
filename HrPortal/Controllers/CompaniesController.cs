@@ -25,7 +25,14 @@ namespace HrPortal.Controllers
 
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
-            cvm.SearchResults = await companyRepository.GetPaged(s => (!String.IsNullOrEmpty(cvm.Keywords) ? s.Name.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
+            //s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName : (vm.SortBy == 3 || vm.SortBy == 4 ? s.Occupation.Name : (vm.SortBy == 5 || vm.SortBy == 6 ? s.Location.Name : s.UpdateDate.ToString()))), (vm.SortBy == 1 || vm.SortBy == 3 || vm.SortBy == 5 ? false : (vm.SortBy == 2 || vm.SortBy == 4 || vm.SortBy == 6)
+            cvm.SearchResults = await companyRepository.GetPaged(s => 
+            (!String.IsNullOrEmpty(cvm.Keywords) ? s.Name.Contains(cvm.Keywords) : true) && 
+            (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && 
+            (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true),
+            s => (cvm.SortBy == 1 || cvm.SortBy == 2 ? s.Name : (cvm.SortBy == 3 || cvm.SortBy == 4 ? s.Sector.Name : (cvm.SortBy == 5 || cvm.SortBy == 6 ? s.Location.Name : s.UpdateDate.ToString()))),
+            (cvm.SortBy == 1 || cvm.SortBy == 3 || cvm.SortBy == 5 ? false : (cvm.SortBy == 2 || cvm.SortBy == 4 || cvm.SortBy == 6)),
+                5, cvm.Page, "Jobs", "Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
             ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
             return View(cvm);
@@ -74,6 +81,26 @@ namespace HrPortal.Controllers
             ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
             return View(cvm);
 
+        }
+        public IActionResult Edit(string id)
+        {
+
+            var company = companyRepository.Get(id);
+           
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
+        }
+        [HttpPost]
+        public IActionResult Edit(Company company)
+        {
+            if (ModelState.IsValid)
+            {
+                companyRepository.Update(company);
+                return RedirectToAction("Index");
+            }
+            
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
         }
 
 
