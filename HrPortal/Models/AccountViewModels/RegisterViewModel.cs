@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HrPortal.Models.AccountViewModels
@@ -55,5 +59,8 @@ namespace HrPortal.Models.AccountViewModels
 
         [Display(Name = "Fotoğraf")]
         public string Photo { get; set; }
+
+       
+        public IFormFile AvatarImage { get; set; }
     }
 }

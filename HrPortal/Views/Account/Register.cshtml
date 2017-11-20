@@ -19,14 +19,15 @@
         <div class="col-md-6 col-sm-4 ">
 
             <section>
+
                
-                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="All" class="text-danger"></div>
                         <h4>Yeni bir hesap oluşturun.</h4>
                           
                       
                         <div style=" border:1px; width :200px; height:200px" class="form-group">
-                            <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                            <input asp-for="Photo" type="file"  name="AvatarImage" class="dropify" data-default-file="assets/img/avatar.jpg">
                             <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
                             <span asp-validation-for="Photo" class="text-danger"></span>
                         </div>
