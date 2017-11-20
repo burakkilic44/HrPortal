@@ -51,7 +51,13 @@ namespace HrPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                job.JobLocations = new HashSet<JobLocation>();
                 jobRepository.Insert(job);
+                foreach (var item in LocationId)
+                {
+                    job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                }
+                jobRepository.Update(job);
                 return RedirectToAction("SuccessfullyCreated");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
