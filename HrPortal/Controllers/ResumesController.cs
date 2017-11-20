@@ -78,12 +78,12 @@ namespace HrPortal.Controllers
             ViewBag.IsModelStateValid = ModelState.IsValid;
             return View(resume);
         }
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit()
         {
             return View();
         }
-
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfos()
@@ -171,9 +171,11 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Candidate,Admin")]
         public ActionResult TagHelper(string term)
         {
+            
             var data = tagRepository.GetAll().Select(s => new {id=s.Id, name=s.Name}).Take(10).ToList();
             return Json(data);
         }
+
         public async Task<IActionResult> MyResumes(ResumeSearchViewModel vm)
         {
             vm.SearchResults = await resumeRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Title, false, 10, vm.Page, "EducationInfos", "Location");
