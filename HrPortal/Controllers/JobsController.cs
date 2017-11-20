@@ -51,7 +51,13 @@ namespace HrPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                job.JobLocations = new HashSet<JobLocation>();
                 jobRepository.Insert(job);
+                foreach (var item in LocationId)
+                {
+                    job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                }
+                jobRepository.Update(job);
                 return RedirectToAction("SuccessfullyCreated");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -138,71 +144,7 @@ namespace HrPortal.Controllers
             return View();
         }
 
-        //static void TarihHesapla(DateTime yayintarihi)
-        //{
-        //  TimeSpan differance =DateTime.Now - yayintarihi;
-
-        //   string  formatedDateString = "";
-        //   day = Math.Floor((differance)/(1000 * 60 * 60 * 24));
-        //    if (day > 0)
-        //    {
-        //        formatedDateString += day.ToString() + " gün ";
-        //    }
-
-
-
-        //    if (formatedDateString == "")
-        //    {
-        //        formatedDateString = "biraz ";
-        //    }
-
-        //    formatedDateString += "önce";
-
-        //    return formatedDateString;
-        //}
-
-
-        ////  static void  DisplayAgoFormat(DateTime inputDate)
-        //  {
-
-        //      var currentDate = DateTime.Now;
-        //      TimeSpan differance = currentDate-inputDate;
-        //      TimeSpan result = AgoFormat(differance);
-
-        //  }
-
-        //  static void AgoFormat(TimeSpan timeSpan)
-        //  {
-        //      var formatedDateString = "";
-        //      var day = (timeSpan / (1000 * 60 * 60 * 24));
-        //      var hour =(timeSpan / (1000 * 60 * 60) % 24);
-        //      var minute=(timeSpan / (1000 * 60) % 60);
-
-
-
-        //      if (day > 0)
-        //      {
-        //          formatedDateString += day.toString() + " gün ";
-        //      }
-        //      if (hour > 0)
-        //      {
-        //          formatedDateString += hour.toString() + " saat ";
-        //      }
-        //      if (minute > 0)
-        //      {
-        //          formatedDateString += minute.toString() + " dakika ";
-        //      }
-
-        //      if (formatedDateString == "")
-        //      {
-        //          formatedDateString = "biraz ";
-        //      }
-
-        //      formatedDateString += "önce";
-
-        //      return formatedDateString;
-        //  }
-
+        
        static string DisplayAgoFormat(DateTime inputDate)
        {
             DateTime date =DateTime.Today;

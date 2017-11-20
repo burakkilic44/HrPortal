@@ -45,23 +45,25 @@
                                                 var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
                                                 if (User.IsInRole("Admin"))
                                                 {
-
-                                                    <a class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
-                                                    <button class="btn btn-xs btn-success btn-block">İlanlarım</button>
-                                                    <button class="btn btn-xs btn-success btn-block">Başvuranlar</button>
-                                                    <button class="btn btn-xs btn-success btn-block">Başvurularım</button>
-                                                    <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block">Özgeçmişlerim</button>
-
+                                                    <div class="form-group" style="text-align:center;margin-bottom:5px;">
+                                                       
+                                                        <button style="margin-bottom:5px;" class="btn btn-sm btn-danger ">Başvuranlar</button>
+                                                        <button style="margin-bottom:5px;" class="btn btn-sm btn-primary ">Başvurularım</button>
+                                                        <button asp-controller="Resumes" asp-action="MyResumes" style="margin-bottom:5px;" class="btn btn-sm btn-warning">Özgeçmişlerim</button>
+                                                        <a style="margin-bottom:5px;" class="btn btn-sm  btn-success" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
+                                                        <button class="btn btn-sm btn-info"  style="margin-bottom:5px;" >İlanlarım</button>
+                                                    </div>
 
                                                 }
-                                               
-                                              else if (user.IsEmployer == true)
+
+                                                else if (user.IsEmployer == true)
                                                 {
-                                                    <a  class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies" >Firmalarım</a><br />
-                                                    <button type="submit" class="btn btn-danger btn-sm">İlanlarım</button>
-                                                    <button  class="btn btn-xs btn-success btn-block">Başvuranlar</button>
+                                                    <div style="text-align:center">
+                                            <a class="btn-success btn btn-sm " asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a>
+                                            <button type="submit" class="btn btn-info btn-sm">İlanlarım</button>
+                                            <button style="margin-top:5px;" class="btn btn-sm btn-warning ">Başvuranlar</button>
 
-
+                                                           </div>
                                                 }
                                                 else if (user.IsEmployer == false)
                                                 { <div style="text-align:center">
