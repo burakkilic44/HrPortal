@@ -52,7 +52,7 @@ namespace HrPortal.Controllers
 
         public IActionResult Details(string id)
         {
-            var resume = resumeRepository.Get(id,"Resume.Tags","EducationInfos","Experiences","Skills","Certificates","LanguageInfos","Language","Location");
+            var resume = resumeRepository.Get(id,"EducationInfos","Experiences","Skills","Certificates","LanguageInfos","Language","Location");
             return View(resume);
         }
         [Authorize(Roles = "Candidate,Admin")]
