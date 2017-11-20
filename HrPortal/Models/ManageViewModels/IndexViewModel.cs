@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace HrPortal.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
-        public object AvatarImage { get; internal set; }
+       
+        public IFormFile AvatarImage { get; set; }
     }
 }
