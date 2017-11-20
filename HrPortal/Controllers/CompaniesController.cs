@@ -25,7 +25,7 @@ namespace HrPortal.Controllers
 
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
-            cvm.SearchResults = await companyRepository.GetPaged(s => (!String.IsNullOrEmpty(cvm.Keywords) ? s.Name.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
+            cvm.SearchResults = await companyRepository.GetPaged(s => (!String.IsNullOrEmpty(cvm.Keywords) ? s.Name.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 5, cvm.Page, "Jobs", "Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
             ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
             return View(cvm);
@@ -74,6 +74,26 @@ namespace HrPortal.Controllers
             ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
             return View(cvm);
 
+        }
+        public IActionResult Edit(string id)
+        {
+
+            var company = companyRepository.Get(id);
+           
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
+        }
+        [HttpPost]
+        public IActionResult Edit(Company company)
+        {
+            if (ModelState.IsValid)
+            {
+                companyRepository.Update(company);
+                return RedirectToAction("Index");
+            }
+            
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
         }
 
 
