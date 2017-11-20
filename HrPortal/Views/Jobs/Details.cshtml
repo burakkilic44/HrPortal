@@ -9,8 +9,8 @@
             <div class="hgroup">
                 <h1>@Model.Title</h1>
                 <h3><a href="#">@Model.Company.Name</a></h3>
-            </div>
-            <time>@ViewBag.PublishAgoFormat</time>
+            </div>           
+            <time class="fa fa-clock-o"> @ViewBag.PublishAgoFormat</time>
             <hr>
             <div class="action-buttons">             
                 
@@ -21,14 +21,14 @@
                         <i class="fa fa-map-marker"></i>
                         <span>
                             @if (Model.JobLocations != null)
-                        {
-                            foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
                             {
-                                @location
-                                <text> </text>
+                                foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
+                                {
+                                    @location
+                                    <text> </text>
+                                }
                             }
-                        }
-                    </span>
+                        </span>
                 </li>
 
                 <li>
