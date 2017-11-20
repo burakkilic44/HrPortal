@@ -32,7 +32,7 @@ namespace HrPortal.Controllers
         public async Task<IActionResult> MyApplications(JobApplicationSearchViewModel jvm)
         {
 
-            jvm.SearchResults = await jobApplicationRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(jvm.Keywords) ? s.Job.Title.Contains(jvm.Keywords) : true), o => o.Job.Title, false, 10, jvm.Page, "Job", "Resume" );
+            jvm.SearchResults = await jobApplicationRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(jvm.Keywords) ? s.Job.Title.Contains(jvm.Keywords) : true), o => o.Job.Title, false, 10, jvm.Page, "Job", "Resume","Job.Company");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", jvm);
             return View(jvm);
 
