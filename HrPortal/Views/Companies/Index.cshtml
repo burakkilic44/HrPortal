@@ -32,35 +32,17 @@
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-3">
-
-
-                    <div class="radio">
-                        <input type="radio" name="sortby" id="sortby1" checked value="1">
-                        <label for="sortby1">Ada göre artan</label>
-                    </div>
-
-                    <div class="radio">
-                        <input type="radio" name="sortby" id="sortby2" value="2">
-                        <label for="sortby2">Ada göre azalan</label>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" name="sortby" id="sortby3" value="3">
-                        <label for="sortby3">Sektöre göre artan</label>
-                    </div>
-
-                    <div class="radio">
-                        <input type="radio" name="sortby" id="sortby4" value="4">
-                        <label for="sortby4">Sektöre göre azalan</label>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" name="sortby" id="sortby5" value="5">
-                        <label for="sortby5">Konuma göre artan</label>
-                    </div>
-
-                    <div class="radio">
-                        <input type="radio" name="sortby" id="sortby6" value="6">
-                        <label for="sortby6">Konuma göre azalan</label>
-                    </div>
+                  
+                        <select class="form-control selectpicker" asp-for="SortBy" asp-items="@ViewBag.SortBy">
+                            <option value="">Sırala</option>
+                            <option value="1">Ada Göre Artan</option>
+                            <option value="2">Ada Göre Azalan</option>
+                            <option value="3">Sektöre Göre Artan</option>
+                            <option value="4">Sektöre Göre Azalan</option>
+                            <option value="5">Konuma Göre Artan</option>
+                            <option value="6">Konuma Göre Azalan</option>
+                        </select>
+                   
                 </div>
 
             </div>
