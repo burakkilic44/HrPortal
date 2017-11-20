@@ -68,6 +68,26 @@ namespace HrPortal.Controllers
         {
             return View();
         }
+        public IActionResult Edit(string id)
+        {
+
+            var company = companyRepository.Get(id);
+           
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
+        }
+        [HttpPost]
+        public IActionResult Edit(Company company)
+        {
+            if (ModelState.IsValid)
+            {
+                companyRepository.Update(company);
+                return RedirectToAction("Index");
+            }
+            
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            return View(company);
+        }
 
 
     }
