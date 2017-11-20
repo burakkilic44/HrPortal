@@ -27,5 +27,7 @@ namespace HrPortal.Areas.Admin.Controllers
             var resumes = resumeRepository.GetAll("EducationInfos", "Location");
             return View(resumes);
         }
+
+
     }
 }
