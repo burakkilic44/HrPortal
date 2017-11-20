@@ -5,12 +5,7 @@
 }
 <head>
    
-    <link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />  
-    <link href="https://cdn.datatables.net/1.10.9/css/dataTables.jqueryui.min.css" rel="stylesheet" />
-    <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/responsive/2.2.0/css/dataTables.responsive.css" rel="stylesheet" />
+    
 
 </head>
 
@@ -20,18 +15,20 @@
         font-size:small
     }
 
+
 </style>
 
+         <center>   <a class="btn btn-success" asp-area="" asp-controller="Resumes" asp-action="Create">Özgeçmiş Oluştur</a></center>
+
+      
 
 
-<a class="btn btn-success" asp-area=""  asp-controller="Resumes"  asp-action="Create"  >Özgeçmiş Ekle</a>
-<br />
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12" style="overflow-x:auto;">
+        <div class="col-md-12">
 
-            <table class="table"  id="myTable">
+            <table class="display responsive nowrap" id="tblRecords">
                 <thead>
                     <tr>
                         <th>
@@ -135,7 +132,7 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Occupation)
-                        </th>
+                        </th>                       
                         <th></th>
                     </tr>
                 </thead>
@@ -249,8 +246,6 @@
 
                                 <a class="btn btn-warning"   asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
                                 
-                                <a  class="btn btn-primary"  asp-action="Details" asp-route-id="@item.Id">Detay</a>
-                                
                                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
 
                             </td>
@@ -267,59 +262,20 @@
 
 
 
-
-<script src="~/maruti/js/bootstrap.min.js"></script>
-<script src="~/maruti/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.9/js/dataTables.jqueryui.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
-
-
-
-    <script type="text/javascript" charset="utf-8">
-
+@section scripts {
+<script>
         $(document).ready(function () {
-            $('#myTable').DataTable(
-                {
-                    "responsive": true,
-                    "bJQueryUI": true,
-                    "sPaginationType": "full_numbers",
-                    "language": {
-                        "decimal": "",
-                        "emptyTable": "Tabloda mevcut kayıt yok",
-                        "info": " _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar",
-                        "infoEmpty": "Kayıt Yok",
-                        "infoFiltered": "( _MAX_ kayıt arasından filtrelendi)",
-                        "infoPostFix": "",
-                        "thousands": ",",
-                        "lengthMenu": "İlk _MENU_ kaydı göster ",
-                        "loadingRecords": "Yükleniyor...",
-                        "processing": "Arama yapılıyor, lütfen bekleyiniz",
-                        "search": "Arama:",
-                        "zeroRecords": "Aradığınız Kayıt Yok",
-                        "paginate":
-                        {
-                            "first": "ilk",
-                            "last": "son",
-                            "next": "sonraki",
-                            "previous": "önceki"
-                        },
-                        "aria": {
-                            "sortAscending": ": activate to sort column ascending",
-                            "sortDescending": ": activate to sort column descending"
-                        }
+            $('#tblRecords').DataTable({
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Turkish.json"
+                }
+            });
+        });
 
-
-                    }
-
-
-                });
-  });
 </script>
 
-
+}
 
 
 
