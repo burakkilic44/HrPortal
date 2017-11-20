@@ -24,7 +24,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Resumes
         public IActionResult Index()
         {
-            var resumes = resumeRepository.GetAll("EducationInfos", "Location", "ResumeTags", "ResumeTags.Tag");
+            var resumes = resumeRepository.GetAll("EducationInfos", "Location");
             return View(resumes);
         }
     }
