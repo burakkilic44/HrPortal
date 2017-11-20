@@ -12,9 +12,10 @@ using System;
 namespace HrPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171116090006_hackxyz")]
+    partial class hackxyz
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,7 +326,7 @@ namespace HrPortal.Migrations
                     b.Property<string>("Details")
                         .IsRequired();
 
-                    b.Property<int?>("EducationLevel");
+                    b.Property<int>("EducationLevel");
 
                     b.Property<DateTime>("EndDate");
 
@@ -333,7 +334,7 @@ namespace HrPortal.Migrations
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<int?>("MilitaryStatus");
+                    b.Property<int>("MilitaryStatus");
 
                     b.Property<string>("OccupationId");
 
@@ -355,7 +356,7 @@ namespace HrPortal.Migrations
 
                     b.Property<int?>("WorkingHours");
 
-                    b.Property<int?>("WorkingStyle");
+                    b.Property<int>("WorkingStyle");
 
                     b.HasKey("Id");
 
@@ -621,9 +622,6 @@ namespace HrPortal.Migrations
 
                     b.Property<int>("SmokingStatus");
 
-                    b.Property<string>("Tags")
-                        .HasMaxLength(4000);
-
                     b.Property<string>("Title")
                         .HasMaxLength(200);
 
@@ -649,6 +647,19 @@ namespace HrPortal.Migrations
                     b.HasIndex("OccupationId");
 
                     b.ToTable("Resumes");
+                });
+
+            modelBuilder.Entity("HrPortal.Models.ResumeTag", b =>
+                {
+                    b.Property<string>("ResumeId");
+
+                    b.Property<string>("TagId");
+
+                    b.HasKey("ResumeId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ResumeTags");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Sector", b =>
@@ -1027,6 +1038,19 @@ namespace HrPortal.Migrations
                     b.HasOne("HrPortal.Models.Occupation", "Occupation")
                         .WithMany("Resumes")
                         .HasForeignKey("OccupationId");
+                });
+
+            modelBuilder.Entity("HrPortal.Models.ResumeTag", b =>
+                {
+                    b.HasOne("HrPortal.Models.Resume", "Resume")
+                        .WithMany("ResumeTags")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HrPortal.Models.Tag", "Tag")
+                        .WithMany("ResumeTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("HrPortal.Models.Skill", b =>

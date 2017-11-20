@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <select asp-for="SectorId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
+                    <select asp-for="LocationId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
                         <option value="">Bölge Seçiniz</option>
                     </select>
                 </div>
@@ -66,22 +66,16 @@
                             <span class="open-position"></span>
 
                         </header>
-                   
+                        
 
                             <div class="item-body">
                                 
-                                    <p>Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
+                                    <p>@CompanyItem.About</p>
                                    
                             </div>
                         </div>
-
-                      
-                    
-                    
-                </div>
-               
-
-                }
+                 </div>
+                 }
                 <!-- Page navigation -->
                 <nav aria-label="Job navigation example">
                     @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })

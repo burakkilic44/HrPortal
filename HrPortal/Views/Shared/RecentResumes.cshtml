@@ -20,7 +20,7 @@
 
             <!-- Job item -->
     <div class="col-xs-12">
-        <a class="item-block"    asp-action="Details"  asp-route-id="@Resumeitem.Id">
+        <a class="item-block" asp-controller="Resumes" asp-action="Details" asp-route-id="@Resumeitem.Id">
             <header>
                 <img src="/uploads/jobs/@Resumeitem.Photo" alt="@Resumeitem.Photo" />
                 <div class="hgroup">

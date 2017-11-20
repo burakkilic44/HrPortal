@@ -25,28 +25,29 @@ namespace HrPortal.Controllers
 
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
-            cvm.SearchResults = await companyRepository.GetPaged(s => (!String.IsNullOrEmpty(cvm.Keywords) ? s.Title.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
+            cvm.SearchResults = await companyRepository.GetPaged(s => (!String.IsNullOrEmpty(cvm.Keywords) ? s.Name.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId: true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 5, cvm.Page, "Jobs", "Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
             ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location");
             return View(comp);
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult Create()
         {
             var compa = new Company();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(compa);
         }
 
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         [HttpPost]
         public IActionResult Create(Company company)
         {
@@ -57,16 +58,22 @@ namespace HrPortal.Controllers
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer , Admin")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
-        }
-        public IActionResult MyCompanies()
+        }   
+      
+        public async Task<IActionResult> MyCompanies(CompanySearchViewModel cvm)
         {
-            return View();
+            cvm.SearchResults = await companyRepository.GetPaged(s => (s.CreatedBy == User.Identity.Name) && (!String.IsNullOrEmpty(cvm.Keywords) ? s.Title.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId : true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
+            ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
+            return View(cvm);
+
         }
         public IActionResult Edit(string id)
         {

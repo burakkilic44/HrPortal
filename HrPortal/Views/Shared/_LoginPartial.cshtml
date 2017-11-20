@@ -19,17 +19,19 @@
                 <div class="container-fluid well span6">
                     <div class="row">
                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
-                           
-                                <div class="span2" style="text-align:center;">
-                                    <span class="fa fa-user icon-size" style="color:darkorange;"></span>
+                           @{
 
+                               var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+                               ViewBag.FullName = user.FirstName + " " + user.LastName;
+                        }
+                                <div class="span2" style="text-align:center;">
+                                    <img src="@user.Photo" alt="@(user.FirstName + " " + user.LastName)" />
+                                    
                                 </div>
 
                                 <div class="span8" style="text-align:center; padding-top:10px; color:black;">
-                                    @{
-                                        var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                                        ViewBag.FullName = user.FirstName + " " + user.LastName;
-                                    }
+                                   
                                     <p class="text"><strong>@ViewBag.FullName</strong></p>
                                     <p class="text-small">@User.Identity.Name</p>
                                   
@@ -41,23 +43,38 @@
                                         @{ if (User.Identity.Name != null)
                                             {
                                                 var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
-                                                if (user.IsEmployer==true)
+                                                if (User.IsInRole("Admin"))
+                                                {
+
+                                                    <a class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
+                                                    <button class="btn btn-xs btn-success btn-block">İlanlarım</button>
+                                                    <button class="btn btn-xs btn-success btn-block">Başvuranlar</button>
+                                                    <button class="btn btn-xs btn-success btn-block">Başvurularım</button>
+                                                    <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block">Özgeçmişlerim</button>
+
+
+                                                }
+                                               
+                                              else if (user.IsEmployer == true)
                                                 {
                                                     <a  class="btn btn-xs btn-success btn-block" asp-controller="Companies" asp-action="MyCompanies" >Firmalarım</a><br />
-                                                    <button  class="btn btn-xs btn-success btn-block" >İlanlarım</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm">İlanlarım</button>
                                                     <button  class="btn btn-xs btn-success btn-block">Başvuranlar</button>
+
 
                                                 }
                                                 else if (user.IsEmployer == false)
-                                                {
-                                                    <button  class="btn btn-xs btn-success btn-block" style="margin:0.5px;height:36px;line-height:36px">Başvurularım</button>
-                                                    <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-xs btn-success btn-block"  style="margin:0.5px;height:36px;line-height:36px">Özgeçmişlerim</button>
+                                                { <div style="text-align:center">
+                                            <button style="margin-bottom:5px;" class="btn btn-sm btn-success ">Başvurularım</button>
+                                            <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-warning">Özgeçmişlerim</button>
+                                        </div>
                                                 }
                                             }
-                                         }
-                                        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-sm " style="margin-top:5px;margin-left:41px;">Profil</a>
-                                        <button type="submit" style="margin-left:5px;margin-top:5px" class="btn btn-danger btn-sm" >Çıkış</button>
-
+                                        }
+                                        <div style="text-align:center; margin-top:5px;" >
+                                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-sm ">Profil</a>
+                                            <button type="submit" class="btn btn-danger btn-sm">Çıkış</button>
+                                        </div>
                                     </div>
                                 </div>
                                 

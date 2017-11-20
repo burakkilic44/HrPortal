@@ -9,13 +9,11 @@
             <div class="hgroup">
                 <h1>@Model.Title</h1>
                 <h3><a href="#">@Model.Company.Name</a></h3>
-
-
             </div>
-            <div class="action-buttons">
+            <time datetime="DisplayAgoFormat()">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
+            <hr>
+            <div class="action-buttons">             
                 
-                <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
-                <hr>
                 <p class="lead">@Model.ShortDescription</p>
 
                 <ul class="details cols-3">
@@ -60,7 +58,7 @@
 
                 <li>
                     <i class="fa fa-check"></i>
-                    <a href="#">Aktif mi? @(Model.IsActive ? "Evet" : "Hayır:")</a>
+                    <a href="#">Aktif mi? @(Model.IsActive ? "Evet" : "Hayır")</a>
                 </li>
                 <li>
                     <i class="fa fa-calendar"></i>
@@ -69,7 +67,7 @@
 
                 <li>
                     <i class="fa fa-calendar"></i>
-                    <a href="#"> Bitiş Tarihi: @Model.EndDate.ToString("yy.MM.yyyy")</a>
+                    <a href="#"> Bitiş Tarihi:@Model.PublishDate.AddDays(60).ToString("yy.MM.yyyy")</a>
                 </li>
             </ul>
 
@@ -106,7 +104,7 @@
         </main>
 <script>
     DisplayAgoFormat();
-    AgoFormat(timeSpan);
+  
 
         function DisplayAgoFormat() {
             var inputDate = new Date(document.getElementById("girilenTarih").value);
