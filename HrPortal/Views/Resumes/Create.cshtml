@@ -147,7 +147,7 @@
                
                     <h6>Etiket Listesi</h6>
                     <div id="form-group">
-                        <input class="tags form-control" onblur="$('#tags').val(ms.getValue())" />
+                        <input class="tags form-control"/>
                         <input type="hidden" asp-for="Tags" />
                         <span asp-validation-for="Tags" class="text-danger"></span>
                     </div>
@@ -308,14 +308,16 @@
     <script src="~/js/magicsuggest.js"></script>
 
     <script>
+        
+        
         $(document).ready(function() {
-
+            
             $("#EducationInfos").load("/Resumes/EducationInfos");
             $("#Experience").load("/Resumes/Experience");
             $("#Skill").load("/Resumes/Skill");
             $("#Certificate").load("/Resumes/Certificate");
             $("#LanguageInfos").load("/Resumes/LanguageInfos");
-           var ms = $('.tags').magicSuggest({
+            var ms= $('.tags').magicSuggest({
                 allowFreeEntries: true,
                 data: '/Resumes/TagHelper',
                 dataUrlParams: {
@@ -324,7 +326,12 @@
                 },
                 placeholder: 'Etiket',
                 valueField: 'id',
-                displayField: 'name',
+                displayField: 'name',  
+                
+            });
+
+            $(ms).on('blur', function (c) {
+                alert(JSON.stringify(ms.getValue()));
             });
 
         });
