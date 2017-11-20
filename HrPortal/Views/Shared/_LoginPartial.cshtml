@@ -21,16 +21,16 @@
                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
                            @{
 
-                               var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                                var user = await UserManager.FindByNameAsync(User.Identity.Name);
 
                                ViewBag.FullName = user.FirstName + " " + user.LastName;
                         }
                                 <div class="span2" style="text-align:center;">
-                                    <img src="@user.Photo" alt="@(user.FirstName + " " + user.LastName)" />
+                                    <img src="/uploads/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
                                     
                                 </div>
 
-                                <div class="span8" style="text-align:center; padding-top:10px; color:black;">
+                                <div class="span8" style="text-align:center; padding-top:10px; color:black; ">
                                    
                                     <p class="text"><strong>@ViewBag.FullName</strong></p>
                                     <p class="text-small">@User.Identity.Name</p>

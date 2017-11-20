@@ -13,6 +13,9 @@ using Microsoft.Extensions.Options;
 using HrPortal.Models;
 using HrPortal.Models.AccountViewModels;
 using HrPortal.Services;
+using System.IO;
+using static HrPortal.Models.AccountViewModels.RegisterViewModel;
+using Microsoft.AspNetCore.Hosting;
 
 namespace HrPortal.Controllers
 {
@@ -26,6 +29,7 @@ namespace HrPortal.Controllers
         private IRepository<Occupation> occupationRepository;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         public AccountController(
             IRepository<Location> locationRepository,
@@ -34,8 +38,9 @@ namespace HrPortal.Controllers
             SignInManager<ApplicationUser> signInManager,
 
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger, IHostingEnvironment environment)
         {
+            hostingEnvironment = environment;
             this.locationRepository = locationRepository;
             this.occupationRepository = occupationRepository;
             _userManager = userManager;
@@ -247,13 +252,22 @@ namespace HrPortal.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model,  string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId, Photo = model.Photo };
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.AvatarImage.CopyToAsync(stream);
+                }
+                var user = new ApplicationUser { Photo=model.AvatarImage.FileName, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId};
                 var result = await _userManager.CreateAsync(user, model.Password);
+
+
                 if (result.Succeeded)
                 {
                     if (user.IsEmployer == true)
@@ -531,4 +545,5 @@ namespace HrPortal.Controllers
 
         #endregion
     }
+
 }
