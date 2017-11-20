@@ -10,7 +10,7 @@
                 <h1>@Model.Title</h1>
                 <h3><a href="#">@Model.Company.Name</a></h3>
             </div>
-            <time datetime="DisplayAgoFormat()">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
+            <time>@ViewBag.PublishAgoFormat</time>
             <hr>
             <div class="action-buttons">             
                 
@@ -101,44 +101,4 @@
                     @Html.Raw(Model.Details)
                 </div>
             </section>
-        </main>
-<script>
-    DisplayAgoFormat();
-  
-
-        function DisplayAgoFormat() {
-            var inputDate = new Date(document.getElementById("girilenTarih").value);
-            var currentDate = new Date();
-            var differance = currentDate.getTime() - inputDate.getTime();
-            var result = AgoFormat(differance);
-            document.getElementById("sonuc").innerHTML = result;
-        }
-
-        function AgoFormat(timeSpan) {
-            var formatedDateString = "";
-            var day = Math.floor(timeSpan / (1000 * 60 * 60 * 24));
-            var hour = Math.floor(timeSpan / (1000 * 60 * 60) % 24);
-            var minute = Math.floor(timeSpan / (1000 * 60) % 60);
-
-
-
-            if (day > 0) {
-                formatedDateString += day.toString() + " gün ";
-            }
-            if (hour > 0) {
-                formatedDateString += hour.toString() + " saat ";
-            }
-            if (minute > 0) {
-                formatedDateString += minute.toString() + " dakika ";
-            }
-
-            if (formatedDateString == "") {
-                formatedDateString = "biraz ";
-            }
-
-            formatedDateString += "önce";
-
-            return formatedDateString;
-        }
-
-</script>
+        </main>    
