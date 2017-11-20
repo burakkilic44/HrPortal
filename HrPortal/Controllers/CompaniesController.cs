@@ -86,7 +86,7 @@ namespace HrPortal.Controllers
         {
 
             var company = companyRepository.Get(id);
-
+            ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
             return View(company);
         }

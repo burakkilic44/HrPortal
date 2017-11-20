@@ -46,6 +46,7 @@
                                 <select class="form-control selectpicker" asp-for="SectorId" asp-items="@ViewBag.Sector">
                                     <option value="">Sektör Seçiniz</option>
                                 </select>
+                                <span asp-validation-for="Sector" class="text-danger"></span>
                             </div>
                         </div>
 
