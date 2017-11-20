@@ -10,7 +10,7 @@
                 <h1>@Model.Title</h1>
                 <h3><a href="#">@Model.Company.Name</a></h3>
             </div>
-            <time datetime="DisplayAgoFormat()">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
+            <time>@ViewBag.PublishAgoFormat</time>
             <hr>
             <div class="action-buttons">             
                 
@@ -140,5 +140,5 @@
 
             return formatedDateString;
         }
-
+ 
 </script>
