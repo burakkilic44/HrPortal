@@ -7,7 +7,7 @@
 <body>
     @model TwoFactorAuthenticationViewModel
     @{
-        ViewData["Title"] = "�ki Fakt�rl� Kimlik Do�rulama";
+        ViewData["Title"] = "iki Faktörlü Kimlik Doğrulama";
         ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
     }
     <div class="container" style="margin-bottom:20px;">
@@ -21,40 +21,40 @@
                 {
                         <div class="alert alert-danger">
                             <strong>Kurtarma Kodunuz Yok.</strong>
-                            <p>You must <a asp-action="GenerateRecoveryCodes">Kurtarma kodu set olu�tur.s</a> Kurtarma modu ile girmeden �nce</p>
+                            <p>You must <a asp-action="GenerateRecoveryCodes">Kurtarma kodu set oluştur.s</a> Kurtarma modu ile girmeden önce</p>
                         </div>
                     }
                     else if (Model.RecoveryCodesLeft == 1)
                     {
                         <div class="alert alert-danger">
-                            <strong> Sadece bir tane kurtarma kodunuz kald�.</strong>
-                            <p> <a asp-action="GenerateRecoveryCodes">Kurtarma kodlar� seti olu�tur.</a>.</p>
+                            <strong> Sadece bir tane kurtarma kodunuz kaldı.</strong>
+                            <p> <a asp-action="GenerateRecoveryCodes">Kurtarma kodları seti oluştur.</a>.</p>
                         </div>
                     }
                     else if (Model.RecoveryCodesLeft <= 3)
                     {
                         <div class="alert alert-warning">
-                            <strong> @Model.RecoveryCodesLeft tane kurtarma konuduz kald�..</strong>
-                            <p> <a asp-action="GenerateRecoveryCodes">Yeni  kurtarma kodlar� seti olu�tur.</a>.</p>
+                            <strong> @Model.RecoveryCodesLeft tane kurtarma konuduz kaldı..</strong>
+                            <p> <a asp-action="GenerateRecoveryCodes">Yeni  kurtarma kodları seti oluştur.</a>.</p>
                         </div>
                     }
 
-                    <a asp-action="Disable2faWarning" class="btn btn-success">Pasifle�tir 2FA</a>
+                    <a asp-action="Disable2faWarning" class="btn btn-success">Pasifleştir 2FA</a>
 
-                    <a asp-action="GenerateRecoveryCodes" class="btn btn-primary">Kurtarma Kodlar�n� S�f�rla</a>
+                    <a asp-action="GenerateRecoveryCodes" class="btn btn-primary">Kurtarma Kodlarını Sıfırla</a>
 
                 }
 
-                <h5>Kimlik Do�rulama Uygulamas�</h5>
+                <h5>Kimlik Doğrulama Uygulaması</h5>
                 @if (!Model.HasAuthenticator)
             {
-                    <a asp-action="EnableAuthenticator" class="btn btn-success">Kimlik Do�rulama Uygulamas� Ekle</a>
+                    <a asp-action="EnableAuthenticator" class="btn btn-success">Kimlik Doğrulama Uygulaması Ekle</a>
                 }
                 else
                 {
-                    <a asp-action="EnableAuthenticator" class="btn btn-primary"> Yap�land�r</a>
+                    <a asp-action="EnableAuthenticator" class="btn btn-primary"> Yapılandır</a>
 
-                    <a asp-action="ResetAuthenticatorWarning" class="btn btn-danger">S�f�rla </a>
+                    <a asp-action="ResetAuthenticatorWarning" class="btn btn-danger">Sıfırla </a>
                 }
             </div>
         </div>
