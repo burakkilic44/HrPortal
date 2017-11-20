@@ -111,9 +111,6 @@
                     else if ((user.IsEmployer == true) || (User.IsInRole("Employer")))
                     {
                         <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
-                        <a class="btn btn-success btn-xs" asp-controller="Companies" asp-action="Create">Firma Ekle</a>
-                        
-
                     }
                     else if ((user.IsEmployer == false) || (User.IsInRole("Candidate")))
                     {
