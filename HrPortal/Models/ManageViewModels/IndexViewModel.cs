@@ -40,6 +40,6 @@ namespace HrPortal.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
-       
+        public object AvatarImage { get; internal set; }
     }
 }

@@ -31,7 +31,7 @@ namespace HrPortal.Controllers
         public async Task<IActionResult> Index(JobSearchViewModel jvm)
         {
             
-            jvm.SearchResults = await jobRepository.GetPaged(s => (!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l=> l.LocationId == jvm.LocationId) : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true)&& (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true), s => (jvm.SortBy == 1 || jvm.SortBy == 2 ? s.Title : (jvm.SortBy == 3 || jvm.SortBy == 4 ? s.Occupation.Name : (jvm.SortBy == 5 || jvm.SortBy == 6 ? s.Company.LocationId: s.UpdateDate.ToString()))), (jvm.SortBy == 1 || jvm.SortBy == 3 || jvm.SortBy == 5 ? false : (jvm.SortBy == 2 || jvm.SortBy == 4 || jvm.SortBy == 6)),10,jvm.Page, "Company", "JobLocations", "JobLocations.Location");
+            jvm.SearchResults = await jobRepository.GetPaged(s => s.PublishDate<=DateTime.Now && DateTime.Now<=s.EndDate&&(!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l=> l.LocationId == jvm.LocationId) : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true)&& (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true), s => (jvm.SortBy == 1 || jvm.SortBy == 2 ? s.Title : (jvm.SortBy == 3 || jvm.SortBy == 4 ? s.Occupation.Name : (jvm.SortBy == 5 || jvm.SortBy == 6 ? s.Company.LocationId: s.UpdateDate.ToString()))), (jvm.SortBy == 1 || jvm.SortBy == 3 || jvm.SortBy == 5 ? false : (jvm.SortBy == 2 || jvm.SortBy == 4 || jvm.SortBy == 6)),10,jvm.Page, "Company", "JobLocations", "JobLocations.Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", jvm.LocationId);
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", jvm.OccupationId);
             return View(jvm);
@@ -51,7 +51,14 @@ namespace HrPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                job.EndDate = job.PublishDate.AddDays(60);
+                job.JobLocations = new HashSet<JobLocation>();
                 jobRepository.Insert(job);
+                foreach (var item in LocationId)
+                {
+                    job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                }
+                jobRepository.Update(job);
                 return RedirectToAction("SuccessfullyCreated");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -138,71 +145,7 @@ namespace HrPortal.Controllers
             return View();
         }
 
-        //static void TarihHesapla(DateTime yayintarihi)
-        //{
-        //  TimeSpan differance =DateTime.Now - yayintarihi;
-
-        //   string  formatedDateString = "";
-        //   day = Math.Floor((differance)/(1000 * 60 * 60 * 24));
-        //    if (day > 0)
-        //    {
-        //        formatedDateString += day.ToString() + " gün ";
-        //    }
-
-
-
-        //    if (formatedDateString == "")
-        //    {
-        //        formatedDateString = "biraz ";
-        //    }
-
-        //    formatedDateString += "önce";
-
-        //    return formatedDateString;
-        //}
-
-
-        ////  static void  DisplayAgoFormat(DateTime inputDate)
-        //  {
-
-        //      var currentDate = DateTime.Now;
-        //      TimeSpan differance = currentDate-inputDate;
-        //      TimeSpan result = AgoFormat(differance);
-
-        //  }
-
-        //  static void AgoFormat(TimeSpan timeSpan)
-        //  {
-        //      var formatedDateString = "";
-        //      var day = (timeSpan / (1000 * 60 * 60 * 24));
-        //      var hour =(timeSpan / (1000 * 60 * 60) % 24);
-        //      var minute=(timeSpan / (1000 * 60) % 60);
-
-
-
-        //      if (day > 0)
-        //      {
-        //          formatedDateString += day.toString() + " gün ";
-        //      }
-        //      if (hour > 0)
-        //      {
-        //          formatedDateString += hour.toString() + " saat ";
-        //      }
-        //      if (minute > 0)
-        //      {
-        //          formatedDateString += minute.toString() + " dakika ";
-        //      }
-
-        //      if (formatedDateString == "")
-        //      {
-        //          formatedDateString = "biraz ";
-        //      }
-
-        //      formatedDateString += "önce";
-
-        //      return formatedDateString;
-        //  }
-
+        
        static string DisplayAgoFormat(DateTime inputDate)
        {
             DateTime date =DateTime.Today;
@@ -220,6 +163,7 @@ namespace HrPortal.Controllers
             
        
        }
+       
 
     }
 }
