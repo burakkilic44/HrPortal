@@ -1,4 +1,6 @@
-﻿@model JobApplication
+﻿@model JobApplicationSearchViewModel
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 @{
     ViewData["Title"] = "MyApplication";
 }
@@ -36,18 +38,19 @@
 
                     <div class="col-xs-12">
                         <br>
-                        <h5>Bulunan <strong>1</strong> kayıt bulundu..</h5>
+                        <h5>@Model.SearchResults.Count<strong></strong> kayıt bulundu..</h5>
                         <br>
                     </div>
                     <!-- Job item -->
+                    @foreach (var item in Model.SearchResults)
+                    {
                     <div class="col-xs-12">
-                       
-                        <a class="item-block" href="/Jobs/Details/4346d1fe-6c91-4104-801a-aca3a8c4a612">
+                        <a class="item-block" href="/Jobs/Details/@item.Id">
                             <header>
                                 <img src="/uploads/jobs/" alt="google">
                                 <div class="hgroup">
-                                    <h4></h4>
-                                    <h5>google</h5>
+                                    <h4>@item.Job.Company</h4>
+                                    <h5>.</h5>
                                 </div>
                                 <div class="header-meta">
                                     <span class="location"></span>
@@ -55,8 +58,8 @@
                                 </div>
                             </header>
                         </a>
-                        }
                     </div>
+                    }
                     <!-- END Job item -->
                 </div>
 
