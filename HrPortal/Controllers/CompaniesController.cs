@@ -102,6 +102,14 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
         }
+        public IActionResult Remove(string id)
+        {
+            var company = companyRepository.Get(id);
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList (locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name"); 
+            companyRepository.Delete(company);
+            return RedirectToAction("Index");
+        }
 
 
     }
