@@ -34,7 +34,7 @@
 
                             </div>
                             <div class="form-group">
-                                <input asp-for="Title" class="form-control input-lg" placeholder="İlan Başlığı">
+                                <input asp-for="Title" class="form-control input-lg" placeholder="Slogan">
                                 <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
 
@@ -49,7 +49,7 @@
                 <div class="col-xs-12">
                     <div class="row">
 
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
                      
                                 <select asp-for="LocationId" class="form-control select2-container-multi">
                                     <option value="">Bölge Seçiniz</option>
@@ -60,7 +60,7 @@
                                 </select>
                   
                         </div>
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
                            
                                 <select asp-for="SectorId" class="form-control select2-container-multi" asp-items="@ViewBag.Sectors">
                                     <option value="">Sektör Seçiniz</option>
@@ -70,7 +70,7 @@
 
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
                                 <select class="form-control selectpicker">
@@ -85,55 +85,55 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                            <div class="input-group input-group-sm">
-                                <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
-                                <span asp-validation-for="WebAddress" class="text-danger"></span>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                            <div class="checkbox">
+                                <input type="checkbox" id="IsActive" name="IsActive">
+                                <label for="IsActive">Aktif</label>
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                            <div class="input-group input-group-sm">
-                                <input asp-for="EstablishYear" class="form-control" placeholder="Kuruluş Yılı">
-                                <span asp-validation-for="EstablishYear" class="text-danger"></span>
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="input-group input-group-sm">
+                                    <input asp-for="EstablishYear" class="form-control" placeholder="Kuruluş Yılı">
+                                    <span asp-validation-for="EstablishYear" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                <span asp-validation-for="Phone" class="text-danger"></span>
-                                <input asp-for="Phone" class="form-control" placeholder="Telefon">
-
-                           
-                               
-                                
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="input-group input-group-sm">
+                                    <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
+                                    <span asp-validation-for="WebAddress" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input asp-for="Email" class="form-control" placeholder="Email">
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                                
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                    <input asp-for="Phone" class="form-control" placeholder="Tel">
+
+
+
+
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <input asp-for="Email" class="form-control" placeholder="Mail">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                        </div>
                 </div>
 
 
             </div>
 
-            <div class="button-group">
-                <div class="action-buttons">
-                    <div class="upload-button">
-                        <button class="btn btn-block btn-primary">Kapak Fotoğrafı seç</button>
-                        <input id="cover_img_file" type="file">
-                    </div>
-                </div>
-            </div>
+
 
         </div>
     </header>
