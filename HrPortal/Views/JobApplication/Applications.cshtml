@@ -1,4 +1,6 @@
-﻿
+﻿@model ApplicationSearchViewModel
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 @{
     ViewData["Title"] = "Applications";
 }
@@ -9,8 +11,8 @@
 
     <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner3.jpg);">
         <div class="container page-name">
-            <h1 class="text-center">Başvurularım</h1>
-            <p class="lead text-center">Aradığınız pozisyon için başvurular aşağıdadır.</p>
+            <h1 class="text-center">Başvurular</h1>
+            <p class="lead text-center">Pozisyonunuz için aradığınız başvurular aşağıdadır.</p>
         </div>
 
         <div class="container">
@@ -38,22 +40,25 @@
 
                     <div class="col-xs-12">
                         <br>
-                        <h5><strong>1</strong> eşleşme bulduk</h5>
+                        <h5>@Model.SearchResults.Count<strong></strong> kayıt bulundu..</h5>
+                        <br>
                     </div>
 
                     <!-- Resume detail -->
+                        @foreach (var item in Model.SearchResults)
+                        {
                     <div class="col-xs-12">
-                        <a class="item-block" href="/Resumes/Details/1541fbbb-ddd3-495e-b460-d783de827a28">
+                        <a class="item-block" href="/Resumes/Details/@item.Id">
                             <header>
                                 <img src="/uploads/resumes/" alt="yeşim kariyer">
                                 <div class="hgroup">
-                                    <h4>yeşim kariyer</h4>
-                                    <h5>yazılım uzmanı</h5>
+                                    <h4>@item.Resume.FullName</h4>
+                                    <h5>@item.Resume.Title</h5>
                                 </div>
                             </header>
 
                             <div class="item-body">
-                                <p>not</p>
+                                <p>@item.Resume.Notes</p>
 
                                 <div class="tag-list">
 
@@ -67,15 +72,11 @@
                                     <ul class="list-inline">
                                         <li>
                                             <span class="location">
-                                                İstanbul
+                                                @item.Resume.Location.Name
                                             </span>
-                                        </li>
+                                        </li>   
                                         <li>
-                                            <span class="label label-success"> </span>
-
-                                        </li>
-                                        <li>
-                                            <span class="label label-success">Yapıldı</span>
+                                            <span class="label label-success">Askerlik Durumu:@item.Resume.MilitaryStatus.GetDisplayName()</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -83,6 +84,7 @@
                             </footer>
                         </a>
                     </div>
+                        }
                     <!-- END Resume detail -->
                 </div>
                 <!-- Page navigation -->
