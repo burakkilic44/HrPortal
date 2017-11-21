@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Job>
-
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -14,7 +12,7 @@
         </header>
 
         <div class="row item-blocks-condensed">
-            @foreach (var Jobitem in ViewBag.jobs)
+            @foreach (var Jobitem in (IEnumerable<Job>)ViewBag.jobs)
             {
                 <div class="col-xs-12">
                     <a class="item-block" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id">
@@ -27,10 +25,10 @@
                             <div class="header-meta">
                                 <span class="location">@if (Jobitem.JobLocations != null)
                                 {
-                                    foreach(var location in Jobitem.JobLocations)
+                                    foreach(var location in Jobitem.JobLocations.Select(i => i.Location.Name).ToList())
                                     {
                                         @location
-                                        <text>, </text>
+                                        <text> </text>
 
                                     }
 
