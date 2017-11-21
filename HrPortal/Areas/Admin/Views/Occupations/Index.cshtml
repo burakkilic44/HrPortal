@@ -27,7 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreateDate)
             </th>
-           
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.UpdateDate)
             </th>
@@ -47,7 +49,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CreateDate)
                 </td>
-             
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdateDate)
                 </td>
