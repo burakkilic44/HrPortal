@@ -48,7 +48,7 @@
                     </div>
 
                         <div class="form-group">
-                            <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                            <textarea asp-for="Notes" class="form-control" value="" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
                             <span asp-validation-for="Notes" class="text-danger"></span>
                         </div>
 
@@ -122,18 +122,16 @@
                             <div class="form-group">
                                 <select asp-for="IsTravelDisabled" class="form-control selectpicker">
                                     <option selected>Seyahat engeliniz var mı?</option>
-                                    <option value ="true">Evet</option>
+                                    <option value="true">Evet</option>
                                     <option value="false">Hayır</option>
                                 </select>
                                 <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <select asp-for="SmokingStatus" class="form-control selectpicker">
-                                   
+                                <select asp-for="SmokingStatus" class="form-control selectpicker">                   
                                     <option selected>Sigara kullanıyor musunuz?</option>
                                     <option value="1">Evet</option>
                                     <option value="0">Hayır</option>
-
                                 </select>
                                 <span asp-validation-for="SmokingStatus" class="text-danger"></span>
                             </div>
@@ -147,7 +145,7 @@
                
                     <h6>Etiket Listesi</h6>
                     <div id="form-group">
-                        <input class="tags form-control" onblur="$('#tags').val(ms.getValue())" />
+                        <input class="tags form-control"/>
                         <input type="hidden" asp-for="Tags" />
                         <span asp-validation-for="Tags" class="text-danger"></span>
                     </div>
@@ -308,6 +306,7 @@
     <script src="~/js/magicsuggest.js"></script>
 
     <script>
+
         $(document).ready(function() {
 
             $("#EducationInfos").load("/Resumes/EducationInfos");
@@ -315,27 +314,36 @@
             $("#Skill").load("/Resumes/Skill");
             $("#Certificate").load("/Resumes/Certificate");
             $("#LanguageInfos").load("/Resumes/LanguageInfos");
-           var ms = $('.tags').magicSuggest({
+            var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
+                toggleOnClick: true,
                 data: '/Resumes/TagHelper',
-                dataUrlParams: {
-                    init: true,
-                    defaultValues: $(".tags").val().split(',')
-                },
                 placeholder: 'Etiket',
-                valueField: 'id',
-                displayField: 'name',
+           
+
+            });
+
+            $(ms).on('blur', function (c) {
+                
+                $.each(ms.getValue(), function (index, key) {
+                    $("#Tags").val($("#Tags").val() + "," + key);
+                });
+                alert($("#Tags").val());
+
             });
 
         });
 
+
         $(ms).on('load', function () {
             if (this._dataSet === undefined) {
                 this._dataSet = true;
-                ms.setValue($(".tags").val().split(','));
                 ms.setDataUrlParams({});
             }
         });
+
+
+
 
 
         function AddEducationInfo() {

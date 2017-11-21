@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "Applications";
+}
+
+
+
+<div>
+
+    <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner3.jpg);">
+        <div class="container page-name">
+            <h1 class="text-center">Başvurularım</h1>
+            <p class="lead text-center">Aradığınız pozisyon için başvurular aşağıdadır.</p>
+        </div>
+
+        <div class="container">
+            <form method="get" action="/Resumes">
+
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-12">
+                        <input type="text" class="form-control" placeholder="Başvuru Ara" id="Keywords" name="Keywords" value="">
+                    </div>
+
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                </div>
+            </form>
+
+        </div>
+
+    </header>
+
+    <main>
+        <section class="no-padding-top bg-alt">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <br>
+                        <h5><strong>1</strong> eşleşme bulduk</h5>
+                    </div>
+
+                    <!-- Resume detail -->
+                    <div class="col-xs-12">
+                        <a class="item-block" href="/Resumes/Details/1541fbbb-ddd3-495e-b460-d783de827a28">
+                            <header>
+                                <img src="/uploads/resumes/" alt="yeşim kariyer">
+                                <div class="hgroup">
+                                    <h4>yeşim kariyer</h4>
+                                    <h5>yazılım uzmanı</h5>
+                                </div>
+                            </header>
+
+                            <div class="item-body">
+                                <p>not</p>
+
+                                <div class="tag-list">
+
+                                    <span></span>
+
+                                </div>
+                            </div>
+
+                            <footer>
+                                <div class="header-meta">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <span class="location">
+                                                İstanbul
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="label label-success"> </span>
+
+                                        </li>
+                                        <li>
+                                            <span class="label label-success">Yapıldı</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </footer>
+                        </a>
+                    </div>
+                    <!-- END Resume detail -->
+                </div>
+                <!-- Page navigation -->
+                <nav aria-label="Resume navigation example">
+
+
+
+
+                </nav>
+                <!-- END Page navigation -->
+
+
+            </div>
+        </section>
+    </main>
+
+</div>

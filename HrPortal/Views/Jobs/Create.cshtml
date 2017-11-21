@@ -44,7 +44,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                        <select class="form-control select2-container-multi">
+                        <select name="LocationId" class="form-control select2-container-multi">
                             <option value="">Seçiniz</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                         {
