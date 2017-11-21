@@ -18,7 +18,7 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<JobApplication> jobApplicationRepository;
         private IRepository<Occupation> occupationRepository;
-        //private object context;
+        private object context;
 
         public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository, IRepository<JobApplication> jobApplicationRepository, IRepository<Occupation> occupationRepository)
         {
@@ -33,13 +33,7 @@ namespace HrPortal.Controllers
         {
             
             jvm.SearchResults = await jobRepository.GetPaged(s => s.PublishDate<=DateTime.Now && DateTime.Now<=s.EndDate&&(!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l=> l.LocationId == jvm.LocationId) : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true)&& (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true), s => (jvm.SortBy == 1 || jvm.SortBy == 2 ? s.Title : (jvm.SortBy == 3 || jvm.SortBy == 4 ? s.Occupation.Name : (jvm.SortBy == 5 || jvm.SortBy == 6 ? s.Company.LocationId: s.UpdateDate.ToString()))), (jvm.SortBy == 1 || jvm.SortBy == 3 || jvm.SortBy == 5 ? false : (jvm.SortBy == 2 || jvm.SortBy == 4 || jvm.SortBy == 6)),10,jvm.Page, "Company", "JobLocations", "JobLocations.Location");
-            jvm.SearchResults.RouteValue = new RouteValueDictionary {
-            { "keywords", jvm.Keywords},
-            { "locationId", jvm.LocationId},
-            { "sortBy", jvm.SortBy},
-            { "militaryStatus", jvm.MilitaryStatus},
-            { "educationLevel", jvm.EducationLevel},
-            { "workingStyle", jvm.WorkingStyle}};
+            jvm.SearchResults.RouteValue = new RouteValueDictionary { { "keywords", jvm.Keywords }, { "locationId", jvm.LocationId }, { "sortBy", jvm.SortBy }, { "militaryStatus", jvm.MilitaryStatus }, { "educationLevel", jvm.EducationLevel }, { "workingStyle", jvm.WorkingStyle } };
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", jvm.LocationId);
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", jvm.OccupationId);
             return View(jvm);
