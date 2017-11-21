@@ -64,7 +64,7 @@ namespace HrPortal.Controllers
                 return RedirectToAction("SuccessfullyCreated");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }
@@ -86,8 +86,8 @@ namespace HrPortal.Controllers
         {
 
             var company = companyRepository.Get(id);
-           
-            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
             return View(company);
         }
         [HttpPost]
@@ -101,6 +101,14 @@ namespace HrPortal.Controllers
             
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
+        }
+        public IActionResult Remove(string id)
+        {
+            var company = companyRepository.Get(id);
+            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList (locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name"); 
+            companyRepository.Delete(company);
+            return RedirectToAction("Index");
         }
 
 

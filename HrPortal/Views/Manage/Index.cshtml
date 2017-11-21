@@ -1,4 +1,7 @@
-﻿@model IndexViewModel
+﻿
+@model IndexViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Profil";
     ViewData.AddActivePage(ManageNavPages.Index);
@@ -10,10 +13,15 @@
     <div class="row">
 
         <div class="col-md-6">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div style=" border:1px; width :200px; height:200px" class="form-group">
-                    <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                    @{
+
+                        var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                        
+                    }
+                    <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/@user.Photo">
                     <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
                     <span asp-validation-for="Photo" class="text-danger"></span>
                 </div>
