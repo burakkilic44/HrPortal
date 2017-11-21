@@ -36,29 +36,35 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-8">
-                    <div class="form-group">
-                        <input asp-for="FullName" type="text" class="form-control input-lg" placeholder="Ad ve Soyad">
-                        <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
+              
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="form-group">
+                            <input asp-for="ResumeName" type="text" class="form-control input-lg" placeholder="CV adı">
+                            <span asp-validation-for="ResumeName" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-group">
-                        <input asp-for="Title" type="text" class="form-control" placeholder="Başlık (Bkz. Yazılım Uzmanı)">
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
+                        <div class="form-group">
+                            <input asp-for="FullName" type="text" class="form-control input-lg" placeholder="Ad ve Soyad">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Title" type="text" class="form-control" placeholder="Başlık (Bkz. Yazılım Uzmanı)">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
 
                         <div class="form-group">
                             <textarea asp-for="Notes" class="form-control" value="" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
                             <span asp-validation-for="Notes" class="text-danger"></span>
                         </div>
 
-                    <div class="form-group">
-                        <select asp-for="LanguageId" class="form-control selectpicker" asp-items="@ViewBag.Languages">
-                        <option value="">Özgeçmiş dili seçiniz</option>
-                        </select>
-                        <span asp-validation-for="Language" class="text-danger"></span>
+                        <div class="form-group">
+                            <select asp-for="LanguageId" class="form-control selectpicker" asp-items="@ViewBag.Languages">
+                                <option value="">Özgeçmiş dili seçiniz</option>
+                            </select>
+                            <span asp-validation-for="Language" class="text-danger"></span>
 
-                    </div>
+                        </div>
 
                         <hr class="hr-lg">
 
@@ -67,10 +73,10 @@
                             <div class="form-group col-xs-12 col-sm-6">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select asp-for="LocationId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
-                                            <option value="">Lokasyon seçiniz</option>
-                                        </select>
-                                        <span asp-validation-for="Location" class="text-danger"></span>
+                                    <select asp-for="LocationId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
+                                        <option value="">Lokasyon seçiniz</option>
+                                    </select>
+                                    <span asp-validation-for="Location" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -112,7 +118,7 @@
                                 <span asp-validation-for="DrivingLicense" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group"> 
+                            <div class="form-group">
                                 <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
                                     <option value="">Askerlik durumunuz nedir?</option>
                                 </select>
@@ -128,7 +134,7 @@
                                 <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <select asp-for="SmokingStatus" class="form-control selectpicker">                   
+                                <select asp-for="SmokingStatus" class="form-control selectpicker">
                                     <option selected>Sigara kullanıyor musunuz?</option>
                                     <option value="1">Evet</option>
                                     <option value="0">Hayır</option>
@@ -142,15 +148,15 @@
                         </div>
 
                         <hr class="hr-lg">
-               
-                    <h6>Etiket Listesi</h6>
-                    <div id="form-group">
-                        <input class="tags form-control"/>
-                        <input type="hidden" asp-for="Tags" />
-                        <span asp-validation-for="Tags" class="text-danger"></span>
+
+                        <h6>Etiket Listesi</h6>
+                        <div id="form-group">
+                            <input class="tags form-control" />
+                            <input type="hidden" asp-for="Tags" />
+                            <span asp-validation-for="Tags" class="text-danger"></span>
+                        </div>
                     </div>
-                    </div>
-            </div>
+                </div>
 
             <div class="button-group">
                 <div class="action-buttons">

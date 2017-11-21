@@ -12,14 +12,15 @@ namespace HrPortal.Models.ManageViewModels
 
     {
         [Display(Name = "Fotoğraf")]
+        [FileExtensions(Extensions = "png,jpg,jpeg,gif")]
         public string Photo { get; set; }
 
 
-        [Display(Name ="Kullanıcı Adı")]
+        [Display(Name = "Kullanıcı Adı")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
-        [Required (ErrorMessage ="Ad alanı gereklidir.")]
+        [Required(ErrorMessage = "Ad alanı gereklidir.")]
         [Display(Name = "Ad")]
         public String FirstName { get; set; }
         [Required(ErrorMessage = "Soyad alanı gereklidir.")]
@@ -41,7 +42,9 @@ namespace HrPortal.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
-       
+
+        [Required(ErrorMessage = "Bu alan zorunludur. Lütfen '.jpg, .png, .gif' formatında yükleme yapınız.")]
+        [DataType(DataType.Upload)]
         public IFormFile AvatarImage { get; set; }
     }
 }
