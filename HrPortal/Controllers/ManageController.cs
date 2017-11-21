@@ -93,6 +93,14 @@ namespace HrPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
+            if (model.AvatarImage != null) { 
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png"};
+                var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage","Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
             if (!ModelState.IsValid)
             {
                
@@ -127,8 +135,9 @@ namespace HrPortal.Controllers
             // for updating
 
             user.Photo = model.Photo;
-            if(model.AvatarImage!= null)
+            if(model.AvatarImage!= null && model.AvatarImage.Length>0)
             {
+                
                 var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
                 var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
 
