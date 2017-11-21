@@ -262,20 +262,25 @@ namespace HrPortal.Controllers
                 {
                     ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
                 }
+
             }
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                if (model.AvatarImage != null && model.AvatarImage.Length > 0)
                 {
-                    await model.AvatarImage.CopyToAsync(stream);
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                    var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
+                
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.AvatarImage.CopyToAsync(stream);
+                    }
+                    model.Photo = model.AvatarImage.FileName;
                 }
-                var user = new ApplicationUser { Photo=model.AvatarImage.FileName, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId};
-                var result = await _userManager.CreateAsync(user, model.Password);
-
+                    var user = new ApplicationUser { Photo = model.Photo, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    
 
                 if (result.Succeeded)
                 {
@@ -298,6 +303,7 @@ namespace HrPortal.Controllers
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
                     return RedirectToLocal(returnUrl);
                 }
+                
                 //for Translatig errors en to tr 
                 if (result.Errors.Where(e => e.Code == "PasswordRequiresNonAlphanumeric").FirstOrDefault() != null)
                 {
@@ -326,6 +332,7 @@ namespace HrPortal.Controllers
                 }
                 AddErrors(result);
             }
+           
             // if there is any error for registiring,this code provide to choose location and occupation again.
             ViewData["ReturnUrl"] = returnUrl;
             ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
