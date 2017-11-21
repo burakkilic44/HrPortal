@@ -11,8 +11,8 @@
     <!-- Page header -->
     <header class="page-header">
         <div class="container page-name">
-            <h1 class="text-center">İş İlanı Ver</h1>
-            <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
+            <h1 class="text-center">İlanı Düzenle</h1>
+            <p class="lead text-center">Aşağıdaki form ile ilanınızı düzenleyebilirsiniz.</p>
         </div>
 
         <div class="container">
@@ -40,7 +40,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                         <select name="LocationId" class="form-control select2-container-multi">
-                            <option value="">Şehir</option>
+                            <option value=""></option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                             {
                                 <option value="@location.Id">@location.Name</option>
@@ -72,7 +72,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input asp-for="WorkingHours" class="form-control" placeholder="Çalışma Saati" value="">
+                        <input asp-for="WorkingHours" class="form-control" placeholder="Çalışma Saati">
                         <span class="input-group-addon">Saat / Hafta</span>
                         <span asp-validation-for="WorkingHours" class="text-danger"></span>
                     </div>
@@ -81,7 +81,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                        <input asp-for="Experience" class="form-control" placeholder="Deneyim" value="">
+                        <input asp-for="Experience" class="form-control" placeholder="Deneyim" >
                         <span class="input-group-addon">Yıl</span>
                         <span asp-validation-for="Experience" class="text-danger"></span>
                     </div>
@@ -99,7 +99,7 @@
                 <div class="form-group col-xs-4 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" value="Date.now();" />
+                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" />
                         <span asp-validation-for="PublishDate" class="text-danger"></span>
                     </div>
                 </div>
