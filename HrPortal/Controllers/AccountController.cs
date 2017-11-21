@@ -254,6 +254,15 @@ namespace HrPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model,  string returnUrl = null)
         {
+            if (model.AvatarImage != null && model.AvatarImage.Length > 0)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
