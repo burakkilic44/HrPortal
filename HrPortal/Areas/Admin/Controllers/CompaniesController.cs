@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HrPortal.Services;
 using HrPortal.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [Authorize(Roles = "Admin")]
     public class CompaniesController : Controller
     {
 

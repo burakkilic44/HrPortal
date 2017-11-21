@@ -17,7 +17,8 @@ namespace HrPortal.Models
         public string Keywords { get; set; }
         public string LocationId { get; set; }
         public int SortBy { get; set; }
-        public string OccupationId { get; set; }
+        public string OccupationId { get; set; } 
         public ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.JobApplication> SearchResults { get; set; }
+        
     }
 }
