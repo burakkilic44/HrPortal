@@ -53,21 +53,21 @@
 
                 <li>
                     <i class="fa fa-certificate"></i>
-                    <a href="#">Eğitim Seviyesi: @Model.EducationLevel.GetDisplayName()</a>
+                    <span>Eğitim Seviyesi: @Model.EducationLevel.GetDisplayName()</span>
                 </li>
 
                 <li>
                     <i class="fa fa-check"></i>
-                    <a href="#">Aktif mi? @ViewBag.IsActiveFormat</a>
+                    <span>Aktif mi? @ViewBag.IsActiveFormat</span>
                 </li>
                 <li>
                     <i class="fa fa-calendar"></i>
-                    <a href="#"> Yayın Tarihi: @Model.PublishDate.ToString("dd.MM.yyyy")</a>
+                    <span> Yayın Tarihi: @Model.PublishDate.ToString("dd.MM.yyyy")</span>
                 </li>
 
                 <li>
                     <i class="fa fa-calendar"></i>
-                    <a href="#"> Bitiş Tarihi:@Model.PublishDate.AddDays(60).ToString("dd.MM.yyyy")</a>
+                    <span> Bitiş Tarihi: @Model.PublishDate.AddDays(60).ToString("dd.MM.yyyy")</span>
                 </li>
             </ul>
 
