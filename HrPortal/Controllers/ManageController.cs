@@ -145,8 +145,9 @@ namespace HrPortal.Controllers
                 {
                     await model.AvatarImage.CopyToAsync(stream);
                 }
+                user.Photo = model.AvatarImage.FileName;
             }
-            user.Photo = model.AvatarImage.FileName;
+           
             user.LastName = model.LastName;
             user.LocationId = model.LocationId;
             user.OccupationId = model.OccupationId;

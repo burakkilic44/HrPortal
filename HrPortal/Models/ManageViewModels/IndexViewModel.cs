@@ -42,8 +42,7 @@ namespace HrPortal.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
-
-        [Required(ErrorMessage = "Bu alan zorunludur. Lütfen '.jpg, .png, .gif' formatında yükleme yapınız.")]
+ 
         [DataType(DataType.Upload)]
         public IFormFile AvatarImage { get; set; }
     }
