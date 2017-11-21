@@ -6,19 +6,6 @@
 }
 
 
-<script src="~/maruti/js/bootstrap.min.js"></script>
-<script src="~/maruti/js/jquery.min.js"></script>
-<link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-<link href="~/maruti/css/Body.css" rel="stylesheet" />
-
-
-
-
-<h2>Create</h2>
-
-<h4>Language</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -35,9 +22,9 @@
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreateBy" class="control-label"></label>
-                <input asp-for="CreateBy" class="form-control" />
-                <span asp-validation-for="CreateBy" class="text-danger"></span>
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UpdateDate" class="control-label"></label>
@@ -50,14 +37,14 @@
                 <span asp-validation-for="UpdatedBy" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Ekle" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">Listeye Geri Dön</a>
 </div>
 
 @section Scripts {

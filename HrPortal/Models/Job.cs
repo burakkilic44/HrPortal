@@ -33,7 +33,6 @@ namespace HrPortal.Models
         [Display(Name ="Web Adresi")]
         public string WebAddress { get; set; }
         [Display(Name = "İşin Konumu")]
-        [Required(ErrorMessage = "Firma alanı gereklidir")]
         public ICollection <JobLocation> JobLocations { get; set; }
         [Display(Name = "Çalışma Şekli")]
         public WorkingStyle WorkingStyle { get; set; }
@@ -56,6 +55,7 @@ namespace HrPortal.Models
 
         [Display(Name = "Aktif Mi?")]
         public bool IsActive { get; set; }
+
         [Required(ErrorMessage = "Bu alan gereklidir")]
         [Display(Name = "Yayın Tarihi")]
         public DateTime PublishDate { get; set; }

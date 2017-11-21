@@ -7,7 +7,7 @@
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
     <div class="container">
         <div class="header-detail">
-            <img class="logo" src="assets/img/logo-google.jpg" alt="">
+            <img class="logo" src="/uploads/@Model.Photo" alt="">
             <div class="hgroup">
                 <h1>@Model.Name</h1>
                 <h3>@Model.Sector</h3>
@@ -58,7 +58,7 @@
 
                 <div class="action-buttons">
                     <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">Düzenle</a>
-                    <a class="btn btn-success" href="#">İletişim</a>
+                    <a class="btn btn-danger" asp-action="Remove" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                 </div>
             </div>
 
