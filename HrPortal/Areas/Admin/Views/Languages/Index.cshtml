@@ -8,20 +8,10 @@
 
 
 
-<script src="~/maruti/js/bootstrap.min.js"></script>
-<script src="~/maruti/js/jquery.min.js"></script>
-<link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
 
-<link href="~/maruti/css/Body.css" rel="stylesheet" />
-
-
-
-
-
-
+<hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <center><a class="btn btn-success" asp-action="Create">Yeni Oluştur</></a></center> 
 </p>
 <table class="display responsive nowrap" id="tblRecords">
     <thead>
@@ -64,9 +54,9 @@
                 @Html.DisplayFor(modelItem => item.UpdatedBy)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
             </td>
         </tr>
 }

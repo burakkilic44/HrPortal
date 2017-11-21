@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HrPortal.Data;
 using HrPortal.Models;
 using HrPortal.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ResumesController : Controller
     {
         private IRepository<Resume> resumeRepository;

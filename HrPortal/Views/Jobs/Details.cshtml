@@ -58,16 +58,16 @@
 
                 <li>
                     <i class="fa fa-check"></i>
-                    <a href="#">Aktif mi? @(Model.IsActive ? "Evet" : "Hayır")</a>
+                    <a href="#">Aktif mi? @ViewBag.IsActiveFormat</a>
                 </li>
                 <li>
                     <i class="fa fa-calendar"></i>
-                    <a href="#"> Yayın Tarihi: @Model.PublishDate.ToString("yy.MM.yyyy")</a>
+                    <a href="#"> Yayın Tarihi: @Model.PublishDate.ToString("dd.MM.yyyy")</a>
                 </li>
 
                 <li>
                     <i class="fa fa-calendar"></i>
-                    <a href="#"> Bitiş Tarihi:@Model.PublishDate.AddDays(60).ToString("yy.MM.yyyy")</a>
+                    <a href="#"> Bitiş Tarihi:@Model.PublishDate.AddDays(60).ToString("dd.MM.yyyy")</a>
                 </li>
             </ul>
 
