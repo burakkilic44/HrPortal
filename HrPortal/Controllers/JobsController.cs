@@ -18,7 +18,7 @@ namespace HrPortal.Controllers
         private IRepository<Resume> resumeRepository;
         private IRepository<JobApplication> jobApplicationRepository;
         private IRepository<Occupation> occupationRepository;
-        //private object context;
+        private object context;
 
         public JobsController (IRepository<Job> jobRepository, IRepository<Company> companyRepository, IRepository<Location> locationRepository ,IRepository<Resume> resumeRepository, IRepository<JobApplication> jobApplicationRepository, IRepository<Occupation> occupationRepository)
         {
