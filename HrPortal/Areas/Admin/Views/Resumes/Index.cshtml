@@ -244,9 +244,9 @@
                             </td>
                             <td>
 
-                                <a class="btn btn-warning"   asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                                <a class="btn btn-warning" asp-area=""  asp-controller="Resumes"  asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
                                 
-                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                                <a class="btn btn-danger" asp-area=""  asp-controller="Resumes" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
 
                             </td>
                         </tr>
@@ -263,7 +263,7 @@
 
 
 @section scripts {
-<script>
+    <script>
         $(document).ready(function () {
             $('#tblRecords').DataTable({
                 "responsive": true,
@@ -273,9 +273,12 @@
             });
         });
 
-</script>
+    </script>
 
 }
+
+
+
 
 
 

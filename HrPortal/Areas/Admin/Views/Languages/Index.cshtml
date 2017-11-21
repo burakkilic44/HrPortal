@@ -23,7 +23,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="display responsive nowrap" id="tblRecords">
     <thead>
         <tr>
                 <th>
@@ -32,9 +32,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CreateDate)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateBy)
-                </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.UpdateDate)
                 </th>
@@ -53,9 +51,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateBy)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.UpdateDate)
             </td>
@@ -71,3 +67,19 @@
 }
     </tbody>
 </table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Turkish.json"
+                }
+            });
+        });
+
+    </script>
+
+}
