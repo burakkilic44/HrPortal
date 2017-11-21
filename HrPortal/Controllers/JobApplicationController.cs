@@ -40,7 +40,7 @@ namespace HrPortal.Controllers
 
 
 
-        public IActionResult Application()
+        public IActionResult Applications()
         {
             return View();
         }
