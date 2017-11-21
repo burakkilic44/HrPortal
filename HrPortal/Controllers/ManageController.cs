@@ -14,6 +14,8 @@ using HrPortal.Models;
 using HrPortal.Models.ManageViewModels;
 using HrPortal.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace HrPortal.Controllers
 {
@@ -28,20 +30,22 @@ namespace HrPortal.Controllers
         private readonly UrlEncoder _urlEncoder;
         private IRepository<Location> locationRepository;
         private IRepository<Occupation> occupationRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ManageController(
+            
             IRepository<Location> locationRepository,
             IRepository<Occupation> occupationRepository,
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
-          ILogger<ManageController> logger,
+          ILogger<ManageController> logger, IHostingEnvironment environment,
           UrlEncoder urlEncoder
              )
         {
-           
+            hostingEnvironment = environment;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -91,6 +95,7 @@ namespace HrPortal.Controllers
         {
             if (!ModelState.IsValid)
             {
+               
                 return View(model);
             }
 
@@ -120,7 +125,19 @@ namespace HrPortal.Controllers
                 }
             }
             // for updating
+
             user.Photo = model.Photo;
+            if(model.AvatarImage!= null)
+            {
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.AvatarImage.CopyToAsync(stream);
+                }
+            }
+            user.Photo = model.AvatarImage.FileName;
             user.LastName = model.LastName;
             user.LocationId = model.LocationId;
             user.OccupationId = model.OccupationId;
