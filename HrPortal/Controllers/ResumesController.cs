@@ -80,10 +80,32 @@ namespace HrPortal.Controllers
         }
 
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult Edit()
+        public IActionResult Edit(string id)
         {
-            return View();
+            var resume = resumeRepository.Get(id);
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            return View(resume);
         }
+
+        [HttpPost]
+        public IActionResult Edit(Resume resume)
+        {
+            {
+                if (ModelState.IsValid)
+                {
+                    resumeRepository.Update(resume);
+                    return RedirectToAction("Index");
+                }
+
+            }
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            return View(resume);
+        }
+        
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfos()
@@ -102,12 +124,22 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult Experience()
-        {
-            
-            var Experience = new Experience();
-            return View(Experience);
+        public IActionResult EditEducationInfos(string id, string ResumeId)
+        {           
+            var educationinfo = educationInfoRepository.GetAll().Where(r => r.Id == ResumeId).FirstOrDefault();
+            return View(educationinfo);
         }
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult EditEducationInfo(EducationInfo educationinfo)
+        {
+            if (ModelState.IsValid)
+            {
+                educationInfoRepository.Update(educationinfo);
+            }
+            return Json("Success");
+        }
+      
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult AddExperience(Experience experience)
@@ -115,6 +147,29 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 experienceRepository.Insert(experience);
+            }
+            return Json("Success");
+        }
+        [Authorize(Roles = "Candidate,Admin")]
+        public IActionResult Experience()
+        {
+
+            var Experience = new Experience();
+            return View(Experience);
+        }
+        [Authorize(Roles = "Cendidate, Admin")]
+        public IActionResult EditExperience(string id)
+        {
+            var experience = experienceRepository.Get(id);
+            return View(experience);
+        }
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult EditExperience(Experience experience)
+        {
+            if (ModelState.IsValid)
+            {
+                experienceRepository.Update(experience);
             }
             return Json("Success");
         }
@@ -134,6 +189,23 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
+        [Authorize(Roles = "Cendidate, Admin")]
+        public IActionResult EditSkill(string id)
+        {
+            var skill = skillRepository.Get(id);
+            return View(skill);
+        }
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult EditSkill(Skill skill)
+        {
+            if (ModelState.IsValid)
+            {
+                skillRepository.Update(skill);
+            }
+            return Json("Success");
+        }
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Certificate()
         {
