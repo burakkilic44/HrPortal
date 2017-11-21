@@ -79,11 +79,13 @@
                 <span>Hakkında</span>
                 <h2>Firma Detayı</h2>
             </header>
+            <div class="item-body">
 
-            <p>@Model.About</p>
-            
+                <p>@Html.Raw(Model.ShortDescription)</p>
+            </div>
 
-        </div>
+            </div>
+
     </section>
     <!-- END Company detail -->
     <!-- Open positions -->
