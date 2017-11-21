@@ -18,6 +18,10 @@ namespace HrPortal.Models
             LanguageInfos = new HashSet<LanguageInfo>();
    
         }
+        [Required(ErrorMessage = "CV adı gereklidir.")]
+        [StringLength(200)]
+        [Display(Name = "CV Adı")]
+        public string ResumeName { get; set; }
         [Required(ErrorMessage = "Ad Soyad alanı gereklidir")]
         [StringLength(200)]
         [Display(Name = "Ad Soyad")]

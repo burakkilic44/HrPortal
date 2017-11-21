@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HrPortal.Data;
 using HrPortal.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SkillsController : Controller
     {
         private readonly ApplicationDbContext _context;

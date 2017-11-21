@@ -7,13 +7,13 @@
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
     <div class="container">
         <div class="header-detail">
-            <img class="logo" src="assets/img/logo-google.jpg" alt="">
+            <img class="logo" src="/uploads/@Model.Photo" alt="">
             <div class="hgroup">
                 <h1>@Model.Name</h1>
                 <h3>@Model.Sector</h3>
             </div>
             <hr>
-            <p class="lead">@Model.About</p>
+            <p class="lead">@Html.Raw(Model.About)</p>
             
             <ul class="details cols-3">
                 <li>
@@ -58,7 +58,7 @@
 
                 <div class="action-buttons">
                     <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">Düzenle</a>
-                    <a class="btn btn-success" href="#">İletişim</a>
+                    <a class="btn btn-danger" asp-action="Remove" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                 </div>
             </div>
 
@@ -80,9 +80,8 @@
                 <h2>Firma Detayı</h2>
             </header>
 
-            <p>@Model.About</p>
-            
-
+            <p class="lead">@Html.Raw(Model.About)</p>
+           
         </div>
     </section>
     <!-- END Company detail -->
@@ -107,14 +106,14 @@
                         <header>
                            
                             <div class="hgroup">
-                                <h4>Senior front-end developer</h4>
-                                <h5>Google <span class="label label-success">Tam Zamanlı</span></h5>
+                                <h4>@job.Title</h4>
+                                <h5>@job.Company.Name <span class="label label-success">@job.WorkingStyle</span></h5>
                             </div>
-                            <time datetime="2016-03-10 20:00">34 Dakika Önce</time>
+                            <time datetime="2016-03-10 20:00">@job.CreateDate</time>
                         </header>
 
                         <div class="item-body">
-                            <p>A rapidly growing, well established marketing firm is looking for an experienced web developer for a full-time position. In this role, you will develop websites, apps, emails and other forms of digital electronic media, all while maintaining brand standards across design projects and other marketing communication materials.</p>
+                            <p>@Html.Raw(job.ShortDescription)</p>
                         </div>
                        
 
@@ -122,17 +121,14 @@
                             <ul class="details cols-3">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    <span>Menlo Park, CA</span>
+                                    <span>@job.JobLocations</span>
                                 </li>
 
-                                <li>
-                                    <i class="fa fa-money"></i>
-                                    <span>$90,000 - $110,000 / year</span>
-                                </li>
+                               
 
                                 <li>
                                     <i class="fa fa-certificate"></i>
-                                    <span>Master or Bachelor</span>
+                                    <span>@job.EducationLevel</span>
                                 </li>
                             </ul>
                         </footer>

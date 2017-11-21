@@ -5,22 +5,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/maruti/js/bootstrap.min.js"></script>
-<script src="~/maruti/js/jquery.min.js"></script>
-<link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-<link href="~/maruti/css/Body.css" rel="stylesheet" />
-
-
-
-
-<h2>Index</h2>
-
+<hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <center>  <a class="btn btn-success" asp-action="Create">Yeni Oluştur</a></center>
 </p>
-<table class="table">
+<table class="display responsive nowrap" id="tblRecords">
     <thead>
         <tr>
                 <th>
@@ -32,9 +21,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CreateDate)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateBy)
-                </th>
+              
                 <th>
                     @Html.DisplayNameFor(model => model.UpdateDate)
                 </th>
@@ -59,9 +46,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateBy)
-            </td>
+          
             <td>
                 @Html.DisplayFor(modelItem => item.UpdateDate)
             </td>
@@ -72,11 +57,25 @@
                 @Html.DisplayFor(modelItem => item.Resume.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Turkish.json"
+                }
+            });
+        });
+
+    </script>
+
+}

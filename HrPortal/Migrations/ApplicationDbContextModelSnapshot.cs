@@ -325,15 +325,15 @@ namespace HrPortal.Migrations
                     b.Property<string>("Details")
                         .IsRequired();
 
-                    b.Property<int?>("EducationLevel");
+                    b.Property<int>("EducationLevel");
 
                     b.Property<DateTime>("EndDate");
 
-                    b.Property<int?>("Experience");
+                    b.Property<int>("Experience");
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<int?>("MilitaryStatus");
+                    b.Property<int>("MilitaryStatus");
 
                     b.Property<string>("OccupationId");
 
@@ -353,9 +353,9 @@ namespace HrPortal.Migrations
                     b.Property<string>("WebAddress")
                         .HasMaxLength(200);
 
-                    b.Property<int?>("WorkingHours");
+                    b.Property<int>("WorkingHours");
 
-                    b.Property<int?>("WorkingStyle");
+                    b.Property<int>("WorkingStyle");
 
                     b.HasKey("Id");
 
@@ -617,6 +617,10 @@ namespace HrPortal.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("ResumeFile")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ResumeName")
+                        .IsRequired()
                         .HasMaxLength(200);
 
                     b.Property<int>("SmokingStatus");
