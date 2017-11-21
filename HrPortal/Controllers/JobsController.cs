@@ -71,6 +71,7 @@ namespace HrPortal.Controllers
         {
             var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
             ViewBag.PublishAgoFormat = DisplayAgoFormat(job.PublishDate);
+            ViewBag.IsActiveFormat = IsActiveFormat(job.PublishDate);
             return View(job);
            
         }
@@ -154,17 +155,35 @@ namespace HrPortal.Controllers
             TimeSpan interval = date - inputDate;
             if (date == inputDate)
             {
-                string sonuc = "Bugün";
-                return sonuc;
+                string result = "Bugün";
+                return result;
             }
             else
             {
-                string sonuc1 = " gün önce";
-                return interval.TotalDays.ToString() + sonuc1;
+                string result1 = " gün önce";
+                return interval.TotalDays.ToString() + result1;
             }
             
        
        }
+        static string IsActiveFormat(DateTime inputDate)
+        {
+            DateTime date = DateTime.Today;
+            TimeSpan interval = date - inputDate;
+            if (interval.TotalDays < 60)
+            {
+                string result = "Evet";
+                return result;
+            }
+            else
+            {
+                string result = "Hayır";
+                return result;
+
+
+            }
+
+        }
        
 
     }
