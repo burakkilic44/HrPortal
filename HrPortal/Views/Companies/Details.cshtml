@@ -18,7 +18,7 @@
             <ul class="details cols-3">
                 <li>
                     <i class="fa fa-map-marker"></i>
-                    <span>@Model.Location.Name</span>
+                    <span>@Model.Location?.Name</span>
                 </li>
 
                 <li>
@@ -28,7 +28,7 @@
 
                 <li>
                     <i class="fa fa-users"></i>
-                    <span>@Model.EmployeeCount Employer</span>
+                    <span>@Model.EmployeeCount Çalışan</span>
                 </li>
 
                 <li>
@@ -58,6 +58,7 @@
 
                 <div class="action-buttons">
                     <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">Düzenle</a>
+                    <a class="btn btn-danger" asp-action="Remove" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                     <a class="btn btn-success" href="#">İletişim</a>
                 </div>
             </div>

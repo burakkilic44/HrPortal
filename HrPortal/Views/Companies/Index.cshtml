@@ -91,9 +91,11 @@
                  </div>
                  }
                 <!-- Page navigation -->
-                <nav aria-label="Job navigation example">
-                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
-                </nav>
+                <div class="col-md-12">
+                    <nav aria-label="Job navigation example">
+                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
+                    </nav>
+                </div>
                 <!-- END Page navigation -->
 
             </div>
