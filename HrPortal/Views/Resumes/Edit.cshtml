@@ -315,11 +315,11 @@
     <script>
 
         $(document).ready(function () {
-            $("#EducationInfoEdit").load("/Resumes/EducationInfoEdit");
-            $("#ExperienceEdit").load("/Resumes/ExperienceEdit");
-            $("#SkillEdit").load("/Resumes/SkillEdit");
-            $("#CertificateEdit").load("/Resumes/CertificateEdit");
-            $("#LanguageInfoEdit").load("/Resumes/LanguageInfoEdit");
+            $("#EducationInfoEdit").load("/Resumes/EducationInfoEdit?resumeId=@Model.Id");
+            $("#ExperienceEdit").load("/Resumes/ExperienceEdit?resumeId=@Model.Id");
+            $("#SkillEdit").load("/Resumes/SkillEdit?resumeId=@Model.Id");
+            $("#CertificateEdit").load("/Resumes/CertificateEdit?resumeId=@Model.Id");
+            $("#LanguageInfoEdit").load("/Resumes/LanguageInfoEdit?resumeId=@Model.Id");
             var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
                 toggleOnClick: true,
