@@ -110,14 +110,14 @@ namespace HrPortal.Controllers
         
 
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EducationInfos()
+        public IActionResult EducationInfos() //Index sayfası
         {
             var EducationInfo = new EducationInfo();
             return View(EducationInfo);
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult AddEducationInfo(EducationInfo educationinfo)
+        public JsonResult AddEducationInfo(EducationInfo educationinfo) //Eğitim bilgisi ekleme
         {
             if (ModelState.IsValid)
             {
@@ -126,14 +126,14 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EditEducationInfos(string id, string ResumeId)
+        public IActionResult EditEducationInfos(string id, string ResumeId) //Eğitim bilgisi düzenleme (getir)
         {           
-            var educationinfo = educationInfoRepository.GetAll().Where(r => r.Id == ResumeId).FirstOrDefault();
+            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == id).FirstOrDefault();
             return View(educationinfo);
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult EditEducationInfo(EducationInfo educationinfo)
+        public JsonResult EditEducationInfo(EducationInfo educationinfo) //Eğitim bilgisi düzenleme
         {
             if (ModelState.IsValid)
             {
@@ -144,7 +144,7 @@ namespace HrPortal.Controllers
       
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult AddExperience(Experience experience)
+        public JsonResult AddExperience(Experience experience) //Deneyim ekleme
         {
             if (ModelState.IsValid)
             {
@@ -153,21 +153,21 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult Experience()
+        public IActionResult Experience() //experience index
         {
 
             var Experience = new Experience();
             return View(Experience);
         }
         [Authorize(Roles = "Cendidate, Admin")]
-        public IActionResult EditExperience(string id)
+        public IActionResult EditExperience(string id) //experience düzeneleme getir
         {
             var experience = experienceRepository.Get(id);
             return View(experience);
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult EditExperience(Experience experience)
+        public JsonResult EditExperience(Experience experience) //experience düzenle
         {
             if (ModelState.IsValid)
             {
@@ -176,14 +176,14 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult Skill()
+        public IActionResult Skill() //Skill görüntüle
         {
             var Skill = new Skill();
             return View(Skill);
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult AddSkill(Skill skill)
+        public JsonResult AddSkill(Skill skill) //Skill ekleme
         {
             if (ModelState.IsValid)
             {
@@ -192,14 +192,14 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Cendidate, Admin")]
-        public IActionResult EditSkill(string id)
+        public IActionResult EditSkill(string id) //Skill düzenleme getir
         {
             var skill = skillRepository.Get(id);
             return View(skill);
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult EditSkill(Skill skill)
+        public JsonResult EditSkill(Skill skill) //Skill düzenleme
         {
             if (ModelState.IsValid)
             {
@@ -209,14 +209,14 @@ namespace HrPortal.Controllers
         }
 
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult Certificate()
+        public IActionResult Certificate()  //Sertifika formu view
         {
             var Certificate = new Certificate();
             return View(Certificate);
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult AddCertificate(Certificate certificate)
+        public JsonResult AddCertificate(Certificate certificate) // Sertifika ekleme
         {
             if (ModelState.IsValid)
             {
@@ -225,7 +225,7 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult LanguageInfos()
+        public IActionResult LanguageInfos() //Dil bilgisi formu view
         {
             var LanguageInfo = new LanguageInfo();
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
@@ -233,7 +233,7 @@ namespace HrPortal.Controllers
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult AddLanguageInfo(LanguageInfo languageinfo)
+        public JsonResult AddLanguageInfo(LanguageInfo languageinfo) //Dil bilgisi ekle
         {
             if (ModelState.IsValid)
             {
@@ -243,7 +243,7 @@ namespace HrPortal.Controllers
             return Json("Success");      
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public ActionResult TagHelper(string term)
+        public ActionResult TagHelper(string term) //Etiket yardımcısı
         {
             
             var data = tagRepository.GetAll().Select(s => new {id=s.Id, name=s.Name}).Take(10).ToList();
