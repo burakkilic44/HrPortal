@@ -35,8 +35,6 @@
                                 }
                             }
                         </span><br />
-
-                        <time datetime="@Model.PublishDate">@Model.PublishDate.ToString("yy.MM.yyyy")</time>
                     </div>
                 </header>
             </a>
@@ -45,7 +43,6 @@
 
             <div class="button-group">
                 <div class="action-buttons">
-                    <a class="btn btn-gray" href="#sec-custom">Özel başvuru</a>
                     <a class="btn btn-primary" href="#sec-resume">Özgeçmiş ile başvurun</a>
                 </div>
             </div>
@@ -65,7 +62,6 @@
                     <span>Özgeçmiş ile başvurun</span>
                     <h2>Özgeçmiş seçin</h2>
                     <p>Bu iş için mevcut çevrimiçi özgeçmişlerinden birisi ile  başvur</p>
-
                 </header>
 
 
@@ -73,56 +69,66 @@
                 @foreach (var resumeItem in ViewBag.Resumes)
                 {
          <!-- Resume item -->
+                    
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                
+                                <div class="item-block col-md-12"><span style="float:left">
+    <input type="radio" asp-for="ResumeId" class="radio">
+</span><label asp-for="ResumeId">
+    <header>
 
-                    <div class="item-block">
-                        <header>
-                            <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar.jpg" alt=""></a>
-                            <div class="hgroup">
-                                <h4><a href="resume-detail.html"></a></h4>
-                                <h4>@resumeItem.FullName</h4>
-                                <h5>@resumeItem.Title</h5>
-                            </div>
-                            <div class="header-meta">
-                                <i class="fa fa-map-marker"></i>
-                                <span>
 
-                                    @if (Model.JobLocations != null)
+        <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
+        <div class="hgroup">
+            <h4><a href="resume-detail.html"></a></h4>
+            <h4>@resumeItem.ResumeName</h4>
+            <h5>@resumeItem.Title</h5>
+        </div>
+        <div class="header-meta">
+            <i class="fa fa-map-marker"></i>
+            <span>
+
+                @if (Model.JobLocations != null)
                 {
                     foreach (var location in Model.JobLocations.Select(s => s.Location.Name).ToList())
                     {
-                                            @location
-                                            <text> </text>
-                                        }
-                                    }
-                                </span>
-                            </div>
-                        </header>
-
-                        <footer>
-                            <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate.ToString("yy.MM.yyyy")</p>
-
-                            <div class="action-btn">
-                                <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
-                                <a class="btn btn-xs btn-success"><input type="radio" name="resumeId" value="@resumeItem.Id" /></a>
-                            </div>
-                        </footer>
-                    </div>
-                <!-- END Resume item -->
+                        @location
+                        <text> </text>
+                    }
                 }
+            </span>
+        </div>
 
+    </header>
 
+    <footer>
+        <p class="status"><strong>Son güncelleme:</strong>@Model.UpdateDate.ToString("dd.MM.yyyy")</p>
 
+        <div class="action-btn">
+            <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
+            @*<a class="btn btn-xs btn-success"><input type="radio" name="resumeId" value="@resumeItem.Id" /></a>*@
+        </div>
+    </footer>
+</label>
 
-                <br>
-
+                                </div>
+                                <!-- END Resume item -->
+                            </div>
+                        </div>
+                    
+                        @*<div>
+                            <div class="col-md-1"><a class="btn btn-block btn-success"><input type="radio" class="radio-inline input-lg" name="resumeId" value="@resumeItem.Id" /></a></div>
+                        </div>*@
+                       
+                }
+                <br />
                 <div class="row">
                     <div class="col-xs-12 col-md-3">
-                        <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
-                    
+                        <a class="btn btn-block btn-primary" style="margin-top:5px; margin-left:15px" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>                    
                     </div>
                     <input type="hidden" name="JobId" value="@Model.Id" />
                 </div>
-
             </div>
         </section>
         <!-- END Apply with resume -->
@@ -130,7 +136,6 @@
         <section id="sec-custom" class="bg-alt">
             <div class="container">
                 <header class="section-header">
-                    <span>Özel Başvuru</span>
                     <h2>Şimdi Uygula</h2>
                     <p>Bu işi özel bir uygulama ile uygulayın.</p>
                 </header>
