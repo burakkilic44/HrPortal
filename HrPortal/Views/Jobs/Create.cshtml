@@ -42,9 +42,17 @@
                         <select name="LocationId" class="form-control select2-container-multi">
                             <option value="">Şehir</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
-                        {
-                                <option value="@location.Id">@location.Name</option>
-                        }
+                            {
+                                @if (Model.LocationId.Contains(location.Id))
+                                {
+                                    <option value="@location.Id" selected="selected">@location.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@location.Id">@location.Name</option>
+
+                                }
+                            }
                         </select>
                     </div>
                 </div>

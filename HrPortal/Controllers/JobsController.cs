@@ -44,21 +44,23 @@ namespace HrPortal.Controllers
             var job = new Job();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+           
             return View(job);
 
 
         }
         [HttpPost]
-        public IActionResult Create(Job job,string[] LocationId)
+        public IActionResult Create(Job job,Job LocationId)
         {
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
                 job.JobLocations = new HashSet<JobLocation>();
                 jobRepository.Insert(job);
-                foreach (var item in LocationId)
+                foreach (var item in job.LocationId)
                 {
                     job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                    
                 }
                 jobRepository.Update(job);
                 return RedirectToAction("SuccessfullyCreated");
