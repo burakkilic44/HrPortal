@@ -25,7 +25,8 @@
                         <input type="text" class="form-control" placeholder="Başvuru Ara" id="Keywords" name="Keywords" value="">
                     </div>
                     <div class="col-xs-3 col-sm-3">
-                          <select class="form-control" asp-for="JobId" asp-items="@ViewBag.Jobs"></select>        
+                          <select class="form-control" asp-for="JobId" asp-items="@ViewBag.Jobs"><option selected>seçiniz</option></select>
+                        
                     </div>
                     
 
@@ -57,7 +58,7 @@
                     <div class="col-xs-12">
                         <a class="item-block" href="/Resumes/Details/@item.Id">
                             <header>
-                                <img src="/uploads/resumes/" alt="yeşim kariyer">
+                                <img src="/uploads/resumes/" alt="photo">
                                 <div class="hgroup">
                                     <h4>@item.Resume.FullName</h4>
                                     <h5>@item.Resume.Title</h5>
