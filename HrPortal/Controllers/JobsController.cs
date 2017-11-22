@@ -112,7 +112,9 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
+
                 jobRepository.Update(job);
+
                 return RedirectToAction("Index");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");

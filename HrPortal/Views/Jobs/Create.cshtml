@@ -40,7 +40,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                         <select name="LocationId" class="form-control select2-container-multi">
-                            <option value="">Şehir</option>
+                            <option value="">Konum</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                             {
                                 @if (Model.LocationId != null && Model.LocationId.Contains(location.Id))
@@ -60,7 +60,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                        <select asp-for="WorkingStyle" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<WorkingStyle>()">
+                        <select asp-for="WorkingStyle" class="form-control selectpicker" required asp-items="@Html.GetEnumSelectList<WorkingStyle>()">
                             <option value="">Çalışma Şekli</option>
                         </select>
                         <span asp-validation-for="WorkingStyle" class="text-danger"></span>
@@ -70,7 +70,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                        <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
+                        <select asp-for="MilitaryStatus" class="form-control selectpicker" required asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
                             <option value="">Askerlik Durumu</option>
                         </select>
                         <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
@@ -79,7 +79,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input asp-for="WorkingHours" class="form-control" placeholder="Deneyim">
+                        <input asp-for="WorkingHours" required class="form-control" placeholder="Deneyim">
                         <span class="input-group-addon">Çalışma Saati (Saat/Hafta)</span>
                         <span asp-validation-for="WorkingHours" class="text-danger"></span>
                     </div>
@@ -158,9 +158,9 @@
         <section class="bg-alt">
             <div class="container">
                 <header class="section-header">
-                    <span>Tamam mısın?</span>
-                    <h2>İLANI YAYINLA</h2>
-                    <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
+                    <span>Tamamladınız mı?</span>
+                    <h2>İLANIZI YAYINLAYIN</h2>
+                    <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmeye basın.</p>
                 </header>
 
                 <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">İLANI YAYINLA</button></p>
@@ -175,5 +175,9 @@
 
 
 </form>
+
+
 @section scripts{
 <script src="/assets/vendors/summernote/summernote.min.js"></script>}
+
+
