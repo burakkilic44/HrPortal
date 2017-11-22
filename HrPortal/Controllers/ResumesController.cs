@@ -128,7 +128,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EditEducationInfos(string id, string ResumeId) //Eğitim bilgisi düzenleme (getir)
         {           
-            var educationinfo = educationInfoRepository.GetAll().Where(r => r.Id == ResumeId).FirstOrDefault();
+            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == id).FirstOrDefault();
             return View(educationinfo);
         }
         [Authorize(Roles = "Candidate,Admin")]
