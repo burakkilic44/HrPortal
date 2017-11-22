@@ -43,7 +43,7 @@
                             <option value="">Şehir</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                             {
-                                @if (Model.LocationId.Contains(location.Id))
+                                @if (Model.LocationId != null && Model.LocationId.Contains(location.Id))
                                 {
                                     <option value="@location.Id" selected="selected">@location.Name</option>
                                 }

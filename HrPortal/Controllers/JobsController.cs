@@ -50,7 +50,7 @@ namespace HrPortal.Controllers
 
         }
         [HttpPost]
-        public IActionResult Create(Job job,Job LocationId)
+        public IActionResult Create(Job job)
         {
             if (ModelState.IsValid)
             {
