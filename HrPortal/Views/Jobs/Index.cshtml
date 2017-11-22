@@ -76,7 +76,7 @@
 
                     <div class="radio">
                         <input type="radio" id="militarystatus1" name="militarystatus" value="1">
-                        <label for="rate2">Yapıldı</label>
+                        <label for="militarystatus1">Yapıldı</label>
                     </div>
 
                     <div class="radio">
@@ -163,64 +163,63 @@
 
     </div>
 
-        </header>>
+        </header>
         <!-- END Page header -->
         <!-- Main container -->
-        <main>
-            <section class="no-padding-top bg-alt">
-                <div class="container">
-                    <div class="row item-blocks-connected">
 
-                        <div class="col-xs-12">
-                            <br>
-                            <h5>Toplam <strong>@(Model.SearchResults.TotalRecordCount)</strong> kayıt bulundu...</h5>
-                            <br>
-                        </div>
-                        
-                            @foreach (var jobItem in Model.SearchResults)
-                            {
+    <main class="container">
+        <section class="no-padding-top bg-alt">
+          
+                <div class="row item-blocks-connected">
+
+                    <div class="col-xs-12">
+                        <br>
+                        <h5>Toplam <strong>@(Model.SearchResults.TotalRecordCount)</strong> kayıt bulundu...</h5>
+                        <br>
+                    </div>
+
+                    @foreach (var jobItem in Model.SearchResults)
+                    {
                             <!-- Job item -->
-                                <div class="col-xs-12">
-                                    <a class="item-block" asp-action="Details" asp-route-id="@jobItem.Id">
-                                        <header>
-                                            <img src="/uploads/jobs/@jobItem.Company.Photo" alt="@jobItem.Company.Name">
-                                            <div class="hgroup">
-                                                <h4>@jobItem.Title</h4>
-                                                <h5>@jobItem.Company.Name</h5>
-                                            </div>
+                        <div class="col-xs-12">
+                            <a class="item-block" asp-action="Details" asp-route-id="@jobItem.Id">
+                                <header>
+                                    <img src="/uploads/jobs/@jobItem.Company.Photo" alt="@jobItem.Company.Name">
+                                    <div class="hgroup">
+                                        <h4>@jobItem.Title</h4>
+                                        <h5>@jobItem.Company.Name</h5>
+                                    </div>
 
-                                            <div class="header-meta">
-                                                <span class="location">
-                                                    @if (jobItem.JobLocations != null)
+                                    <div class="header-meta">
+                                        <span class="location">
+                                            @if (jobItem.JobLocations != null)
+                                            {
+                                                foreach (var location in jobItem.JobLocations.Select(s => s.Location.Name).ToList())
                                                 {
-                                                    foreach (var location in jobItem.JobLocations.Select(s => s.Location.Name).ToList())
-                                                    {
-                                                        @location
-                                                        <text> </text>
-                                                    }
+                                                    @location
+                                                    <text> </text>
                                                 }
-                                            </span>
-                                            <span class="label label-success">@jobItem.WorkingStyle.GetDisplayName()</span>
-                                        </div>
-                                    </header>
-                                </a>
-                            </div>
+                                            }
+                                        </span>
+                                        <span class="label label-success">@jobItem.WorkingStyle.GetDisplayName()</span>
+                                    </div>
+                                </header>
+                            </a>
+                        </div>
                         <!-- END Job item -->
 
-                            }
-                        </div>
-                   
-
-
-                    <!-- Page navigation -->
-                    <nav aria-label="Job navigation example">
-                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
-                    </nav>
-                    <!-- END Page navigation -->
-
-
+                    }
                 </div>
-            </section>
-        </main>
 
 
+
+                <!-- Page navigation -->
+                <nav aria-label="Job navigation example">
+                    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.SearchResults })
+                </nav>
+                <!-- END Page navigation -->
+
+
+           
+        </section>
+    </main>
