@@ -1,0 +1,74 @@
+﻿@model IEnumerable<EducationInfo>
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <header class="section-header">
+        <span>Eğitim Durumu</span>
+        <h2>Eğitim Bilgileri</h2>
+    </header>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-12">
+                <div class="item-block">
+                    <div class="item-form">
+
+                        <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="form-group">
+                                  @item.Photo
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="form-group">
+                                   @item.EducationLevel.GetDisplayName()
+                                </div>
+
+                                <div class="form-group">
+                                    @item.Department
+                                </div>
+                                <div class="form-group">
+                                    @item.SchoolName
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Başlangıç tarihi</span>
+                                        @item.StartDate
+                                        <span class="input-group-addon">Biriş tarihi</span>
+                                        @item.EndDate
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @item.Notes
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+        
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <br>
+            <button id="btnAdd" type="button" onclick="AddEducationInfo()" class="btn btn-primary btn-duplicator">Eğitim Bilgisi Ekle</button>
+        </div>
+
+
+    </div>
+</div>
+
