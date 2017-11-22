@@ -41,7 +41,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Employer , Admin")]
         public IActionResult Details(string id)
         {
-            var comp = companyRepository.Get(id, "Jobs", "Location");
+            var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
             return View(comp);
         }
         [Authorize(Roles = "Employer , Admin")]
@@ -49,12 +49,12 @@ namespace HrPortal.Controllers
         {
             var compa = new Company();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(compa);
         }
 
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public IActionResult Create(Company company)
         {
@@ -64,7 +64,7 @@ namespace HrPortal.Controllers
                 return RedirectToAction("SuccessfullyCreated");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LanguageInfo>
+@{
+    Layout = null;
+}
+
+<div class="container">
+
+    <header class="section-header">
+        <span>Yabancı Diller</span>
+        <h2>Yabancı Dil Bilgileri</h2>
+    </header>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="item-block">
+                <div class="item-form">
+
+                    <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+                    @foreach (var item in Model)
+                    {
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                               @item.Language.Name
+                            </div>
+
+
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
+                                        @item.SpeakingLevel
+                                        <span class="input-group-addon"></span>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
+                                       @item.ReadingLevel
+                                        <span class="input-group-addon"></span>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
+                                        @item.WritingLevel
+                                        <span class="input-group-addon"></span>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <br>
+            <button type="button" id="btnAdd" onclick="LanguageInfoCreate()" class="btn btn-primary btn-duplicator">Yabancı Dil Ekle</button>
+        </div>
+    </div>
+</div>
+

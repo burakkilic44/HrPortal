@@ -42,9 +42,17 @@
                         <select name="LocationId" class="form-control select2-container-multi">
                             <option value="">Şehir</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
-                        {
-                                <option value="@location.Id">@location.Name</option>
-                        }
+                            {
+                                @if (Model.LocationId != null && Model.LocationId.Contains(location.Id))
+                                {
+                                    <option value="@location.Id" selected="selected">@location.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@location.Id">@location.Name</option>
+
+                                }
+                            }
                         </select>
                     </div>
                 </div>
@@ -68,12 +76,11 @@
                         <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
                     </div>
                 </div>
-
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input asp-for="WorkingHours" class="form-control" placeholder="Çalışma Saati" value="">
-                        <span class="input-group-addon">Saat / Hafta</span>
+                        <input asp-for="WorkingHours" class="form-control" placeholder="Deneyim">
+                        <span class="input-group-addon">Çalışma Saati (Saat/Hafta)</span>
                         <span asp-validation-for="WorkingHours" class="text-danger"></span>
                     </div>
                 </div>
@@ -82,11 +89,12 @@
 
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                        <input asp-for="Experience" class="form-control" placeholder="Deneyim" value="">
-                        <span class="input-group-addon">Yıl</span>
+                        <input asp-for="Experience" class="form-control" placeholder="Deneyim">
+                        <span class="input-group-addon">Deneyim (Yıl)</span>
                         <span asp-validation-for="Experience" class="text-danger"></span>
                     </div>
                 </div>
+              
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
@@ -100,7 +108,7 @@
                 <div class="form-group col-xs-4 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon" title="Yayın Tarihi"><i class="fa fa-calendar"></i></span>
-                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" value="Date.now();"/>
+                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" title="Yayın Tarihi"/>
                         <span asp-validation-for="PublishDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -111,6 +119,7 @@
                         <span asp-validation-for="WebAddress" class="text-danger"></span>
                     </div>
                 </div>
+              
                     @*<div class="button-group">
                 <div class="action-buttons">
                     <div class="upload-button">
