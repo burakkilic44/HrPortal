@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-globe"></i></span>
                                     <input asp-for="WebAddress" type="text" class="form-control" placeholder="Web Sayfası">
                                     <span asp-validation-for="WebAddress" class="text-danger"></span>
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                                     <input asp-for="BirthDate" type="datetime" class="form-control" placeholder="Doğum Tarihi">
                                     <span asp-validation-for="BirthDate" class="text-danger"></span>
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                     <input asp-for="Phone" type="text" class="form-control" placeholder="Telefon Numarası">
                                     <span asp-validation-for="Phone" class="text-danger"></span>
@@ -106,44 +106,53 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                     <input asp-for="Email" type="text" class="form-control" placeholder="E-Posta">
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <input asp-for="DrivingLicense" type="text" class="form-control" placeholder="Sürücü Belgesi (Bkz. B, A2) ">
-                                <span asp-validation-for="DrivingLicense" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <input asp-for="DrivingLicense" type="text" class="form-control" placeholder="Sürücü Belgesi (Bkz. B, A2) ">
+                                    <span asp-validation-for="DrivingLicense" class="text-danger"></span>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
-                                    <option value="">Askerlik durumunuz nedir?</option>
-                                </select>
-                                <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
+                                        <option value="">Askerlik durumunuz nedir?</option>
+                                    </select>
+                                    <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <select asp-for="IsTravelDisabled" class="form-control selectpicker">
-                                    <option selected>Seyahat engeliniz var mı?</option>
-                                    <option value="true">Evet</option>
-                                    <option value="false">Hayır</option>
-                                </select>
-                                <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <select asp-for="IsTravelDisabled" class="form-control selectpicker">
+                                        <option selected>Seyahat engeliniz var mı?</option>
+                                        <option value="true">Evet</option>
+                                        <option value="false">Hayır</option>
+                                    </select>
+                                    <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <select asp-for="SmokingStatus" class="form-control selectpicker">
-                                    <option selected>Sigara kullanıyor musunuz?</option>
-                                    <option value="1">Evet</option>
-                                    <option value="0">Hayır</option>
-                                </select>
-                                <span asp-validation-for="SmokingStatus" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <select asp-for="SmokingStatus" class="form-control selectpicker">
+                                        <option selected>Sigara kullanıyor musunuz?</option>
+                                        <option value="1">Evet</option>
+                                        <option value="0">Hayır</option>
+                                    </select>
+                                    <span asp-validation-for="SmokingStatus" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
-                                <span asp-validation-for="Hobbies" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
+                                    <span asp-validation-for="Hobbies" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
 
@@ -262,30 +271,36 @@
         <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
-        <section id="EditEducationInfos" class=" bg-alt">
+       
+        <section id="EducationInfoEdit" class=" bg-alt">
             
         </section>
         <!-- END Education -->
         <!-- Work Experience -->
-        <section id="Experience" class="bg-alt">
-           
+      
+        <section id="ExperienceEdit" class="bg-alt">
+
         </section>
         <!-- END Work Experience -->
         <!-- Skills -->
-        <section id="Skill" class=" bg-alt">
-            
-        </section>
+      
+        <section id="SkillEdit" class=" bg-alt"></section>
         <!-- END Skills -->
 
         <!-- Sertifikalar -->
-        <section id="Certificate" class=" bg-alt">
-            
+       
+        <section id="CertificateEdit" class=" bg-alt">
+
         </section>
 
+      
 
         <!-- Language -->
-        <section id="LanguageInfos" class=" bg-alt">
-           
+    
+
+        <section id="LanguageInfoEdit" class=" bg-alt">
+
+
         </section>
 
         <!-- Submit -->
@@ -313,13 +328,14 @@
 
     <script>
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
-            $("#EditEducationInfos").load("/Resumes/EditEducationInfos");
-            $("#Experience").load("/Resumes/Experience");
-            $("#Skill").load("/Resumes/Skill");
-            $("#Certificate").load("/Resumes/Certificate");
-            $("#LanguageInfos").load("/Resumes/LanguageInfos");
+            $("#EducationInfosIndex").load("/Resumes/EducationInfosIndex");
+            $("#EducationInfoEdit").load("/Resumes/EducationInfoEdit");
+            $("#ExperienceEdit").load("/Resumes/ExperienceEdit");
+            $("#SkillEdit").load("/Resumes/SkillEdit");
+            $("#CertificateEdit").load("/Resumes/CertificateEdit");
+            $("#LanguageInfoEdit").load("/Resumes/LanguageInfoEdit");
             var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
                 toggleOnClick: true,
@@ -352,8 +368,8 @@
 
 
 
-        function EditEducationInfo() {
-            $.post("/Resumes/EditEducationInfo",
+        function EducationInfoEdit() {
+            $.post("/Resumes/EducationInfoEdit",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -370,8 +386,8 @@
                 });
         }
 
-        function EditExperience() {
-            $.post("/Resumes/EditExperience",
+        function ExperienceEdit() {
+            $.post("/Resumes/ExperienceEdit",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -387,8 +403,8 @@
         }
 
 
-        function EditSkill() {
-            $.post("/Resumes/EditSkill",
+        function SkillEdit() {
+            $.post("/Resumes/SkillEdit",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#Name").val(),
@@ -401,8 +417,8 @@
 
         }
 
-        function EditCertificate() {
-            $.post("/Resumes/EditCertificate",
+        function CertificateEdit() {
+            $.post("/Resumes/CertificateEdit",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#CertificateName").val(),
@@ -416,8 +432,8 @@
                 });
         }
 
-        function EditLanguageInfo() {
-            $.post("/Resumes/EditLanguageInfo",
+        function LanguageInfoEdit() {
+            $.post("/Resumes/LanguageInfoEdit",
                 {
                     ResumeId: "@(Model.Id)",
                     LanguageId: $("#LanguageId").val(),

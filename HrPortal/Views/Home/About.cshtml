@@ -1,8 +1,10 @@
-﻿@{
+﻿
+@model Setting
+@{
     ViewData["Title"] = "Hakkımızda";
 }
 
-<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
+<header class="page-header bg-img">
     <div class="container page-name">
         <h1 class="text-center">Hakkımızda</h1>
         <p class="lead text-center">Hakkımızda Sayfasına Hoş Geldiniz!</p>
@@ -11,23 +13,17 @@
 
     <!-- END Site header -->
     <!-- Main container -->
-    <main>
+    <main class="container">
 
 
 
         <!-- About -->
         <section>
-            <div class="container" style="margin-top:-80px;">
+            <div class="container">
 
-                <h5>Amaç</h5>
-                <p>Bir istihdam web sitesi, özellikle istihdam veya kariyer olanakları sunan bir web sitesidir. Pek çok istihdam web sitesi, işverenlerin doldurulması gereken bir pozisyon için iş gereksinimlerini göndermelerine izin vermek üzere tasarlanmıştır ve genelde iş ilan panoları olarak bilinirler. Diğer istihdam alanları, işveren değerlendirmesi, kariyer ve iş arama önerileri sunar ve farklı iş tanımlarını veya işverenleri tanımlar. Potansiyel bir çalışan, bir iş web sitesi aracılığıyla, bir iş başvurusunu bulabilir ve doldurabilir.</p>
-                <p>Bir istihdam web sitesi, özellikle istihdam veya kariyer olanakları sunan bir web sitesidir. Pek çok istihdam web sitesi, işverenlerin doldurulması gereken bir pozisyon için iş gereksinimlerini göndermelerine izin vermek üzere tasarlanmıştır ve genelde iş ilan panoları olarak bilinirler. Diğer istihdam alanları, işveren değerlendirmesi, kariyer ve iş arama önerileri sunar ve farklı iş tanımlarını veya işverenleri tanımlar. Potansiyel bir çalışan, bir iş web sitesi aracılığıyla, bir iş başvurusunu bulabilir ve doldurabilir.</p>
-
-                <h5>How we resolve it?</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in tristique odio. Quisque nec sollicitudin est. Sed vel malesuada diam. Donec laoreet scelerisque imperdiet. Sed eleifend porta lorem a dictum. Sed lorem lorem, rhoncus eget posuere eget, bibendum ut odio. Nulla lacinia nunc et fermentum lobortis. Fusce scelerisque, lacus tincidunt pellentesque luctus, tellus risus consectetur dui, ut accumsan tellus leo vel mauris. Aenean id tortor lacus.</p>
-
-                <h5>What's our solution?</h5>
-                <p>Quisque lobortis accumsan tempus. Mauris pretium neque eu posuere molestie. Maecenas tincidunt eleifend egestas. Vestibulum tellus augue, laoreet sit amet quam nec, pulvinar luctus nisl. In consequat elit et aliquet posuere. Mauris porttitor est a ipsum vehicula, non porttitor quam tincidunt. Proin id orci tortor. Integer sit amet enim a nisi sagittis ultrices. Sed efficitur feugiat lobortis. In in lorem mauris. Ut placerat velit ut ligula placerat, eu accumsan sapien luctus. Vivamus in est sit amet felis dictum dapibus. Sed et eros sed massa porttitor volutpat vel at orci. Proin et lacus molestie, bibendum nisi eu, bibendum velit.</p>
+                
+              @Html.Raw(Model.About)
 
             </div>
         </section>
+    </main>

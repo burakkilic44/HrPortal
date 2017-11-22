@@ -31,9 +31,9 @@
 
     </header>
 
-    <main>
+    <main class="container">
         <section class="no-padding-top bg-alt">
-            <div class="container">
+            
                 <div class="row item-blocks-connected">
 
                     <div class="col-xs-12">
@@ -47,15 +47,18 @@
                     <div class="col-xs-12">
                         <a class="item-block" href="/Jobs/Details/@item.Id">
                             <header>
-                                <img src="/uploads/jobs/" alt="google">
+                                <img src="/uploads/jobs/" alt="photo">
                                 <div class="hgroup">
-                                    <h4>@item.Job.Company.Name</h4>
+                                    <h4>@item.Job.Company.Title (@item.Job.Company.Name)</h4>
                                     <h5>@item.Resume.ResumeName</h5>
                                 </div>
                                 <div class="header-meta">
                                     <span class="location">@item.Resume.Location.Name</span>
                                     <span class="label label-success">@item.Job.WorkingStyle.GetDisplayName()</span>
+                                    
                                 </div>
+                                <div><span>Notes</span></div>
+
                             </header>
                         </a>
                     </div>
@@ -71,7 +74,7 @@
                 <!-- END Page navigation -->
 
 
-            </div>
+           
         </section>
     </main>
 

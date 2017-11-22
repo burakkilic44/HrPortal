@@ -14,15 +14,15 @@ namespace HrPortal.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private IRepository<Setting> settingRepository;
         private IRepository<Resume> resumeRepository;
         private IRepository<Message> messageRepository;
         private IRepository<Job> jobRepository;
         private IRepository<Location> locationRepository;
 
-        public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository, IRepository<Location> locationRepository)
+        public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository, IRepository<Location> locationRepository, IRepository<Setting> settingRepository)
         {
-   
+            this.settingRepository = settingRepository;
             this.resumeRepository = resumeRepository;
             this.messageRepository = messageRepository;
             this.jobRepository = jobRepository;
@@ -42,25 +42,35 @@ namespace HrPortal.Controllers
 
         public IActionResult About()
         {
-            return View();
+            var setting = settingRepository.GetAll().FirstOrDefault();
+
+            return View(setting);
         }
 
         public IActionResult HowItWorks()
         {
-            return View();
+            var setting = settingRepository.GetAll().FirstOrDefault();
+
+            return View(setting);
         }
         public IActionResult Help()
         {
-            return View();
+            var setting = settingRepository.GetAll().FirstOrDefault();
+
+            return View(setting);
         }
         public IActionResult PrivacyPolicy()
         {
-            return View();
+            var setting = settingRepository.GetAll().FirstOrDefault();
+
+            return View(setting);
         }
 
         public IActionResult Contact()
         {
-            return View();
+            var setting = settingRepository.GetAll().FirstOrDefault();
+            
+            return View(setting);
         }
 
         [HttpPost]

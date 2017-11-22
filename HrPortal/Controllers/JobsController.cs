@@ -100,9 +100,10 @@ namespace HrPortal.Controllers
         public IActionResult Edit(string id)
         {
 
-            var job = jobRepository.Get(id);
+            var job = jobRepository.Get(id,"JobLocations");
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            job.LocationId = job.JobLocations.Select(s => s.LocationId).ToArray();
             return View(job);
         }
         [HttpPost]
@@ -110,11 +111,13 @@ namespace HrPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                job.EndDate = job.PublishDate.AddDays(60);
                 jobRepository.Update(job);
                 return RedirectToAction("Index");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            
             return View(job);
         }
 
