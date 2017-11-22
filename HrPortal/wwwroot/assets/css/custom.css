@@ -36,7 +36,7 @@ margin-right:22px;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 1px;
-        padding: 0 12px;
+        padding: 0 8px;
         -webkit-transition: color .2s linear;
         -o-transition: color .2s linear;
         transition: color .2s linear;
@@ -162,5 +162,32 @@ margin-right:22px;
     }
         
 }
-
-body {background-color:lightgray;}
+main.container {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    padding: 0px 30px 20px;
+    -webkit-box-shadow: 0 5px 25px 0 rgba(0,0,0,.07);
+    box-shadow: 0 5px 25px 0 rgba(0,0,0,.07);
+    
+}
+.page-header {
+    padding-top: 0px;
+    margin-bottom: 30px;
+}
+    .page-header .container {
+        -webkit-transform: none;
+        -o-transform: none;
+        transform: none;
+    }
+    
+body {
+    background-color: lightgray;
+}
+.page-header.bg-img:before {
+    background: orange; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(orange, lightgray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(orange, lightgray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(orange, lightgray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(orange, lightgray); /* Standard syntax */
+}

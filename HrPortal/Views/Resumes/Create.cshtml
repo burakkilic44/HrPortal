@@ -90,10 +90,10 @@
 
                             <div class="form-group col-xs-12 col-sm-6">
                                 <div class="input-group ">
-                                    <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                                    <input asp-for="BirthDate" type="datetime" class="form-control" placeholder="Doğum Tarihi">
+                                    <span class="input-group-addon" title="Doğum Tarihi"><i class="fa fa-birthday-cake"></i></span>
+                                    <input asp-for="BirthDate"  class="form-control" placeholder="Doğum Tarihi" type="date"  title="Doğum Tarihi"/>
                                     <span asp-validation-for="BirthDate" class="text-danger"></span>
-                                    <span class="input-group-addon">gg/aa/yyyy</span>
+                                    @*<span class="input-group-addon">gg/aa/yyyy</span>*@
                                 </div>
                             </div>
 
