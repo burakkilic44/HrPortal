@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model Setting
+@{
     ViewData["Title"] = "İletişim";
 }
 
@@ -48,15 +50,16 @@
                             <div class="highlighted-block">
                                 <dl class="icon-holder">
                                     <dt><i class="fa fa-map-marker"></i></dt>
-                                    <dd>Osmanağa Mahallesi, Süleyman Paşa Sk. No:2, 34700 Kadıköy/İstanbul <br />
-                                    <p style="color: cadetblue">(Bahariye Caddesi üzerinde Mavi Jeans'in üstü. Serasker Sokak ile Bahariye Caddesi'nin birleştiği nokta)</p></dd>
+                                    <dd>@Model.Address @*<p style="color: cadetblue">(Bahariye Caddesi üzerinde Mavi Jeans'in üstü. Serasker Sokak ile Bahariye Caddesi'nin birleştiği nokta)</p>*@</dd>
 
                                     <dt><i class="fa fa-phone"></i></dt>
-                                    <dd>(0216) 444 32 36</dd>
+                                    <dd>@Model.Phone</dd>
 
+                                    <dt><i class="fa fa-fax"></i></dt>
+                                    <dd>@Model.Fax</dd>
 
                                     <dt><i class="fa fa-envelope"></i></dt>
-                                    <dd>bilisim@bilisimegitim.com</dd>
+                                    <dd>@Model.Email</dd>
                                 </dl>
                             </div>
 
