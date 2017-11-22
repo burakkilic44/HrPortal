@@ -26,8 +26,9 @@
                                ViewBag.FullName = user.FirstName + " " + user.LastName;
                         }
                                 <div class="span2" style="text-align:center;">
-                                    <img src="/uploads/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
-                                    
+                                    <a href="manage/index">
+                                        <img src="/uploads/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
+                                    </a>
                                 </div>
 
                                 <div class="span8" style="text-align:center; padding-top:10px; color:black; ">
