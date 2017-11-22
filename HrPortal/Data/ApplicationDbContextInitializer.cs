@@ -59,7 +59,7 @@ namespace HrPortal.Data
         {
             if (!context.Settings.Any())
             {
-                var setting = new Setting() { About = "Hakkımızda"};
+                var setting = new Setting() { FooterText = "Alt yazı", Address="Adres", Email="cvhavuzu@bilisimkariyer.net", HowItWorks="Nasıl Çalışır?", Facebook="facebook", About = "Hakkımızda", CreateDate=DateTime.Now, CreatedBy="username", UpdateDate=DateTime.Now, CustomHtml="<!-- Author: Bilişim Eğitim Merkezi -->", MapLat="1",MapLng="1", Help="Yardım metni", MetaDescription="Bilişim CV Havuzu", MetaTitle = "Bilişim Kariyer İK", Phone="0542", UpdatedBy="username", PrivacyPolicy="Gizlilik", MembershipAgreement="Üyelik Sözleşmesi Metni"};
                 context.Add(setting);
                 context.SaveChanges();
             }
