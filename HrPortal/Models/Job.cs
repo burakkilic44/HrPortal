@@ -9,6 +9,10 @@ namespace HrPortal.Models
 {
     public class Job:BaseEntity
     {
+        public Job():base()
+        {
+            PublishDate = DateTime.Now;
+        }
 
         [StringLength(200)]
         [Required(ErrorMessage = "Başlık alanı gereklidir")]
