@@ -31,7 +31,7 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
                         <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
-                        <span class="help-block">Please choose a 4:6 profile picture.</span>
+                        <span class="help-block"></span>
                         <span asp-validation-for="Photo" class="text-danger"></span>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-globe"></i></span>
                                     <input asp-for="WebAddress" type="text" class="form-control" placeholder="Web Sayfası">
                                     <span asp-validation-for="WebAddress" class="text-danger"></span>
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                                     <input asp-for="BirthDate" type="datetime" class="form-control" placeholder="Doğum Tarihi">
                                     <span asp-validation-for="BirthDate" class="text-danger"></span>
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                     <input asp-for="Phone" type="text" class="form-control" placeholder="Telefon Numarası">
                                     <span asp-validation-for="Phone" class="text-danger"></span>
@@ -106,63 +106,72 @@
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-6">
-                                <div class="input-group input-group-sm">
+                                <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                     <input asp-for="Email" type="text" class="form-control" placeholder="E-Posta">
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <input asp-for="DrivingLicense" type="text" class="form-control" placeholder="Sürücü Belgesi (Bkz. B, A2) ">
-                                <span asp-validation-for="DrivingLicense" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <input asp-for="DrivingLicense" type="text" class="form-control" placeholder="Sürücü Belgesi (Bkz. B, A2) ">
+                                    <span asp-validation-for="DrivingLicense" class="text-danger"></span>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
-                                    <option value="">Askerlik durumunuz nedir?</option>
-                                </select>
-                                <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
+                                        <option value="">Askerlik durumunuz nedir?</option>
+                                    </select>
+                                    <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <select asp-for="IsTravelDisabled" class="form-control selectpicker">
-                                    <option selected>Seyahat engeliniz var mı?</option>
-                                    <option value="true">Evet</option>
-                                    <option value="false">Hayır</option>
-                                </select>
-                                <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <select asp-for="IsTravelDisabled" class="form-control selectpicker">
+                                        <option selected>Seyahat engeliniz var mı?</option>
+                                        <option value="true">Evet</option>
+                                        <option value="false">Hayır</option>
+                                    </select>
+                                    <span asp-validation-for="IsTravelDisabled" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <select asp-for="SmokingStatus" class="form-control selectpicker">
-                                    <option selected>Sigara kullanıyor musunuz?</option>
-                                    <option value="1">Evet</option>
-                                    <option value="0">Hayır</option>
-                                </select>
-                                <span asp-validation-for="SmokingStatus" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <select asp-for="SmokingStatus" class="form-control selectpicker">
+                                        <option selected>Sigara kullanıyor musunuz?</option>
+                                        <option value="1">Evet</option>
+                                        <option value="0">Hayır</option>
+                                    </select>
+                                    <span asp-validation-for="SmokingStatus" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
-                                <span asp-validation-for="Hobbies" class="text-danger"></span>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <input asp-for="Hobbies" type="text" class="form-control" placeholder="Hobileriniz (Bkz. Müzik, Resim, Kamp ) ">
+                                    <span asp-validation-for="Hobbies" class="text-danger"></span>
+                                </div>
+                                </div>
+                            </div>
+
+                            <hr class="hr-lg">
+
+                            <h6>Etiket Listesi</h6>
+                            <div id="form-group">
+                                <input class="tags form-control" />
+                                <input type="hidden" asp-for="Tags" />
+                                <span asp-validation-for="Tags" class="text-danger"></span>
                             </div>
                         </div>
-
-                        <hr class="hr-lg">
-
-                        <h6>Etiket Listesi</h6>
-                        <div id="form-group">
-                            <input class="tags form-control" />
-                            <input type="hidden" asp-for="Tags" />
-                            <span asp-validation-for="Tags" class="text-danger"></span>
                         </div>
-                    </div>
-                </div>
 
             <div class="button-group">
                 <div class="action-buttons">
 
                     <div class="upload-button">
-                        <button class="btn btn-block btn-gray">Bir özgeçmiş dosyası seçin</button>
+                        <button class="btn btn-block btn-primary">Bir özgeçmiş dosyası seçin</button>
                         <input asp-for="ResumeFile" type="file">
                         <span asp-validation-for="ResumeFile" class="text-danger"></span>
                     </div>
