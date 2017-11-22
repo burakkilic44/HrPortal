@@ -26,7 +26,7 @@
                                ViewBag.FullName = user.FirstName + " " + user.LastName;
                         }
                                 <div class="span2" style="text-align:center;">
-                                    <a href="manage/index">
+                                    <a asp-controller="Manage" asp-action="Index">
                                         <img src="/uploads/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
                                     </a>
                                 </div>

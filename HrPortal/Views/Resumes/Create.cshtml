@@ -90,10 +90,10 @@
 
                             <div class="form-group col-xs-12 col-sm-6">
                                 <div class="input-group ">
-                                    <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                                    <input asp-for="BirthDate" type="datetime" class="form-control" placeholder="Doğum Tarihi">
+                                    <span class="input-group-addon" title="Doğum Tarihi"><i class="fa fa-birthday-cake"></i></span>
+                                    <input asp-for="BirthDate"  class="form-control" placeholder="Doğum Tarihi" type="date"  title="Doğum Tarihi"/>
                                     <span asp-validation-for="BirthDate" class="text-danger"></span>
-                                    <span class="input-group-addon">gg/aa/yyyy</span>
+                                    @*<span class="input-group-addon">gg/aa/yyyy</span>*@
                                 </div>
                             </div>
 
@@ -271,29 +271,32 @@
         <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
-        <section id="EducationInfos" class=" bg-alt">
+
+        <section id="EducationInfoCreate" class=" bg-alt">
             
         </section>
         <!-- END Education -->
         <!-- Work Experience -->
-        <section id="Experience" class="bg-alt">
+   
+        <section id="ExperienceCreate" class="bg-alt">
            
         </section>
         <!-- END Work Experience -->
         <!-- Skills -->
-        <section id="Skill" class=" bg-alt">
+        
+        <section id="SkillCreate" class=" bg-alt">
             
         </section>
         <!-- END Skills -->
 
         <!-- Sertifikalar -->
-        <section id="Certificate" class=" bg-alt">
+        <section id="CertificateCreate" class=" bg-alt">
             
         </section>
 
 
         <!-- Language -->
-        <section id="LanguageInfos" class=" bg-alt">
+        <section id="LanguageInfoCreate" class=" bg-alt">
            
         </section>
 
@@ -323,18 +326,22 @@
     <script>
 
         $(document).ready(function() {
-
-            $("#EducationInfos").load("/Resumes/EducationInfos");
-            $("#Experience").load("/Resumes/Experience");
-            $("#Skill").load("/Resumes/Skill");
-            $("#Certificate").load("/Resumes/Certificate");
-            $("#LanguageInfos").load("/Resumes/LanguageInfos");
+          
+            $("#EducationInfosIndex").load("/Resumes/EducationInfosIndex");
+            $("#EducationInfoCreate").load("/Resumes/EducationInfoCreate");
+            $("#ExperienceIndex").load("/Resumes/ExperienceIndex");
+            $("#ExperienceCreate").load("/Resumes/ExperienceCreate");
+            $("#SkillIndex").load("/Resumes/SkillIndex");
+            $("#SkillCreate").load("/Resumes/SkillCreate");
+            $("#CertificateIndex").load("/Resumes/CertificateIndex");
+            $("#CertificateCreate").load("/Resumes/CertificateCreate");
+            $("#LanguageInfosIndex").load("/Resumes/LanguageInfosIndex");
+            $("#LanguageInfoCreate").load("/Resumes/LanguageInfoCreate");
             var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
                 toggleOnClick: true,
                 data: '/Resumes/TagHelper',
-                placeholder: 'Etiket',
-           
+                placeholder: 'Etiket',           
 
             });
 
@@ -361,8 +368,8 @@
 
 
 
-        function AddEducationInfo() {
-            $.post("/Resumes/AddEducationInfo",
+        function EducationInfoCreate() {
+            $.post("/Resumes/EducationInfoCreate",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -379,8 +386,8 @@
                 });
         }
 
-        function AddExperience() {
-            $.post("/Resumes/AddExperience",
+        function ExperienceCreate() {
+            $.post("/Resumes/ExperienceCreate",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -396,8 +403,8 @@
         }
 
 
-        function AddSkill() {
-            $.post("/Resumes/AddSkill",
+        function SkillCreate() {
+            $.post("/Resumes/SkillCreate",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#Name").val(),
@@ -410,8 +417,8 @@
 
         }
 
-        function AddCertificate() {
-            $.post("/Resumes/AddCertificate",
+        function CertificateCreate() {
+            $.post("/Resumes/CertificateCreate",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#CertificateName").val(),
@@ -425,8 +432,8 @@
                 });
         }
 
-        function AddLanguageInfo() {
-            $.post("/Resumes/AddLanguageInfo",
+        function LanguageInfoCreate() {
+            $.post("/Resumes/LanguageInfoCreate",
                 {
                     ResumeId: "@(Model.Id)",
                     LanguageId: $("#LanguageId").val(),
