@@ -5,18 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/maruti/js/bootstrap.min.js"></script>
-<script src="~/maruti/js/jquery.min.js"></script>
-<link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
 
-<link href="~/maruti/css/Body.css" rel="stylesheet" />
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Occupation</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -53,7 +43,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-action="Index">Listeye Geri Dön</a>
     </form>
 </div>

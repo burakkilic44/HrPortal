@@ -6,30 +6,26 @@
 <link href="/assets/vendors/summernote/summernote.css" rel="stylesheet">
 
 
+<form asp-action="Create" method="post">
 
-<!-- Page header -->
-<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <!-- Page header -->
     <header class="page-header">
         <div class="container page-name">
-            <h1 class="text-center">İlanı Düzenle</h1>
-
+            <h1 class="text-center">İş İlanı Ver</h1>
+            <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
         </div>
 
         <div class="container">
 
             <div class="row">
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group col-xs-12 col-sm-6">
-                    <input type="hidden" asp-for="Id" />
-
                     <input asp-for="Title" class="form-control input-lg" placeholder="İlan Başlığı">
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6">
                     <select asp-for="CompanyId" class="form-control selectpicker" asp-items="@ViewBag.Companies">
-                        <option value="">Seçiniz</option>
+                        <option value="">Firma</option>
                     </select>
                     <span asp-validation-for="CompanyId" class="text-danger"></span>
                     <a class="help-block" asp-controller="Companies" asp-action="Create">Yeni Firma Ekle</a>
@@ -40,16 +36,11 @@
                     <span asp-validation-for="ShortDescription" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-xs-12">
-                    <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
-                    <span asp-validation-for="WebAddress" class="text-danger"></span>
-                </div>
-
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                        <select class="form-control select2-container-multi">
-                            <option value="">Seçiniz</option>
+                        <select name="LocationId" class="form-control select2-container-multi">
+                            <option value="">Şehir</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                             {
                                 <option value="@location.Id">@location.Name</option>
@@ -62,7 +53,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
                         <select asp-for="WorkingStyle" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<WorkingStyle>()">
-                            <option value="">Seçiniz</option>
+                            <option value="">Çalışma Şekli</option>
                         </select>
                         <span asp-validation-for="WorkingStyle" class="text-danger"></span>
                     </div>
@@ -72,7 +63,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-male"></i></span>
                         <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
-                            <option value="">Seçiniz</option>
+                            <option value="">Askerlik Durumu</option>
                         </select>
                         <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
                     </div>
@@ -100,12 +91,25 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
                         <select asp-for="EducationLevel" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
-                            <option value="">Seçiniz</option>
+                            <option value="">Eğitim Seviyesi</option>
                         </select>
                         <span asp-validation-for="EducationLevel" class="text-danger"></span>
                     </div>
                 </div>
-
+                <div class="form-group col-xs-4 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" />
+                        <span asp-validation-for="PublishDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group col-xs-4 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-wikipedia-w "></i></span>
+                        <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
+                        <span asp-validation-for="WebAddress" class="text-danger"></span>
+                    </div>
+                </div>
                 @*<div class="button-group">
                         <div class="action-buttons">
                             <div class="upload-button">
@@ -114,9 +118,9 @@
                             </div>
                         </div>
                     </div>*@
+
             </div>
         </div>
-
     </header>
     <!-- END Page header -->
     <!-- Main container -->
@@ -131,10 +135,9 @@
                     <span>AÇIKLAMA</span>
                     <h2>İş Detayı</h2>
                     <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
-                    <textarea asp-for="Details" class="summernote-editor"></textarea>
                 </header>
 
-
+                <textarea asp-for="Details" class="summernote-editor"></textarea>
 
             </div>
         </section>
@@ -150,7 +153,7 @@
                     <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
                 </header>
 
-                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round"   asp-route-id="@Model.Id">İLANI YAYINLA</button></p>
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">İLANI YAYINLA</button></p>
 
             </div>
         </section>
@@ -158,10 +161,10 @@
 
 
     </main>
+    <!-- END Main container -->
+
+
 </form>
-<!-- END Main container -->
-
-
 @section scripts{
     <script src="/assets/vendors/summernote/summernote.min.js"></script>}
 

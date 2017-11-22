@@ -53,11 +53,8 @@ namespace HrPortal.Controllers
         public string ErrorMessage { get; set; }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Confirm(string returnUrl = null)
+        public IActionResult Confirm(string returnUrl = null)
         {
-           
-           
-
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -82,16 +79,16 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 // Require the user to have a confirmed email before they can log on.
-                //var user = await _userManager.FindByEmailAsync(model.Email);
-                //if (user != null)
-                //{
-                //    if (!await _userManager.IsEmailConfirmedAsync(user))
-                //    {
-                //        ModelState.AddModelError(string.Empty,
-                //                      "Giriş yapabilmek için mail adresinizin onaylanması gerekmektedir.");
-                //        return View(model);
-                //    }
-                //}
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    if (!await _userManager.IsEmailConfirmedAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty,
+                                      "Giriş yapabilmek için mail adresinizin onaylanması gerekmektedir.");
+                        return View(model);
+                    }
+                }
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -254,19 +251,33 @@ namespace HrPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model,  string returnUrl = null)
         {
+            if (model.AvatarImage != null && model.AvatarImage.Length > 0)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+
+            }
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                if (model.AvatarImage != null && model.AvatarImage.Length > 0)
                 {
-                    await model.AvatarImage.CopyToAsync(stream);
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                    var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
+                
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.AvatarImage.CopyToAsync(stream);
+                    }
+                    model.Photo = model.AvatarImage.FileName;
                 }
-                var user = new ApplicationUser { Photo=model.AvatarImage.FileName, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId};
-                var result = await _userManager.CreateAsync(user, model.Password);
-
+                    var user = new ApplicationUser { Photo = model.Photo, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    
 
                 if (result.Succeeded)
                 {
@@ -285,10 +296,11 @@ namespace HrPortal.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    // await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("Kullanıcı şifre ile yeni bir hesap oluşturdu.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Confirm");
                 }
+                
                 //for Translatig errors en to tr 
                 if (result.Errors.Where(e => e.Code == "PasswordRequiresNonAlphanumeric").FirstOrDefault() != null)
                 {
@@ -317,6 +329,7 @@ namespace HrPortal.Controllers
                 }
                 AddErrors(result);
             }
+           
             // if there is any error for registiring,this code provide to choose location and occupation again.
             ViewData["ReturnUrl"] = returnUrl;
             ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");

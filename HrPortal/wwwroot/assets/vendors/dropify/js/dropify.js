@@ -42,10 +42,10 @@ function Dropify(element, options) {
         errorsPosition: 'overlay',
         allowedFormats: ['portrait', 'square', 'landscape'],
         messages: {
-            'default': 'Drag and drop a file here or click',
-            'replace': 'Drag and drop or click to replace',
-            'remove':  'Remove',
-            'error':   'Ooops, something wrong appended.'
+            'default': 'Resim eklemek için tıklayınız',
+            'replace': 'Resmi değiştirmek için tıklayınız',
+            'remove': 'Kaldır',
+            'error': 'Bir şeyler yanlış gitti.'
         },
         error: {
             'fileSize': 'The file size is too big ({{ value }} max).',
