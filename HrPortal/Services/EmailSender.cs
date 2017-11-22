@@ -15,20 +15,21 @@ namespace HrPortal.Services
         {
 
 
-            //SmtpClient client = new SmtpClient("smtp.gmail.com");
-            //client.UseDefaultCredentials = false;
-            //client.EnableSsl = true;
-            //client.Port = 587;
-            //client.Credentials = new NetworkCredential("bemkadikoy34@gmail.com", "Deneme1.");
+            SmtpClient client = new SmtpClient("mail.bilisimkariyer.net");
+            client.UseDefaultCredentials = false;
+            client.EnableSsl = false;
+            client.Port = 587;
+            client.Credentials = new NetworkCredential("cvhavuzu@bilisimkariyer.net", "waa6hl");
 
-            //MailMessage mailMessage = new MailMessage();
-            //mailMessage.IsBodyHtml = true;
-            //mailMessage.From = new MailAddress("bemkadikoy34@gmail.com");
-            //mailMessage.To.Add(email);
-            //mailMessage.Body = message;
-            //mailMessage.Subject = subject;
-            //client.Send(mailMessage);
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.IsBodyHtml = true;
+            mailMessage.From = new MailAddress("cvhavuzu@bilisimkariyer.net");
+            mailMessage.To.Add(email);
+            mailMessage.Body = message;
+            mailMessage.Subject = subject;
+            client.Send(mailMessage);
             return Task.CompletedTask;
+           
         }
 }
 }

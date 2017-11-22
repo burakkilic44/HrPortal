@@ -60,7 +60,6 @@ namespace HrPortal.Models.AccountViewModels
         [Display(Name = "Fotoğraf")]
         public string Photo { get; set; }
 
-        [Required(ErrorMessage = "Bu alan zorunludur. Lütfen '.jpg, .png, .gif' formatında yükleme yapınız.")]
         [DataType(DataType.Upload)]
         public IFormFile AvatarImage { get; set; }
     }

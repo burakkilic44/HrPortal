@@ -13,7 +13,7 @@
         <div class="container page-name">
             <h1 class="text-center">Başvurular</h1>
             <p class="lead text-center">Pozisyonunuz için aradığınız başvurular aşağıdadır.</p>
-            <p class=" text-center"><select></select></p>
+            
             
         </div>
 
@@ -21,8 +21,11 @@
             <form method="get" action="/Resumes">
                 
                 <div class="row">
-                    <div class="form-group col-xs-12 col-sm-12">
+                    <div class="form-group col-xs-9 col-sm-9">
                         <input type="text" class="form-control" placeholder="Başvuru Ara" id="Keywords" name="Keywords" value="">
+                    </div>
+                    <div class="col-xs-3 col-sm-3">
+                          <select class="form-control" asp-for="JobId" asp-items="@ViewBag.Jobs"></select>        
                     </div>
                     
 

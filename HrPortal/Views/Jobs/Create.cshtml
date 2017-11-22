@@ -25,7 +25,7 @@
 
                 <div class="form-group col-xs-12 col-sm-6">
                     <select asp-for="CompanyId" class="form-control selectpicker" asp-items="@ViewBag.Companies">
-                        <option value="">Seçiniz</option>
+                        <option value="">Firma</option>
                     </select>
                     <span asp-validation-for="CompanyId" class="text-danger"></span>
                     <a class="help-block" asp-controller="Companies" asp-action="Create">Yeni Firma Ekle</a>
@@ -34,18 +34,13 @@
                 <div class="form-group col-xs-12">
                     <textarea asp-for="ShortDescription" class="form-control" rows="3" placeholder="Kısa Açıklama"></textarea>
                     <span asp-validation-for="ShortDescription" class="text-danger"></span>
-                </div>
-
-                <div class="form-group col-xs-12">
-                    <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
-                    <span asp-validation-for="WebAddress" class="text-danger"></span>
-                </div>
+                </div>               
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                         <select name="LocationId" class="form-control select2-container-multi">
-                            <option value="">Seçiniz</option>
+                            <option value="">Şehir</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                         {
                                 <option value="@location.Id">@location.Name</option>
@@ -58,7 +53,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
                         <select asp-for="WorkingStyle" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<WorkingStyle>()">
-                            <option value="">Seçiniz</option>
+                            <option value="">Çalışma Şekli</option>
                         </select>
                         <span asp-validation-for="WorkingStyle" class="text-danger"></span>
                     </div>
@@ -68,7 +63,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-male"></i></span>
                         <select asp-for="MilitaryStatus" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
-                            <option value="">Seçiniz</option>
+                            <option value="">Askerlik Durumu</option>
                         </select>
                         <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
                     </div>
@@ -77,7 +72,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input asp-for="WorkingHours" class="form-control" placeholder="Çalışma Saati">
+                        <input asp-for="WorkingHours" class="form-control" placeholder="Çalışma Saati" value="">
                         <span class="input-group-addon">Saat / Hafta</span>
                         <span asp-validation-for="WorkingHours" class="text-danger"></span>
                     </div>
@@ -86,7 +81,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                        <input asp-for="Experience" class="form-control" placeholder="Deneyim">
+                        <input asp-for="Experience" class="form-control" placeholder="Deneyim" value="">
                         <span class="input-group-addon">Yıl</span>
                         <span asp-validation-for="Experience" class="text-danger"></span>
                     </div>
@@ -96,28 +91,35 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
                         <select asp-for="EducationLevel" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
-                            <option value="">Seçiniz</option>
+                            <option value="">Eğitim Seviyesi</option>
                         </select>
                         <span asp-validation-for="EducationLevel" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group col-xs-4 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <span class="input-group-addon" title="Yayın Tarihi"><i class="fa fa-calendar"></i></span>
                         <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" value="Date.now();"/>
                         <span asp-validation-for="PublishDate" class="text-danger"></span>
                     </div>
                 </div>
-                @*<div class="button-group">
-                        <div class="action-buttons">
-                            <div class="upload-button">
-                                <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
-                                <input id="cover_img_file" type="file">
-                            </div>
-                        </div>
-                    </div>*@
+                <div class="form-group col-xs-4 col-sm-6 col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-wikipedia-w "></i></span>
+                        <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
+                        <span asp-validation-for="WebAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                    @*<div class="button-group">
+                <div class="action-buttons">
+                    <div class="upload-button">
+                        <button class="btn btn-block btn-primary">Kapak Resmi Seçin</button>
+                        <input id="cover_img_file" type="file">
+                    </div>
+                </div>
+            </div>*@
 
-            </div>
+                </div>
         </div>
     </header>
     <!-- END Page header -->
