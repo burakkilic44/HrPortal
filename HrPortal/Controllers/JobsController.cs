@@ -79,11 +79,9 @@ namespace HrPortal.Controllers
 
         public IActionResult Apply(string id)
         {
-            var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
+            var jobApplication = new JobApplication() { JobId = id, Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
             ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name);
-
-
-            return View(job);
+            return View(jobApplication);
         }
         [HttpPost]
         public IActionResult Apply(JobApplication jobApplication)
