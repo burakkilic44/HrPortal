@@ -9,6 +9,10 @@ namespace HrPortal.Models
 {
     public class Job:BaseEntity
     {
+        public Job():base()
+        {
+            PublishDate = DateTime.Now;
+        }
 
         [StringLength(200)]
         [Required(ErrorMessage = "Başlık alanı gereklidir")]
@@ -62,6 +66,10 @@ namespace HrPortal.Models
 
         [Display(Name = "Bitiş Tarihi")]
         public DateTime EndDate { get; set; }
+
+        [NotMapped]
+         public string[] LocationId { get; set; }
+       
 
         public ICollection<JobApplication> JobApplications { get; set; }
     }

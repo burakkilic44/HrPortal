@@ -1,4 +1,4 @@
-﻿@model Skill
+﻿@model IEnumerable<Skill>
 @{
     Layout = null;
 }
@@ -13,27 +13,29 @@
             <div class="item-block">
                 <div class="item-form">
                     <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+                      @foreach (var item in Model)
+                      {
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <input asp-for="Name" type="text" class="form-control" placeholder="Yetenek, bkz. HTML">
+                                @item.Name
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input asp-for="Level" type="text" class="form-control" value="" placeholder="Yetenek seviyesi, bkz. 90">
-                                    <span class="input-group-addon">%</span>
+                                    @item.Level
                                 </div>
                             </div>
                         </div>
                     </div>
+                      }
                 </div>
             </div>
         </div>
         <div class="col-xs-12 text-center">
             <br>
-            <button id="btnAdd" type="button" onclick="AddSkill()" class="btn btn-primary btn-duplicator">Yetenek Ekle</button>
+            <button id="btnAdd" type="button" onclick="SkillCreate()" class="btn btn-primary btn-duplicator">Yetenek Ekle</button>
         </div>
     </div>
 </div>
