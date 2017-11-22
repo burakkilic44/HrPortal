@@ -6,7 +6,7 @@
 <link href="/assets/vendors/summernote/summernote.css" rel="stylesheet">
 
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" asp-route-id="@Model.Id"  method="post">
 
     <!-- Page header -->
     <header class="page-header">
@@ -39,11 +39,19 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+
                         <select name="LocationId" class="form-control select2-container-multi">
-                            <option value="">Şehir</option>
+                            <option value="">Konum</option>
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                             {
-                                <option value="@location.Id">@location.Name</option>
+                                @if (Model.LocationId.Contains(location.Id)) { 
+                                <option value="@location.Id" selected="selected">@location.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@location.Id">@location.Name</option>
+
+                                }
                             }
                         </select>
                     </div>
@@ -153,8 +161,7 @@
                     <p>Lütfen bilgilerinizi bir kez daha gözden geçirin ve işinizi çevrimiçi hale getirmek için aşağıdaki düğmesine basın.</p>
                 </header>
 
-                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">İLANI YAYINLA</button></p>
-
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round" asp-route-id="@Model.Id">Kaydet</button></p>
             </div>
         </section>
         <!-- END Submit -->

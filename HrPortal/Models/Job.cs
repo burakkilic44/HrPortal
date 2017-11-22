@@ -63,6 +63,10 @@ namespace HrPortal.Models
         [Display(Name = "Bitiş Tarihi")]
         public DateTime EndDate { get; set; }
 
+        [NotMapped]
+         public string[] LocationId { get; set; }
+       
+
         public ICollection<JobApplication> JobApplications { get; set; }
     }
 }
