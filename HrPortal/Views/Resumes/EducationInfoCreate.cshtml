@@ -1,12 +1,12 @@
-﻿@model Experience
+﻿@model EducationInfo
 @{
     Layout = null;
 }
 
 <div class="container">
     <header class="section-header">
-        <span>Çalıştığınız Firmalar</span>
-        <h2>İş Deneyimi</h2>
+        <span>Eğitim Durumu</span>
+        <h2>Eğitim Bilgileri</h2>
     </header>
 
     <div class="row">
@@ -28,24 +28,29 @@
 
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
-                                <input asp-for="CompanyName" type="text" class="form-control" placeholder="Firma Adı">
-                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                                <select asp-for="EducationLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationLevel>()">
+                                    <option selected>Eğitim Düzeyi Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="EducationLevel" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
-                                <input asp-for="Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
-                                <span asp-validation-for="Position" class="text-danger"></span>
+                                <input asp-for="Department" type="text" class="form-control" placeholder="Bölüm, Bkz. Bilgisayar Mühendisliği">
+                                <span asp-validation-for="Department" class="text-danger"></span>
                             </div>
-                        
+                            <div class="form-group">
+                                <input asp-for="SchoolName" type="text" class="form-control" placeholder="Okul Adı, Bkz. Yıldız Teknik Üniversitesi">
+                                <span asp-validation-for="SchoolName" class="text-danger"></span>
+                            </div>
 
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">Başlangıç tarihi</span>
-                                    <input asp-for="StartYear" type="text" class="form-control" value="" placeholder="bkz. 2012">
-                                    <span asp-validation-for="StartYear" class="text-danger"></span>
+                                    <input asp-for="StartDate" class="form-control" placeholder="Başlangı. Tarihi" type="date" title="Başlangıç Tarihi">
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
                                     <span class="input-group-addon">Bitiş tarihi</span>
-                                    <input asp-for="EndYear" type="text" class="form-control" value="" placeholder="bkz. 2016">
-                                    <span asp-validation-for="EndYear" class="text-danger"></span>
+                                    <input asp-for="EndDate" class="form-control" placeholder="Bitiş Tarihi"type="date" title="Bitiş Tarihi">
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -62,7 +67,7 @@
 
         <div class="col-xs-12 text-center">
             <br>
-            <button id="btnAdd" type="button" onclick="AddExperience()" class="btn btn-primary btn-duplicator">İş Deneyimi Ekle</button>
+            <button id="btnAdd" type="button" onclick="EducationInfoCreate()" class="btn btn-primary btn-duplicator">Eğitim Bilgisi Ekle</button>
         </div>
 
 

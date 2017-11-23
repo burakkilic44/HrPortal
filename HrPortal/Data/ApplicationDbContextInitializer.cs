@@ -51,8 +51,21 @@ namespace HrPortal.Data
             var user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "bilisimkariyernet@gmail.com", Email = "bilisimkariyernet@gmail.com", EmailConfirmed = true, NormalizedEmail = "BILISIMKARIYERNET@GMAIL.COM", NormalizedUserName = "BILISIMKARIYERNET@GMAIL.COM" };
             var task1 = Task.Run(() => userManager.CreateAsync(user, "Hr123+"));
             task1.Wait();
-            var task2 = Task.Run(() => userManager.AddToRoleAsync(user, "Admin"));
+            var task2 = Task.Run(() => userManager.AddToRoleAsync(user, "Employer"));
             task2.Wait();
+            var user2 = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "cvhavuzu@bilisimkariyer.net", Email = "cvhavuzu@bilisimkariyer.net", EmailConfirmed = true, NormalizedEmail = "CVHAVUZU@BILISIMKARIYER.NET", NormalizedUserName = "CVHAVUZU@BILISIMKARIYER.NET"};
+            var task3 = Task.Run(() => userManager.CreateAsync(user2, "Hr123+"));
+            task3.Wait();
+            var task4 = Task.Run(() => userManager.AddToRoleAsync(user2, "Admin"));
+            task4.Wait();
+            var user3 = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "muslumkiliceee@gmail.com", Email = "muslumkiliceee@gmail.com", EmailConfirmed = true, NormalizedEmail = "MUSLUMKILICEEE@GMAIL.COM", NormalizedUserName = "MUSLUMKILICEEE@GMAIL.COM" };
+            var task5 = Task.Run(() => userManager.CreateAsync(user3, "Hr123+"));
+            task5.Wait();
+            var task6 = Task.Run(() => userManager.AddToRoleAsync(user3, "Candidate"));
+            task6.Wait();
+
+
+
         }
 
         private void CreateSettings()

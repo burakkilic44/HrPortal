@@ -9,6 +9,11 @@ namespace HrPortal.Models
 {
     public class EducationInfo:BaseEntity
     {
+       public EducationInfo():base()
+        {
+            StartDate= DateTime.Now;
+            EndDate = DateTime.Now;
+        }
         [Required(ErrorMessage = "Eğitim Seviyesi alanı gereklidir.")]
         [Display(Name = "Eğitim Seviyesi")]
         public EducationLevel EducationLevel{ get; set; }

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<EducationInfo>
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <header class="section-header">
+        <span>Eğitim Durumu</span>
+        <h2>Eğitim Bilgileri</h2>
+    </header>
+
+   @foreach (var item in Model)
+   {
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="item-block">
+                <div class="item-form">
+                    <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group">
+                                <input asp-for="@item.Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                <span asp-validation-for="@item.Photo" class="text-danger"></span>
+                                <span class="help-block">Please choose a square logo</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="form-group">
+                                <select asp-for="@item.EducationLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationLevel>()">
+                                    <option selected>Eğitim Düzeyi Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="@item.EducationLevel" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@item.Department" type="text" class="form-control" placeholder="Bölüm, Bkz. Bilgisayar Mühendisliği">
+                                <span asp-validation-for="@item.Department" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@item.SchoolName" type="text" class="form-control" placeholder="Okul Adı, Bkz. Yıldız Teknik Üniversitesi">
+                                <span asp-validation-for="@item.SchoolName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Başlangıç tarihi</span>
+                                    <input asp-for="@item.StartDate" type="text" class="form-control" placeholder="bkz. 01.01.2012">
+                                    <span asp-validation-for="@item.StartDate" class="text-danger"></span>
+                                    <span class="input-group-addon">Biriş tarihi</span>
+                                    <input asp-for="@item.EndDate" type="text" class="form-control" placeholder="bkz. 01.01.2016">
+                                    <span asp-validation-for="@item.EndDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea asp-for="@item.Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                <span asp-validation-for="@item.Notes" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <br>
+            <button id="btnAdd" type="button" onclick="EducationInfoEdit()" class="btn btn-primary btn-duplicator">Eğitim Bilgisini Güncelle</button>
+        </div>
+    </div>
+   }
+</div>
+
+

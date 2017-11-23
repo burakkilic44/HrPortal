@@ -253,7 +253,7 @@ namespace HrPortal.Controllers
         {
             if (model.AvatarImage != null && model.AvatarImage.Length > 0)
             {
-                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
                 var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
                 if (!supportedTypes.Contains(fileExt))
                 {
