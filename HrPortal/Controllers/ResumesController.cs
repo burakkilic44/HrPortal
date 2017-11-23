@@ -108,12 +108,14 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
-        public IActionResult Remove(string id)
+        public IActionResult Delete(string id)
         {
-            var resume = resumeRepository.Get(id);
-            ViewBag.EducationInfos = new SelectList(educationInfoRepository.GetAll().OrderBy(c => c.EducationLevel).ToList(), "Id", "Name");
-            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
-            resumeRepository.Delete(resume);
+            educationInfoRepository.Delete(e => e.ResumeId == id);
+            experienceRepository.Delete(e => e.ResumeId == id);
+            skillRepository.Delete(e => e.ResumeId == id);
+            certificateRepository.Delete(e => e.ResumeId == id);
+            languageInfoRepository.Delete(e => e.ResumeId == id);
+            resumeRepository.Delete(r => r.Id == id);
             return RedirectToAction("Index");
         }
 
@@ -199,6 +201,18 @@ namespace HrPortal.Controllers
                 experienceRepository.Update(experience);
             }
             return Json("Success");
+        }
+
+        [HttpPost]
+        public JsonResult ExperienceDelete(string ResumeId)
+        {
+            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                experienceRepository.Delete(experience);
+            }
+            return Json("Success");
+            
         }
 
         [Authorize(Roles = "Candidate,Admin")]

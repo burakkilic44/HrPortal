@@ -13,7 +13,7 @@
                 <h3>@Model.Sector</h3>
             </div>
             <hr>
-            <p class="lead">@Html.Raw(Model.About)</p>
+            <p class="lead">@Html.Raw(Model.ShortDescription)</p>
             
             <ul class="details cols-3">
                 <li>
@@ -23,7 +23,7 @@
 
                 <li>
                     <i class="fa fa-globe"></i>
-                    <a href="#">@Model.GooglePlus</a>
+                    <a href="#">@Model.WebAddress</a>
                 </li>
 
                 <li>
@@ -33,7 +33,7 @@
 
                 <li>
                     <i class="fa fa-birthday-cake"></i>
-                    <span>@Model.CreateDate</span>
+                    <span>Kuruluş Yılı: @Model.EstablishYear</span>
                 </li>
 
                 <li>
