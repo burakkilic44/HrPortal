@@ -108,15 +108,24 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        public IActionResult Remove(string id)
+        {
+            var resume = resumeRepository.Get(id);
+            ViewBag.EducationInfos = new SelectList(educationInfoRepository.GetAll().OrderBy(c => c.EducationLevel).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            resumeRepository.Delete(resume);
+            return RedirectToAction("Index");
+        }
+
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EducationInfosIndex() //Index sayfası
+        public IActionResult EducationInfosIndex() 
         {
            var educationInfos = educationInfoRepository.GetAll();
             return View(educationInfos);
         }
 
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EducationInfoCreate() //Index sayfası
+        public IActionResult EducationInfoCreate()
         {
             var EducationInfo = new EducationInfo();
             return View(EducationInfo);
@@ -124,7 +133,7 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult EducationInfoCreate(EducationInfo educationinfo) //Eğitim bilgisi ekleme
+        public JsonResult EducationInfoCreate(EducationInfo educationinfo) 
         {
             if (ModelState.IsValid)
             {
@@ -150,7 +159,7 @@ namespace HrPortal.Controllers
         }
 
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult ExperienceIndex() //Index sayfası
+        public IActionResult ExperienceIndex() 
         {
             var experience = experienceRepository.GetAll();
             return View(experience);
@@ -165,7 +174,7 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult ExperienceCreate(Experience experience) //Deneyim ekleme
+        public JsonResult ExperienceCreate(Experience experience)
         {
             if (ModelState.IsValid)
             {
@@ -183,7 +192,7 @@ namespace HrPortal.Controllers
 
         
         [HttpPost]
-        public JsonResult ExperienceEdit(Experience experience) //experience düzenle
+        public JsonResult ExperienceEdit(Experience experience) 
         {
             if (ModelState.IsValid)
             {
@@ -307,7 +316,7 @@ namespace HrPortal.Controllers
         }
        
         [HttpPost]
-        public JsonResult LanguageInfoEdit(LanguageInfo languageInfo) //Skill düzenleme
+        public JsonResult LanguageInfoEdit(LanguageInfo languageInfo) 
         {
             if (ModelState.IsValid)
             {
