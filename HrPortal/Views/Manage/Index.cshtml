@@ -2,87 +2,86 @@
 @model IndexViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@{
-    ViewData["Title"] = "Profil";
-    ViewData.AddActivePage(ManageNavPages.Index);
-}
 
-<h4>@ViewData["Title"]</h4>
-@Html.Partial("_StatusMessage", Model.StatusMessage)
+            @{
+                ViewData["Title"] = "Profil";
+                ViewData.AddActivePage(ManageNavPages.Index);
+            }
+
+            <h4>@ViewData["Title"]</h4>
+            @Html.Partial("_StatusMessage", Model.StatusMessage)
+
 <main>
-    <section>
-    <div class="row">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div style=" border:1px; width :200px; height:200px" class="form-group">
+                        @{
 
-        <div class="col-md-6">
-            <form method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div style=" border:1px; width :200px; height:200px" class="form-group">
-                    @{
+                            var user = await UserManager.FindByNameAsync(User.Identity.Name);
 
-                        var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                        }
+                        <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/account/@user.Photo">
+                        <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
 
-                    }
-                    <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/account/@user.Photo">
-                    <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
-                    <span asp-validation-for="Photo" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Username"></label>
-                    <input asp-for="Username" class="form-control" disabled />
-                </div>
-                <div class="form-group">
-                    <label asp-for="FirstName"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName"></label>
-                    <input asp-for="LastName" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="LocationId"></label>
-                    <select asp-for="LocationId" class="form-control" asp-items="@ViewBag.Locations">
-                        <option value="">Seçiniz</option>
-                    </select>
-                    <span asp-validation-for="LocationId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="OccupationId"></label>
-                    <select asp-for="OccupationId" class="form-control" asp-items="@ViewBag.Occupations">
-                        <option value="">Seçiniz</option>
-                    </select>
-                    <span asp-validation-for="OccupationId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    @if (Model.IsEmailConfirmed)
-                    {
-                        <div class="input-group">
+                    <div class="form-group">
+                        <label asp-for="Username"></label>
+                        <input asp-for="Username" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LocationId"></label>
+                        <select asp-for="LocationId" class="form-control" asp-items="@ViewBag.Locations">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OccupationId"></label>
+                        <select asp-for="OccupationId" class="form-control" asp-items="@ViewBag.Occupations">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="OccupationId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        @if (Model.IsEmailConfirmed)
+                        {
+                            <div class="input-group">
+                                <input asp-for="Email" class="form-control" />
+                                <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                            </div>
+                        }
+                        else
+                        {
                             <input asp-for="Email" class="form-control" />
-                            <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
-                        </div>
-                    }
-                    else
-                    {
-                        <input asp-for="Email" class="form-control" />
-                        <button asp-action="SendVerificationEmail" class="btn btn-primary" style="margin-top:20px;">Onaylama Maili Gönder</button>
-                    }
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
+                            <button asp-action="SendVerificationEmail" class="btn btn-primary" style="margin-top:20px;">Onaylama Maili Gönder</button>
+                        }
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="PhoneNumber"></label>
-                    <input asp-for="PhoneNumber" class="form-control" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-success" style="margin-bottom:20px;">Kaydet</button>
-            </form>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="margin-bottom:20px;">Kaydet</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-    }
-    
-    </section>
+        @section Scripts {
+            @await Html.PartialAsync("_ValidationScriptsPartial")
+        }
+
 </main>
