@@ -7,6 +7,7 @@ using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Controllers
 {
@@ -78,14 +79,17 @@ namespace HrPortal.Controllers
            
         }
 
-
+        [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Apply(string id)
         {
             var jobApplication = new JobApplication() { JobId = id, Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
             ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name && r.IsActive == true && r.IsApproved == true,  "Location");
             return View(jobApplication);
         }
+
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
+       
         public IActionResult Apply(JobApplication jobApplication)
         {
             if (ModelState.IsValid)
