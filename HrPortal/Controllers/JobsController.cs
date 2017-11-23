@@ -44,7 +44,7 @@ namespace HrPortal.Controllers
         public IActionResult Create()
         {
             var job = new Job();
-            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Companies = new SelectList(companyRepository.GetMany(r => r.CreatedBy == User.Identity.Name).OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
            
             return View(job);
