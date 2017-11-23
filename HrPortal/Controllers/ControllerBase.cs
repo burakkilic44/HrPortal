@@ -11,14 +11,10 @@ namespace HrPortal.Controllers
 {
     public class ControllerBase : Controller
     {
-        private IRepository<Audit> auditRepository;
-        public ControllerBase()
-        {
-            this.auditRepository = (IRepository<Audit>)HttpContext.RequestServices.GetService(typeof (Repository<Audit>));
-        }
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
+            var auditRepository = (IRepository<Audit>)HttpContext.RequestServices.GetService(typeof(IRepository<Audit>));
             var audit = new Audit();
             // entityid'yi al
             // action adını al
