@@ -11,11 +11,18 @@ namespace HrPortal.Controllers
 {
     public class ControllerBase : Controller
     {
+        private ActionExecutedContext filterContext;
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             var auditRepository = (IRepository<Audit>)HttpContext.RequestServices.GetService(typeof(IRepository<Audit>));
             var audit = new Audit();
+
+            
+            audit.Ip = context.HttpContext.Request.Host.ToString();
+            audit.Action = context.ActionDescriptor.DisplayName;
+            audit.EntityId = context.Controller.ToString();
+
             // entityid'yi al
             // action adını al
             // varsa eski veriyi al
