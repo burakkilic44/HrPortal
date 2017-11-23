@@ -117,8 +117,7 @@
                 <div class="form-group">
                     <textarea asp-for="Message" class="form-control" rows="5" placeholder="Mesaj"></textarea>
                 </div>   
-                @if (Model.JobId != Model.Id)
-                {
+               
                     <div class="row">
                         <div class="col-xs-6 col-md-3">
 
@@ -126,17 +125,7 @@
                            
                         </div>
                     </div>
-                }
-                else if (Model.JobId == Model.Id)
-                {
-                    <div class="row">
-                        <div class="col-xs-6 col-md-3">
-
-                            <button type="submit" class="btn btn-block btn-primary disabled">BAŞVURUYU GÖNDER</button>
-
-                        </div>
-                    </div>
-                }
+               
 
         </section>
         <!-- END Custom application -->
