@@ -44,7 +44,7 @@ namespace HrPortal.Controllers
         public IActionResult Create()
         {
             var job = new Job();
-            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Companies = new SelectList(companyRepository.GetMany(r => r.CreatedBy == User.Identity.Name).OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
            
             return View(job);
@@ -84,7 +84,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Apply(string id)
         {
-            var jobApplication = new JobApplication() { JobId = id, Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
+            var jobApplication = new JobApplication() { JobId = id,Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
             ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name && r.IsActive == true && r.IsApproved == true,  "Location");
             return View(jobApplication);
         }
@@ -94,8 +94,13 @@ namespace HrPortal.Controllers
        
         public IActionResult Apply(JobApplication jobApplication)
         {
-            if (ModelState.IsValid)
+            var oldJobApplication = jobApplicationRepository.Get(j => j.JobId == jobApplication.JobId && j.CreatedBy == User.Identity.Name);
+            if (oldJobApplication != null) // kayıt dönerse daha önce başvurmuş demektir
             {
+                ModelState.AddModelError("DuplicateRecord", "Bu ilana daha önce başvurmuştunuz.");
+            }
+            else if (ModelState.IsValid)
+            {                
                 jobApplicationRepository.Insert(jobApplication);
                 return RedirectToAction("SuccessfullyApplication");
 
