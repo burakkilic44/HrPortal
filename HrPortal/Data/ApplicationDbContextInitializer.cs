@@ -48,7 +48,7 @@ namespace HrPortal.Data
         }
         private void CreateDefaultUsers()
         {
-            var user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "bilisimkariyernet@gmail.com", Email = "bilisimkariyernet@gmail.com", EmailConfirmed = true, NormalizedEmail = "BILISIMKARIYERNET@GMAIL.COM", NormalizedUserName = "BILISIMKARIYERNET@GMAIL.COM" };
+            var user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "bilisimkariyernet@gmail.com", Email = "bilisimkariyernet@gmail.com", EmailConfirmed = true, NormalizedEmail = "BILISIMKARIYERNET@GMAIL.COM", NormalizedUserName = "BILISIMKARIYERNET@GMAIL.COM", IsEmployer = true};
             var task1 = Task.Run(() => userManager.CreateAsync(user, "Hr123+"));
             task1.Wait();
             var task2 = Task.Run(() => userManager.AddToRoleAsync(user, "Employer"));
