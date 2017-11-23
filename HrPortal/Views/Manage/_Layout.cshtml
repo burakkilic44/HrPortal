@@ -5,28 +5,32 @@
 
 
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
-    <div class="container no-shadow">
+    <div class="container page-name">
         <h1 class="text-center">Hesap Yönetimi</h1>
         <p class="lead text-center">Hesap Ayarlarını Değiştirmek için Formu Kullanın</p>
     </div>
 </header>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-          
-            <hr />
-            <div class="row">
-                <div class="col-md-3">
-                    @await Html.PartialAsync("_ManageNav")
-                </div>
-                <div class="col-md-9">
-                    @RenderBody()
+
+<main class="container">
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-3">
+                        @await Html.PartialAsync("_ManageNav")
+                    </div>
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@section Scripts {
-    @RenderSection("Scripts", required: false)
-}
-        
+
+        @section Scripts {
+            @RenderSection("Scripts", required: false)
+        }
+
+    </section>
+</main>

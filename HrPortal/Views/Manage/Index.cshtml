@@ -9,7 +9,8 @@
 
 <h4>@ViewData["Title"]</h4>
 @Html.Partial("_StatusMessage", Model.StatusMessage)
-<div class="container">
+<main>
+    <section>
     <div class="row">
 
         <div class="col-md-6">
@@ -19,20 +20,20 @@
                     @{
 
                         var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                        
+
                     }
                     <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/@user.Photo">
                     <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
                     <span asp-validation-for="Photo" class="text-danger"></span>
                 </div>
-             
+
                 <div class="form-group">
                     <label asp-for="Username"></label>
-                    <input asp-for="Username" class="form-control" disabled/>
+                    <input asp-for="Username" class="form-control" disabled />
                 </div>
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
-                    <input asp-for="FirstName" class="form-control"  />
+                    <input asp-for="FirstName" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label asp-for="LastName"></label>
@@ -78,7 +79,10 @@
             </form>
         </div>
     </div>
-</div>
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+    
+    </section>
+</main>
