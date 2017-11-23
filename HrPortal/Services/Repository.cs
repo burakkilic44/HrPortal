@@ -89,6 +89,7 @@ namespace HrPortal.Services
             }
             entity.UpdateDate = DateTime.Now;
             entity.UpdatedBy = userName;
+            // eğer mevcut kaydı oluşturan ile güncelleyen farklı burada izin vermeyebilirsin
             context.Update(entity);
             context.SaveChanges();
         }
