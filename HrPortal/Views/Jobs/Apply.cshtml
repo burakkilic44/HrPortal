@@ -11,7 +11,7 @@
             <h1 class="text-center">İş başvurusunda bulunun</h1>
             <p class="lead text-center">Online özgeçmişinizle başvurun, iş için yeni özgeçmiş oluşturun veya özel bir uygulama yapın.</p>
             <hr>
-
+            <div asp-validation-summary="All" class="text-danger"></div>
             <!-- Job detail -->
             <a class="item-block item-block-flat"  asp-controller="Jobs" asp-action="Details" asp-route-id="@Model.JobId">
                 <header>

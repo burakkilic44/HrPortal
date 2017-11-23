@@ -93,8 +93,13 @@ namespace HrPortal.Controllers
        
         public IActionResult Apply(JobApplication jobApplication)
         {
-            if (ModelState.IsValid)
+            var oldJobApplication = jobApplicationRepository.Get(j => j.JobId == jobApplication.JobId && j.CreatedBy == User.Identity.Name);
+            if (oldJobApplication != null) // kayıt dönerse daha önce başvurmuş demektir
             {
+                ModelState.AddModelError("DuplicateRecord", "Bu ilana daha önce başvurmuştunuz.");
+            }
+            else if (ModelState.IsValid)
+            {                
                 jobApplicationRepository.Insert(jobApplication);
                 return RedirectToAction("SuccessfullyApplication");
 
