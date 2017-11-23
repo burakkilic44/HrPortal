@@ -390,6 +390,22 @@
 
         }
 
+          function ExperienceDelete() {
+            $.post("/Resumes/ExperienceDelete",
+                {
+                    ResumeId: "@(Model.Id)",
+                    Photo: $("#Photo").val(),
+                    CompanyName: $("#CompanyName").val(),
+                    Position: $("#Position").val(),
+                    Notes: $("#Notes").val(),
+                },
+                function(data) {
+                    alert(data);
+
+                });
+
+        }
+
 
         function SkillEdit() {
             $.post("/Resumes/SkillEdit",
