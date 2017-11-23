@@ -60,21 +60,19 @@
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="Languages" asp-action="Index">Diller</a></li>
                                 <li><a asp-controller="Occupations" asp-action="Index">Meslekler</a></li>
-                                <li><a asp-controller="Skills" asp-action="Index">Yetkinlikler</a></li>                              
+                                <li><a asp-controller="Skills" asp-action="Index">Yetkinlikler</a></li>
                                 <li><a asp-controller="Tags" asp-action="Index">Etiketler</a></li>
                                 <li><a asp-controller="Locations" asp-action="Index">Konumlar</a></li>
+                                <li><a asp-controller="Settings" asp-action="Edit">Ayarlar</a></li>
                             </ul>
-                        </li>
-              
-                        
+                            </ul>
 
-                    </ul>
                     <div class="btn-group pull-right">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-user"></i>Admin<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">                                                        
-                            <li><a asp-controller="" asp-action="Index" ><i class="icon-share"></i>Çıkış Yap</a></li>
+                            <li><a  asp-area="" asp-controller="" asp-action="Index" ><i class="icon-share"></i>Çıkış Yap</a></li>
                         </ul>
                     </div>
                 </div>

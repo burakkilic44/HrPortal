@@ -1,15 +1,192 @@
-﻿
+﻿@model IEnumerable<HrPortal.Models.ApplicationUser>
+
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/maruti/js/bootstrap.min.js"></script>
-<script src="~/maruti/js/jquery.min.js"></script>
-<link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-<link href="~/maruti/css/Body.css" rel="stylesheet" />
 
 
-<h2>Kullanıcılar</h2>
+<table class="display responsive nowrap" id="tblRecords">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsEmployer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsApproved)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApproveDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NormalizedUserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NormalizedEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PasswordHash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecurityStamp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConcurrencyStamp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEnd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessFailedCount)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEmployer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApproveDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NormalizedUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NormalizedEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordHash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecurityStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConcurrencyStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LockoutEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LockoutEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessFailedCount)
+            </td>
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |              
+                <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Turkish.json"
+                }
+            });
+        });
+
+    </script>
+
+}
+
+
 

@@ -83,7 +83,7 @@ namespace HrPortal.Controllers
         public IActionResult Apply(string id)
         {
             var jobApplication = new JobApplication() { JobId = id, Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
-            ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name);
+            ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name && r.IsActive == true && r.IsApproved == true,  "Location");
             return View(jobApplication);
         }
 
@@ -98,6 +98,7 @@ namespace HrPortal.Controllers
                 return RedirectToAction("SuccessfullyApplication");
 
             }
+            ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name && r.IsActive == true && r.IsApproved == true, "Location");
             return View(jobApplication);
         }
 
