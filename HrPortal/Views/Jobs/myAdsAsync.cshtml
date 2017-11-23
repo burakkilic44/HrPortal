@@ -31,33 +31,19 @@
                             <span class="location">
                                 @if (Jobitem.JobLocations != null)
                                 {
-                                    foreach (var location in Jobitem.JobLocations)
+                                    foreach (var location in Jobitem.JobLocations.Select(i => i.Location.Name).ToList())
                                     {
                                         @location
-                                        <text>, </text>
-
+                                        <text></text>
                                     }
 
                                 }
                             </span>
-                            <span class="label label-success">@Jobitem.WorkingStyle</span>
+                            <span class="label label-success">@Jobitem.WorkingStyle.GetDisplayName()</span>
                         </div>
                     </header>
                 </a>
             </div>
-
-            <div class="col-xs-2">
-                <a class="btn-danger" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> İlandan Kaldır</a>
-            </div>
-
-            <div class="col-xs-2">
-                <a class="btn-default" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> Düzenle</a>
-            </div>
-
         }
-        <!-- Job item -->
-        <!-- END Job item -->
-        <!-- Job item -->
-
     </div>
     </div>
