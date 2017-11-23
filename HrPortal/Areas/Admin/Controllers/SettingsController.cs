@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using HrPortal.Services;
+using HrPortal.Models;
 
 namespace HrPortal.Areas.Admin.Controllers
 {
@@ -11,9 +13,15 @@ namespace HrPortal.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class SettingsController : Controller
     {
-        public IActionResult Index()
+        private IRepository<Setting> settingRepository;
+        public SettingsController(IRepository<Setting> settingRepository)
         {
-            return View();
+            this.settingRepository = settingRepository;
+        }
+        public IActionResult Edit()
+        {
+            var setting = settingRepository.GetAll().FirstOrDefault();
+            return View(setting);
         }
     }
 }
