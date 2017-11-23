@@ -32,6 +32,7 @@ namespace HrPortal.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Occupation> Occupations { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }
+        public DbSet<Audit> Audits { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

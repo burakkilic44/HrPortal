@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Controllers
 {
-    public class CompaniesController : Controller
+    public class CompaniesController : ControllerBase
     {
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
