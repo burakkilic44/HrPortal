@@ -201,6 +201,7 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [HttpPost]
         public JsonResult ExperienceDelete(string ResumeId)
         {
             var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
