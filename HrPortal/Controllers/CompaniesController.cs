@@ -41,7 +41,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Employer , Admin")]
         public IActionResult Details(string id)
         {
-            var comp = companyRepository.Get(id, "Jobs", "Location");
+            var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
             return View(comp);
         }
         [Authorize(Roles = "Employer , Admin")]

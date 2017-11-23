@@ -60,15 +60,18 @@
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="Languages" asp-action="Index">Diller</a></li>
                                 <li><a asp-controller="Occupations" asp-action="Index">Meslekler</a></li>
-                                <li><a asp-controller="Skills" asp-action="Index">Yetkinlikler</a></li>                              
+                                <li><a asp-controller="Skills" asp-action="Index">Yetkinlikler</a></li>
                                 <li><a asp-controller="Tags" asp-action="Index">Etiketler</a></li>
                                 <li><a asp-controller="Locations" asp-action="Index">Konumlar</a></li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Genel Ayarlar</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a tabindex="-1" href="#">Hakkımızda</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-              
-                        
+                            </ul>
 
-                    </ul>
                     <div class="btn-group pull-right">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-user"></i>Admin<span class="caret"></span>

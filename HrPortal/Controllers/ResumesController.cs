@@ -133,7 +133,7 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
         [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EducationInfoEdit(string id, string ResumeId) 
+        public IActionResult EducationInfoEdit(string ResumeId) 
         {           
             var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
             return View(educationinfo);
@@ -174,13 +174,14 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
        
-        [Authorize(Roles = "Cendidate, Admin")]
-        public IActionResult ExperienceEdit(string id) //experience düzeneleme getir
+        
+        public IActionResult ExperienceEdit(string ResumeId) 
         {
-            var experience = experienceRepository.Get(id);
+            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
             return View(experience);
         }
-        [Authorize(Roles = "Candidate,Admin")]
+
+        
         [HttpPost]
         public JsonResult ExperienceEdit(Experience experience) //experience düzenle
         {
@@ -214,13 +215,13 @@ namespace HrPortal.Controllers
             }
             return Json("Success");
         }
-        [Authorize(Roles = "Cendidate, Admin")]
-        public IActionResult SkillEdit(string id) //Skill düzenleme getir
+       
+        public IActionResult SkillEdit(string ResumeId) //Skill düzenleme getir
         {
-            var skill = skillRepository.Get(id);
+            var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
             return View(skill);
         }
-        [Authorize(Roles = "Candidate,Admin")]
+        
         [HttpPost]
         public JsonResult SkillEdit(Skill skill) //Skill düzenleme
         {
@@ -255,13 +256,13 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Cendidate, Admin")]
-        public IActionResult CertificateEdit(string id) //Sertifika bilgileri düzenleme getir
+        
+        public IActionResult CertificateEdit(string ResumeId) //Sertifika bilgileri düzenleme getir
         {
-            var certificate = certificateRepository.Get(id);
+            var certificate = certificateRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
             return View(certificate);
         }
-        [Authorize(Roles = "Candidate,Admin")]
+        
         [HttpPost]
         public JsonResult CertificateEdit(Certificate certificate) //Sertifika bilgileri düzenleme
         {
@@ -298,13 +299,13 @@ namespace HrPortal.Controllers
             return Json("Success");      
         }
 
-        [Authorize(Roles = "Cendidate, Admin")]
-        public IActionResult LanguageInfoEdit(string id) //Skill düzenleme getir
+       
+        public IActionResult LanguageInfoEdit(string ResumeId) //Skill düzenleme getir
         {
-            var languageInfo = languageInfoRepository.Get(id);
-            return View(languageInfo);
+            var languageinfo = languageInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            return View(languageinfo);
         }
-        [Authorize(Roles = "Candidate,Admin")]
+       
         [HttpPost]
         public JsonResult LanguageInfoEdit(LanguageInfo languageInfo) //Skill düzenleme
         {
