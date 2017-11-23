@@ -201,6 +201,17 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        public JsonResult ExperienceDelete(string ResumeId)
+        {
+            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                experienceRepository.Delete(experience);
+            }
+            return Json("Success");
+            
+        }
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult SkillIndex() 
         {
