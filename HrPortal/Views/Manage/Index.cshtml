@@ -22,7 +22,7 @@
                         var user = await UserManager.FindByNameAsync(User.Identity.Name);
 
                     }
-                    <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/@user.Photo">
+                    <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/account/@user.Photo">
                     <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
                     <span asp-validation-for="Photo" class="text-danger"></span>
                 </div>
