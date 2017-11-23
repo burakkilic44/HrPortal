@@ -28,7 +28,9 @@
 
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
-                                <select asp-for="EducationLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationLevel>()"></select>
+                                <select asp-for="EducationLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationLevel>()">
+                                    <option selected>Eğitim Düzeyi Seçiniz</option>
+                                </select>
                                 <span asp-validation-for="EducationLevel" class="text-danger"></span>
                             </div>
 
