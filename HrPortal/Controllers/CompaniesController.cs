@@ -66,7 +66,7 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Company company)
+        public async Task<IActionResult> Create(Company company)
         {
             if (company.AvatarImage != null)
             {
