@@ -18,7 +18,7 @@
             <ul class="details cols-3">
                 <li>
                     <i class="fa fa-map-marker"></i>
-                    <span>@Model.Location.Name</span>
+                    <span>@Model.Location?.Name</span>
                 </li>
 
                 <li>
@@ -57,8 +57,14 @@
                 </ul>
 
                 <div class="action-buttons">
-                    <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">Düzenle</a>
-                    <a class="btn btn-danger" asp-action="Remove" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+                    @if ((User.IsInRole("Employer") && Model.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">Düzenle</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+
+
+                    }
+                   
                 </div>
             </div>
 
