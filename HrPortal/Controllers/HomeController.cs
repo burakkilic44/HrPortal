@@ -34,8 +34,8 @@ namespace HrPortal.Controllers
         {
             ViewBag.ResumeCount = resumeRepository.Count();
             ViewBag.jobCount = jobRepository.Count();
-            ViewBag.jobs = jobRepository.GetAll("Company","JobLocations","JobLocations.Location");
-            ViewBag.resumes = resumeRepository.GetAll("EducationInfos");
+            ViewBag.jobs = jobRepository.GetMany(s=>s.PublishDate <= DateTime.Now && DateTime.Now <= s.EndDate && s.IsActive == true, "Company","JobLocations","JobLocations.Location");
+            ViewBag.resumes = resumeRepository.GetMany(s=>s.IsActive == true && s.IsApproved  == true, "EducationInfos");
             ViewBag.Locations = locationRepository.GetAll();
             return View();
         }

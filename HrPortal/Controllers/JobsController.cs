@@ -44,21 +44,23 @@ namespace HrPortal.Controllers
             var job = new Job();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+           
             return View(job);
 
 
         }
         [HttpPost]
-        public IActionResult Create(Job job,string[] LocationId)
+        public IActionResult Create(Job job)
         {
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
                 job.JobLocations = new HashSet<JobLocation>();
                 jobRepository.Insert(job);
-                foreach (var item in LocationId)
+                foreach (var item in job.LocationId)
                 {
                     job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                    
                 }
                 jobRepository.Update(job);
                 return RedirectToAction("SuccessfullyCreated");
@@ -79,11 +81,9 @@ namespace HrPortal.Controllers
 
         public IActionResult Apply(string id)
         {
-            var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
+            var jobApplication = new JobApplication() { JobId = id, Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
             ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name);
-
-
-            return View(job);
+            return View(jobApplication);
         }
         [HttpPost]
         public IActionResult Apply(JobApplication jobApplication)
@@ -112,7 +112,9 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
+
                 jobRepository.Update(job);
+
                 return RedirectToAction("Index");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
