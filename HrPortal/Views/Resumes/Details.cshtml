@@ -115,8 +115,11 @@
             </ul>
 
             <div class="action-buttons">
+                @if ((User.IsInRole("Candidate") && Model.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
+                {
                 <a class="btn btn-gray" href="#">CV İNDİR</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+                }
             </div>
         </div>
     </div>

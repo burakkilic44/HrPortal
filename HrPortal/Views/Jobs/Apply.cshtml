@@ -11,14 +11,24 @@
             <h1 class="text-center">İş başvurusunda bulunun</h1>
             <p class="lead text-center">Online özgeçmişinizle başvurun, iş için yeni özgeçmiş oluşturun veya özel bir uygulama yapın.</p>
             <hr>
-
+            <div asp-validation-summary="All" class="text-danger"></div>
             <!-- Job detail -->
-            <a class="item-block item-block-flat"  asp-controller="Jobs" asp-action="Details" asp-route-id="@Model.JobId">
-                <header>
+            
+        @if (Model.Job != null)
+        {
+          <a class="item-block item-block-flat" asp-controller="Jobs" asp-action="Details" asp-route-id="@Model.JobId">
+               
+             
+              <header>
                     <img src="assets/img/logo-google.jpg" alt="">
                     <div class="hgroup">
-                        <h4>@Model.Job.Title</h4>
-                        <h5>@Model.Job.Company.Name</h5>
+                  
+                        <h4>
+                            @Model.Job.Title;
+                        </h4>
+                        <h5>@if (Model.Job != null)
+                        {
+                        @Model.Job.Company.Name}</h5>
                     </div>
                     <div class="header-meta">
                         <i class="fa fa-map-marker"></i>
@@ -28,14 +38,14 @@
                                 foreach (var location in Model.Job.JobLocations.Select(s => s.Location.Name).ToList())
                                 {
                                     @location
-                                    <text> </text>
+                                    <text>,</text>
                                 }
                             }
                         </span><br />
                     </div>
                 </header>
             </a>
-
+            }
             <!-- END Job detail -->
 
             <div class="button-group">
@@ -94,8 +104,8 @@
                             <!-- END Resume item -->
                         </div>
                     </div>
-                        }
                     }
+                }
                 <br />
                 <div class="row">
                     <div class="col-xs-12 col-md-3" style="margin-top:10px;margin-left:15px;">
@@ -117,8 +127,7 @@
                 <div class="form-group">
                     <textarea asp-for="Message" class="form-control" rows="5" placeholder="Mesaj"></textarea>
                 </div>   
-                @if (Model.JobId != Model.Id)
-                {
+               
                     <div class="row">
                         <div class="col-xs-6 col-md-3">
 
@@ -126,17 +135,7 @@
                            
                         </div>
                     </div>
-                }
-                else if (Model.JobId == Model.Id)
-                {
-                    <div class="row">
-                        <div class="col-xs-6 col-md-3">
-
-                            <button type="submit" class="btn btn-block btn-primary disabled">BAŞVURUYU GÖNDER</button>
-
-                        </div>
-                    </div>
-                }
+               
 
         </section>
         <!-- END Custom application -->

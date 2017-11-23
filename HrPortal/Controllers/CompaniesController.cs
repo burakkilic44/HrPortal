@@ -48,7 +48,7 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer,Admin")]
+        
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
