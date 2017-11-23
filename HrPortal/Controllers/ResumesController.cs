@@ -161,7 +161,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfoEdit(string ResumeId) 
         {           
-            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId);
+            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId);   
             return View(educationinfo);
         }
         [Authorize(Roles = "Candidate,Admin")]
