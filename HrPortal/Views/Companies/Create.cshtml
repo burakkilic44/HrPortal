@@ -51,20 +51,9 @@
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-3">
                      
-                            <select name="LocationId" required class="form-control selectpicker" multiple data-header="Konum seçiniz">
-
-                                @foreach (var location in (IList<Location>)ViewBag.Locations)
-                                {
-                                    @if (Model.LocationId != null && Model.LocationId.Contains(location.Id))
-                                    {
-                                        <option value="@location.Id" selected="selected">@location.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@location.Id">@location.Name</option>
-
-                                    }
-                                }
+                            <select asp-for="LocationId" class="form-control selectpicker" asp-items="@ViewBag.Locations">
+                                <option value="">Bölge Seçiniz</option>
+                              
                             </select>
                             <span asp-validation-for="Location" class="text-danger"></span>
                         </div>
