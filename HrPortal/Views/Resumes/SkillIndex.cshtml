@@ -8,28 +8,29 @@
         <span>Uzmanlık Alanları</span>
         <h2>Yetenekler</h2>
     </header>
+@foreach (var item in Model)
+{
     <div class="row">
         <div class="col-xs-12">
             <div class="item-block">
                 <div class="item-form">
                     <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-                      @foreach (var item in Model)
-                      {
+                     
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6">                  
                             <div class="form-group">
+                                <span class="input-group-addon">Yetenek Adı</span>
                                 @item.Name
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <div class="input-group">
+                                <span class="input-group-addon">Düzey</span>
                                     @item.Level
                                 </div>
                             </div>
                         </div>
-                    </div>
-                      }
+                    </div>                      
                 </div>
             </div>
         </div>
@@ -37,5 +38,5 @@
             <br>
             <button id="btnAdd" type="button" onclick="SkillCreate()" class="btn btn-primary btn-duplicator">Yetenek Ekle</button>
         </div>
+}
     </div>
-</div>
