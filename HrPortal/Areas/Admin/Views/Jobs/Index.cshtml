@@ -5,9 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<p>
+
     <center>   <a class="btn btn-success" asp-area="" asp-controller="Jobs" asp-action="Create">İş ilanı Oluştur</a></center>
-</p>
+
 <table class="display responsive nowrap" id="tblRecords">
     <thead>
         <tr>
@@ -127,10 +127,8 @@
                     @Html.DisplayFor(modelItem => item.Occupation.Id)
                 </td>
                 <td>
-
                     <a class="btn btn-warning" asp-area="" asp-controller="Jobs" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
-
-                    <a class="btn btn-danger" asp-area="" asp-controller="Jobs" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Jobs" asp-action="Remove" asp-route-id="@item.Id">Sil</a>
 
                 </td>
             </tr>
