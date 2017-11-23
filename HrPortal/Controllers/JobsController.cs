@@ -72,6 +72,7 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(job);
         }
+        
         public IActionResult Details(string id)
         {
             var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
@@ -106,8 +107,12 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(string id)
         {
-
-            var job = jobRepository.Get(id,"JobLocations");
+            var job = jobRepository.GetMany(j => j.Id == id && (!User.IsInRole("Admin") ? j.CreatedBy == User.Identity.Name : true), "JobLocations").FirstOrDefault();
+            if (job == null)
+            {
+                return NotFound();
+            }
+    
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             job.LocationId = job.JobLocations.Select(s => s.LocationId).ToArray();
@@ -117,13 +122,18 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(Job job)
         {
+
+            if (!User.IsInRole("Admin") && job.CreatedBy != User.Identity.Name)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
 
                 jobRepository.Update(job);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("myAdsAsync");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
@@ -134,16 +144,27 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Delete(string id)
         {
-            var job = jobRepository.Get(id);
+            var job = jobRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+
+            if (job == null)
+            {
+                return NotFound();
+            }
+           
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             jobRepository.Delete(job);
-            return RedirectToAction("Index");
+            return RedirectToAction("index");
         }
-
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Remove(string id)
         {
-            var job = jobRepository.Get(id);
+            var job = jobRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+
+            if (job == null)
+            {
+                return NotFound();
+            }
             job.IsActive = false;
             jobRepository.Update(job);
          
