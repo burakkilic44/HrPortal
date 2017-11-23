@@ -5,59 +5,70 @@
 
 
 
-<header class="page-header bg-img size-lg" style="background-image:url(assets/img/bg-banner3.jpg);">
-    <div class="container no-shadow">
-         <h5>İlanlarım</h5>
+<header class="page-header bg-img">
+    <div class="container page-name">
+        <h1 class="text-center">İlanlarım</h1>
+        <p class="lead text-center">Kaydettiğniz ilanlara buradan ulaşabilirsiniz.</p>
     </div>
 </header>
 
+<main>
+    <section class="no-padding-top bg-alt">
+        <div class="container">
+            <div class="row item-blocks-condensed">
 
-<div class="container">
-    <div class="row item-blocks-condensed">
+                <div class="col-xs-12">
+                    <br>
+                    <h5>Toplam <strong>@(Model.SearchResults.TotalRecordCount)</strong> ilan bulundu...</h5>
+                    <br>
+                </div>
 
-        @foreach (var Jobitem in Model.SearchResults)
+                @foreach (var Jobitem in Model.SearchResults)
 
             {
 
-            <div class="col-xs-8">
-                <a class="item-block" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id">
-                    <header>
-                        <img src="/uploads/jobs/@Jobitem.Company.Photo" alt="@Jobitem.Company.Name">
-                        <div class="hgroup">
-                            <h4>@Jobitem.Title</h4>
-                            <h5>@Jobitem.Company.Name</h5>
-                        </div>
-                        <div class="header-meta">
-                            <span class="location">
-                                @if (Jobitem.JobLocations != null)
-                                {
-                                    foreach (var location in Jobitem.JobLocations)
-                                    {
-                                        @location
-                                        <text>, </text>
+                    <div class="col-xs-8">
+                        <a class="item-block" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id">
+                            <header>
+                                <img src="/uploads/jobs/@Jobitem.Company.Photo" alt="@Jobitem.Company.Name">
+                                <div class="hgroup">
+                                    <h4>@Jobitem.Title</h4>
+                                    <h5>@Jobitem.Company.Name</h5>
+                                </div>
+                                <div class="header-meta">
+                                    <span class="location">
+                                        @if (Jobitem.JobLocations != null)
+                                        {
+                                            foreach (var location in Jobitem.JobLocations)
+                                            {
+                                                @location
+                                                <text>, </text>
 
-                                    }
+                                            }
 
-                                }
-                            </span>
-                            <span class="label label-success">@Jobitem.WorkingStyle</span>
-                        </div>
-                    </header>
-                </a>
+                                        }
+                                    </span>
+                                    <span class="label label-success">@Jobitem.WorkingStyle</span>
+                                </div>
+                            </header>
+                        </a>
+                    </div>
+
+                    <div class="col-xs-2">
+                        <a class="btn-danger" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> İlandan Kaldır</a>
+                    </div>
+
+                    <div class="col-xs-2">
+                        <a class="btn-default" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> Düzenle</a>
+                    </div>
+
+
+                }
+                <!-- Job item -->
+                <!-- END Job item -->
+                <!-- Job item -->
+
             </div>
-
-            <div class="col-xs-2">
-                <a class="btn-danger" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> İlandan Kaldır</a>
-            </div>
-
-            <div class="col-xs-2">
-                <a class="btn-default" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> Düzenle</a>
-            </div>
-
-        }
-        <!-- Job item -->
-        <!-- END Job item -->
-        <!-- Job item -->
-
-    </div>
-    </div>
+        </div>
+        </section>
+</main>
