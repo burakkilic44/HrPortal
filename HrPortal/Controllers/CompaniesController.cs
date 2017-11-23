@@ -14,7 +14,7 @@ using System.IO;
 
 namespace HrPortal.Controllers
 {
-    public class CompaniesController : Controller
+    public class CompaniesController : ControllerBase
     {
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
@@ -48,13 +48,13 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
             return View(comp);
         }
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create()
         {
             var compa = new Company();
@@ -104,7 +104,7 @@ namespace HrPortal.Controllers
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
@@ -118,33 +118,48 @@ namespace HrPortal.Controllers
             return View(cvm);
 
         }
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(string id)
         {
 
-            var company = companyRepository.Get(id);
+            var company = companyRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (company == null)
+            {
+                return NotFound();
+            }
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
             return View(company);
         }
+        [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public IActionResult Edit(Company company)
         {
+            if (!User.IsInRole("Admin") && company.CreatedBy != User.Identity.Name)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 companyRepository.Update(company);
-                return RedirectToAction("Index");
+                return RedirectToAction("MyCompanies");
             }
             
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
+
         }
-        public IActionResult Remove(string id)
+        [Authorize(Roles = "Employer,Admin")]
+        public IActionResult Delete(string id)
         {
-            var company = companyRepository.Get(id);
-            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Locations = new SelectList (locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name"); 
+            var company = companyRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+
+            if (company == null)
+            {
+                return NotFound();
+            }
             companyRepository.Delete(company);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyCompanies");
         }
 
 
