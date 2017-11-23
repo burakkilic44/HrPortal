@@ -12,13 +12,10 @@
    @foreach (var item in Model)
    {
     <div class="row">
-
         <div class="col-xs-12">
             <div class="item-block">
                 <div class="item-form">
-
                     <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-
                     <div class="row">
                         <div class="col-xs-12 col-sm-4">
                             <div class="form-group">
@@ -27,7 +24,6 @@
                                 <span class="help-block">Please choose a square logo</span>
                             </div>
                         </div>
-
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
                                 <select asp-for="@item.EducationLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationLevel>()">
@@ -35,7 +31,6 @@
                                 </select>
                                 <span asp-validation-for="@item.EducationLevel" class="text-danger"></span>
                             </div>
-
                             <div class="form-group">
                                 <input asp-for="@item.Department" type="text" class="form-control" placeholder="Bölüm, Bkz. Bilgisayar Mühendisliği">
                                 <span asp-validation-for="@item.Department" class="text-danger"></span>
@@ -55,7 +50,6 @@
                                     <span asp-validation-for="@item.EndDate" class="text-danger"></span>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <textarea asp-for="@item.Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
                                 <span asp-validation-for="@item.Notes" class="text-danger"></span>
@@ -66,13 +60,10 @@
                 </div>
             </div>
         </div>
-
         <div class="col-xs-12 text-center">
             <br>
             <button id="btnAdd" type="button" onclick="EducationInfoEdit()" class="btn btn-primary btn-duplicator">Eğitim Bilgisini Güncelle</button>
         </div>
-
-
     </div>
    }
 </div>
