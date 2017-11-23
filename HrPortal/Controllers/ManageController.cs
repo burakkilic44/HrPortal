@@ -138,14 +138,17 @@ namespace HrPortal.Controllers
             if(model.AvatarImage!= null && model.AvatarImage.Length>0)
             {
                 
-                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/account");
+                var extension = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                var fileName = model.AvatarImage.FileName.Substring(0, model.AvatarImage.FileName.IndexOf(extension)-1).GenerateSlug();
+
+                var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await model.AvatarImage.CopyToAsync(stream);
                 }
-                user.Photo = model.AvatarImage.FileName;
+                user.Photo = fileName + "." + extension.ToLower();
             }
            
             user.LastName = model.LastName;

@@ -31,11 +31,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\" />
+    <Folder Include="wwwroot\uploads\companies\" />
+    <Folder Include="wwwroot\uploads\jobs\" />
+    <Folder Include="wwwroot\uploads\resumes\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ReflectionIT.Mvc.Paging\ReflectionIT.Mvc.Paging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\uploads\account\img.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
