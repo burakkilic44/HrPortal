@@ -6,6 +6,8 @@
 <link href="~/css/magicsuggest-min.css" rel="stylesheet" />
 
 <form asp-action="Create" method="post">
+    <input type="hidden" asp-for="CreatedBy" />
+    <input type="hidden" asp-for="CreateDate" />
     <header class="page-header">
         <div class="container page-name">
             <h1 class="text-center">Özgeçmişinizi Oluşturun</h1>

@@ -7,6 +7,10 @@ using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace HrPortal.Controllers
 {
@@ -15,9 +19,15 @@ namespace HrPortal.Controllers
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Sector> sectorRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger _logger;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public CompaniesController(IRepository<Company> companyRepository,IRepository<Location> locationRepository, IRepository<Sector> sectorRepository)
+        public CompaniesController(UserManager<ApplicationUser> userManager, ILogger<ManageController> logger, IHostingEnvironment environment, IRepository<Company> companyRepository,IRepository<Location> locationRepository, IRepository<Sector> sectorRepository)
         {
+            hostingEnvironment = environment;
+            _userManager = userManager;
+            _logger = logger;
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
             this.sectorRepository = sectorRepository;
@@ -38,13 +48,13 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
             return View(comp);
         }
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create()
         {
             var compa = new Company();
@@ -56,8 +66,34 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
-        public IActionResult Create(Company company)
+        public async Task<IActionResult> CreateAsync(Company company)
         {
+            if (company.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
+                var fileExt = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
+            var user = await _userManager.GetUserAsync(User);
+            user.Photo = company.Photo;
+            if (company.AvatarImage != null && company.AvatarImage.Length > 0)
+            {
+
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/account");
+                var extension = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1);
+                var fileName = company.AvatarImage.FileName.Substring(0, company.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await company.AvatarImage.CopyToAsync(stream);
+                }
+                user.Photo = fileName + "." + extension.ToLower();
+            }
             if (ModelState.IsValid)
             {
                companyRepository.Insert(company);
@@ -68,7 +104,7 @@ namespace HrPortal.Controllers
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }
-        [Authorize(Roles = "Employer , Admin")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
@@ -82,33 +118,48 @@ namespace HrPortal.Controllers
             return View(cvm);
 
         }
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(string id)
         {
 
-            var company = companyRepository.Get(id);
+            var company = companyRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (company == null)
+            {
+                return NotFound();
+            }
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
             return View(company);
         }
+        [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public IActionResult Edit(Company company)
         {
+            if (!User.IsInRole("Admin") && company.CreatedBy != User.Identity.Name)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 companyRepository.Update(company);
-                return RedirectToAction("Index");
+                return RedirectToAction("MyCompanies");
             }
             
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(company);
+
         }
-        public IActionResult Remove(string id)
+        [Authorize(Roles = "Employer,Admin")]
+        public IActionResult Delete(string id)
         {
-            var company = companyRepository.Get(id);
-            ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Locations = new SelectList (locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name"); 
+            var company = companyRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+
+            if (company == null)
+            {
+                return NotFound();
+            }
             companyRepository.Delete(company);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyCompanies");
         }
 
 

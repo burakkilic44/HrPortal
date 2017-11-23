@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -105,6 +106,10 @@ namespace HrPortal.Models
         public bool IsHidden { get; set; }
 
         public virtual ICollection<Job> Jobs { get; set; }
+
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        public IFormFile AvatarImage { get; set; }
 
     }
 }

@@ -9,9 +9,10 @@
 
 
 <form asp-action="Create" method="post">
+   
 
     <!-- Page header -->
-    <header class="page-header">
+    <header class="page-header bg-img">
         <div class="container page-name">
             <h1 class="text-center">İş İlanı Ver</h1>
             <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
@@ -137,12 +138,12 @@
     </header>
     <!-- END Page header -->
     <!-- Main container -->
-    <main>
+    <main class="container">
 
 
         <!-- Job detail -->
         <section>
-            <div class="container">
+           
 
                 <header class="section-header">
                     <span>AÇIKLAMA</span>
@@ -152,7 +153,7 @@
 
                 <textarea asp-for="Details" class="summernote-editor"></textarea>
 
-            </div>
+            
         </section>
 
 
