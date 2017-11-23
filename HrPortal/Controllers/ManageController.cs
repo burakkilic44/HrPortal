@@ -93,6 +93,14 @@ namespace HrPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
+            if (model.AvatarImage != null) { 
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
+                var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage","Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
             if (!ModelState.IsValid)
             {
                
@@ -127,8 +135,9 @@ namespace HrPortal.Controllers
             // for updating
 
             user.Photo = model.Photo;
-            if(model.AvatarImage!= null)
+            if(model.AvatarImage!= null && model.AvatarImage.Length>0)
             {
+                
                 var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
                 var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
 
@@ -136,8 +145,9 @@ namespace HrPortal.Controllers
                 {
                     await model.AvatarImage.CopyToAsync(stream);
                 }
+                user.Photo = model.AvatarImage.FileName;
             }
-            user.Photo = model.AvatarImage.FileName;
+           
             user.LastName = model.LastName;
             user.LocationId = model.LocationId;
             user.OccupationId = model.OccupationId;
@@ -365,8 +375,16 @@ namespace HrPortal.Controllers
             };
 
             return View(model);
+           
         }
-
+        private string GenerateQrCodeUri(string email, string unformattedKey)
+        {
+            return string.Format(
+                AuthenicatorUriFormat,
+                _urlEncoder.Encode("Razor Pages"),
+                _urlEncoder.Encode(email),
+                unformattedKey);
+        }
         [HttpGet]
         public async Task<IActionResult> Disable2faWarning()
         {
@@ -533,14 +551,7 @@ namespace HrPortal.Controllers
             return result.ToString().ToLowerInvariant();
         }
 
-        private string GenerateQrCodeUri(string email, string unformattedKey)
-        {
-            return string.Format(
-                AuthenicatorUriFormat,
-                _urlEncoder.Encode("HrPortal"),
-                _urlEncoder.Encode(email),
-                unformattedKey);
-        }
+       
 
         #endregion
     }

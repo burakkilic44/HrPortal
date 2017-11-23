@@ -34,7 +34,8 @@ namespace HrPortal
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
                 
             {
-                //config.SignIn.RequireConfirmedEmail = true;
+               
+                config.SignIn.RequireConfirmedEmail = true;
                 config.User.RequireUniqueEmail = true;
 
             })

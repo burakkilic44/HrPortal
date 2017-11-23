@@ -44,21 +44,23 @@ namespace HrPortal.Controllers
             var job = new Job();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+           
             return View(job);
 
 
         }
         [HttpPost]
-        public IActionResult Create(Job job,string[] LocationId)
+        public IActionResult Create(Job job)
         {
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
                 job.JobLocations = new HashSet<JobLocation>();
                 jobRepository.Insert(job);
-                foreach (var item in LocationId)
+                foreach (var item in job.LocationId)
                 {
                     job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                    
                 }
                 jobRepository.Update(job);
                 return RedirectToAction("SuccessfullyCreated");
@@ -71,6 +73,7 @@ namespace HrPortal.Controllers
         {
             var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
             ViewBag.PublishAgoFormat = DisplayAgoFormat(job.PublishDate);
+            ViewBag.IsActiveFormat = IsActiveFormat(job.PublishDate);
             return View(job);
            
         }
@@ -78,11 +81,9 @@ namespace HrPortal.Controllers
 
         public IActionResult Apply(string id)
         {
-            var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
+            var jobApplication = new JobApplication() { JobId = id, Job = jobRepository.Get(id, "JobLocations", "JobLocations.Location", "Company") };
             ViewBag.Resumes = resumeRepository.GetMany(r => r.CreatedBy == User.Identity.Name);
-
-
-            return View(job);
+            return View(jobApplication);
         }
         [HttpPost]
         public IActionResult Apply(JobApplication jobApplication)
@@ -99,9 +100,10 @@ namespace HrPortal.Controllers
         public IActionResult Edit(string id)
         {
 
-            var job = jobRepository.Get(id);
+            var job = jobRepository.Get(id,"JobLocations");
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            job.LocationId = job.JobLocations.Select(s => s.LocationId).ToArray();
             return View(job);
         }
         [HttpPost]
@@ -109,11 +111,15 @@ namespace HrPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                job.EndDate = job.PublishDate.AddDays(60);
+
                 jobRepository.Update(job);
+
                 return RedirectToAction("Index");
             }
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            
             return View(job);
         }
 
@@ -154,17 +160,35 @@ namespace HrPortal.Controllers
             TimeSpan interval = date - inputDate;
             if (date == inputDate)
             {
-                string sonuc = "Bugün";
-                return sonuc;
+                string result = "Bugün";
+                return result;
             }
             else
             {
-                string sonuc1 = " gün önce";
-                return interval.TotalDays.ToString() + sonuc1;
+                string result1 = " gün önce";
+                return interval.TotalDays.ToString() + result1;
             }
             
        
        }
+        static string IsActiveFormat(DateTime inputDate)
+        {
+            DateTime date = DateTime.Today;
+            TimeSpan interval = date - inputDate;
+            if (interval.TotalDays < 60)
+            {
+                string result = "Evet";
+                return result;
+            }
+            else
+            {
+                string result = "Hayır";
+                return result;
+
+
+            }
+
+        }
        
 
     }

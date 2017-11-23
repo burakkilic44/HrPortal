@@ -13,19 +13,29 @@
         <div class="container page-name">
             <h1 class="text-center">Başvurular</h1>
             <p class="lead text-center">Pozisyonunuz için aradığınız başvurular aşağıdadır.</p>
+            
+            
         </div>
 
         <div class="container">
             <form method="get" action="/Resumes">
-
+                
                 <div class="row">
-                    <div class="form-group col-xs-12 col-sm-12">
+                    <div class="form-group col-xs-9 col-sm-9">
                         <input type="text" class="form-control" placeholder="Başvuru Ara" id="Keywords" name="Keywords" value="">
                     </div>
+                    <div class="col-xs-3 col-sm-3">
+                          <select class="form-control selectpicker" asp-for="JobId" asp-items="@ViewBag.Jobs">
+                        <option>İlan Seçiniz</option>
+                          </select>
+                        
+                    </div>
+                    
 
                 </div>
                 <div class="action-buttons">
                     <button type="submit" class="btn btn-primary">Filtrele</button>
+                    
                 </div>
             </form>
 
@@ -33,9 +43,9 @@
 
     </header>
 
-    <main>
+    <main class="container">
         <section class="no-padding-top bg-alt">
-            <div class="container">
+            
                 <div class="row">
 
                     <div class="col-xs-12">
@@ -50,7 +60,7 @@
                     <div class="col-xs-12">
                         <a class="item-block" href="/Resumes/Details/@item.Id">
                             <header>
-                                <img src="/uploads/resumes/" alt="yeşim kariyer">
+                                <img src="/uploads/resumes/" alt="photo">
                                 <div class="hgroup">
                                     <h4>@item.Resume.FullName</h4>
                                     <h5>@item.Resume.Title</h5>
@@ -97,7 +107,7 @@
                 <!-- END Page navigation -->
 
 
-            </div>
+            
         </section>
     </main>
 

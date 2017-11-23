@@ -1,38 +1,23 @@
-﻿@{
+﻿
+@model Setting
+@{
     ViewData["Title"] = "İletişim";
 }
-<!-- Styles -->
-<link href="assets/css/app.min.css" rel="stylesheet">
-<link href="assets/css/custom.css" rel="stylesheet">
 
-<!-- Fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700' rel='stylesheet' type='text/css'>
-
-<!-- Favicons -->
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="icon" href="assets/img/favicon.ico">
-
-<header class="page-header bg-img size-lg">
-    <div class="container no-shadow">
+<header class="page-header bg-img">
+    <div class="container page-name">
         <h1 class="text-center">İletişim</h1>
-        <p class="lead text-center">İletişim Sayfasına Hoşgeldiniz</p>
+        <p class="lead text-center">Sorularınız ve geri bildirimleriniz için iletişim formunu kullanabilir veya bizi arayabilirsiniz.</p>
     </div>
 </header>
 <!-- END Site header -->    
 <!-- Main container -->
-<main>
+<main class="container">
 
     <section>
 
-        <div class="container" style="margin-bottom: 50px">
-            <div class="row-fluid">
-                <div style="margin-bottom:80px">
-                    <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24908.855683381906!2d29.028956!3d40.989143!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2d0fcf9b3fb8d79d!2sIT+Training+Center!5e1!3m2!1sen!2str!4v1510916904654"></iframe>
-                </div>
-                </div>
-            </div>
-               
-                <div class="container" style="margin-top:-80px;">
+        
+                    <iframe width="100%"  height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24908.855683381906!2d29.028956!3d40.989143!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2d0fcf9b3fb8d79d!2sIT+Training+Center!5e1!3m2!1sen!2str!4v1510916904654"></iframe>
 
 
                     <br><br>
@@ -65,31 +50,33 @@
                             <div class="highlighted-block">
                                 <dl class="icon-holder">
                                     <dt><i class="fa fa-map-marker"></i></dt>
-                                    <dd>Osmanağa Mahallesi, Süleyman Paşa Sk. No:2, 34700 Kadıköy/İstanbul</dd>
+                                    <dd>@Model.Address @*<p style="color: cadetblue">(Bahariye Caddesi üzerinde Mavi Jeans'in üstü. Serasker Sokak ile Bahariye Caddesi'nin birleştiği nokta)</p>*@</dd>
 
                                     <dt><i class="fa fa-phone"></i></dt>
-                                    <dd>(0216) 444 32 36</dd>
+                                    <dd>@Model.Phone</dd>
 
+                                    <dt><i class="fa fa-fax"></i></dt>
+                                    <dd>@Model.Fax</dd>
 
                                     <dt><i class="fa fa-envelope"></i></dt>
-                                    <dd>bilisimegitim.com</dd>
+                                    <dd>@Model.Email</dd>
                                 </dl>
                             </div>
 
                             <br>
 
                             <ul class="social-icons size-sm text-center">
-                                <li><a class="facebook" href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                <li><a class="twitter" href="http://www.twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li><a class="dribbble" href="http://www.dribbble.com" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a class="linkedin" href="http://www.linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a class="instagram" href="http://www.instagram.com" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                <li><a class="facebook" href="@Model.Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="@Model.Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="youtube" href="@Model.Youtube" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                                <li><a class="linkedin" href="@Model.Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a class="instagram" href="@Model.Instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
                             </ul>
 
                         </div>
                     </div>
 
-                </div>
+                
     </section>
 
 

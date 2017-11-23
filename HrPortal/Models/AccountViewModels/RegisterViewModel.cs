@@ -60,7 +60,7 @@ namespace HrPortal.Models.AccountViewModels
         [Display(Name = "Fotoğraf")]
         public string Photo { get; set; }
 
-       
+        [DataType(DataType.Upload)]
         public IFormFile AvatarImage { get; set; }
     }
 }

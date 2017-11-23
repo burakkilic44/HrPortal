@@ -55,6 +55,7 @@ namespace HrPortal.Controllers
             vm.SearchResults = await jobApplicationRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.Resume.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.Resume.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.Resume.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.Resume.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Resume.Title, false, 10, vm.Page, "Resume","Resume.Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", vm.LocationId);
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
+            ViewBag.Jobs = new SelectList(jobRepository.GetAll().ToList(), "Id", "Title",vm.JobId);
             return View(vm);
         }
 

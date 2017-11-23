@@ -18,7 +18,7 @@
             <ul class="details cols-3">
                 <li>
                     <i class="fa fa-map-marker"></i>
-                    <span>@Model.Location?.Name</span>
+                    <span>@Model.Location.Name</span>
                 </li>
 
                 <li>
@@ -79,6 +79,7 @@
                 <span>Hakkında</span>
                 <h2>Firma Detayı</h2>
             </header>
+            <div class="item-body">
 
             <p class="lead">@Html.Raw(Model.About)</p>
            
@@ -98,22 +99,20 @@
             <div class="row">
                 @foreach(var job in Model.Jobs) { 
                 <!-- Job item -->
-                    <div class="action-buttons">
-                        <a class="btn btn-success pull-right" asp-controller="Companies" asp-action="Index">Firma Ara</a>
-                    </div>
+                    
                 <div class="col-xs-12">
                     <a class="item-block" asp-action="Details" asp-controller="Jobs" asp-route-id="@job.Id">
                         <header>
                            
                             <div class="hgroup">
                                 <h4>@job.Title</h4>
-                                <h5>@job.Company.Name <span class="label label-success">@job.WorkingStyle</span></h5>
+                                <h5>@job.Company.Name <span class="label label-success">@job.WorkingStyle.GetDisplayName()</span></h5>
                             </div>
                             <time datetime="2016-03-10 20:00">@job.CreateDate</time>
                         </header>
 
                         <div class="item-body">
-                            <p>@Html.Raw(job.ShortDescription)</p>
+                            <p>@job.ShortDescription</p>
                         </div>
                        
 
@@ -121,14 +120,28 @@
                             <ul class="details cols-3">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    <span>@job.JobLocations</span>
+                                    <span>@if (job.JobLocations != null)
+                                    {
+                                        var i = 0;
+                                        foreach (var location in job.JobLocations.Select(s => s.Location.Name).ToList())
+
+                                        {
+                                            if (i > 0) {
+                                            <text>, </text>
+                                            }
+                                            i++;
+                                            @location
+
+                                            
+                                        }
+                                    }</span>
                                 </li>
 
                                
 
                                 <li>
                                     <i class="fa fa-certificate"></i>
-                                    <span>@job.EducationLevel</span>
+                                    <span>@job.EducationLevel.GetDisplayName()</span>
                                 </li>
                             </ul>
                         </footer>
