@@ -1,4 +1,8 @@
-﻿@model Company
+﻿@using Microsoft.AspNetCore.Identity
+@using HrPortal.Models
+
+@model Company
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Create";
 }
@@ -20,11 +24,17 @@
                     <div class="row">
 
                         <div class="col-xs-12 col-sm-4 col-lg-2">
-                            <div class="form-group">
-                                <input asp-for="Photo" type="file" class="dropify" data-default-file="/assets/img/avatar.jpg">
-                                <span class="help-block">Please choose a 4:6 profile picture.</span>
+                            <div style=" border:1px; width :200px; height:200px" class="form-group">
+                                @{
+
+                                    var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+                                }
+                                <input asp-for="Photo" type="file" name="AvatarImage" class="dropify" data-default-file="/uploads/companies/@user.Photo">
+                                <span class="help-block">Lütfen fotoğraf yükleyiniz.</span>
                                 <span asp-validation-for="Photo" class="text-danger"></span>
                             </div>
+
                         </div>
 
                         <div class="col-xs-12 col-sm-8 col-lg-10">
