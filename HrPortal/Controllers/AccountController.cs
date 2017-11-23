@@ -266,14 +266,17 @@ namespace HrPortal.Controllers
             {
                 if (model.AvatarImage != null && model.AvatarImage.Length > 0)
                 {
-                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                    var filePath = Path.Combine(uploads, model.AvatarImage.FileName);
-                
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/account");
+                    var extension = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                    var fileName = model.AvatarImage.FileName.Substring(0, model.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await model.AvatarImage.CopyToAsync(stream);
                     }
-                    model.Photo = model.AvatarImage.FileName;
+                    model.Photo = fileName + "." + extension.ToLower();
                 }
                     var user = new ApplicationUser { Photo = model.Photo, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsEmployer = model.IsEmployer, CompanyName = model.CompanyName, CreateDate = DateTime.Now, UpdateDate = DateTime.Now, LocationId = model.LocationId, OccupationId = model.OccupationId };
                     var result = await _userManager.CreateAsync(user, model.Password);
