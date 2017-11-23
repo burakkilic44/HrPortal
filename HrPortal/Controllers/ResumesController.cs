@@ -119,12 +119,6 @@ namespace HrPortal.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EducationInfosIndex() 
-        {
-           var educationInfos = educationInfoRepository.GetAll();
-            return View(educationInfos);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfoCreate()
@@ -146,7 +140,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfoEdit(string ResumeId) 
         {           
-            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(educationinfo);
         }
         [Authorize(Roles = "Candidate,Admin")]
@@ -160,12 +154,6 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult ExperienceIndex() 
-        {
-            var experience = experienceRepository.GetAll();
-            return View(experience);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult ExperienceCreate() 
@@ -188,7 +176,7 @@ namespace HrPortal.Controllers
         
         public IActionResult ExperienceEdit(string ResumeId) 
         {
-            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(experience);
         }
 
@@ -206,21 +194,12 @@ namespace HrPortal.Controllers
         [HttpPost]
         public JsonResult ExperienceDelete(string ResumeId)
         {
-            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
-            if (ModelState.IsValid)
-            {
-                experienceRepository.Delete(experience);
-            }
+            var experience = experienceRepository.Get(ResumeId);
+            experienceRepository.Delete(experience);
             return Json("Success");
             
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult SkillIndex() 
-        {
-            var skill = skillRepository.GetAll();
-            return View(skill);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult SkillCreate() 
@@ -241,7 +220,7 @@ namespace HrPortal.Controllers
        
         public IActionResult SkillEdit(string ResumeId) 
         {
-            var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(skill);
         }
         
@@ -255,12 +234,6 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult CertificateIndex() 
-        {
-            var certificate = certificateRepository.GetAll();
-            return View(certificate);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult CertificateCreate()  
@@ -282,7 +255,7 @@ namespace HrPortal.Controllers
         
         public IActionResult CertificateEdit(string ResumeId) 
         {
-            var certificate = certificateRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var certificate = certificateRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(certificate);
         }
         
@@ -296,12 +269,6 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult LanguageInfosIndex() 
-        {
-            var languageInfo = languageInfoRepository.GetAll();
-            return View(languageInfo);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult LanguageInfoCreate() 
@@ -325,7 +292,7 @@ namespace HrPortal.Controllers
        
         public IActionResult LanguageInfoEdit(string ResumeId) 
         {
-            var languageinfo = languageInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var languageinfo = languageInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(languageinfo);
         }
        
