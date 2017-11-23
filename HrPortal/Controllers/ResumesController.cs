@@ -108,6 +108,15 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        public IActionResult Remove(string id)
+        {
+            var resume = resumeRepository.Get(id);
+            ViewBag.EducationInfos = new SelectList(educationInfoRepository.GetAll().OrderBy(c => c.EducationLevel).ToList(), "Id", "Name");
+            ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
+            resumeRepository.Delete(resume);
+            return RedirectToAction("Index");
+        }
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfosIndex() 
         {

@@ -63,12 +63,7 @@
                                 <li><a asp-controller="Skills" asp-action="Index">Yetkinlikler</a></li>
                                 <li><a asp-controller="Tags" asp-action="Index">Etiketler</a></li>
                                 <li><a asp-controller="Locations" asp-action="Index">Konumlar</a></li>
-                                <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">Genel Ayarlar</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a tabindex="-1" href="#">Hakkımızda</a></li>
-                                    </ul>
-                                </li>
+                                <li><a asp-controller="Settings" asp-action="Edit">Ayarlar</a></li>
                             </ul>
                             </ul>
 
@@ -76,6 +71,8 @@
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-user"></i>Admin<span class="caret"></span>
                         </a>
+                        <ul class="dropdown-menu">                                                        
+                            <li><a  asp-area="" asp-controller="" asp-action="Index" ><i class="icon-share"></i>Çıkış Yap</a></li>
                         <ul class="dropdown-menu" >                                                        
                             <li>
                             <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
