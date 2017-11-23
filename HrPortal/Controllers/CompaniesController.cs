@@ -48,7 +48,7 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer,Admin")]
+        
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
@@ -66,7 +66,7 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Company company)
+        public async Task<IActionResult> Create(Company company)
         {
             if (company.AvatarImage != null)
             {

@@ -43,6 +43,7 @@ namespace HrPortal.Controllers
             
 
         }
+        [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
             vm.SearchResults = await resumeRepository.GetPaged(s => (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName:(vm.SortBy==3 || vm.SortBy==4 ? s.Occupation.Name:(vm.SortBy==5 ||vm.SortBy==6 ? s.Location.Name:s.UpdateDate.ToString()))),(vm.SortBy==1 || vm.SortBy ==3 || vm.SortBy == 5?false:(vm.SortBy == 2 || vm.SortBy ==4 || vm.SortBy == 6 )), 2, vm.Page, "EducationInfos", "Location");
@@ -51,10 +52,15 @@ namespace HrPortal.Controllers
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
             return View(vm);
         }
-
+        
         public IActionResult Details(string id)
         {
-            var resume = resumeRepository.Get(id,"EducationInfos","Experiences","Skills","Certificates","LanguageInfos","Language","Location");
+            var resume = resumeRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true), "EducationInfos", "Experiences", "Skills", "Certificates", "LanguageInfos", "Language", "Location").FirstOrDefault();
+            if (resume == null)
+            {
+                return NotFound();
+            }
+           
             return View(resume);
         }
         [Authorize(Roles = "Candidate,Admin")]
@@ -83,8 +89,14 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit(string id)
-        {
-            var resume = resumeRepository.Get(id);
+                    {
+            // privent to any user to edit
+            var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (resume == null)
+            {
+                return NotFound();
+            }
+            
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -95,6 +107,10 @@ namespace HrPortal.Controllers
         public IActionResult Edit(Resume resume)
         {
             {
+                if (!User.IsInRole("Admin") && resume.CreatedBy != User.Identity.Name)
+                {
+                    return NotFound();
+                }
                 if (ModelState.IsValid)
                 {
                     resumeRepository.Update(resume);
@@ -110,6 +126,11 @@ namespace HrPortal.Controllers
 
         public IActionResult Delete(string id)
         {
+            var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (resume == null)
+            {
+                return NotFound();
+            }
             educationInfoRepository.Delete(e => e.ResumeId == id);
             experienceRepository.Delete(e => e.ResumeId == id);
             skillRepository.Delete(e => e.ResumeId == id);
