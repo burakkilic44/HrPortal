@@ -39,6 +39,7 @@ namespace HrPortal.Services
                 qEntities = qEntities.Include(nav);
             return qEntities.Where(where).ToList();
         }
+        
         public async Task<PagingList<T>> GetPaged(Expression<Func<T, bool>> where, Expression<Func<T, object>> orderby, bool desc, int pageSize, int pageNo, params string[] navigations)
         {
             var qEntities = entities.AsQueryable().AsNoTracking();
@@ -103,6 +104,20 @@ namespace HrPortal.Services
             context.SaveChanges();
         }
 
+        public void Delete(Expression<Func<T, bool>> where)
+        {
+            var qEntities = entities.AsQueryable().Where(where).ToList();
+            var affectedRows = 0;
+            foreach (T entity in qEntities)
+            {
+                entities.Remove(entity);
+                affectedRows++;
+            }
+            if (affectedRows>0) { 
+                context.SaveChanges();
+            }
+        }
+
         public int Count()
         {
             return entities.Count();
@@ -119,6 +134,6 @@ namespace HrPortal.Services
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
-        
+        void Delete(Expression<Func<T, bool>> where);
     }
 }
