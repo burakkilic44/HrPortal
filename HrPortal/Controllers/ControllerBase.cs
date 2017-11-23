@@ -20,8 +20,7 @@ namespace HrPortal.Controllers
 
             
             audit.Ip = context.HttpContext.Request.Host.ToString();
-            audit.Action = context.ActionDescriptor.DisplayName;
-            audit.EntityId = context.Controller.ToString();
+            audit.Action = context.RouteData.Values["action"].ToString();
 
             // entityid'yi al
             // action adını al
