@@ -5,12 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<table class="display responsive nowrap" id="tblRecords">
     <thead>
         <tr>
                 <th>
@@ -85,12 +82,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.AccessFailedCount)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Occupation)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -169,18 +160,33 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AccessFailedCount)
             </td>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.Location.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Occupation.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |              
+                <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Turkish.json"
+                }
+            });
+        });
+
+    </script>
+
+}
+
+
+

@@ -1,0 +1,186 @@
+﻿@model HrPortal.Models.Setting
+
+@{
+    ViewData["Title"] = "Ayarlar";
+}
+
+<h4>Genel Ayarlar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="View">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MapLat" class="control-label"></label>
+                <input asp-for="MapLat" class="form-control" />
+                <span asp-validation-for="MapLat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapLng" class="control-label"></label>
+                <input asp-for="MapLng" class="form-control" />
+                <span asp-validation-for="MapLng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fax" class="control-label"></label>
+                <input asp-for="Fax" class="form-control" />
+                <span asp-validation-for="Fax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SmtpUserName" class="control-label"></label>
+                <input asp-for="SmtpUserName" class="form-control" />
+                <span asp-validation-for="SmtpUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SmtpPassword" class="control-label"></label>
+                <input asp-for="SmtpPassword" class="form-control" />
+                <span asp-validation-for="SmtpPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SmtpHost" class="control-label"></label>
+                <input asp-for="SmtpHost" class="form-control" />
+                <span asp-validation-for="SmtpHost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SmtpPort" class="control-label"></label>
+                <input asp-for="SmtpPort" class="form-control" />
+                <span asp-validation-for="SmtpPort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="SmtpSSLEnabled" /> @Html.DisplayNameFor(model => model.SmtpSSLEnabled)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="UseSSL" /> @Html.DisplayNameFor(model => model.UseSSL)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Facebook" class="control-label"></label>
+                <input asp-for="Facebook" class="form-control" />
+                <span asp-validation-for="Facebook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Twitter" class="control-label"></label>
+                <input asp-for="Twitter" class="form-control" />
+                <span asp-validation-for="Twitter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Linkedin" class="control-label"></label>
+                <input asp-for="Linkedin" class="form-control" />
+                <span asp-validation-for="Linkedin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instagram" class="control-label"></label>
+                <input asp-for="Instagram" class="form-control" />
+                <span asp-validation-for="Instagram" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Youtube" class="control-label"></label>
+                <input asp-for="Youtube" class="form-control" />
+                <span asp-validation-for="Youtube" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FooterText" class="control-label"></label>
+                <textarea asp-for="FooterText" class="form-control"></textarea>
+                <span asp-validation-for="FooterText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaTitle" class="control-label"></label>
+                <textarea asp-for="MetaTitle" class="form-control"></textarea>
+                <span asp-validation-for="MetaTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaDescription" class="control-label"></label>
+                <textarea asp-for="MetaDescription" class="form-control"></textarea>
+                <span asp-validation-for="MetaDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomHtml" class="control-label"></label>
+                <textarea asp-for="CustomHtml" class="form-control"></textarea>
+                <span asp-validation-for="CustomHtml" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="About" class="control-label"></label>
+                <textarea asp-for="About" class="form-control" name="About"></textarea>
+                <script>
+                    CKEDITOR.replace('About');
+                </script>
+                <span asp-validation-for="About" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrivacyPolicy" class="control-label"></label>
+                <textarea asp-for="PrivacyPolicy" class="form-control"></textarea>
+                <span asp-validation-for="PrivacyPolicy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermsOfUse" class="control-label"></label>
+                <textarea asp-for="TermsOfUse" class="form-control"></textarea>
+                <span asp-validation-for="TermsOfUse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MembershipAgreement" class="control-label"></label>
+                <textarea asp-for="MembershipAgreement" class="form-control"></textarea>
+                <span asp-validation-for="MembershipAgreement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowItWorks" class="control-label"></label>
+                <textarea asp-for="HowItWorks" class="form-control"></textarea>
+                <span asp-validation-for="HowItWorks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Help" class="control-label"></label>
+                <textarea asp-for="Help" class="form-control"></textarea>
+                <span asp-validation-for="Help" class="text-danger"></span>
+            </div>
+            <div>
+            <input type="hidden" asp-for="Id" />
+
+                <input asp-for="CreateDate" type="hidden"  />
+              
+           
+                <input asp-for="CreatedBy" type="hidden"  />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            
+                <input asp-for="UpdateDate" type="hidden"  />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+           
+                <input asp-for="UpdatedBy" type="hidden" />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye geri dön </a>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
