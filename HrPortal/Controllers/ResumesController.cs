@@ -200,8 +200,7 @@ namespace HrPortal.Controllers
             var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(experience);
         }
-
-        
+       
         [HttpPost]
         public JsonResult ExperienceEdit(Experience experience) 
         {
@@ -220,8 +219,6 @@ namespace HrPortal.Controllers
             return Json("Success");
             
         }
-
-
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult SkillCreate() 
         {

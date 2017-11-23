@@ -388,7 +388,7 @@
         }
 
         function ExperienceDelete(id) {
-            $.post("/Resumes/ExperienceDelete?Id=@Model.Id" + id ,
+            $.post("/Resumes/ExperienceDelete?Id=" + id ,
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
