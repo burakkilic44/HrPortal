@@ -15,7 +15,7 @@
 <main>
     <section class="no-padding-top bg-alt">
         <div class="container">
-            <div class="row item-blocks-condensed">
+            <div class="row">
 
                 <div class="col-xs-12">
                     <br>
@@ -27,7 +27,7 @@
 
             {
 
-                    <div class="col-xs-8">
+                    <div class="col-xs-12">
                         <a class="item-block" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id">
                             <header>
                                 <img src="/uploads/jobs/@Jobitem.Company.Photo" alt="@Jobitem.Company.Name">
@@ -39,29 +39,22 @@
                                     <span class="location">
                                         @if (Jobitem.JobLocations != null)
                                         {
-                                            foreach (var location in Jobitem.JobLocations)
+                                            foreach (var location in Jobitem.JobLocations.Select(i => i.Location.Name).ToList())
                                             {
                                                 @location
-                                                <text>, </text>
+                                                <text> </text>
 
                                             }
 
                                         }
                                     </span>
-                                    <span class="label label-success">@Jobitem.WorkingStyle</span>
+                                    <span class="label label-success">@Jobitem.WorkingStyle.GetDisplayName()</span>
                                 </div>
                             </header>
                         </a>
                     </div>
 
-                    <div class="col-xs-2">
-                        <a class="btn-danger" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> İlandan Kaldır</a>
-                    </div>
-
-                    <div class="col-xs-2">
-                        <a class="btn-default" asp-controller="Jobs" asp-action="Details" asp-route-id="@Jobitem.Id"> Düzenle</a>
-                    </div>
-
+               
 
                 }
                 <!-- Job item -->
