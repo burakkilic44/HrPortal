@@ -61,11 +61,11 @@ namespace HrPortal.Controllers
             return View(vm);
 
         }
-       
+        
         public IActionResult Details(string id)
         {
-
-            var resume = resumeRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true), "EducationInfos", "Experiences", "Skills", "Certificates", "LanguageInfos", "Language", "Location").FirstOrDefault();
+            
+            var resume = resumeRepository.Get(c => c.Id == id, "EducationInfos", "Experiences", "Skills", "Certificates", "LanguageInfos", "Language", "Location");
             if (resume == null)
             {
                 return NotFound();
