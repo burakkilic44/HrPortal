@@ -8,12 +8,17 @@ using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
+using System.IO;
+using HrPortal.Models.ManageViewModels;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
 
 namespace HrPortal.Controllers
 {
     public class ResumesController : Controller
     {
-        
+
         private IRepository<Resume> resumeRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Language> languageRepository;
@@ -24,12 +29,15 @@ namespace HrPortal.Controllers
         private IRepository<Occupation> occupationRepository;
         private IRepository<Tag> tagRepository;
         private IRepository<LanguageInfo> languageInfoRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
+        
 
 
 
 
-        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
+        public ResumesController(ILogger<ResumesController> logger, IHostingEnvironment environment,IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
         {
+            
             this.languageInfoRepository=languageInfoRepository;
             this.tagRepository = tagRepository;
             this.languageRepository = languageRepository;
@@ -40,7 +48,7 @@ namespace HrPortal.Controllers
             this.skillRepository = skillRepository;
             this.certificateRepository = certificateRepository;
             this.occupationRepository = occupationRepository;
-            
+            hostingEnvironment = environment;
 
         }
         [Authorize(Roles = "Employer,Admin")]
@@ -51,10 +59,12 @@ namespace HrPortal.Controllers
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id","Name", vm.LocationId);
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
             return View(vm);
+
         }
-        
-        public IActionResult Details(string id)
+       
+            public IActionResult Details(string id)
         {
+
             var resume = resumeRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true), "EducationInfos", "Experiences", "Skills", "Certificates", "LanguageInfos", "Language", "Location").FirstOrDefault();
             if (resume == null)
             {
@@ -63,6 +73,48 @@ namespace HrPortal.Controllers
            
             return View(resume);
         }
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Details(Resume resume)
+        {
+            if (resume.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
+                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
+            if (ModelState.IsValid)
+            {
+
+                if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
+                {
+
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/resumes");
+                    var extension = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                    var fileName = resume.AvatarImage.FileName.Substring(0, resume.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await resume.AvatarImage.CopyToAsync(stream);
+                    }
+                    resume.Photo = fileName + "." + extension.ToLower();
+                }
+                resumeRepository.Insert(resume);
+            }
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
+            ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
+            ViewBag.IsModelStateValid = ModelState.IsValid;
+            return View(resume);
+        }
+
+
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Create()
         {
@@ -74,10 +126,35 @@ namespace HrPortal.Controllers
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public IActionResult Create(Resume resume)
+        public async Task<IActionResult> Create(Resume resume)
         {
+            if (resume.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
+                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
             if (ModelState.IsValid)
             {
+                
+                if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
+                {
+
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/resumes");
+                    var extension = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                    var fileName = resume.AvatarImage.FileName.Substring(0, resume.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await resume.AvatarImage.CopyToAsync(stream);
+                    }
+                    resume.Photo = fileName + "." + extension.ToLower();
+                }
                 resumeRepository.Insert(resume);
             }
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -87,11 +164,14 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+      
+    
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit(string id)
                     {
             // privent to any user to edit
-            var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            var resume = resumeRepository.Get(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true));
             if (resume == null)
             {
                 return NotFound();
@@ -106,18 +186,18 @@ namespace HrPortal.Controllers
         [HttpPost]
         public IActionResult Edit(Resume resume)
         {
+            
+            if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
-                if (!User.IsInRole("Admin") && resume.CreatedBy != User.Identity.Name)
-                {
-                    return NotFound();
-                }
-                if (ModelState.IsValid)
-                {
-                    resumeRepository.Update(resume);
-                    return RedirectToAction("Index");
-                }
-
+                return NotFound();
             }
+            if (ModelState.IsValid)
+            {
+                resumeRepository.Update(resume);
+                return RedirectToAction("Myresumes");
+            }
+
+            
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -137,7 +217,7 @@ namespace HrPortal.Controllers
             certificateRepository.Delete(e => e.ResumeId == id);
             languageInfoRepository.Delete(e => e.ResumeId == id);
             resumeRepository.Delete(r => r.Id == id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Myresumes");
         }
 
 

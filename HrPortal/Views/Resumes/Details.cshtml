@@ -12,8 +12,8 @@
 
             <div class="col-xs-12 col-sm-8 header-detail">
                 <div class="hgroup">
-                    <h1>@Model.FullName</h1>
-                    <h3>@Model.Title</h3>
+                    <h1>@Model.ResumeName</h1>
+                    <h3>@Model.FullName / @Model.Title</h3>
                 </div>
                 <hr>
                 <p class="lead">@Model.Notes</p>
@@ -21,7 +21,7 @@
                 <ul class="details cols-2">
                     <li>
                         <i class="fa fa-map-marker"></i>
-                        <span>Konumu:@Model.Location.Name</span>
+                        <span>Konumu:@Model.Location?.Name</span>
                     </li>
 
                     <li>
@@ -118,6 +118,8 @@
                 @if ((User.IsInRole("Candidate") && Model.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
                 {
                 <a class="btn btn-gray" href="#">CV İNDİR</a>
+
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
                 }
             </div>

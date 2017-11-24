@@ -72,7 +72,7 @@ namespace HrPortal.Data
             builder.Entity<JobApplication>()
                 .HasOne(pt => pt.Resume)
                 .WithMany(t => t.JobApplications)
-                .HasForeignKey(pt => pt.ResumeId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pt => pt.ResumeId).OnDelete(DeleteBehavior.Cascade);
 
         }
         public DbSet<HrPortal.Models.ApplicationUser> ApplicationUser { get; set; }
