@@ -62,7 +62,7 @@ namespace HrPortal.Controllers
 
         }
        
-            public IActionResult Details(string id)
+        public IActionResult Details(string id)
         {
 
             var resume = resumeRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true), "EducationInfos", "Experiences", "Skills", "Certificates", "LanguageInfos", "Language", "Location").FirstOrDefault();
@@ -73,47 +73,6 @@ namespace HrPortal.Controllers
            
             return View(resume);
         }
-        [Authorize(Roles = "Candidate,Admin")]
-        [HttpPost]
-        public async Task<IActionResult> Details(Resume resume)
-        {
-            if (resume.AvatarImage != null)
-            {
-                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
-                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
-                if (!supportedTypes.Contains(fileExt))
-                {
-                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
-                }
-            }
-            if (ModelState.IsValid)
-            {
-
-                if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
-                {
-
-                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/resumes");
-                    var extension = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
-                    var fileName = resume.AvatarImage.FileName.Substring(0, resume.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
-
-                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await resume.AvatarImage.CopyToAsync(stream);
-                    }
-                    resume.Photo = fileName + "." + extension.ToLower();
-                }
-                resumeRepository.Insert(resume);
-            }
-            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
-            ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
-            ViewBag.IsModelStateValid = ModelState.IsValid;
-            return View(resume);
-        }
-
-
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Create()
@@ -130,8 +89,8 @@ namespace HrPortal.Controllers
         {
             if (resume.AvatarImage != null)
             {
-                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
-                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1).ToLowerInvariant();
                 if (!supportedTypes.Contains(fileExt))
                 {
                     ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
@@ -139,7 +98,7 @@ namespace HrPortal.Controllers
             }
             if (ModelState.IsValid)
             {
-                
+
                 if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
                 {
 
@@ -184,15 +143,39 @@ namespace HrPortal.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Resume resume)
+        public async Task<IActionResult> Edit(Resume resume)
         {
             
             if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
                 return NotFound();
             }
+            if (resume.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1).ToLowerInvariant();
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
             if (ModelState.IsValid)
             {
+                if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
+                {
+
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/resumes");
+                    var extension = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                    var fileName = resume.AvatarImage.FileName.Substring(0, resume.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await resume.AvatarImage.CopyToAsync(stream);
+                    }
+                    resume.Photo = fileName + "." + extension.ToLower();
+                }
                 resumeRepository.Update(resume);
                 return RedirectToAction("Myresumes");
             }
