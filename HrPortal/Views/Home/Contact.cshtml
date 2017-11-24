@@ -25,24 +25,31 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-8">
                             <h4>İletişim Formu</h4>
-                            <form>
+                            <form asp-action="Contact" method="post">
+                                @if (!String.IsNullOrEmpty(ViewBag.Result))
+                                {
+                                    <div class="alert alert-success">@ViewBag.Result</div>
+
+                                }
                                 <div class="form-group">
-                                    <input type="text" class="form-control input-lg" placeholder="İsim">
+                                    <input required type="text" class="form-control input-lg" placeholder="İsim">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="email" class="form-control input-lg" placeholder="E-Mail">
+                                    <input required name="Email" type="email" class="form-control input-lg" placeholder="E-Mail">
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="form-control input-lg" placeholder="Telefon">
+                                    <input required name="Phone" id="Phone" type="tel" class="form-control input-lg" placeholder="Telefon">
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="5" placeholder="Mesaj"></textarea>
+                                    <textarea required class="form-control" rows="5" placeholder="Mesaj"></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Gönder</button>
+                             
                             </form>
+                            
                         </div>
 
                         <div class="col-sm-12 col-md-4">
@@ -50,7 +57,7 @@
                             <div class="highlighted-block">
                                 <dl class="icon-holder">
                                     <dt><i class="fa fa-map-marker"></i></dt>
-                                    <dd>@Model.Address @*<p style="color: cadetblue">(Bahariye Caddesi üzerinde Mavi Jeans'in üstü. Serasker Sokak ile Bahariye Caddesi'nin birleştiği nokta)</p>*@</dd>
+                                    <dd>@Model.Address</dd>
 
                                     <dt><i class="fa fa-phone"></i></dt>
                                     <dd>@Model.Phone</dd>
