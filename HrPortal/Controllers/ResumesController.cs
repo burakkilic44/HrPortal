@@ -120,7 +120,7 @@ namespace HrPortal.Controllers
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.IsModelStateValid = ModelState.IsValid;
-            return View(resume);
+            return View(resume); // resume oluşturulduktan sonra edite yönlendirilse daha iyi olur
         }
 
       

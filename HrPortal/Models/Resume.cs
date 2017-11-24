@@ -19,6 +19,7 @@ namespace HrPortal.Models
             LanguageInfos = new HashSet<LanguageInfo>();
             BirthDate = DateTime.Now;
             IsActive = true;
+            IsApproved = true;
 
         }
         [Required(ErrorMessage = "CV adı gereklidir.")]
