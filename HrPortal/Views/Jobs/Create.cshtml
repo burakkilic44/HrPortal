@@ -157,8 +157,8 @@
                     <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
                 </header>
 
-                <textarea asp-for="Details" class="summernote-editor"></textarea>
-
+                <textarea required asp-for="Details" class="summernote-editor"></textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
             
         </section>
 
