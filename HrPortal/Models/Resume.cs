@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -118,7 +119,8 @@ namespace HrPortal.Models
         [Display(Name = "Meslek")]
         [ForeignKey("OccupationId")]
         public Occupation Occupation { get; set; }
-
+        [NotMapped]
+        public IFormFile AvatarImage { get; set; }
 
         public ICollection<JobApplication> JobApplications { get; set; }
 

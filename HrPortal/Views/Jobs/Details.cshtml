@@ -11,7 +11,7 @@
                 <h1>@Model.Title</h1>
                 <h3><a href="#">@Model.Company.Name</a></h3>
             </div>           
-            <time class="fa fa-clock-o">@ViewBag.PublishAgoFormat</time>
+            <time class="fa fa-clock-o"> @ViewBag.PublishAgoFormat</time>
             <hr>
             <div class="action-buttons">             
                 
@@ -105,11 +105,11 @@
     <!-- END Page header -->
     <!-- Main container -->
 </header>
-        <main>
+        <main class="container">
 
             <!-- Job detail -->
             <section>
-                <div class="container">
+                <div>
                     @Html.Raw(Model.Details)
                 </div>
             </section>
