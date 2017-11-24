@@ -68,6 +68,7 @@ namespace HrPortal.Controllers
 
         public IActionResult Contact()
         {
+            
             var setting = settingRepository.GetAll().FirstOrDefault();
             
             return View(setting);
@@ -79,7 +80,10 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid) { 
             messageRepository.Insert(message);
             }
-            return View(message);
+            ViewBag.Result = "Mesajınız başarıyla iletilmiştir.";
+            var setting = settingRepository.GetAll().FirstOrDefault();
+
+            return View(setting);
         }
 
         public IActionResult Error()
