@@ -135,7 +135,23 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
+                if (job.JobLocations != null)
+                {
+                    var locations = job.JobLocations.ToList();
 
+                    {
+                        foreach (var l in locations)
+                            job.JobLocations.Remove(l);
+                    }
+                }
+                if (job.JobLocations != null)
+                {
+                    foreach (var item in job.LocationId)
+                    {
+                        job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                        jobRepository.Update(job);
+                    }
+                }
                 jobRepository.Update(job);
 
                 return RedirectToAction("myAdsAsync");
@@ -184,7 +200,7 @@ namespace HrPortal.Controllers
         public async Task<IActionResult> myAdsAsync(JobSearchViewModel jvm)
         {
 
-            jvm.SearchResults = await jobRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l => l.LocationId == jvm.LocationId) : true) && (!String.IsNullOrEmpty(jvm.OccupationId) ? s.OccupationId == jvm.OccupationId : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true) && (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true), s => (jvm.SortBy == 1 || jvm.SortBy == 2 ? s.Title : (jvm.SortBy == 3 || jvm.SortBy == 4 ? s.Occupation.Name : s.UpdateDate.ToString())), (jvm.SortBy == 1 || jvm.SortBy == 3 || jvm.SortBy == 5 ? false : (jvm.SortBy == 2 || jvm.SortBy == 4 || jvm.SortBy == 6)), 5, jvm.Page, "Company", "JobLocations", "JobLocations.Location");
+            jvm.SearchResults = await jobRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(jvm.Keywords) ? s.Title.Contains(jvm.Keywords) : true) && (!String.IsNullOrEmpty(jvm.LocationId) ? s.JobLocations.Any(l => l.LocationId == jvm.LocationId) : true) && (!String.IsNullOrEmpty(jvm.OccupationId) ? s.OccupationId == jvm.OccupationId : true) && (jvm.MilitaryStatus.HasValue ? s.MilitaryStatus == jvm.MilitaryStatus : true) && (jvm.EducationLevel.HasValue ? s.EducationLevel == jvm.EducationLevel : true) && (jvm.WorkingStyle.HasValue ? s.WorkingStyle == jvm.WorkingStyle : true), s => (jvm.SortBy == 1 || jvm.SortBy == 2 ? s.Title : (jvm.SortBy == 3 || jvm.SortBy == 4 ? s.Occupation.Name : s.UpdateDate.ToString())), (jvm.SortBy == 1 || jvm.SortBy == 3 || jvm.SortBy == 5 ? false : (jvm.SortBy == 2 || jvm.SortBy == 4 || jvm.SortBy == 6)), 10, jvm.Page, "Company", "JobLocations", "JobLocations.Location");
 
 
             return View(jvm);
