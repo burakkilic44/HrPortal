@@ -4,10 +4,10 @@
 }
 <!-- Page header -->
 <link href="~/css/magicsuggest-min.css" rel="stylesheet" />
-<input type="hidden" asp-for="CreatedBy" />
-<input type="hidden" asp-for="CreateDate" />
-<form asp-action="Create" method="post">
-   
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="CreatedBy" />
+    <input type="hidden" asp-for="CreateDate" />
     <header class="page-header">
         <div class="container page-name">
             <h1 class="text-center">Özgeçmişinizi Oluşturun</h1>
@@ -267,7 +267,7 @@
                 </div>
             </div>
         </section>
-        <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+        <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
        
@@ -299,7 +299,7 @@
                     @*<p>Please review your information once more and press the below button to put your resume online.</p>*@
                 </header>
 
-                <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
 
             </div>
         </section>

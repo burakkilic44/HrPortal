@@ -135,7 +135,7 @@ namespace HrPortal.Controllers
         [HttpPost]
         public IActionResult Edit(Company company)
         {
-            if (!User.IsInRole("Admin") && company.CreatedBy != User.Identity.Name)
+            if (!(User.IsInRole("Employer") && company.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
                 return NotFound();
             }

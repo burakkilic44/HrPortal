@@ -128,7 +128,7 @@ namespace HrPortal.Controllers
         public IActionResult Edit(Job job)
         {
 
-            if (!User.IsInRole("Admin") && job.CreatedBy != User.Identity.Name)
+            if (!(User.IsInRole("Employer") && job.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
                 return NotFound();
             }

@@ -91,7 +91,7 @@ namespace HrPortal.Controllers
         public IActionResult Edit(string id)
                     {
             // privent to any user to edit
-            var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            var resume = resumeRepository.Get(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true));
             if (resume == null)
             {
                 return NotFound();
@@ -106,18 +106,18 @@ namespace HrPortal.Controllers
         [HttpPost]
         public IActionResult Edit(Resume resume)
         {
+            
+            if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
-                if (!User.IsInRole("Admin") && resume.CreatedBy != User.Identity.Name)
-                {
-                    return NotFound();
-                }
-                if (ModelState.IsValid)
-                {
-                    resumeRepository.Update(resume);
-                    return RedirectToAction("Index");
-                }
-
+                return NotFound();
             }
+            if (ModelState.IsValid)
+            {
+                resumeRepository.Update(resume);
+                return RedirectToAction("Myresumes");
+            }
+
+            
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -137,7 +137,7 @@ namespace HrPortal.Controllers
             certificateRepository.Delete(e => e.ResumeId == id);
             languageInfoRepository.Delete(e => e.ResumeId == id);
             resumeRepository.Delete(r => r.Id == id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Myresumes");
         }
 
 
