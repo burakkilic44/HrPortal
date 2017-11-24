@@ -10,7 +10,7 @@
     <input type="hidden" asp-for="CreatedBy" />
     <input type="hidden" asp-for="CreateDate" />
     <!-- Page header -->
-    <header class="page-header">
+    <header class="page-header bg-img " style="background-image: url(assets/img/bg-banner2.jpg)">
         <div class="container page-name">
             <h1 class="text-center">İş İlanı Ver</h1>
             <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
@@ -41,21 +41,21 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
 
-                       
-                            <select name="LocationId" required class="form-control selectpicker" multiple data-header="Konum seçiniz">
-                                @foreach (var location in (IList<Location>)ViewBag.Locations)
-                                {
-                                    @if (Model.LocationId.Contains(location.Id))
-                                    {
-                                        <option value="@location.Id" selected="selected">@location.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@location.Id">@location.Name</option>
 
-                                    }
+                        <select name="LocationId" required class="form-control selectpicker" multiple data-header="Konum seçiniz">
+                            @foreach (var location in (IList<Location>)ViewBag.Locations)
+                            {
+                                @if (Model.LocationId.Contains(location.Id))
+                                {
+                                    <option value="@location.Id" selected="selected">@location.Name</option>
                                 }
-                            </select>
+                                else
+                                {
+                                    <option value="@location.Id">@location.Name</option>
+
+                                }
+                            }
+                        </select>
                     </div>
                 </div>
 
@@ -139,6 +139,7 @@
             </div>
         </div>
     </header>
+
     <!-- END Page header -->
     <!-- Main container -->
     <main>
