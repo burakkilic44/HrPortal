@@ -135,24 +135,33 @@ namespace HrPortal.Controllers
             if (ModelState.IsValid)
             {
                 job.EndDate = job.PublishDate.AddDays(60);
-                if (job.JobLocations != null)
-                {
-                    var locations = job.JobLocations.ToList();
 
-                    {
-                        foreach (var l in locations)
-                            job.JobLocations.Remove(l);
-                    }
-                }
-                if (job.JobLocations != null)
-                {
+                var j = jobRepository.Get(job.Id, "JobLocations");
+                j.JobLocations.Clear();
+                jobRepository.Update(j);
+              
                     foreach (var item in job.LocationId)
                     {
-                        job.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
-                        jobRepository.Update(job);
+                        j.JobLocations.Add(new JobLocation() { JobId = job.Id, LocationId = item });
+                      
                     }
-                }
-                jobRepository.Update(job);
+                j.Title = job.Title;
+                j.CompanyId = job.CompanyId;
+                j.ShortDescription = job.ShortDescription;
+                j.LocationId = job.LocationId;
+                j.WorkingStyle = job.WorkingStyle;
+                j.WorkingHours = job.WorkingHours;
+                j.Experience = job.Experience;
+                j.MilitaryStatus = job.MilitaryStatus;
+                j.EducationLevel = job.EducationLevel;
+                j.Details = job.Details;
+                j.IsActive = job.IsActive;
+                j.PublishDate = job.PublishDate;
+                j.EndDate = job.EndDate;
+
+                jobRepository.Update(j);
+               
+                
 
                 return RedirectToAction("myAdsAsync");
             }
