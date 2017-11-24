@@ -9,10 +9,50 @@
 
 
 
-<div class="container">
-    <div class="row">
+<style>
 
-        <div class="col-md-12">
+@@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+@@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Roboto Mono");
+@@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+
+
+@@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Dosis Light'), local('Dosis-Light'), url(http://fonts.gstatic.com/l/font?kit=RoNoOKoxvxVq4Mi9I4xIReCW9eLPAnScftSvRB4WBxg&skey=a88ea9d907460694) format('woff2');
+}
+@@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Dosis Medium'), local('Dosis-Medium'), url(http://fonts.gstatic.com/l/font?kit=Z1ETVwepOmEGkbaFPefd_-CW9eLPAnScftSvRB4WBxg&skey=21884fc543bb1165) format('woff2');
+}
+    body {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.42857;
+        height: 350px;
+        padding: 0;
+        margin: 0;
+    }
+
+
+
+</style>
+
+
+
+<div class="container">
+
+
+    <h5 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">İletisim</h5>
+    <hr width="100%" size="2" />
+
+
+    <div class="row">
+        <div class="col-md-1"> </div>
+        <div class="col-md-10">
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="panel panel-default well">
                     <div class="panel-body">
@@ -20,19 +60,20 @@
 
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label asp-for="MapLat" class="control-label" style="border:1px solid black; border-style:solid"></label>
+                                    <label asp-for="MapLat" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-map"></i>
                                         </div>
                                         <input asp-for="MapLat" class="form-control" placeholder="MapLat giriniz" name="" >
                                     </div>
                                     <span asp-validation-for="MapLat" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6">
+                                    <label asp-for="MapLng" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-map-marker"></i>
                                         </div>
                                         <input asp-for="MapLng" class="form-control" placeholder="MapLng giriniz" name="" type="text">
                                     </div>
@@ -42,23 +83,52 @@
 
                             <div class="form-group">
                                 <div class="col-sm-6">
+                                    <label asp-for="Fax" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-fax"></i>
                                         </div>
-                                        <textarea asp-for="Address" class="form-control" rows="1" style="width:49.9%" placeholder="Adress bilgilerinizi lütfen buraya giriniz."></textarea>
+                                        <input asp-for="Fax" class="form-control" placeholder="Fax no giriniz" name="" type="text">
                                     </div>
-                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                    <span asp-validation-for="Fax" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6">
+                                    <label asp-for="Phone" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-phone"></i>
                                         </div>
                                         <input asp-for="Phone" class="form-control" placeholder="Telefon No nuzu lütfen buraya giriniz" name="" type="text">
                                     </div>
                                     <span asp-validation-for="Phone" class="text-danger"></span>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-mail-forward"></i>
+                                        </div>
+                                        <input asp-for="Email" class="form-control" placeholder="E-mail adresinizi lütfen buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="Address" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-database"></i>
+                                        </div>
+                                        <textarea asp-for="Address" class="form-control" rows="3" style="width:99.9%" placeholder="Adress bilgilerinizi lütfen buraya giriniz."></textarea>
+                                    </div>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                           
                             </div>
 
                         </form>
@@ -67,277 +137,343 @@
                 </div>
             </div>
          </div>
-        
+        <div class="col-md-1"> </div>
      </div>
+
+
+
+    <br />
+
+    <h5>E-posta Ayarları</h5>
+    <hr width="100%" size="2" />
+
+    <br />
+
+
+    <div class="row">
+        <div class="col-md-1"> </div>
+        <div class="col-md-10">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="panel panel-default well">
+                    <div class="panel-body">
+                        <form class="form-horizontal track-event-form bv-form" novalidate="novalidate">
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label asp-for="SmtpUserName" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input asp-for="SmtpUserName" class="form-control" placeholder="Kullanıcı adını buraya giriniz" name="">
+                                    </div>
+                                    <span asp-validation-for="SmtpUserName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="SmtpPassword" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-database"></i>
+                                        </div>
+                                        <input asp-for="SmtpPassword" class="form-control" placeholder="Kullanıcı sifresini buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="SmtpPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label asp-for="SmtpHost" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-database"></i>
+                                        </div>
+                                        <input asp-for="SmtpHost" class="form-control" placeholder="Değeri buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="SmtpHost" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="SmtpPort" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-database"></i>
+                                        </div>
+                                        <input asp-for="SmtpPort" class="form-control" placeholder="Değeri buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="SmtpPort" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    
+                                    <div class="input-group">
+                                       
+                                        <div class="checkbox">
+                                            <label>
+                                                <input asp-for="SmtpSSLEnabled" /> @Html.DisplayNameFor(model => model.SmtpSSLEnabled)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"> </div>
+    </div>
+
+
+    <br />
+
+    <h5>Footer(Alt Bilgi) Ayarları</h5>
+    <hr width="100%" size="2" />
+    
+    <br />
+
+
+    <div class="row">
+        <div class="col-md-1"> </div>
+        <div class="col-md-10">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="panel panel-default well">
+                    <div class="panel-body">
+                        <form class="form-horizontal track-event-form bv-form" novalidate="novalidate">
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label asp-for="Facebook" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-facebook"></i>
+                                        </div>
+                                        <input asp-for="Facebook" class="form-control" placeholder="Facebook adresini lütfen buraya giriniz" name="">
+                                    </div>
+                                    <span asp-validation-for="Facebook" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="Twitter" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-twitter"></i>
+                                        </div>
+                                        <input asp-for="Twitter" class="form-control" placeholder="Twitter adresini lütfen buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="Twitter" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label asp-for="Instagram" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-instagram"></i>
+                                        </div>
+                                        <input asp-for="Instagram" class="form-control" placeholder="İnstagram hesabını lütfen buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="Instagram" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="Youtube" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-youtube"></i>
+                                        </div>
+                                        <input asp-for="Youtube" class="form-control" placeholder="Youtube adresini lütfen buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="Youtube" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label asp-for="Linkedin" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-linkedin"></i>
+                                        </div>
+                                        <input asp-for="Linkedin" class="form-control" placeholder="Linkedin hesabını lütfen buraya giriniz" name="" type="text">
+                                    </div>
+                                    <span asp-validation-for="Linkedin" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="MetaTitle" class="control-label"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar-times-o"></i>
+                                        </div>
+                                        <textarea asp-for="MetaTitle" class="form-control" rows="1" style="width:99.9%" placeholder="Baslıgı lütfen lütfen buraya giriniz" name="" ></textarea>
+                                    </div>
+                                    <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="FooterText" class="control-label"></label>
+                                    <div class="input-group">
+                                       
+                                        <textarea asp-for="FooterText" class="form-control" rows="3" style="width:99.9%" name="FooterText"></textarea>
+                                    </div>
+                                    <span asp-validation-for="FooterText" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="About" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="About" class="form-control" rows="3" style="width:99.9%" name="About"></textarea>
+                                    </div>
+                                    <span asp-validation-for="About" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="MetaDescription" class="control-label"></label>
+                                    <div class="input-group">
+                                       
+                                        <textarea asp-for="MetaDescription" class="form-control" rows="3" style="width:99.9%" name="MetaDescription"></textarea>
+                                    </div>
+                                    <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="CustomHtml" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="CustomHtml" class="form-control" rows="3" style="width:99.9%" name="CustomHtml"></textarea>
+                                    </div>
+                                    <span asp-validation-for="CustomHtml" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="PrivacyPolicy" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="PrivacyPolicy" class="form-control" rows="3" style="width:99.9%" name="PrivacyPolicy"></textarea>
+                                    </div>
+                                    <span asp-validation-for="PrivacyPolicy" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="TermsOfUse" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="TermsOfUse" class="form-control" rows="3" style="width:99.9%" name="TermsOfUse"></textarea>
+                                    </div>
+                                    <span asp-validation-for="TermsOfUse" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="MembershipAgreement" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="MembershipAgreement" class="form-control" rows="3" style="width:99.9%" name="MembershipAgreement"></textarea>
+                                    </div>
+                                    <span asp-validation-for="MembershipAgreement" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="HowItWorks" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="HowItWorks" class="form-control" rows="3" style="width:99.9%" name="HowItWorks"></textarea>
+                                    </div>
+                                    <span asp-validation-for="HowItWorks" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label asp-for="Help" class="control-label"></label>
+                                    <div class="input-group">
+                                        
+                                        <textarea asp-for="Help" class="form-control" rows="3" style="width:99.9%" name="Help"></textarea>
+                                    </div>
+                                    <span asp-validation-for="Help" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"> </div>
+    </div>
+
+
+    <div>
+        <input type="hidden" asp-for="Id" />
+
+        <input asp-for="CreateDate" type="hidden" />
+
+
+        <input asp-for="CreatedBy" type="hidden" />
+        <span asp-validation-for="CreatedBy" class="text-danger"></span>
+
+        <input asp-for="UpdateDate" type="hidden" />
+        <span asp-validation-for="UpdateDate" class="text-danger"></span>
+
+        <input asp-for="UpdatedBy" type="hidden" />
+        <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                <input asp-for="UseSSL" /> @Html.DisplayNameFor(model => model.UseSSL)
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+
+
+
   </div>
 
 
 
-
-
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <form asp-action="View">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <h5>İletişim</h5>
-                        <hr width="100%" size="2" />
-
-                        <div class="form-group">
-                            <label asp-for="MapLat" class="control-label"></label>
-                            <input asp-for="MapLat" class="form-control" />
-                            <span asp-validation-for="MapLat" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="MapLng" class="control-label"></label>
-                            <input asp-for="MapLng" class="form-control" />
-                            <span asp-validation-for="MapLng" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Address" class="control-label"></label>
-                            <textarea asp-for="Address" class="form-control"></textarea>
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Phone" class="control-label"></label>
-                            <input asp-for="Phone" class="form-control" />
-                            <span asp-validation-for="Phone" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Fax" class="control-label"></label>
-                            <input asp-for="Fax" class="form-control" />
-                            <span asp-validation-for="Fax" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div> 
-                        
-                        <br />
-
-                        <h5>E-posta Ayarları</h5>
-                        <hr width="100%" size="2" /> <br />
-
-                        <div class="form-group">
-                            <label asp-for="SmtpUserName" class="control-label"></label>
-                            <input asp-for="SmtpUserName" class="form-control" />
-                            <span asp-validation-for="SmtpUserName" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="SmtpPassword" class="control-label"></label>
-                            <input asp-for="SmtpPassword" class="form-control" />
-                            <span asp-validation-for="SmtpPassword" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="SmtpHost" class="control-label"></label>
-                            <input asp-for="SmtpHost" class="form-control" />
-                            <span asp-validation-for="SmtpHost" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="SmtpPort" class="control-label"></label>
-                            <input asp-for="SmtpPort" class="form-control" />
-                            <span asp-validation-for="SmtpPort" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input asp-for="SmtpSSLEnabled" /> @Html.DisplayNameFor(model => model.SmtpSSLEnabled)
-                                </label>
-                            </div>
-                        </div> 
-                        
-                        <br />
-
-                        <h5>Footer(Alt Bilgi) Ayarları</h5>
-                        <hr width="100%" size="2" /> <br />
-
-                        <div class="form-group">
-                            <label asp-for="Facebook" class="control-label"></label>
-                            <input asp-for="Facebook" class="form-control" />
-                            <span asp-validation-for="Facebook" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Twitter" class="control-label"></label>
-                            <input asp-for="Twitter" class="form-control" />
-                            <span asp-validation-for="Twitter" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Linkedin" class="control-label"></label>
-                            <input asp-for="Linkedin" class="form-control" />
-                            <span asp-validation-for="Linkedin" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Instagram" class="control-label"></label>
-                            <input asp-for="Instagram" class="form-control" />
-                            <span asp-validation-for="Instagram" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Youtube" class="control-label"></label>
-                            <input asp-for="Youtube" class="form-control" />
-                            <span asp-validation-for="Youtube" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="MetaTitle" class="control-label"></label>
-                            <textarea asp-for="MetaTitle" class="form-control"></textarea>
-                            <span asp-validation-for="MetaTitle" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="FooterText" class="control-label"></label>
-                            <textarea asp-for="FooterText" class="form-control" name="FooterText"></textarea>
-
-                            <span asp-validation-for="FooterText" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="MetaDescription" class="control-label"></label>
-                            <textarea asp-for="MetaDescription" class="form-control" name="MetaDescription"></textarea>
-
-                            <span asp-validation-for="MetaDescription" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="CustomHtml" class="control-label"></label>
-                            <textarea asp-for="CustomHtml" class="form-control" name="CustomHtml"></textarea>
-
-                            <script>
-                               
-                            </script>
-
-                            <span asp-validation-for="CustomHtml" class="text-danger"></span>
-                        </div> 
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="About" class="control-label"></label>
-                            <textarea asp-for="About" class="form-control" name="About"></textarea>
-
-                            <script>
-                               
-                            </script>
-
-                            <span asp-validation-for="About" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="PrivacyPolicy" class="control-label"></label>
-                            <textarea asp-for="PrivacyPolicy" class="form-control" name="PrivacyPolicy"></textarea>
-
-                            <span asp-validation-for="PrivacyPolicy" class="text-danger"></span>
-                        </div> 
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="TermsOfUse" class="control-label"></label>
-                            <textarea asp-for="TermsOfUse" class="form-control" name="TermsOfUse"></textarea>
-
-                            <script>
-                              
-                            </script>
-
-                            <span asp-validation-for="TermsOfUse" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="MembershipAgreement" class="control-label"></label>
-                            <textarea asp-for="MembershipAgreement" class="form-control" name="MembershipAgreement"></textarea>
-
-                            <script>
-                               
-                            </script>
-
-                            <span asp-validation-for="MembershipAgreement" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="HowItWorks" class="control-label"></label>
-                            <textarea asp-for="HowItWorks" class="form-control" name="HowItWorks"></textarea>
-
-                          
-                            <span asp-validation-for="HowItWorks" class="text-danger"></span>
-                        </div> 
-                        
-                        <br />
-
-                        <div class="form-group">
-                            <label asp-for="Help" class="control-label"></label>
-                            <textarea asp-for="Help" class="form-control" name="Help"></textarea>
-
-                          
-
-                            <span asp-validation-for="Help" class="text-danger"></span>
-                        </div>
-                        
-                        <br />
-
-                        <div>
-                            <input type="hidden" asp-for="Id" />
-
-                            <input asp-for="CreateDate" type="hidden" />
-
-
-                            <input asp-for="CreatedBy" type="hidden" />
-                            <span asp-validation-for="CreatedBy" class="text-danger"></span>
-
-                            <input asp-for="UpdateDate" type="hidden" />
-                            <span asp-validation-for="UpdateDate" class="text-danger"></span>
-
-                            <input asp-for="UpdatedBy" type="hidden" />
-                            <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input asp-for="UseSSL" /> @Html.DisplayNameFor(model => model.UseSSL)
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <a asp-action="Index">Listeye geri dön </a>
-        </div>
+<div>
+    <a asp-action="Index">Listeye geri dön </a>
+</div>
+ 
 
 
 

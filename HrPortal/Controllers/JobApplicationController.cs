@@ -21,19 +21,20 @@ namespace HrPortal.Controllers
         private IRepository<Occupation> occupationRepository;
         private IRepository<EducationInfo> educationInfoRepository;
         private IRepository<Resume> resumeRepository;
-        
+        private IUnitOfWork unitOfWork;
 
 
 
-        public JobApplicationController( IRepository<EducationInfo> educationInfoRepository,IRepository<Job> jobRepository,IRepository<Company> companyRepository, IRepository<Location> locationRepository,IRepository<JobApplication> jobApplicationRepository, IRepository<Occupation> occupationRepository,IRepository<Resume> resumeRepository)
+        public JobApplicationController( IRepository<EducationInfo> educationInfoRepository,IRepository<Company> companyRepository, IRepository<Location> locationRepository,IRepository<Occupation> occupationRepository,IRepository<Resume> resumeRepository, IUnitOfWork unitOfWork)
         {
-            this.jobRepository = jobRepository;
+            this.unitOfWork = unitOfWork;
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
-            this.jobApplicationRepository = jobApplicationRepository;
             this.resumeRepository = resumeRepository;
             this.occupationRepository = occupationRepository;
             this.educationInfoRepository = educationInfoRepository;
+            this.jobApplicationRepository = unitOfWork.JobApplicationRepository;
+            this.jobRepository = unitOfWork.JobRepository;
   
         }
   
@@ -52,7 +53,9 @@ namespace HrPortal.Controllers
 
         public async Task<IActionResult> Applications(ApplicationSearchViewModel vm)
         {
-            vm.SearchResults = await jobApplicationRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.Resume.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.Resume.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.Resume.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.Resume.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Resume.Title, false, 10, vm.Page, "Resume","Resume.Location");
+            // iki context hatası
+            var jobIds = jobRepository.GetMany(j => j.CreatedBy == User.Identity.Name).Select(s => s.Id);
+            vm.SearchResults = await jobApplicationRepository.GetPaged(s =>  jobIds.Contains(s.JobId) && (!String.IsNullOrEmpty(vm.Keywords) ? s.Resume.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.Resume.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.Resume.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.Resume.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Resume.Title, false, 10, vm.Page, "Resume","Resume.Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", vm.LocationId);
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
             ViewBag.Jobs = new SelectList(jobRepository.GetAll().ToList(), "Id", "Title",vm.JobId);
