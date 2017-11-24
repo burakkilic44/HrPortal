@@ -1,13 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@inject UserManager<ApplicationUser> userManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
    
     <title>@ViewData["Title"] - HrPortal</title>
 
-    <link href="~/maruti/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/maruti/css/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css" />
 
@@ -21,10 +28,7 @@
             height: 10px;
             margin: 0px 0px;
         }
-
-      .nav-collapse{
-                
-      }
+        
 
     </style>
 
@@ -33,7 +37,59 @@
 </head>
 <body style="background-image:url(/maruti/img/background.png)">
 
-    <div class="navbar navbar-default">
+ 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">HR Portal</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">İş İlanları @*<span class="sr-only">(current)</span>*@</a></li>
+                    <li><a href="#">Özgeçmişler</a></li>
+                    <li><a href="#">Firmalar</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ayarlar <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="Languages" asp-action="Index">Diller</a></li>
+                            <li><a asp-controller="Occupations" asp-action="Index">Meslekler</a></li>
+                            <li><a asp-controller="Skills" asp-action="Index">Yetkinlikler</a></li>
+                            <li><a asp-controller="Languages" asp-action="Index">Etiketler</a></li>
+                            <li><a asp-controller="Languages" asp-action="Index">Konumlar</a></li>
+                            <li><a asp-controller="Languages" asp-action="Index">Kullanıcılar</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a asp-controller="Settings" asp-action="Edit">Genel Ayarlar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+               
+                <ul class="nav navbar-nav navbar-right">
+                   
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@{var user = await userManager.GetUserAsync(User);} @user.FirstName @user.LastName (@User.Identity.Name) <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="Manage" asp-action="Index">Profilim</a></li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit();">Çıkış Yap</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <!--- eksisi -->
+    
+    @*<div class="navbar navbar-default">
         <div class="navbar-inner">
             <div class="container-fluid">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -41,10 +97,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                
+
                 <div class="logo"><img src="~/maruti/img/logo.png" /></div>
-                <div class="nav-collapse active">               
-                    <ul class="nav">                       
+                <div class="nav-collapse active">
+                    <ul class="nav" >
                         <li><a asp-controller="" asp-action="Index"><i class="icon-home icon-black"></i>Ana Sayfa</a></li>
                         <li class="divider-vertical"></li>
                         <li><a asp-controller="Jobs" asp-action="Index"><i class="icon-file icon-black"></i>İş ilanları</a></li>
@@ -70,14 +126,14 @@
                                     </ul>
                                 </li>
                             </ul>
-                            </ul>
+                    </ul>
 
                     <div class="btn-group pull-right">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-user"></i>Admin<span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">                                                        
-                            <li><a  asp-area="" asp-controller="" asp-action="Index" ><i class="icon-share"></i>Çıkış Yap</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="" asp-action="Index"><i class="icon-share"></i>Çıkış Yap</a></li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +142,7 @@
             <!--/.container-fluid -->
         </div>
         <!--/.navbar-inner -->
-    </div>
+    </div>*@
     <!--/.navbar -->
 
 
@@ -97,11 +153,14 @@
             <p>&copy; 2017 - HrPortal</p>
         </footer>
     </div>
-    <script src="~/maruti/js/jquery.min.js"></script>
-    <script src="~/maruti/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.9/js/dataTables.jqueryui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.9/js/dataTables.jqueryui.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
     @RenderSection("scripts", required: false);
 
 </body>
