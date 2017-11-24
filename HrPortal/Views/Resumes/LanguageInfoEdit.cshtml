@@ -1,41 +1,34 @@
-﻿@model LanguageInfo
+﻿@model IEnumerable<LanguageInfo>
 @{
     Layout = null;
 }
 
 <div class="container">
-
     <header class="section-header">
         <span>Yabancı Diller</span>
         <h2>Yabancı Dil Bilgileri</h2>
     </header>
-
+    @foreach (var item in Model)
+    {
     <div class="row">
-
         <div class="col-xs-12">
             <div class="item-block">
                 <div class="item-form">
-
-                    <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-
+                    <button class="btn btn-danger btn-float btn-remove" onclick="LanguageInfoDelete()"><i class="ti-close"></i></button>
                     <div class="row">
-
-
                         <div class="col-xs-12 col-sm-12">
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                                <select asp-for="LanguageId" class="form-control" asp-items="@ViewBag.Languages">
+                                <select asp-for="@item.LanguageId" class="form-control" asp-items="@ViewBag.Languages">
                                     <option value="">Bir dil seçiniz</option>
                                 </select>
-                                <span asp-validation-for="Language" class="text-danger"></span>
+                                <span asp-validation-for="@item.Language" class="text-danger"></span>
                             </div>
-
-
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
-                                        <input asp-for="SpeakingLevel" class="form-control" value="" placeholder="Konuşma seviyesi">
-                                        <span asp-validation-for="SpeakingLevel" class="text-danger"></span>
+                                        <input asp-for="@item.SpeakingLevel" class="form-control" value="" placeholder="Konuşma seviyesi">
+                                        <span asp-validation-for="@item.SpeakingLevel" class="text-danger"></span>
                                         <span class="input-group-addon"></span>
                                         <span class="text-danger"></span>
                                     </div>
@@ -45,8 +38,8 @@
                                 <div class="form-group">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
-                                        <input asp-for="ReadingLevel" class="form-control" value="" placeholder="Okuma Seviyesi">
-                                        <span asp-validation-for="ReadingLevel" class="text-danger"></span>
+                                        <input asp-for="@item.ReadingLevel" class="form-control" value="" placeholder="Okuma Seviyesi">
+                                        <span asp-validation-for="@item.ReadingLevel" class="text-danger"></span>
                                         <span class="input-group-addon"></span>
                                         <span class="text-danger"></span>
                                     </div>
@@ -56,24 +49,23 @@
                                 <div class="form-group">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
-                                        <input asp-for="WritingLevel" class="form-control" value="" placeholder="Yazma Seviyesi">
-                                        <span asp-validation-for="WritingLevel" class="text-danger"></span>
+                                        <input asp-for="@item.WritingLevel" class="form-control" value="" placeholder="Yazma Seviyesi">
+                                        <span asp-validation-for="@item.WritingLevel" class="text-danger"></span>
                                         <span class="input-group-addon"></span>
                                         <span class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col-xs-12 text-center">
             <br>
-            <button type="button" id="btnAdd" onclick="LanguageInfoEdit()" class="btn btn-primary btn-duplicator">Yabancı Dil Güncelle</button>
+            <button type="button" asp-route-id="@item.Id" onclick="LanguageInfoEdit()" class="btn btn-primary">Yabancı Dil Güncelle</button>
         </div>
     </div>
+    }
 </div>
 

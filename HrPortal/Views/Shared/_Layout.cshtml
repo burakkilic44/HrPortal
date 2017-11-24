@@ -84,10 +84,14 @@
             <a class="menuitem" asp-controller="Jobs" asp-action="Index">İş ilanları</a>
 
         </li>
+    
         <li>
-            <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
-
+            @if (User.IsInRole("Admin")|| (User.IsInRole("Employer")) )
+            {
+           <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
+            }
         </li>
+        
         <li>
             <a class="menuitem" asp-controller="Companies" asp-action="Index">Firmalar</a>
         </li>
@@ -208,6 +212,18 @@
     <script src="/assets/js/app.min.js"></script>
     <script src="/assets/js/custom.js"></script>
     @RenderSection("Scripts", required:false)
+
+  
+    <script src="/assets/vendors/summernote/summernote.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#Phone").mask("(999) 999-9999");
+            $("#Date").mask("99/99/9999", { placeholder: "mm/dd/yyyy" });
+        });
+    </script>
     
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿@model Skill
+﻿@model IEnumerable<Skill>
 @{
     Layout = null;
 }
@@ -8,21 +8,25 @@
         <span>Uzmanlık Alanları</span>
         <h2>Yetenekler</h2>
     </header>
+    @foreach (var item in Model)
+    {
     <div class="row">
         <div class="col-xs-12">
             <div class="item-block">
                 <div class="item-form">
-                    <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
+                    <button class="btn btn-danger btn-float btn-remove" onclick="SkillDelete()"><i class="ti-close"></i></button>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <input asp-for="Name" type="text" class="form-control" placeholder="Yetenek, bkz. HTML">
+                                <input asp-for="@item.Name" type="text" class="form-control" placeholder="Yetenek, bkz. HTML">
+                               <span asp-validation-for="@item.Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input asp-for="Level" type="text" class="form-control" value="" placeholder="Yetenek seviyesi, bkz. 90">
+                                    <input asp-for="@item.Level" type="text" class="form-control" value="" placeholder="Yetenek seviyesi, bkz. 90">
+                                    <span asp-validation-for="@item.Level" class="text-danger"></span>
                                     <span class="input-group-addon">%</span>
                                 </div>
                             </div>
@@ -33,7 +37,8 @@
         </div>
         <div class="col-xs-12 text-center">
             <br>
-            <button id="btnAdd" type="button" onclick="SkillEdit()" class="btn btn-primary btn-duplicator">Yetenek Düzenle</button>
+            <button type="button" asp-route-id="@item.Id" onclick="SkillEdit()" class="btn btn-primary">Yetenek Düzenle</button>
         </div>
     </div>
+    }
 </div>

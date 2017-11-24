@@ -11,32 +11,41 @@
             <h1 class="text-center">İş başvurusunda bulunun</h1>
             <p class="lead text-center">Online özgeçmişinizle başvurun, iş için yeni özgeçmiş oluşturun veya özel bir uygulama yapın.</p>
             <hr>
-
+            <div asp-validation-summary="All" class="text-danger"></div>
             <!-- Job detail -->
-            <a class="item-block item-block-flat" href="Details">
-                <header>
+            
+        @if (Model.Job != null)
+        {
+          <a class="item-block item-block-flat" asp-controller="Jobs" asp-action="Details" asp-route-id="@Model.JobId">
+               
+             
+              <header>
                     <img src="assets/img/logo-google.jpg" alt="">
                     <div class="hgroup">
-                        <h4>@Model.Job.Title</h4>
-                        <h5>@Model.Job.Company.Name</h5>
+                  
+                        <h4>
+                            @Model.Job.Title;
+                        </h4>
+                        <h5>@if (Model.Job != null)
+                        {
+                        @Model.Job.Company.Name}</h5>
                     </div>
                     <div class="header-meta">
                         <i class="fa fa-map-marker"></i>
                         <span>
-
                             @if (Model.Job.JobLocations != null)
                             {
                                 foreach (var location in Model.Job.JobLocations.Select(s => s.Location.Name).ToList())
                                 {
                                     @location
-                                    <text> </text>
+                                    <text>,</text>
                                 }
                             }
                         </span><br />
                     </div>
                 </header>
             </a>
-
+            }
             <!-- END Job detail -->
 
             <div class="button-group">
@@ -44,69 +53,49 @@
                     <a class="btn btn-primary" href="#sec-resume">Özgeçmiş ile başvurun</a>
                 </div>
             </div>
-
         </div>
     </header>
     <!-- END Page header -->
     <!-- Main container -->
     <main>
-
-
         <!-- Apply with resume -->
         <section id="sec-resume">
             <div class="container">
-
                 <header class="section-header">
                     <span>Özgeçmiş ile başvurun</span>
                     <h2>Özgeçmiş seçin</h2>
                     <p>Bu iş için mevcut çevrimiçi özgeçmişlerinden birisi ile  başvur</p>
-
                 </header>
-
-
-
-                @foreach (var resumeItem in ViewBag.Resumes)
-            {
+                @foreach (var resumeItem in (IEnumerable<Resume>)ViewBag.Resumes)
+                {
      <!-- Resume item -->
-
+                    @if (resumeItem.Location != null)
+                    {
                     <div class="col-lg-12">
                         <div class="input-group item-block">
 
                             <div class="item-block col-md-12">
                                 <span style="float:left">
-                                    <input type="radio" value="@Model.ResumeId" asp-for="ResumeId" class="radio-inline">
+                                    <input type="radio" required value="@resumeItem.Id" asp-for="ResumeId" class="radio-inline">
                                 </span><label for="ResumeId" class="col-md-12">
                                     <header>
-
-
                                         <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
                                         <div class="hgroup">
-                                            <h4><a href="resume-detail.html"></a></h4>
                                             <h4>@resumeItem.ResumeName</h4>
                                             <h5>@resumeItem.Title</h5>
                                         </div>
                                         <div class="header-meta">
                                             <i class="fa fa-map-marker"></i>
                                             <span>
-
-                                                @if (Model.Job.JobLocations != null)
-                                                {
-                                                    foreach (var location in Model.Job.JobLocations.Select(s => s.Location.Name).ToList())
-                                                    {
-                                                        @location
-                                                        <text> </text>
-                                                    }
-                                                }
+                                                @resumeItem.Location.Name
                                             </span>
                                         </div>
-
                                     </header>
-
                                     <footer>
-                                        <p class="status"><strong>Son güncelleme:</strong>@Model.Job.UpdateDate.ToString("dd.MM.yyyy")</p>
+                                        <p class="status"><strong>Son güncelleme:</strong>@resumeItem.UpdateDate.ToString("dd.MM.yyyy")</p>
 
                                         <div class="action-btn">
-                                            <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit">Düzenle</a>
+                                            <a class="btn btn-xs btn-danger" asp-controller="Resumes" asp-action="Edit" asp-route-id="@resumeItem.Id">Düzenle</a>                                            
                                         </div>
                                     </footer>
                                 </label>
@@ -115,14 +104,14 @@
                             <!-- END Resume item -->
                         </div>
                     </div>
-
+                    }
                 }
                 <br />
                 <div class="row">
                     <div class="col-xs-12 col-md-3" style="margin-top:10px;margin-left:15px;">
                         <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
                     </div>
-                    <input type="hidden" name="JobId" value="@Model.Id" />
+                    <input type="hidden" name="JobId" value="@Model.JobId" />
                 </div>
             </div>
         </section>
@@ -135,27 +124,24 @@
                     <h2>Şimdi Uygula</h2>
                     <p>Bu işi özel bir uygulama ile uygulayın.</p>
                 </header>
-
-
                 <div class="form-group">
                     <textarea asp-for="Message" class="form-control" rows="5" placeholder="Mesaj"></textarea>
-                </div>
+                </div>   
+               
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
 
-
-
-                <div class="row">
-                    <div class="col-xs-6 col-md-3">
-                        <button type="submit" class="btn btn-block btn-primary">BAŞVURUYU GÖNDER</button>
+                            <button type="submit" class="btn btn-block btn-primary ">BAŞVURUYU GÖNDER</button>
+                           
+                        </div>
                     </div>
+               
 
-
-                </div>
         </section>
         <!-- END Custom application -->
-
-
     </main>
 </form>
+
 <script>
 
     DisplayAgoFormat();

@@ -1,55 +1,49 @@
-﻿@model Certificate
+﻿@model IEnumerable<Certificate>
 @{
     Layout = null;
 }
 
 <div class="container">
-
     <header class="section-header">
         <span>Sertifikalar</span>
         <h2>Sertifika Bilgileri</h2>
     </header>
-
+    @foreach (var item in Model)
+    {
     <div class="row">
-
         <div class="col-xs-12">
             <div class="item-block">
                 <div class="item-form">
-
-                    <button class="btn btn-danger btn-float btn-remove"><i class="ti-close"></i></button>
-
+                    <button class="btn btn-danger btn-float btn-remove" onclick="CertificateDelete"><i class="ti-close"></i></button>
                     <div class="row">
-
                         <div class="col-xs-12 col-sm-12">
                             <div class="form-group">
-                                <input id="CertificateName" asp-for="Name" type="text" class="form-control" placeholder="Sertifika Adı">
-                                <span asp-validation-for="Name" class="text-danger"></span>
+                                <input id="CertificateName" asp-for="@item.Name" type="text" class="form-control" placeholder="Sertifika Adı">
+                                <span asp-validation-for="@item.Name" class="text-danger"></span>
                             </div>
-
                             <div class="form-group">
-                                <input asp-for="Issuer" type="text" class="form-control" placeholder="Alındığı Kurum">
-                                <span asp-validation-for="Issuer" class="text-danger"></span>
+                                <input asp-for="@item.Issuer" type="text" class="form-control" placeholder="Alındığı Kurum">
+                                <span asp-validation-for="@item.Issuer" class="text-danger"></span>
                             </div>
-
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">Alındığı Tarih</span>
-                                    <input asp-for="IssueDate" type="text" class="form-control" placeholder="bkz. 2012">
-                                    <span asp-validation-for="IssueDate" class="text-danger"></span>
+                                    <input asp-for="@item.IssueDate" type="text" class="form-control" placeholder="bkz. 2012">
+                                    <span asp-validation-for="@item.IssueDate" class="text-danger"></span>
                                     <span class="input-group-addon">Sertifika Dosyası</span>
-                                    <input asp-for="CertificateFile" type="file" class="form-control">
-                                    <span asp-validation-for="CertificateFile" class="text-danger"></span>
+                                    <input asp-for="@item.CertificateFile" type="file" class="form-control">
+                                    <span asp-validation-for="@item.CertificateFile" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <div class="col-xs-12 text-center">
             <br>
-            <button id="btnAdd" type="button" onclick="CertificateEdit()" class="btn btn-primary btn-duplicator">Sertifika Bilgisi Güncelle</button>
+            <button type="button" onclick="CertificateEdit()" class="btn btn-primary btn-duplicator">Sertifika Bilgisi Güncelle</button>
         </div>
     </div>
+    }
 </div>

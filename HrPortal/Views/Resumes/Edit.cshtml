@@ -4,8 +4,10 @@
 }
 <!-- Page header -->
 <link href="~/css/magicsuggest-min.css" rel="stylesheet" />
-
+<input type="hidden" asp-for="CreatedBy" />
+<input type="hidden" asp-for="CreateDate" />
 <form asp-action="Create" method="post">
+   
     <header class="page-header">
         <div class="container page-name">
             <h1 class="text-center">Özgeçmişinizi Oluşturun</h1>
@@ -268,24 +270,24 @@
         <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
-        <section id="EducationInfoIndex" class=" bg-alt"></section>
+       
         <section id="EducationInfoEdit" class=" bg-alt"></section>
         <!-- END Education -->
         <!-- Work Experience -->
-        <section id="ExperienceIndex" class="bg-alt"></section>
+        
         <section id="ExperienceEdit" class="bg-alt"></section>
         <!-- END Work Experience -->
         <!-- Skills -->
-        <section id="SkillIndex" class="bg-alt"></section>
+        
         <section id="SkillEdit" class=" bg-alt"></section>
         <!-- END Skills -->
         <!-- Sertifikalar -->
-        <section id="CertificateIndex" class="bg-alt"></section>
+        
         <section id="CertificateEdit" class=" bg-alt"></section>
 
 
         <!-- Language -->
-        <section id="LanguageInfoIndex" class="bg-alt"></section>
+        
         <section id="LanguageInfoEdit" class=" bg-alt"></section>
 
         <!-- Submit -->
@@ -315,15 +317,10 @@
 
         $(document).ready(function () {
             $("#EducationInfoEdit").load("/Resumes/EducationInfoEdit?resumeId=@Model.Id");
-            $("#EducationInfoIndex").load("/Resumes/EducationInfoIndex?resumeId=@Model.Id");
             $("#ExperienceEdit").load("/Resumes/ExperienceEdit?resumeId=@Model.Id");
-            $("#ExperienceIndex").load("/Resumes/ExperienceIndex?resumeId=@Model.Id");
             $("#SkillEdit").load("/Resumes/SkillEdit?resumeId=@Model.Id");
-            $("#SkillIndex").load("/Resumes/SkillIndex?resumeId=@Model.Id");
             $("#CertificateEdit").load("/Resumes/CertificateEdit?resumeId=@Model.Id");
-            $("#CertificateIndex").load("/Resumes/CertificateIndex?resumeId=@Model.Id");
             $("#LanguageInfoEdit").load("/Resumes/LanguageInfoEdit?resumeId=@Model.Id");
-            $("#LanguageInfoIndex").load("/Resumes/LanguageInfoIndex?resumeId=@Model.Id");
             var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
                 toggleOnClick: true,
@@ -357,7 +354,7 @@
 
 
         function EducationInfoEdit() {
-            $.post("/Resumes/EducationInfoEdit",
+            $.post("/Resumes/EducationInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -375,7 +372,23 @@
         }
 
         function ExperienceEdit() {
-            $.post("/Resumes/ExperienceEdit",
+            $.post("/Resumes/ExperienceEdit?resumeId=@Model.Id",
+                {
+                    ResumeId: "@(Model.Id)",
+                    Photo: $("#Photo").val(),
+                    CompanyName: $("#CompanyName").val(),
+                    Position: $("#Position").val(),
+                    Notes: $("#Notes").val(),
+                },
+                function(data) {
+                    alert(data);
+
+                });
+
+        }
+
+        function ExperienceDelete(id) {
+            $.post("/Resumes/ExperienceDelete?Id=" + id ,
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -392,7 +405,7 @@
 
 
         function SkillEdit() {
-            $.post("/Resumes/SkillEdit",
+            $.post("/Resumes/SkillEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#Name").val(),
@@ -406,7 +419,7 @@
         }
 
         function CertificateEdit() {
-            $.post("/Resumes/CertificateEdit",
+            $.post("/Resumes/CertificateEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#CertificateName").val(),
@@ -421,7 +434,7 @@
         }
 
         function LanguageInfoEdit() {
-            $.post("/Resumes/LanguageInfoEdit",
+            $.post("/Resumes/LanguageInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     LanguageId: $("#LanguageId").val(),

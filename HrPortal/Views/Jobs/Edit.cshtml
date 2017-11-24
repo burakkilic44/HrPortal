@@ -7,9 +7,10 @@
 
 
 <form asp-action="Edit" asp-route-id="@Model.Id"  method="post">
-
+    <input type="hidden" asp-for="CreatedBy" />
+    <input type="hidden" asp-for="CreateDate" />
     <!-- Page header -->
-    <header class="page-header">
+    <header class="page-header bg-img " style="background-image: url(assets/img/bg-banner2.jpg)">
         <div class="container page-name">
             <h1 class="text-center">İş İlanı Ver</h1>
             <p class="lead text-center">Aşağıdaki form ile hemen ücretsiz iş ilanı verebilirsiniz.</p>
@@ -40,12 +41,13 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
 
-                        <select name="LocationId" required class="form-control select2-container-multi">
-                            <option>Konum</option>
+
+                        <select name="LocationId" required class="form-control selectpicker" multiple data-header="Konum seçiniz">
                             @foreach (var location in (IList<Location>)ViewBag.Locations)
                             {
-                                @if (Model.LocationId.Contains(location.Id)) { 
-                                <option value="@location.Id" selected="selected">@location.Name</option>
+                                @if (Model.LocationId.Contains(location.Id))
+                                {
+                                    <option value="@location.Id" selected="selected">@location.Name</option>
                                 }
                                 else
                                 {
@@ -118,6 +120,13 @@
                         <span asp-validation-for="WebAddress" class="text-danger"></span>
                     </div>
                 </div>
+
+                <div class="form-group col-xs-4 col-sm-6 col-md-4">
+                    <div class="checkbox">
+                        <input asp-for="IsActive">
+                        <label asp-for="IsActive">Aktif</label>
+                    </div>
+                </div>
                 @*<div class="button-group">
                         <div class="action-buttons">
                             <div class="upload-button">
@@ -130,6 +139,7 @@
             </div>
         </div>
     </header>
+
     <!-- END Page header -->
     <!-- Main container -->
     <main>
