@@ -7,6 +7,8 @@ using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Newtonsoft.Json.Linq;
 
 namespace HrPortal.Controllers
 {
@@ -22,9 +24,11 @@ namespace HrPortal.Controllers
            
             audit.Ip = context.HttpContext.Request.Host.ToString();
             audit.Action = context.RouteData.Values["action"].ToString();
+            audit.Controller = context.RouteData.Values["controller"].ToString();
             audit.EntityId = context.ActionDescriptor.Id;
-
-
+            audit.UserAgent = context.HttpContext.Request.Headers["user-agent"].ToString();
+               
+            
             // varsa eski veriyi al
             // varsa yeni veriyi al
             audit.UserName = User.Identity.Name;
