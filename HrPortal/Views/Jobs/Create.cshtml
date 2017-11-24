@@ -103,7 +103,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                        <select asp-for="EducationLevel" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
+                        <select asp-for="EducationLevel" required class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
                             <option value="">Eğitim Seviyesi</option>
                         </select>
                         <span asp-validation-for="EducationLevel" class="text-danger"></span>
