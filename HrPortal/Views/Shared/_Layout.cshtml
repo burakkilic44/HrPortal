@@ -86,7 +86,7 @@
         </li>
     
         <li>
-            @if (User.IsInRole("Admin,Employer"))
+            @if (User.IsInRole("Admin")|| (User.IsInRole("Employer")) )
             {
            <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
             }
