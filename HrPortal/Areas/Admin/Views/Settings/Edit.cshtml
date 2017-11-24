@@ -63,7 +63,7 @@
                                     <label asp-for="MapLat" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-map"></i>
                                         </div>
                                         <input asp-for="MapLat" class="form-control" placeholder="MapLat giriniz" name="" >
                                     </div>
@@ -73,7 +73,7 @@
                                     <label asp-for="MapLng" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-map-marker"></i>
                                         </div>
                                         <input asp-for="MapLng" class="form-control" placeholder="MapLng giriniz" name="" type="text">
                                     </div>
@@ -86,7 +86,7 @@
                                     <label asp-for="Fax" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-fax"></i>
                                         </div>
                                         <input asp-for="Fax" class="form-control" placeholder="Fax no giriniz" name="" type="text">
                                     </div>
@@ -96,7 +96,7 @@
                                     <label asp-for="Phone" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-phone"></i>
                                         </div>
                                         <input asp-for="Phone" class="form-control" placeholder="Telefon No nuzu lütfen buraya giriniz" name="" type="text">
                                     </div>
@@ -109,7 +109,7 @@
                                     <label asp-for="Email" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
+                                            <i class="fa fa-mail-forward"></i>
                                         </div>
                                         <input asp-for="Email" class="form-control" placeholder="E-mail adresinizi lütfen buraya giriniz" name="" type="text">
                                     </div>
@@ -163,7 +163,7 @@
                                     <label asp-for="SmtpUserName" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-user"></i>
                                         </div>
                                         <input asp-for="SmtpUserName" class="form-control" placeholder="Kullanıcı adını buraya giriniz" name="">
                                     </div>
@@ -251,7 +251,7 @@
                                     <label asp-for="Facebook" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-facebook"></i>
                                         </div>
                                         <input asp-for="Facebook" class="form-control" placeholder="Facebook adresini lütfen buraya giriniz" name="">
                                     </div>
@@ -261,7 +261,7 @@
                                     <label asp-for="Twitter" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-twitter"></i>
                                         </div>
                                         <input asp-for="Twitter" class="form-control" placeholder="Twitter adresini lütfen buraya giriniz" name="" type="text">
                                     </div>
@@ -274,7 +274,7 @@
                                     <label asp-for="Instagram" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-instagram"></i>
                                         </div>
                                         <input asp-for="Instagram" class="form-control" placeholder="İnstagram hesabını lütfen buraya giriniz" name="" type="text">
                                     </div>
@@ -284,7 +284,7 @@
                                     <label asp-for="Youtube" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-youtube"></i>
                                         </div>
                                         <input asp-for="Youtube" class="form-control" placeholder="Youtube adresini lütfen buraya giriniz" name="" type="text">
                                     </div>
@@ -298,7 +298,7 @@
                                     <label asp-for="Linkedin" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-linkedin"></i>
                                         </div>
                                         <input asp-for="Linkedin" class="form-control" placeholder="Linkedin hesabını lütfen buraya giriniz" name="" type="text">
                                     </div>
@@ -308,9 +308,9 @@
                                     <label asp-for="MetaTitle" class="control-label"></label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
+                                            <i class="fa fa-calendar-times-o"></i>
                                         </div>
-                                        <input asp-for="MetaTitle" class="form-control" placeholder="Baslıgı lütfen lütfen buraya giriniz" name="" type="text">
+                                        <textarea asp-for="MetaTitle" class="form-control" rows="1" style="width:99.9%" placeholder="Baslıgı lütfen lütfen buraya giriniz" name="" ></textarea>
                                     </div>
                                     <span asp-validation-for="MetaTitle" class="text-danger"></span>
                                 </div>
@@ -320,9 +320,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="FooterText" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                       
                                         <textarea asp-for="FooterText" class="form-control" rows="3" style="width:99.9%" name="FooterText"></textarea>
                                     </div>
                                     <span asp-validation-for="FooterText" class="text-danger"></span>
@@ -334,9 +332,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="About" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="About" class="form-control" rows="3" style="width:99.9%" name="About"></textarea>
                                     </div>
                                     <span asp-validation-for="About" class="text-danger"></span>
@@ -348,9 +344,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="MetaDescription" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                       
                                         <textarea asp-for="MetaDescription" class="form-control" rows="3" style="width:99.9%" name="MetaDescription"></textarea>
                                     </div>
                                     <span asp-validation-for="MetaDescription" class="text-danger"></span>
@@ -362,9 +356,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="CustomHtml" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="CustomHtml" class="form-control" rows="3" style="width:99.9%" name="CustomHtml"></textarea>
                                     </div>
                                     <span asp-validation-for="CustomHtml" class="text-danger"></span>
@@ -376,9 +368,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="PrivacyPolicy" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="PrivacyPolicy" class="form-control" rows="3" style="width:99.9%" name="PrivacyPolicy"></textarea>
                                     </div>
                                     <span asp-validation-for="PrivacyPolicy" class="text-danger"></span>
@@ -390,9 +380,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="TermsOfUse" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="TermsOfUse" class="form-control" rows="3" style="width:99.9%" name="TermsOfUse"></textarea>
                                     </div>
                                     <span asp-validation-for="TermsOfUse" class="text-danger"></span>
@@ -404,9 +392,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="MembershipAgreement" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="MembershipAgreement" class="form-control" rows="3" style="width:99.9%" name="MembershipAgreement"></textarea>
                                     </div>
                                     <span asp-validation-for="MembershipAgreement" class="text-danger"></span>
@@ -418,9 +404,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="HowItWorks" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="HowItWorks" class="form-control" rows="3" style="width:99.9%" name="HowItWorks"></textarea>
                                     </div>
                                     <span asp-validation-for="HowItWorks" class="text-danger"></span>
@@ -432,9 +416,7 @@
                                 <div class="col-sm-12">
                                     <label asp-for="Help" class="control-label"></label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-database"></i>
-                                        </div>
+                                        
                                         <textarea asp-for="Help" class="form-control" rows="3" style="width:99.9%" name="Help"></textarea>
                                     </div>
                                     <span asp-validation-for="Help" class="text-danger"></span>
