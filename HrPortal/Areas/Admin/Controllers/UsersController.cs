@@ -28,5 +28,14 @@ namespace HrPortal.Areas.Admin.Controllers
             var users = userManager.Users.ToList();            
             return View(users);
         }
+
+        public IActionResult Edit()
+        {
+            
+            return View();
+        }
+
+
+
     }
 }
