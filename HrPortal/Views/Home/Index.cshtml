@@ -12,13 +12,13 @@
     @{ if (User.Identity.Name != null)
         {
            var user = await UserManager.FindByNameAsync(User.Identity.Name);
-           if(user.IsEmployer)
+           if(User.IsInRole("Candidate") || (User.IsInRole("Admin")))
           {
                 @await Html.PartialAsync("SearchJobs")
                 @await Html.PartialAsync("RecentJobs")
 
             }
-            else
+            else if (User.IsInRole("Employer") || (User.IsInRole("Admin")))
             {
                 @await Html.PartialAsync("Searchresumes")
                 @await Html.PartialAsync("Recentresumes")
@@ -27,8 +27,8 @@
         }
         else
         {
-            @await Html.PartialAsync("Searchresumes")
-            @await Html.PartialAsync("Recentresumes")
+            @await Html.PartialAsync("SearchJobs")
+            @await Html.PartialAsync("RecentJobs")
 
         }
 
