@@ -17,6 +17,7 @@ namespace HrPortal.Models
             Certificates = new HashSet<Certificate>();
             LanguageInfos = new HashSet<LanguageInfo>();
             BirthDate = DateTime.Now;
+            IsActive = true;
 
         }
         [Required(ErrorMessage = "CV adı gereklidir.")]

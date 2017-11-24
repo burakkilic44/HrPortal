@@ -65,6 +65,7 @@
                     <span>Özgeçmiş ile başvurun</span>
                     <h2>Özgeçmiş seçin</h2>
                     <p>Bu iş için mevcut çevrimiçi özgeçmişlerinden birisi ile  başvur</p>
+                    <span asp-validation-for="ResumeId" class="text-danger"></span>
                 </header>
                 @foreach (var resumeItem in (IEnumerable<Resume>)ViewBag.Resumes)
                 {
