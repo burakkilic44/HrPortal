@@ -1,6 +1,4 @@
 ﻿@model CompanySearchViewModel
-@inject UserManager<ApplicationUser> UserManager
-@*@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Company>*@
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
 @{
@@ -60,9 +58,11 @@
     </div>
 
 </header>
-<main class="container">
-    <section class="no-padding-top bg-alt">
-        
+<form method="post" enctype="multipart/form-data">
+
+    <main class="container">
+        <section class="no-padding-top bg-alt">
+
             <div class="row">
 
                 <div class="col-xs-12">
@@ -76,13 +76,9 @@
                     <div class="item-block">
                         <header>
                             <div class="span2" style="text-align:center;">
-                                @{
 
-                                    var user = await UserManager.FindByNameAsync(User.Identity.Name);
-
-                                }
                                 <a asp-controller="Manage" asp-action="Index">
-                                    <img src="/uploads/companies/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
+                                    <img src="/uploads/companies/@CompanyItem.Photo" class="img-circle" style=" width:150px; height:150px" />
                                 </a>
                             </div>
                             <div class="hgroup">
@@ -91,16 +87,16 @@
                             <span class="open-position"></span>
 
                         </header>
-                        
 
-                            <div class="item-body">
-                                
-                                    <p>@Html.Raw(CompanyItem.ShortDescription)</p>
-                                   
-                            </div>
+
+                        <div class="item-body">
+
+                            <p>@Html.Raw(CompanyItem.ShortDescription)</p>
+
                         </div>
-                 </div>
-                 }
+                    </div>
+                </div>
+                }
                 <!-- Page navigation -->
                 <div class="col-md-12">
                     <nav aria-label="Job navigation example">
@@ -110,7 +106,9 @@
                 <!-- END Page navigation -->
 
             </div>
-        
-    </section>
-</main>
-<!-- END Main container -->
+
+        </section>
+    </main>
+    <!-- END Main container -->
+
+</form>

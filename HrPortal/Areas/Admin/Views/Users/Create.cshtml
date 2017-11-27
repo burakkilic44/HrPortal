@@ -1,18 +1,17 @@
 ﻿@model HrPortal.Models.ApplicationUser
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kullanıcı Düzenle</h2>
+<h2>Create</h2>
 
 <h4>ApplicationUser</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -31,13 +30,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="OccupationId" class="control-label"></label>
-                <select asp-for="OccupationId" class="form-control" asp-items="ViewBag.OccupationId"></select>
-                <span asp-validation-for="OccupationId" class="text-danger"></span>
+                <select asp-for="OccupationId" class ="form-control" asp-items="ViewBag.OccupationId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="LocationId" class="control-label"></label>
-                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
-                <span asp-validation-for="LocationId" class="text-danger"></span>
+                <select asp-for="LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -80,7 +77,6 @@
                 <input asp-for="UpdateDate" class="form-control" />
                 <span asp-validation-for="UpdateDate" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
@@ -160,7 +156,7 @@
                 <span asp-validation-for="AccessFailedCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>

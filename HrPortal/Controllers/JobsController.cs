@@ -30,6 +30,8 @@ namespace HrPortal.Controllers
             this.jobApplicationRepository = jobApplicationRepository;
             this.occupationRepository = occupationRepository;
         }
+
+        [Route("ilanlar")]
         public async Task<IActionResult> Index(JobSearchViewModel jvm)
         {
             
@@ -40,6 +42,8 @@ namespace HrPortal.Controllers
             return View(jvm);
 
         }
+
+        [Route("ilanlar/olustur")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create()
         {
@@ -51,6 +55,8 @@ namespace HrPortal.Controllers
 
 
         }
+
+        [Route("ilanlar/olustur")]
         [HttpPost]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create(Job job)
@@ -72,7 +78,8 @@ namespace HrPortal.Controllers
             ViewBag.Locations = locationRepository.GetAll().OrderBy(l => l.Name).ToList();
             return View(job);
         }
-        
+
+        [Route("ilanlar/detaylar")]
         public IActionResult Details(string id)
         {
             var job = jobRepository.Get(id, "Company", "JobLocations", "JobLocations.Location");
@@ -81,6 +88,7 @@ namespace HrPortal.Controllers
            
         }
 
+        [Route("ilanlar/basvuru")]
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Apply(string id)
         {
@@ -89,6 +97,7 @@ namespace HrPortal.Controllers
             return View(jobApplication);
         }
 
+        [Route("ilanlar/basvuru")]
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
        
@@ -109,6 +118,7 @@ namespace HrPortal.Controllers
             return View(jobApplication);
         }
 
+        [Route("ilanlar/duzenle")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(string id)
         {
@@ -123,6 +133,8 @@ namespace HrPortal.Controllers
             job.LocationId = job.JobLocations.Select(s => s.LocationId).ToArray();
             return View(job);
         }
+
+        [Route("ilanlar/duzenle")]
         [HttpPost]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(Job job)
@@ -171,6 +183,7 @@ namespace HrPortal.Controllers
             return View(job);
         }
 
+        [Route("ilanlar/sil")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Delete(string id)
         {
@@ -186,6 +199,8 @@ namespace HrPortal.Controllers
             jobRepository.Delete(job);
             return RedirectToAction("index");
         }
+
+        [Route("ilanlar/yayindan-kaldir")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Remove(string id)
         {
@@ -200,12 +215,14 @@ namespace HrPortal.Controllers
          
             return RedirectToAction("Index");
         }
+
+        [Route("ilanlar/basariyla-kaydedildi")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
         }
 
-
+        [Route("ilanlarım")]
         public async Task<IActionResult> myAdsAsync(JobSearchViewModel jvm)
         {
 
@@ -216,7 +233,7 @@ namespace HrPortal.Controllers
 
         }
 
-
+        [Route("ilanlar/basariyla-basvuruldu")]
         public IActionResult SuccessfullyApplication()
         {
             return View();
