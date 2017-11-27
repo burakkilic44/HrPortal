@@ -37,9 +37,9 @@ namespace HrPortal.Controllers
             this.jobRepository = unitOfWork.JobRepository;
   
         }
-  
 
 
+        [Route("basvurularim")]
         public async Task<IActionResult> MyApplications(JobApplicationSearchViewModel jvm)
         {
 
