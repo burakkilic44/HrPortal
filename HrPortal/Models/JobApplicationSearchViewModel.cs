@@ -14,6 +14,8 @@ namespace HrPortal.Models
             Page = 1;
         }
 
+        public string Id { get; set; }
+
         public string JobId { get; set; }
         public Job Job { get; set; }
 
