@@ -343,6 +343,7 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult SkillDelete(string id)
         {

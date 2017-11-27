@@ -39,17 +39,20 @@
                                 <input asp-for="SchoolName" type="text" class="form-control" placeholder="Okul Adı, Bkz. Yıldız Teknik Üniversitesi">
                                 <span asp-validation-for="SchoolName" class="text-danger"></span>
                             </div>
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Başlangıç tarihi</span>
-                                    <input asp-for="StartDate" class="form-control" placeholder="Başlangı. Tarihi" type="date" title="Başlangıç Tarihi">
-                                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                                    <span class="input-group-addon">Bitiş tarihi</span>
-                                    <input asp-for="EndDate" class="form-control" placeholder="Bitiş Tarihi"type="date" title="Bitiş Tarihi">
-                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                        
+                                <div class="form-group">
+                                    <div class="input-group">
+                            
+                                            <span class="input-group-addon">Başlangıç tarihi</span>
+                                            <input asp-for="StartDate" class="form-control" placeholder="Başlangı. Tarihi" type="date" title="Başlangıç Tarihi">
+                                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                                            <span class="input-group-addon">Bitiş tarihi</span>
+                                            <input asp-for="EndDate" class="form-control" placeholder="Bitiş Tarihi" type="date" title="Bitiş Tarihi">
+                                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
                                 </div>
-                            </div>
+                      
+                            
 
                             <div class="form-group">
                                 <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
