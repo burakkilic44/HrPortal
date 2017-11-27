@@ -38,9 +38,9 @@ namespace HrPortal.Controllers
             this.jobRepository = unitOfWork.JobRepository;
   
         }
-  
 
 
+        [Route("basvurularim")]
         public async Task<IActionResult> MyApplications(JobApplicationSearchViewModel jvm)
         {
 
@@ -51,7 +51,7 @@ namespace HrPortal.Controllers
         }
 
 
-
+        [Route("basvurular")]
         public async Task<IActionResult> Applications(ApplicationSearchViewModel vm)
         {
             // iki context hatası
