@@ -49,7 +49,8 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Occupations/Create
         public IActionResult Create()
         {
-            return View();
+            var occupation = new Occupation() {CreateDate=DateTime.Now,CreatedBy=User.Identity.Name,UpdateDate=DateTime.Now,UpdatedBy=User.Identity.Name};
+            return View(occupation);
         }
 
         // POST: Admin/Occupations/Create
@@ -57,10 +58,14 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Occupation occupation)
+        public async Task<IActionResult> Create([Bind("Name,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Occupation occupation)
         {
             if (ModelState.IsValid)
             {
+                occupation.CreatedBy = User.Identity.Name;
+                occupation.CreateDate = DateTime.Now;
+                occupation.UpdatedBy = User.Identity.Name;
+                occupation.UpdateDate = DateTime.Now;
                 _context.Add(occupation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +94,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Occupation occupation)
+        public async Task<IActionResult> Edit(string id, [Bind("Name,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Occupation occupation)
         {
             if (id != occupation.Id)
             {
@@ -100,6 +105,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    occupation.UpdateDate = DateTime.Now;
+                    occupation.UpdatedBy = User.Identity.Name;
                     _context.Update(occupation);
                     await _context.SaveChangesAsync();
                 }

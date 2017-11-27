@@ -51,8 +51,9 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Skills/Create
         public IActionResult Create()
         {
+            var skill = new Skill() { CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name };
             ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id");
-            return View();
+            return View(skill);
         }
 
         // POST: Admin/Skills/Create
@@ -60,10 +61,15 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Level,ResumeId,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Skill skill)
+        public async Task<IActionResult> Create([Bind("Name,Level,ResumeId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Skill skill)
         {
             if (ModelState.IsValid)
             {
+
+                skill.CreateDate = DateTime.Now;
+                skill.CreatedBy = User.Identity.Name;
+                skill.UpdateDate = DateTime.Now;
+                skill.UpdatedBy = User.Identity.Name;
                 _context.Add(skill);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +100,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Level,ResumeId,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Skill skill)
+        public async Task<IActionResult> Edit(string id, [Bind("Name,Level,ResumeId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Skill skill)
         {
             if (id != skill.Id)
             {
@@ -105,6 +111,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    skill.UpdateDate = DateTime.Now;
+                    skill.UpdatedBy = User.Identity.Name;
                     _context.Update(skill);
                     await _context.SaveChangesAsync();
                 }
