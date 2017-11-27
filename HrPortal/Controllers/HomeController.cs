@@ -30,6 +30,7 @@ namespace HrPortal.Controllers
             
 
         }
+        
         public IActionResult Index()
         {
             ViewBag.ResumeCount = resumeRepository.Count();
@@ -40,6 +41,7 @@ namespace HrPortal.Controllers
             return View();
         }
 
+        [Route("hakkimizda")]
         public IActionResult About()
         {
             var setting = settingRepository.GetAll().FirstOrDefault();
@@ -47,18 +49,23 @@ namespace HrPortal.Controllers
             return View(setting);
         }
 
+        [Route("nasil-calisiyoruz")]
         public IActionResult HowItWorks()
         {
             var setting = settingRepository.GetAll().FirstOrDefault();
 
             return View(setting);
         }
+
+        [Route("yardim")]
         public IActionResult Help()
         {
             var setting = settingRepository.GetAll().FirstOrDefault();
 
             return View(setting);
         }
+
+        [Route("gizlilik-politikasi")]
         public IActionResult PrivacyPolicy()
         {
             var setting = settingRepository.GetAll().FirstOrDefault();
@@ -66,6 +73,7 @@ namespace HrPortal.Controllers
             return View(setting);
         }
 
+        [Route("iletisim")]
         public IActionResult Contact()
         {
             
@@ -74,6 +82,7 @@ namespace HrPortal.Controllers
             return View(setting);
         }
 
+        
         [HttpPost]
         public IActionResult Contact(Message message)
         {
@@ -86,6 +95,7 @@ namespace HrPortal.Controllers
             return View(setting);
         }
 
+        [Route("hata")]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

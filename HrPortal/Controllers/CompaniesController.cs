@@ -33,6 +33,7 @@ namespace HrPortal.Controllers
             this.sectorRepository = sectorRepository;
         }
 
+        [Route("firmalar")]
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
             //s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName : (vm.SortBy == 3 || vm.SortBy == 4 ? s.Occupation.Name : (vm.SortBy == 5 || vm.SortBy == 6 ? s.Location.Name : s.UpdateDate.ToString()))), (vm.SortBy == 1 || vm.SortBy == 3 || vm.SortBy == 5 ? false : (vm.SortBy == 2 || vm.SortBy == 4 || vm.SortBy == 6)
@@ -48,12 +49,15 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        
+
+        [Route("firmalar/detaylar")]
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
             return View(comp);
         }
+
+        [Route("firmalar/olustur")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create()
         {
@@ -64,6 +68,7 @@ namespace HrPortal.Controllers
             return View(compa);
         }
 
+        
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Company company)
@@ -104,12 +109,14 @@ namespace HrPortal.Controllers
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             return View(company);
         }
+        [Route("firmalar/basariyla-kaydedildi")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult SuccessfullyCreated()
         {
             return View();
-        }   
-      
+        }
+
+        [Route("firmalarim")]
         public async Task<IActionResult> MyCompanies(CompanySearchViewModel cvm)
         {
             cvm.SearchResults = await companyRepository.GetPaged(s => (s.CreatedBy == User.Identity.Name) && (!String.IsNullOrEmpty(cvm.Keywords) ? s.Title.Contains(cvm.Keywords) : true) && (!String.IsNullOrEmpty(cvm.LocationId) ? s.LocationId == cvm.LocationId : true) && (!String.IsNullOrEmpty(cvm.SectorId) ? s.SectorId == cvm.SectorId : true), o => o.Title, false, 10, cvm.Page, "Jobs", "Location");
@@ -118,6 +125,8 @@ namespace HrPortal.Controllers
             return View(cvm);
 
         }
+
+        [Route("firmalar/duzenle")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Edit(string id)
         {
@@ -131,6 +140,8 @@ namespace HrPortal.Controllers
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
             return View(company);
         }
+
+        [Route("firmalar/duzenle")]
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public IActionResult Edit(Company company)
@@ -149,6 +160,8 @@ namespace HrPortal.Controllers
             return View(company);
 
         }
+
+        [Route("firmalar/sil")]
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Delete(string id)
         {
