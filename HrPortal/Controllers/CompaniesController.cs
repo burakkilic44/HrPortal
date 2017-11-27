@@ -19,14 +19,12 @@ namespace HrPortal.Controllers
         private IRepository<Company> companyRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Sector> sectorRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger _logger;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public CompaniesController(UserManager<ApplicationUser> userManager, ILogger<ManageController> logger, IHostingEnvironment environment, IRepository<Company> companyRepository,IRepository<Location> locationRepository, IRepository<Sector> sectorRepository)
+        public CompaniesController( ILogger<ManageController> logger, IHostingEnvironment environment, IRepository<Company> companyRepository,IRepository<Location> locationRepository, IRepository<Sector> sectorRepository)
         {
             hostingEnvironment = environment;
-            _userManager = userManager;
             _logger = logger;
             this.companyRepository = companyRepository;
             this.locationRepository = locationRepository;
@@ -36,6 +34,7 @@ namespace HrPortal.Controllers
         [Route("firmalar")]
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
+
             //s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName : (vm.SortBy == 3 || vm.SortBy == 4 ? s.Occupation.Name : (vm.SortBy == 5 || vm.SortBy == 6 ? s.Location.Name : s.UpdateDate.ToString()))), (vm.SortBy == 1 || vm.SortBy == 3 || vm.SortBy == 5 ? false : (vm.SortBy == 2 || vm.SortBy == 4 || vm.SortBy == 6)
             cvm.SearchResults = await companyRepository.GetPaged(s => 
             (!String.IsNullOrEmpty(cvm.Keywords) ? s.Name.Contains(cvm.Keywords) : true) && 
@@ -46,6 +45,8 @@ namespace HrPortal.Controllers
                 5, cvm.Page, "Jobs", "Location");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name", cvm.LocationId);
             ViewBag.Sector = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", cvm.SectorId);
+
+          
             return View(cvm);
           
         }
@@ -61,11 +62,12 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create()
         {
-            var compa = new Company();
+            var company = new Company();
+            //var compa = new Company();
             ViewBag.Companies = new SelectList(companyRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(l => l.Name).ToList(), "Id", "Name");
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
-            return View(compa);
+            return View(company);
         }
 
         
@@ -82,8 +84,7 @@ namespace HrPortal.Controllers
                     ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
                 }
             }
-            var user = await _userManager.GetUserAsync(User);
-            user.Photo = company.Photo;
+          
             if (company.AvatarImage != null && company.AvatarImage.Length > 0)
             {
 
@@ -97,7 +98,7 @@ namespace HrPortal.Controllers
                 {
                     await company.AvatarImage.CopyToAsync(stream);
                 }
-                user.Photo = fileName + "." + extension.ToLower();
+                company.Photo = fileName + "." + extension.ToLower();
             }
             if (ModelState.IsValid)
             {
@@ -128,9 +129,8 @@ namespace HrPortal.Controllers
 
         [Route("firmalar/duzenle")]
         [Authorize(Roles = "Employer,Admin")]
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-
             var company = companyRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
             if (company == null)
             {
@@ -144,8 +144,34 @@ namespace HrPortal.Controllers
         [Route("firmalar/duzenle")]
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
-        public IActionResult Edit(Company company)
+        public async Task<IActionResult> Edit(Company company)
         {
+            if (company.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1).ToLowerInvariant();
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
+          
+            if (company.AvatarImage != null && company.AvatarImage.Length > 0)
+            {
+
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/companies");
+                var extension = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1);
+                var fileName = company.AvatarImage.FileName.Substring(0, company.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await company.AvatarImage.CopyToAsync(stream);
+                }
+                company.Photo = fileName + "." + extension.ToLower();
+            }
+
             if (!(User.IsInRole("Employer") && company.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
                 return NotFound();

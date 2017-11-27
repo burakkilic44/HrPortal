@@ -151,13 +151,14 @@ namespace HrPortal.Controllers
 
         [Route("ozgecmisler/duzenle")]
         [HttpPost]
+        [Authorize(Roles = "Candidate,Admin")]
         public async Task<IActionResult> Edit(Resume resume)
         {
             
-            if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
-            {
-                return NotFound();
-            }
+            //if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
+            //{
+            //    return NotFound();
+            //}
             if (resume.AvatarImage != null)
             {
                 var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
@@ -284,10 +285,13 @@ namespace HrPortal.Controllers
         }
 
         [HttpPost]
-        public JsonResult ExperienceDelete(string ResumeId)
+        public JsonResult ExperienceDelete(string Id)
         {
-            var experience = experienceRepository.Get(ResumeId);
-            experienceRepository.Delete(experience);
+            if (ModelState.IsValid)
+            {
+                var experience = experienceRepository.Get(Id);
+                experienceRepository.Delete(experience);
+            }
             return Json("Success");
             
         }
