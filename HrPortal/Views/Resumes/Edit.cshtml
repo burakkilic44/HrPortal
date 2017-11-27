@@ -371,6 +371,18 @@
                 });
         }
 
+        function EducationInfoDelete() {
+            $post("/Resumes/EducationInfoDelete",
+                {
+                    id:id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
+        }
+
         function ExperienceEdit() {
             $.post("/Resumes/ExperienceEdit?resumeId=@Model.Id",
                 {
@@ -389,10 +401,12 @@
 
         }
 
+
         function ExperienceDelete(id) {
-            $.post("/Resumes/ExperienceDelete?Id=" + id ,
+            alert(id);
+            $.post("/Resumes/ExperienceDelete" ,
                 {
-                  
+                id:id
                 },
                 function(data) {
                     alert(data);
@@ -416,6 +430,19 @@
 
         }
 
+        function SkillDelete(id) {
+            alert(id);
+            $.post("/Resumes/SkillDelete",
+                {
+                    id: id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
+        }
+
         function CertificateEdit() {
             $.post("/Resumes/CertificateEdit?resumeId=@Model.Id",
                 {
@@ -431,6 +458,19 @@
                 });
         }
 
+        function CertificateDelete(id) {
+            alert(id);
+            $.post("/Resumes/CertificateDelete",
+                {
+                    id: id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
+        }
+
         function LanguageInfoEdit() {
             $.post("/Resumes/LanguageInfoEdit?resumeId=@Model.Id",
                 {
@@ -444,6 +484,19 @@
                     alert(data);
 
                 });
+        }
+
+        function LanguageInfoDelete(id) {
+            alert(id);
+            $.post("/Resumes/LanguageInfoDelete",
+                {
+                    id: id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
         }
 
     </script>

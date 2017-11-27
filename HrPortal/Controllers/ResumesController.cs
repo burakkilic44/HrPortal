@@ -239,6 +239,19 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult EducatioInfoDelete(string id)
+        {
+            var educationinfo = educationInfoRepository.GetMany(e => e.Id == id && (!User.IsInRole("Admin") ? e.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (educationinfo == null)
+            {
+                return Json("null");
+            }
+            educationInfoRepository.Delete(educationinfo);
+            return Json("Success");
+        }
+
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult ExperienceCreate() 
@@ -275,16 +288,17 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult ExperienceDelete(string Id)
+        public JsonResult ExperienceDelete(string id)
         {
-            if (ModelState.IsValid)
+            var experience = experienceRepository.GetMany(e => e.Id == id && (!User.IsInRole("Admin") ? e.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (experience == null)
             {
-                var experience = experienceRepository.Get(Id);
-                experienceRepository.Delete(experience);
+                return Json("null");
             }
+            experienceRepository.Delete(experience);
             return Json("Success");
-            
         }
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult SkillCreate() 
@@ -308,7 +322,8 @@ namespace HrPortal.Controllers
             var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(skill);
         }
-        
+
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult SkillEdit(Skill skill) 
         {
@@ -316,6 +331,18 @@ namespace HrPortal.Controllers
             {
                 skillRepository.Update(skill);
             }
+            return Json("Success");
+        }
+
+        [HttpPost]
+        public JsonResult SkillDelete(string id)
+        {
+            var skill = skillRepository.GetMany(s => s.Id == id && (!User.IsInRole("Admin") ? s.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (skill==null)
+            {
+                return Json("null");
+            }
+            skillRepository.Delete(skill);
             return Json("Success");
         }
 
@@ -354,6 +381,20 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult CertificateDelete(string id)
+        {
+            var certificate = certificateRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (certificate == null)
+            {
+                return Json("null");
+            }
+
+            certificateRepository.Delete(certificate);
+            return Json("Success");
+        }
+
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult LanguageInfoCreate() 
@@ -388,6 +429,19 @@ namespace HrPortal.Controllers
             {
                 languageInfoRepository.Update(languageInfo);
             }
+            return Json("Success");
+        }
+
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult LanguageInfoDelete (string id)
+        {
+            var languageinfo = languageInfoRepository.GetMany(l => l.Id == id && (!User.IsInRole("Admin") ? l.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if(languageinfo == null)
+            {
+                return Json("null");
+            }
+            languageInfoRepository.Delete(languageinfo);
             return Json("Success");
         }
 
