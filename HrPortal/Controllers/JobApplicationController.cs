@@ -50,7 +50,7 @@ namespace HrPortal.Controllers
         }
 
 
-
+        [Route("basvurular")]
         public async Task<IActionResult> Applications(ApplicationSearchViewModel vm)
         {
             // iki context hatası
