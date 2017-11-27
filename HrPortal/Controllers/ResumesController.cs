@@ -52,7 +52,7 @@ namespace HrPortal.Controllers
 
         }
 
-        [Route("ozgecmisler")]
+        
         [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
