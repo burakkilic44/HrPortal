@@ -46,12 +46,12 @@
                     <!-- Job item -->
                     @foreach (var item in Model.SearchResults)
                     {
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/Jobs/Details/@item.Id">
+                    <div class="col-xs-12 item-block">
+                        
                             <header>
                                 <img src="/uploads/jobs/" alt="photo">
                                 <div class="hgroup">
-                                    <h4>@item.Job.Title (@item.Job.Company.Name)</h4>
+                                    <h4><a class="" href="/Jobs/Details/@item.Id">@item.Job.Title (@item.Job.Company.Name)</a></h4>
                                     <h5>@item.Resume.ResumeName</h5>
                                 </div>
                                 <div class="header-meta">
@@ -59,15 +59,22 @@
                                     <span class="label label-success">@item.Job.WorkingStyle.GetDisplayName()</span>
                                     
                                 </div>
-                                <div><span>Notes</span></div>
-
+                                
+                                <div>
+                                    <a class="btn btn-danger btn-sm pull-right" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');" asp-controller="JobApplication" asp-action="Delete" asp-route-id="@item.Id" >Sil</a>
+                                    <span>@item.Message</span>
+                                </div>
+                                
+                                
                             </header>
-                        </a>
+    
+
                     </div>
+
                     }
                     <!-- END Job item -->
                 </div>
-
+            
 
                 <!-- Page navigation -->
                 <nav aria-label="Job navigation example">

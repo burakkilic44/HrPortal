@@ -13,36 +13,36 @@
             <div class="col-xs-12">
                 <div class="item-block">
                     <div class="item-form">
-                        <button class="btn btn-danger btn-float btn-remove" onclick="ExperienceDelete(id)"><i class="ti-close"></i></button>
+                        <button type="button" class="btn btn-danger btn-float btn-remove" onclick="ExperienceDelete('@item.Id')"><i class="ti-close"></i></button>
                         <div class="row">
                             <div class="col-xs-12 col-sm-4">
                                 <div class="form-group">
-                                    <input asp-for="@item.Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                    <input name="Photo" id="ExperiencePhoto" value="@item.Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
                                     <span asp-validation-for="@item.Photo" class="text-danger"></span>
                                     <span class="help-block">Please choose a square logo</span>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-8">
                                 <div class="form-group">
-                                    <input asp-for="@item.CompanyName" type="text" class="form-control" placeholder="Firma Adı">
+                                    <input name="CompanyName" id="ExperienceCompanyName" value="@item.CompanyName" type="text" class="form-control" placeholder="Firma Adı">
                                     <span asp-validation-for="@item.CompanyName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input asp-for="@item.Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
+                                    <input name="Position" id="ExperiencePosition" value="@item.Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
                                     <span asp-validation-for="@item.Position" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">Başlangıç tarihi</span>
-                                        <input asp-for="@item.StartYear" type="text" class="form-control" value="" placeholder="bkz. 2012">
+                                        <input name="StartYear" id="ExperienceStartYear" value="@item.StartYear" type="number" class="form-control" value="" placeholder="bkz. 2012">
                                         <span asp-validation-for="@item.StartYear" class="text-danger"></span>
                                         <span class="input-group-addon">Bitiş tarihi</span>
-                                        <input asp-for="@item.EndYear" type="text" class="form-control" value="" placeholder="bkz. 2016">
+                                        <input name="EndYear" id="ExperienceEndYear" value="@item.EndYear" type="number" class="form-control" value="" placeholder="bkz. 2016">
                                         <span asp-validation-for="@item.EndYear" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <textarea asp-for="@item.Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                    <textarea name="Notes" id="ExperienceNotes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar">@item.Notes</textarea>
                                     <span asp-validation-for="@item.Notes" class="text-danger"></span>
                                 </div>
                             </div>

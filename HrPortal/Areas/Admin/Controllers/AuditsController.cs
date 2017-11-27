@@ -47,7 +47,9 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Audits/Create
         public IActionResult Create()
         {
-            return View();
+            var audit = new Audit() { CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name };
+
+            return View(audit);
         }
 
         // POST: Admin/Audits/Create
@@ -59,6 +61,10 @@ namespace HrPortal.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                audit.CreatedBy = User.Identity.Name;
+                audit.CreateDate = DateTime.Now;
+                audit.UpdatedBy = User.Identity.Name;
+                audit.UpdateDate = DateTime.Now;
                 _context.Add(audit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -98,6 +104,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    audit.UpdateDate = DateTime.Now;
+                    audit.UpdatedBy = User.Identity.Name;
                     _context.Update(audit);
                     await _context.SaveChangesAsync();
                 }

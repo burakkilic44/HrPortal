@@ -51,9 +51,12 @@ namespace HrPortal.Controllers
             hostingEnvironment = environment;
 
         }
+
+        
         [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
+            
             vm.SearchResults = await resumeRepository.GetPaged(s => (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName:(vm.SortBy==3 || vm.SortBy==4 ? s.Occupation.Name:(vm.SortBy==5 ||vm.SortBy==6 ? s.Location.Name:s.UpdateDate.ToString()))),(vm.SortBy==1 || vm.SortBy ==3 || vm.SortBy == 5?false:(vm.SortBy == 2 || vm.SortBy ==4 || vm.SortBy == 6 )), 2, vm.Page, "EducationInfos", "Location");
             vm.SearchResults.RouteValue = new RouteValueDictionary { { "Keywords", vm.Keywords }, { "LocationId", vm.LocationId }, { "MilitaryStatus", vm.MilitaryStatus }, { "EducationLevel", vm.EducationLevel }, { "SortBy", vm.SortBy } };
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id","Name", vm.LocationId);
@@ -61,7 +64,8 @@ namespace HrPortal.Controllers
             return View(vm);
 
         }
-        
+
+        [Route("ozgecmisler/detaylar")]
         public IActionResult Details(string id)
         {
             
@@ -74,6 +78,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Route("ozgecmisler/olustur")]
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Create()
         {
@@ -83,6 +88,8 @@ namespace HrPortal.Controllers
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             return View(resume);
         }
+
+        [Route("ozgecmisler/olustur")]
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Resume resume)
@@ -123,9 +130,9 @@ namespace HrPortal.Controllers
             return View(resume); // resume oluşturulduktan sonra edite yönlendirilse daha iyi olur
         }
 
-      
-    
 
+
+        [Route("ozgecmisler/duzenle")]
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit(string id)
                     {
@@ -142,14 +149,16 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Route("ozgecmisler/duzenle")]
         [HttpPost]
+        [Authorize(Roles = "Candidate,Admin")]
         public async Task<IActionResult> Edit(Resume resume)
         {
             
-            if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
-            {
-                return NotFound();
-            }
+            //if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
+            //{
+            //    return NotFound();
+            //}
             if (resume.AvatarImage != null)
             {
                 var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
@@ -187,6 +196,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Route("ozgecmisler/sil")]
         public IActionResult Delete(string id)
         {
             var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
@@ -238,6 +248,19 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult EducatioInfoDelete(string id)
+        {
+            var educationinfo = educationInfoRepository.GetMany(e => e.Id == id && (!User.IsInRole("Admin") ? e.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (educationinfo == null)
+            {
+                return Json("null");
+            }
+            educationInfoRepository.Delete(educationinfo);
+            return Json("Success");
+        }
+
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult ExperienceCreate() 
@@ -274,13 +297,17 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public JsonResult ExperienceDelete(string ResumeId)
+        public JsonResult ExperienceDelete(string id)
         {
-            var experience = experienceRepository.Get(ResumeId);
+            var experience = experienceRepository.GetMany(e => e.Id == id && (!User.IsInRole("Admin") ? e.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (experience == null)
+            {
+                return Json("null");
+            }
             experienceRepository.Delete(experience);
             return Json("Success");
-            
         }
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult SkillCreate() 
@@ -304,7 +331,8 @@ namespace HrPortal.Controllers
             var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(skill);
         }
-        
+
+        [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public JsonResult SkillEdit(Skill skill) 
         {
@@ -312,6 +340,18 @@ namespace HrPortal.Controllers
             {
                 skillRepository.Update(skill);
             }
+            return Json("Success");
+        }
+
+        [HttpPost]
+        public JsonResult SkillDelete(string id)
+        {
+            var skill = skillRepository.GetMany(s => s.Id == id && (!User.IsInRole("Admin") ? s.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (skill==null)
+            {
+                return Json("null");
+            }
+            skillRepository.Delete(skill);
             return Json("Success");
         }
 
@@ -347,6 +387,20 @@ namespace HrPortal.Controllers
             {
                 certificateRepository.Update(certificate);
             }
+            return Json("Success");
+        }
+
+        [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult CertificateDelete(string id)
+        {
+            var certificate = certificateRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (certificate == null)
+            {
+                return Json("null");
+            }
+
+            certificateRepository.Delete(certificate);
             return Json("Success");
         }
 
@@ -388,6 +442,19 @@ namespace HrPortal.Controllers
         }
 
         [Authorize(Roles = "Candidate,Admin")]
+        [HttpPost]
+        public JsonResult LanguageInfoDelete (string id)
+        {
+            var languageinfo = languageInfoRepository.GetMany(l => l.Id == id && (!User.IsInRole("Admin") ? l.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if(languageinfo == null)
+            {
+                return Json("null");
+            }
+            languageInfoRepository.Delete(languageinfo);
+            return Json("Success");
+        }
+
+        [Authorize(Roles = "Candidate,Admin")]
         public ActionResult TagHelper(string term) //Etiket yardımcısı
         {
             
@@ -395,6 +462,7 @@ namespace HrPortal.Controllers
             return Json(data);
         }
 
+        [Route("ozgecmislerim")]
         public async Task<IActionResult> MyResumes(ResumeSearchViewModel vm)
         {
             vm.SearchResults = await resumeRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Title, false, 10, vm.Page, "EducationInfos", "Location");

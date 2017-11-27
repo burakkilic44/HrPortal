@@ -49,7 +49,8 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Languages/Create
         public IActionResult Create()
         {
-            return View();
+            var language = new Language() { CreateDate=DateTime.Now,CreatedBy=User.Identity.Name,UpdateDate=DateTime.Now,UpdatedBy=User.Identity.Name};
+            return View(language);
         }
 
         // POST: Admin/Languages/Create
@@ -57,10 +58,14 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Language language)
+        public async Task<IActionResult> Create([Bind("Name,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Language language)
         {
             if (ModelState.IsValid)
             {
+                language.CreateDate = DateTime.Now;
+                language.CreatedBy = User.Identity.Name;
+                language.UpdateDate = DateTime.Now;
+                language.UpdatedBy = User.Identity.Name;
                 _context.Add(language);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +94,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Language language)
+        public async Task<IActionResult> Edit(string id, [Bind("Name,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Language language)
         {
             if (id != language.Id)
             {
@@ -100,6 +105,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    language.UpdateDate = DateTime.Now;
+                    language.UpdatedBy = User.Identity.Name;
                     _context.Update(language);
                     await _context.SaveChangesAsync();
                 }

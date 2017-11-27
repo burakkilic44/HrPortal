@@ -267,7 +267,7 @@
                 </div>
             </div>
         </section>
-        <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+        <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round" asp-route-id="@Model.Id">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
        
@@ -299,7 +299,7 @@
                     @*<p>Please review your information once more and press the below button to put your resume online.</p>*@
                 </header>
 
-                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round" asp-route-id="@Model.Id">Özgeçmişinizi Kaydedin</button></p>
 
             </div>
         </section>
@@ -371,14 +371,28 @@
                 });
         }
 
+        function EducationInfoDelete() {
+            $post("/Resumes/EducationInfoDelete",
+                {
+                    id:id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
+        }
+
         function ExperienceEdit() {
             $.post("/Resumes/ExperienceEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
-                    Photo: $("#Photo").val(),
-                    CompanyName: $("#CompanyName").val(),
-                    Position: $("#Position").val(),
-                    Notes: $("#Notes").val(),
+                    Photo: $("#ExperiencePhoto").val(),
+                    CompanyName: $("#ExperienceCompanyName").val(),
+                    StartYear: $("#ExperienceStartYear").val(),
+                    EndYear: $("#ExperienceEndYear").val(),
+                    Position: $("#ExperiencePosition").val(),
+                    Notes: $("#ExperienceNotes").val(),
                 },
                 function(data) {
                     alert(data);
@@ -387,14 +401,12 @@
 
         }
 
+
         function ExperienceDelete(id) {
-            $.post("/Resumes/ExperienceDelete?Id=" + id ,
+            alert(id);
+            $.post("/Resumes/ExperienceDelete" ,
                 {
-                    ResumeId: "@(Model.Id)",
-                    Photo: $("#Photo").val(),
-                    CompanyName: $("#CompanyName").val(),
-                    Position: $("#Position").val(),
-                    Notes: $("#Notes").val(),
+                id:id
                 },
                 function(data) {
                     alert(data);
@@ -418,6 +430,19 @@
 
         }
 
+        function SkillDelete(id) {
+            alert(id);
+            $.post("/Resumes/SkillDelete",
+                {
+                    id: id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
+        }
+
         function CertificateEdit() {
             $.post("/Resumes/CertificateEdit?resumeId=@Model.Id",
                 {
@@ -433,6 +458,19 @@
                 });
         }
 
+        function CertificateDelete(id) {
+            alert(id);
+            $.post("/Resumes/CertificateDelete",
+                {
+                    id: id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
+        }
+
         function LanguageInfoEdit() {
             $.post("/Resumes/LanguageInfoEdit?resumeId=@Model.Id",
                 {
@@ -446,6 +484,19 @@
                     alert(data);
 
                 });
+        }
+
+        function LanguageInfoDelete(id) {
+            alert(id);
+            $.post("/Resumes/LanguageInfoDelete",
+                {
+                    id: id
+                },
+                function (data) {
+                    alert(data);
+
+                });
+
         }
 
     </script>
