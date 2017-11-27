@@ -94,8 +94,8 @@ namespace HrPortal.Controllers
         public async Task<IActionResult> Index(IndexViewModel model)
         {
             if (model.AvatarImage != null) { 
-                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
-                var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1);
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png"};
+                var fileExt = System.IO.Path.GetExtension(model.AvatarImage.FileName).Substring(1).ToLowerInvariant();
                 if (!supportedTypes.Contains(fileExt))
                 {
                     ModelState.AddModelError("AvatarImage","Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
