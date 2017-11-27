@@ -103,7 +103,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                        <select asp-for="EducationLevel" class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
+                        <select asp-for="EducationLevel" required class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
                             <option value="">Eğitim Seviyesi</option>
                         </select>
                         <span asp-validation-for="EducationLevel" class="text-danger"></span>
@@ -121,6 +121,12 @@
                         <span class="input-group-addon"><i class="fa fa-wikipedia-w "></i></span>
                         <input asp-for="WebAddress" class="form-control" placeholder="Web Adresi">
                         <span asp-validation-for="WebAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group col-xs-4 col-sm-6 col-md-4">
+                    <div class="checkbox">
+                        <input asp-for="IsActive">
+                        <label asp-for="IsActive">Aktif</label>
                     </div>
                 </div>
               
@@ -151,8 +157,8 @@
                     <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
                 </header>
 
-                <textarea asp-for="Details" class="summernote-editor"></textarea>
-
+                <textarea required asp-for="Details" class="summernote-editor"></textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
             
         </section>
 

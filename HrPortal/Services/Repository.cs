@@ -119,6 +119,11 @@ namespace HrPortal.Services
             }
         }
 
+        public bool Any(Expression<Func<T, bool>> where)
+        {
+            return entities.Any(where);
+        }
+
         public int Count()
         {
             return entities.Count();
@@ -136,5 +141,6 @@ namespace HrPortal.Services
         void Update(T entity);
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
+        bool Any(Expression<Func<T, bool>> where);
     }
 }

@@ -8,12 +8,17 @@ using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
+using System.IO;
+using HrPortal.Models.ManageViewModels;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
 
 namespace HrPortal.Controllers
 {
     public class ResumesController : Controller
     {
-        
+
         private IRepository<Resume> resumeRepository;
         private IRepository<Location> locationRepository;
         private IRepository<Language> languageRepository;
@@ -24,12 +29,15 @@ namespace HrPortal.Controllers
         private IRepository<Occupation> occupationRepository;
         private IRepository<Tag> tagRepository;
         private IRepository<LanguageInfo> languageInfoRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
+        
 
 
 
 
-        public ResumesController(IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
+        public ResumesController(ILogger<ResumesController> logger, IHostingEnvironment environment,IRepository<Resume> resumeRepository, IRepository<Location> locationRepository, IRepository<Language> languageRepository, IRepository<EducationInfo> educationInfoRepository, IRepository<Experience> experienceRepository, IRepository<Skill> skillRepository, IRepository<Certificate> certificateRepository, IRepository<Tag> tagRepository, IRepository<LanguageInfo> languageInfoRepository, IRepository<Occupation> occupationRepository)
         {
+            
             this.languageInfoRepository=languageInfoRepository;
             this.tagRepository = tagRepository;
             this.languageRepository = languageRepository;
@@ -40,9 +48,10 @@ namespace HrPortal.Controllers
             this.skillRepository = skillRepository;
             this.certificateRepository = certificateRepository;
             this.occupationRepository = occupationRepository;
-            
+            hostingEnvironment = environment;
 
         }
+        [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
             vm.SearchResults = await resumeRepository.GetPaged(s => (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName:(vm.SortBy==3 || vm.SortBy==4 ? s.Occupation.Name:(vm.SortBy==5 ||vm.SortBy==6 ? s.Location.Name:s.UpdateDate.ToString()))),(vm.SortBy==1 || vm.SortBy ==3 || vm.SortBy == 5?false:(vm.SortBy == 2 || vm.SortBy ==4 || vm.SortBy == 6 )), 2, vm.Page, "EducationInfos", "Location");
@@ -50,13 +59,21 @@ namespace HrPortal.Controllers
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id","Name", vm.LocationId);
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
             return View(vm);
-        }
 
+        }
+        
         public IActionResult Details(string id)
         {
-            var resume = resumeRepository.Get(id,"EducationInfos","Experiences","Skills","Certificates","LanguageInfos","Language","Location");
+            
+            var resume = resumeRepository.Get(c => c.Id == id, "EducationInfos", "Experiences", "Skills", "Certificates", "LanguageInfos", "Language", "Location");
+            if (resume == null)
+            {
+                return NotFound();
+            }
+           
             return View(resume);
         }
+
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Create()
         {
@@ -68,23 +85,57 @@ namespace HrPortal.Controllers
         }
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
-        public IActionResult Create(Resume resume)
+        public async Task<IActionResult> Create(Resume resume)
         {
+            if (resume.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1).ToLowerInvariant();
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
             if (ModelState.IsValid)
             {
+
+                if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
+                {
+
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/resumes");
+                    var extension = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                    var fileName = resume.AvatarImage.FileName.Substring(0, resume.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await resume.AvatarImage.CopyToAsync(stream);
+                    }
+                    resume.Photo = fileName + "." + extension.ToLower();
+                }
                 resumeRepository.Insert(resume);
             }
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.IsModelStateValid = ModelState.IsValid;
-            return View(resume);
+            return View(resume); // resume oluşturulduktan sonra edite yönlendirilse daha iyi olur
         }
+
+      
+    
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit(string id)
-        {
-            var resume = resumeRepository.Get(id);
+                    {
+            // privent to any user to edit
+            var resume = resumeRepository.Get(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true));
+            if (resume == null)
+            {
+                return NotFound();
+            }
+            
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -92,16 +143,44 @@ namespace HrPortal.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Resume resume)
+        public async Task<IActionResult> Edit(Resume resume)
         {
+            
+            if (! (User.IsInRole("Candidate") && resume.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
-                if (ModelState.IsValid)
-                {
-                    resumeRepository.Update(resume);
-                    return RedirectToAction("Index");
-                }
-
+                return NotFound();
             }
+            if (resume.AvatarImage != null)
+            {
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png" };
+                var fileExt = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1).ToLowerInvariant();
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                if (resume.AvatarImage != null && resume.AvatarImage.Length > 0)
+                {
+
+                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/resumes");
+                    var extension = System.IO.Path.GetExtension(resume.AvatarImage.FileName).Substring(1);
+                    var fileName = resume.AvatarImage.FileName.Substring(0, resume.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
+
+                    var filePath = Path.Combine(uploads, fileName + "." + extension.ToLower());
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await resume.AvatarImage.CopyToAsync(stream);
+                    }
+                    resume.Photo = fileName + "." + extension.ToLower();
+                }
+                resumeRepository.Update(resume);
+                return RedirectToAction("Myresumes");
+            }
+
+            
             ViewBag.Languages = new SelectList(languageRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(c => c.Name).ToList(), "Id", "Name");
@@ -110,21 +189,20 @@ namespace HrPortal.Controllers
 
         public IActionResult Delete(string id)
         {
+            var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+            if (resume == null)
+            {
+                return NotFound();
+            }
             educationInfoRepository.Delete(e => e.ResumeId == id);
             experienceRepository.Delete(e => e.ResumeId == id);
             skillRepository.Delete(e => e.ResumeId == id);
             certificateRepository.Delete(e => e.ResumeId == id);
             languageInfoRepository.Delete(e => e.ResumeId == id);
             resumeRepository.Delete(r => r.Id == id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Myresumes");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult EducationInfosIndex() 
-        {
-           var educationInfos = educationInfoRepository.GetAll();
-            return View(educationInfos);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfoCreate()
@@ -146,7 +224,7 @@ namespace HrPortal.Controllers
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult EducationInfoEdit(string ResumeId) 
         {           
-            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var educationinfo = educationInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId);   
             return View(educationinfo);
         }
         [Authorize(Roles = "Candidate,Admin")]
@@ -160,12 +238,6 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult ExperienceIndex() 
-        {
-            var experience = experienceRepository.GetAll();
-            return View(experience);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult ExperienceCreate() 
@@ -188,11 +260,10 @@ namespace HrPortal.Controllers
         
         public IActionResult ExperienceEdit(string ResumeId) 
         {
-            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(experience);
         }
-
-        
+       
         [HttpPost]
         public JsonResult ExperienceEdit(Experience experience) 
         {
@@ -206,22 +277,11 @@ namespace HrPortal.Controllers
         [HttpPost]
         public JsonResult ExperienceDelete(string ResumeId)
         {
-            var experience = experienceRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
-            if (ModelState.IsValid)
-            {
-                experienceRepository.Delete(experience);
-            }
+            var experience = experienceRepository.Get(ResumeId);
+            experienceRepository.Delete(experience);
             return Json("Success");
             
         }
-
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult SkillIndex() 
-        {
-            var skill = skillRepository.GetAll();
-            return View(skill);
-        }
-
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult SkillCreate() 
         {
@@ -241,7 +301,7 @@ namespace HrPortal.Controllers
        
         public IActionResult SkillEdit(string ResumeId) 
         {
-            var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var skill = skillRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(skill);
         }
         
@@ -255,12 +315,6 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult CertificateIndex() 
-        {
-            var certificate = certificateRepository.GetAll();
-            return View(certificate);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult CertificateCreate()  
@@ -282,7 +336,7 @@ namespace HrPortal.Controllers
         
         public IActionResult CertificateEdit(string ResumeId) 
         {
-            var certificate = certificateRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var certificate = certificateRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(certificate);
         }
         
@@ -296,12 +350,6 @@ namespace HrPortal.Controllers
             return Json("Success");
         }
 
-        [Authorize(Roles = "Candidate,Admin")]
-        public IActionResult LanguageInfosIndex() 
-        {
-            var languageInfo = languageInfoRepository.GetAll();
-            return View(languageInfo);
-        }
 
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult LanguageInfoCreate() 
@@ -325,7 +373,7 @@ namespace HrPortal.Controllers
        
         public IActionResult LanguageInfoEdit(string ResumeId) 
         {
-            var languageinfo = languageInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId).FirstOrDefault();
+            var languageinfo = languageInfoRepository.GetAll().Where(r => r.ResumeId == ResumeId);
             return View(languageinfo);
         }
        

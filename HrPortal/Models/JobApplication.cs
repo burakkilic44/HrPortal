@@ -11,7 +11,7 @@ namespace HrPortal.Models
 
         public string JobId { get; set; }
         public Job Job { get; set; }
-
+        [Required(ErrorMessage = "Başvuru yapmak için özgeçmiş belirtmelisiniz.")]
         public string ResumeId { get; set; }
         public Resume Resume { get; set; }
         [Display(Name = "Mesaj")]

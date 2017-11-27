@@ -15,16 +15,27 @@ namespace HrPortal.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private UserManager<ApplicationUser> userManager;
+        private RoleManager<IdentityRole> roleManager;
 
-        public UsersController(UserManager<ApplicationUser> userManager)
+        public UsersController(UserManager<ApplicationUser> userManager,RoleManager<IdentityRole>roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var users = userManager.Users.ToList();
+            var users = userManager.Users.ToList();            
             return View(users);
         }
+
+        public IActionResult Edit()
+        {
+            
+            return View();
+        }
+
+
+
     }
 }

@@ -9,53 +9,53 @@
     </header>
     @foreach (var item in Model)
     {
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="item-block">
-                <div class="item-form">
-                    <button class="btn btn-danger btn-float btn-remove" onclick="ExperienceDelete(id)"><i class="ti-close"></i></button>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4">
-                            <div class="form-group">
-                                <input asp-for="@item.Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
-                                <span asp-validation-for="@item.Photo" class="text-danger"></span>
-                                <span class="help-block">Please choose a square logo</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-8">
-                            <div class="form-group">
-                                <input asp-for="@item.CompanyName" type="text" class="form-control" placeholder="Firma Adı">
-                                <span asp-validation-for="@item.CompanyName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="@item.Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
-                                <span asp-validation-for="@item.Position" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Başlangıç tarihi</span>
-                                    <input asp-for="@item.StartYear" type="text" class="form-control" value="" placeholder="bkz. 2012">
-                                    <span asp-validation-for="@item.StartYear" class="text-danger"></span>
-                                    <span class="input-group-addon">Bitiş tarihi</span>
-                                    <input asp-for="@item.EndYear" type="text" class="form-control" value="" placeholder="bkz. 2016">
-                                    <span asp-validation-for="@item.EndYear" class="text-danger"></span>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="item-block">
+                    <div class="item-form">
+                        <button class="btn btn-danger btn-float btn-remove" onclick="ExperienceDelete(id)"><i class="ti-close"></i></button>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="form-group">
+                                    <input asp-for="@item.Photo" type="file" class="dropify" data-default-file="assets/img/logo-default.png">
+                                    <span asp-validation-for="@item.Photo" class="text-danger"></span>
+                                    <span class="help-block">Please choose a square logo</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <textarea asp-for="@item.Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
-                                <span asp-validation-for="@item.Notes" class="text-danger"></span>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="form-group">
+                                    <input asp-for="@item.CompanyName" type="text" class="form-control" placeholder="Firma Adı">
+                                    <span asp-validation-for="@item.CompanyName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="@item.Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
+                                    <span asp-validation-for="@item.Position" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Başlangıç tarihi</span>
+                                        <input asp-for="@item.StartYear" type="text" class="form-control" value="" placeholder="bkz. 2012">
+                                        <span asp-validation-for="@item.StartYear" class="text-danger"></span>
+                                        <span class="input-group-addon">Bitiş tarihi</span>
+                                        <input asp-for="@item.EndYear" type="text" class="form-control" value="" placeholder="bkz. 2016">
+                                        <span asp-validation-for="@item.EndYear" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea asp-for="@item.Notes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                                    <span asp-validation-for="@item.Notes" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 text-center">
-            <br>
-            <button id="btnAdd" type="button" onclick="ExperienceEdit()" class="btn btn-primary btn-duplicator">İş Deneyimi Güncelle</button>
-        </div>
+            <div class="col-xs-12 text-center">
+                <br>
+                <button type="button" asp-route-id="@item.Id" onclick="ExperienceEdit()" class="btn btn-primary">İş Deneyimi Güncelle</button>
+            </div>
 
 
-    </div>
+        </div>
     }
 </div>

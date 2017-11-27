@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +18,8 @@ namespace HrPortal.Models
             Certificates = new HashSet<Certificate>();
             LanguageInfos = new HashSet<LanguageInfo>();
             BirthDate = DateTime.Now;
+            IsActive = true;
+            IsApproved = true;
 
         }
         [Required(ErrorMessage = "CV adı gereklidir.")]
@@ -118,7 +121,8 @@ namespace HrPortal.Models
         [Display(Name = "Meslek")]
         [ForeignKey("OccupationId")]
         public Occupation Occupation { get; set; }
-
+        [NotMapped]
+        public IFormFile AvatarImage { get; set; }
 
         public ICollection<JobApplication> JobApplications { get; set; }
 

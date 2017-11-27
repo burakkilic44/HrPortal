@@ -48,11 +48,11 @@
                                                 {
                                                     <div class="form-group" style="text-align:center;margin-bottom:5px;">
                                                        
-                                                        <button asp-controller="JobApplication" asp-action="Applications" style="margin-bottom:5px;" class="btn btn-sm btn-danger ">Başvuranlar</button>
-                                                        <button asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-primary ">Başvurularım</button>
-                                                        <button asp-controller="Resumes" asp-action="MyResumes" style="margin-bottom:5px;" class="btn btn-sm btn-warning">Özgeçmişlerim</button>
+                                                        <a asp-controller="JobApplication" asp-action="Applications" style="margin-bottom:5px;" class="btn btn-sm btn-danger ">Başvuranlar</a>
+                                                        <a asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-primary ">Başvurularım</a>
+                                                        <a asp-controller="Resumes" asp-action="MyResumes" style="margin-bottom:5px;" class="btn btn-sm btn-warning">Özgeçmişlerim</a>
                                                         <a style="margin-bottom:5px;" class="btn btn-sm  btn-success" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
-                                                        <button asp-controller="Jobs" asp-action="myAdsAsync" style="margin-bottom:5px; " class="btn btn-sm btn-info" >İlanlarım</button>
+                                                        <a asp-controller="Jobs" asp-action="myAdsAsync" style="margin-bottom:5px; " class="btn btn-sm btn-info" >İlanlarım</a>
                                                     </div>
 
                                                 }
@@ -60,16 +60,16 @@
                                                 else if (user.IsEmployer == true)
                                                 {
                                                     <div style="text-align:center">
-                                            <button asp-controller="Companies" asp-action="MyCompanies" style="margin-top:5px;" class="btn-block btn btn-sm btn-success " >Firmalarım</button>
-                                            <button asp-controller="Jobs" asp-action="myAdsAsync" style="margin-top:5px;" class="btn-block btn btn-info btn-sm">İlanlarım</button>
-                                            <button asp-controller="JobApplication" asp-action="Applications" style="margin-top:5px;" class="btn-block btn btn-sm btn-warning ">Başvuranlar</button>
+                                            <a asp-controller="Companies" asp-action="MyCompanies" style="margin-top:5px;" class="btn-block btn btn-sm btn-success " >Firmalarım</a>
+                                            <a asp-controller="Jobs" asp-action="myAdsAsync" style="margin-top:5px;" class="btn-block btn btn-info btn-sm">İlanlarım</a>
+                                            <a asp-controller="JobApplication" asp-action="Applications" style="margin-top:5px;" class="btn-block btn btn-sm btn-warning ">Başvuranlar</a>
 
                                                            </div>
                                                 }
                                                 else if (user.IsEmployer == false)
                                                 { <div style="text-align:center">
-                                            <button asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-success ">Başvurularım</button>
-                                            <button asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-warning">Özgeçmişlerim</button>
+                                            <a asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-success ">Başvurularım</a>
+                                            <a asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-warning">Özgeçmişlerim</a>
                                         </div>
                                                 }
                                             }

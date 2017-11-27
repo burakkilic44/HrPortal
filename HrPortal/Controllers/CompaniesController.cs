@@ -48,7 +48,7 @@ namespace HrPortal.Controllers
             return View(cvm);
           
         }
-        [Authorize(Roles = "Employer,Admin")]
+        
         public IActionResult Details(string id)
         {
             var comp = companyRepository.Get(id, "Jobs", "Location", "Jobs.JobLocations", "Jobs.JobLocations.Location");
@@ -135,7 +135,7 @@ namespace HrPortal.Controllers
         [HttpPost]
         public IActionResult Edit(Company company)
         {
-            if (!User.IsInRole("Admin") && company.CreatedBy != User.Identity.Name)
+            if (!(User.IsInRole("Employer") && company.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
                 return NotFound();
             }

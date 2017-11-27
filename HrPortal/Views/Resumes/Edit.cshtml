@@ -5,7 +5,7 @@
 <!-- Page header -->
 <link href="~/css/magicsuggest-min.css" rel="stylesheet" />
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="CreatedBy" />
     <input type="hidden" asp-for="CreateDate" />
     <header class="page-header">
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
-                        <input asp-for="Photo" type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
+                        <input asp-for="Photo" name="AvatarImage" type="file" class="dropify" data-default-file="/uploads/resumes/@Model.Photo">
                         <span class="help-block"></span>
                         <span asp-validation-for="Photo" class="text-danger"></span>
                     </div>
@@ -267,7 +267,7 @@
                 </div>
             </div>
         </section>
-        <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+        <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
        
@@ -299,7 +299,7 @@
                     @*<p>Please review your information once more and press the below button to put your resume online.</p>*@
                 </header>
 
-                <p class="text-center"><button class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
 
             </div>
         </section>
@@ -317,15 +317,10 @@
 
         $(document).ready(function () {
             $("#EducationInfoEdit").load("/Resumes/EducationInfoEdit?resumeId=@Model.Id");
-            $("#EducationInfoIndex").load("/Resumes/EducationInfoIndex?resumeId=@Model.Id");
             $("#ExperienceEdit").load("/Resumes/ExperienceEdit?resumeId=@Model.Id");
-            $("#ExperienceIndex").load("/Resumes/ExperienceIndex?resumeId=@Model.Id");
             $("#SkillEdit").load("/Resumes/SkillEdit?resumeId=@Model.Id");
-            $("#SkillIndex").load("/Resumes/SkillIndex?resumeId=@Model.Id");
             $("#CertificateEdit").load("/Resumes/CertificateEdit?resumeId=@Model.Id");
-            $("#CertificateIndex").load("/Resumes/CertificateIndex?resumeId=@Model.Id");
             $("#LanguageInfoEdit").load("/Resumes/LanguageInfoEdit?resumeId=@Model.Id");
-            $("#LanguageInfoIndex").load("/Resumes/LanguageInfoIndex?resumeId=@Model.Id");
             var ms = $('.tags').magicSuggest({
                 allowFreeEntries: true,
                 toggleOnClick: true,
@@ -359,7 +354,7 @@
 
 
         function EducationInfoEdit() {
-            $.post("/Resumes/EducationInfoEdit",
+            $.post("/Resumes/EducationInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -377,7 +372,7 @@
         }
 
         function ExperienceEdit() {
-            $.post("/Resumes/ExperienceEdit",
+            $.post("/Resumes/ExperienceEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -393,7 +388,7 @@
         }
 
         function ExperienceDelete(id) {
-            $.post("/Resumes/ExperienceDelete?Id=" + id,
+            $.post("/Resumes/ExperienceDelete?Id=" + id ,
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#Photo").val(),
@@ -410,7 +405,7 @@
 
 
         function SkillEdit() {
-            $.post("/Resumes/SkillEdit",
+            $.post("/Resumes/SkillEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#Name").val(),
@@ -424,7 +419,7 @@
         }
 
         function CertificateEdit() {
-            $.post("/Resumes/CertificateEdit",
+            $.post("/Resumes/CertificateEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#CertificateName").val(),
@@ -439,7 +434,7 @@
         }
 
         function LanguageInfoEdit() {
-            $.post("/Resumes/LanguageInfoEdit",
+            $.post("/Resumes/LanguageInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
                     LanguageId: $("#LanguageId").val(),
