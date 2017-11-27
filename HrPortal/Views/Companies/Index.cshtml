@@ -1,4 +1,5 @@
 ﻿@model CompanySearchViewModel
+@inject UserManager<ApplicationUser> UserManager
 @*@model ReflectionIT.Mvc.Paging.PagingList<HrPortal.Models.Company>*@
 @using ReflectionIT.Mvc.Paging
 @addTagHelper *, ReflectionIT.Mvc.Paging
@@ -15,6 +16,7 @@
         <form asp-action="Index" method="get">
 
             <div class="row">
+               
                 <div class="form-group col-xs-12 col-sm-3">
                     <input asp-for="Keywords" class="form-control" type="text" placeholder="Anahtar Kelime">
                 </div>
@@ -73,7 +75,16 @@
 
                     <div class="item-block">
                         <header>
-                            <img src="~/uploads/@CompanyItem.Photo" alt="@CompanyItem.Name">
+                            <div class="span2" style="text-align:center;">
+                                @{
+
+                                    var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+                                }
+                                <a asp-controller="Manage" asp-action="Index">
+                                    <img src="/uploads/companies/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
+                                </a>
+                            </div>
                             <div class="hgroup">
                                 <h4><a asp-action="Details" asp-route-id="@CompanyItem.Id">@CompanyItem.Name</a></h4>
                             </div>
