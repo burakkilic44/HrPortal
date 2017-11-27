@@ -267,7 +267,7 @@
                 </div>
             </div>
         </section>
-        <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+        <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round" asp-route-id="@Model.Id">Özgeçmişinizi Kaydedin</button></p>
         <!-- Social media -->
         <!-- Education -->
        
@@ -299,7 +299,7 @@
                     @*<p>Please review your information once more and press the below button to put your resume online.</p>*@
                 </header>
 
-                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Özgeçmişinizi Kaydedin</button></p>
+                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round" asp-route-id="@Model.Id">Özgeçmişinizi Kaydedin</button></p>
 
             </div>
         </section>
@@ -375,10 +375,12 @@
             $.post("/Resumes/ExperienceEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
-                    Photo: $("#Photo").val(),
-                    CompanyName: $("#CompanyName").val(),
-                    Position: $("#Position").val(),
-                    Notes: $("#Notes").val(),
+                    Photo: $("#ExperiencePhoto").val(),
+                    CompanyName: $("#ExperienceCompanyName").val(),
+                    StartYear: $("#ExperienceStartYear").val(),
+                    EndYear: $("#ExperienceEndYear").val(),
+                    Position: $("#ExperiencePosition").val(),
+                    Notes: $("#ExperienceNotes").val(),
                 },
                 function(data) {
                     alert(data);
@@ -390,11 +392,7 @@
         function ExperienceDelete(id) {
             $.post("/Resumes/ExperienceDelete?Id=" + id ,
                 {
-                    ResumeId: "@(Model.Id)",
-                    Photo: $("#Photo").val(),
-                    CompanyName: $("#CompanyName").val(),
-                    Position: $("#Position").val(),
-                    Notes: $("#Notes").val(),
+                  
                 },
                 function(data) {
                     alert(data);
