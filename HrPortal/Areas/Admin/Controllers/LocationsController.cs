@@ -51,7 +51,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Locations/Create
         public IActionResult Create()
         {
-            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Id");
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace HrPortal.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Id", location.ParentLocationId);
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Name", location.ParentLocationId);
             return View(location);
         }
 
@@ -85,7 +85,7 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Id", location.ParentLocationId);
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Name", location.ParentLocationId);
             return View(location);
         }
 
@@ -121,7 +121,7 @@ namespace HrPortal.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Id", location.ParentLocationId);
+            ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Name", location.ParentLocationId);
             return View(location);
         }
 
