@@ -22,13 +22,13 @@
 
             <div class="row">
                 <div class="form-group col-xs-12 col-sm-6">
-                    <input asp-for="Title" class="form-control input-lg" placeholder="İlan Başlığı">
+                    <input asp-for="Title" class="form-control input-lg" placeholder="İlan Başlığı*">
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6">
                     <select asp-for="CompanyId" class="form-control selectpicker" asp-items="@ViewBag.Companies">
-                        <option value="">Firma</option>
+                        <option value="">Firma*</option>
                     </select>
                     <span asp-validation-for="CompanyId" class="text-danger"></span>
                     <a class="help-block" asp-controller="Companies" asp-action="Create">Yeni Firma Ekle</a>
@@ -41,9 +41,9 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-4" id="checkboxSelectCombo">
                     <div class="input-group input-group-sm">
-                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-map-marker" title="Lokasyon*"></i></span>
                      
-                            <select name="LocationId" required class="form-control selectpicker" multiple data-header="Konum seçiniz">
+                            <select name="LocationId" required class="form-control selectpicker" multiple data-header="Konum seçiniz*">
                              
                                 @foreach (var location in (IList<Location>)ViewBag.Locations)
                                 {
@@ -65,7 +65,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
                         <select asp-for="WorkingStyle" class="form-control selectpicker" required asp-items="@Html.GetEnumSelectList<WorkingStyle>()">
-                            <option value="">Çalışma Şekli</option>
+                            <option value="">Çalışma Şekli*</option>
                         </select>
                         <span asp-validation-for="WorkingStyle" class="text-danger"></span>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-male"></i></span>
                         <select asp-for="MilitaryStatus" class="form-control selectpicker" required asp-items="@Html.GetEnumSelectList<MilitaryStatus>()">
-                            <option value="">Askerlik Durumu</option>
+                            <option value="">Askerlik Durumu*</option>
                         </select>
                         <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
                     </div>
@@ -83,7 +83,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input asp-for="WorkingHours" required class="form-control" placeholder="Deneyim">
+                        <input asp-for="WorkingHours" required class="form-control" placeholder="Çalışma Saati">
                         <span class="input-group-addon">Çalışma Saati (Saat/Hafta)</span>
                         <span asp-validation-for="WorkingHours" class="text-danger"></span>
                     </div>
@@ -104,15 +104,15 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
                         <select asp-for="EducationLevel" required class="form-control selectpicker" asp-items="@Html.GetEnumSelectList<EducationLevel>()">
-                            <option value="">Eğitim Seviyesi</option>
+                            <option value="">Eğitim Seviyesi*</option>
                         </select>
                         <span asp-validation-for="EducationLevel" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group col-xs-4 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
-                        <span class="input-group-addon" title="Yayın Tarihi"><i class="fa fa-calendar"></i></span>
-                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi" type="date" title="Yayın Tarihi"/>
+                        <span class="input-group-addon" title="Yayın Tarihi*"><i class="fa fa-calendar"></i></span>
+                        <input asp-for="PublishDate" class="form-control input-lg" placeholder="Yayın Tarihi*" type="date" title="Yayın Tarihi"/>                        
                         <span asp-validation-for="PublishDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="form-group col-xs-4 col-sm-6 col-md-4">
                     <div class="checkbox">
-                        <input asp-for="IsActive">
+                        <input asp-for="IsActive" checked>
                         <label asp-for="IsActive">Aktif</label>
                     </div>
                 </div>
@@ -141,6 +141,7 @@
 
                 </div>
         </div>
+
     </header>
     <!-- END Page header -->
     <!-- Main container -->
@@ -153,16 +154,17 @@
 
                 <header class="section-header">
                     <span>AÇIKLAMA</span>
-                    <h2>İş Detayı</h2>
+                    <h2>İş Detayı*</h2>
                     <p>Şirketiniz, iş tanımınız, gerekli becerileriniz, avantajlarınız vb. hakkında yazın.</p>
                 </header>
 
-                <textarea required asp-for="Details" class="summernote-editor"></textarea>
+                <textarea asp-for="Details" class="summernote-editor"></textarea>
             <span asp-validation-for="Details" class="text-danger"></span>
-            
+            <br />
+            <span style="color:red">* Yıldızlı alanlar zorunludur.</span>
         </section>
 
-
+        
 
         <!-- Submit -->
         <section class="bg-alt">
