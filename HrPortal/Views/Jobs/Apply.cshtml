@@ -109,7 +109,7 @@
                 }
                 <br />
                 <div class="row">
-                    <div class="col-xs-12 col-md-3" style="margin-top:10px;margin-left:15px;">
+                    <div class="col-md-3">
                         <a class="btn btn-block btn-primary" asp-controller="Resumes" asp-action="Create">Yeni Özgeçmiş Ekle</a>
                     </div>
                     <input type="hidden" name="JobId" value="@Model.JobId" />
@@ -129,12 +129,9 @@
                     <textarea asp-for="Message" class="form-control" rows="5" placeholder="Mesaj"></textarea>
                     <span asp-validation-for="Message" class="text-danger"></span>
                 </div>   
-               
                     <div class="row">
-                        <div class="col-xs-6 col-md-3">
-
+                        <div class="col-md-3">
                             <button type="submit" class="btn btn-block btn-primary ">BAŞVURUYU GÖNDER</button>
-                           
                         </div>
                     </div>
                
