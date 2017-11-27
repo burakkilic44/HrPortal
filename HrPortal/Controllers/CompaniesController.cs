@@ -66,12 +66,12 @@ namespace HrPortal.Controllers
 
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Company company)
+        public async Task<IActionResult> Create(Company company)
         {
             if (company.AvatarImage != null)
             {
-                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png", "GIF", "JPG", "JPEG", "PNG" };
-                var fileExt = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1);
+                var supportedTypes = new[] { "gif", "jpg", "jpeg", "png"};
+                var fileExt = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1).ToLowerInvariant();
                 if (!supportedTypes.Contains(fileExt))
                 {
                     ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
@@ -82,7 +82,7 @@ namespace HrPortal.Controllers
             if (company.AvatarImage != null && company.AvatarImage.Length > 0)
             {
 
-                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/account");
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads/companies");
                 var extension = System.IO.Path.GetExtension(company.AvatarImage.FileName).Substring(1);
                 var fileName = company.AvatarImage.FileName.Substring(0, company.AvatarImage.FileName.IndexOf(extension) - 1).GenerateSlug();
 
