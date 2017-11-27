@@ -51,8 +51,9 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Locations/Create
         public IActionResult Create()
         {
+            var location = new Location() { CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name };
             ViewData["ParentLocationId"] = new SelectList(_context.Locations, "Id", "Name");
-            return View();
+            return View(location);
         }
 
         // POST: Admin/Locations/Create
@@ -60,10 +61,14 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,ParentLocationId,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Location location)
+        public async Task<IActionResult> Create([Bind("Name,ParentLocationId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Location location)
         {
             if (ModelState.IsValid)
             {
+                location.CreateDate = DateTime.Now;
+                location.CreatedBy = User.Identity.Name;
+                location.UpdateDate = DateTime.Now;
+                location.UpdatedBy = User.Identity.Name;
                 _context.Add(location);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +99,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,ParentLocationId,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Location location)
+        public async Task<IActionResult> Edit(string id, [Bind("Name,ParentLocationId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Location location)
         {
             if (id != location.Id)
             {
@@ -105,6 +110,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    location.UpdateDate = DateTime.Now;
+                    location.UpdatedBy = User.Identity.Name;
                     _context.Update(location);
                     await _context.SaveChangesAsync();
                 }

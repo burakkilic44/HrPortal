@@ -45,6 +45,9 @@ namespace HrPortal.Models
         public DateTime CreateDate { get; set; }
         [Display(Name = "Güncellenme Tarihi")]
         public DateTime UpdateDate { get; set; }
+
+        [NotMapped]
+        public string RoleId { get; set; }
         
     }
 }
