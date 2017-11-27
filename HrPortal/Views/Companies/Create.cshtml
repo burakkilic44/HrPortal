@@ -24,7 +24,7 @@
                     <div class="row">
 
                         <div class="col-xs-12 col-sm-4 col-lg-2">
-                            <div style=" border:1px; width :180px; height:200px" class="form-group">
+                            <div class="form-group">
                                 @{
 
                                     var user = await UserManager.FindByNameAsync(User.Identity.Name);
@@ -131,11 +131,11 @@
     <!-- END Page header -->
     <!-- Main container -->
 
-    <main class="container">
+    <main>
 
         <!-- Social media -->
         <section>
-            <div>
+            <div class="container">
 
 
                 <header class="section-header">
@@ -218,7 +218,7 @@
         <!-- Social media -->
         <!-- Company detail -->
         <section class=" bg-alt">
-            <div>
+            <div class="container">
 
                 <header class="section-header">
                     <span>Hakkında</span>
@@ -236,14 +236,14 @@
         <!-- Submit -->
         <section>
 
-            <div >
+            <div class="container">
                 <header class="section-header">
                     <span>Tamamladınız mı?</span>
                     <h2>Gönder</h2>
                     <p>Lütfen bir kez daha gözden geçirin ve alttaki butuna basarak online olarak yerleştirin.</p>
                 </header>
 
-                <p class="text-center"><button type="submit" class="btn btn-success btn-xl btn-round">Firmanı Gönder</button></p>
+                <p class="text-center"><button class="btn btn-success btn-xl btn-round">Firmanı Gönder</button></p>
 
             </div>
         </section>

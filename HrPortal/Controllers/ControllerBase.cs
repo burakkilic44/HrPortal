@@ -33,6 +33,7 @@ namespace HrPortal.Controllers
             // varsa yeni veriyi al
             audit.UserName = User.Identity.Name;
             auditRepository.Insert(audit);
+            base.OnActionExecuted(context);
         }
 
     }
