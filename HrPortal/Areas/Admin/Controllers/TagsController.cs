@@ -49,7 +49,8 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Tags/Create
         public IActionResult Create()
         {
-            return View();
+            var tag = new Tag() {CreateDate=DateTime.Now, CreatedBy=User.Identity.Name, UpdateDate=DateTime.Now,UpdatedBy=User.Identity.Name };
+            return View(tag);
         }
 
         // POST: Admin/Tags/Create
@@ -61,6 +62,11 @@ namespace HrPortal.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                tag.CreateDate = DateTime.Now;
+                tag.CreatedBy = User.Identity.Name;
+                tag.UpdatedBy = User.Identity.Name;
+                tag.UpdateDate = DateTime.Now;
+
                 _context.Add(tag);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +95,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Id,CreateDate,CreateBy,UpdateDate,UpdatedBy")] Tag tag)
+        public async Task<IActionResult> Edit(string id, [Bind("Name,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Tag tag)
         {
             if (id != tag.Id)
             {
@@ -100,6 +106,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    tag.UpdateDate = DateTime.Now;
+                    tag.UpdatedBy = User.Identity.Name;
                     _context.Update(tag);
                     await _context.SaveChangesAsync();
                 }

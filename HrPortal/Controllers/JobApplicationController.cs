@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HrPortal.Services;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Controllers
 {
@@ -37,9 +38,9 @@ namespace HrPortal.Controllers
             this.jobRepository = unitOfWork.JobRepository;
   
         }
-  
 
 
+        [Route("basvurularim")]
         public async Task<IActionResult> MyApplications(JobApplicationSearchViewModel jvm)
         {
 
@@ -50,7 +51,7 @@ namespace HrPortal.Controllers
         }
 
 
-
+        [Route("basvurular")]
         public async Task<IActionResult> Applications(ApplicationSearchViewModel vm)
         {
             // iki context hatası
@@ -60,6 +61,20 @@ namespace HrPortal.Controllers
             ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name", vm.OccupationId);
             ViewBag.Jobs = new SelectList(jobRepository.GetAll().ToList(), "Id", "Title",vm.JobId);
             return View(vm);
+        }
+
+        [Authorize(Roles = "Employer,Admin")]
+        public IActionResult Delete(string id)
+        {
+            var jobApplication = jobApplicationRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
+
+            if (jobApplication == null)
+            {
+                return NotFound();
+            }
+  
+            jobApplicationRepository.Delete(jobApplication);
+            return RedirectToAction("MyApplications");
         }
 
     }

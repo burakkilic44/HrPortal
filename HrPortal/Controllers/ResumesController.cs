@@ -51,9 +51,12 @@ namespace HrPortal.Controllers
             hostingEnvironment = environment;
 
         }
+
+        
         [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Index(ResumeSearchViewModel vm)
         {
+            
             vm.SearchResults = await resumeRepository.GetPaged(s => (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => (vm.SortBy == 1 || vm.SortBy == 2 ? s.FullName:(vm.SortBy==3 || vm.SortBy==4 ? s.Occupation.Name:(vm.SortBy==5 ||vm.SortBy==6 ? s.Location.Name:s.UpdateDate.ToString()))),(vm.SortBy==1 || vm.SortBy ==3 || vm.SortBy == 5?false:(vm.SortBy == 2 || vm.SortBy ==4 || vm.SortBy == 6 )), 2, vm.Page, "EducationInfos", "Location");
             vm.SearchResults.RouteValue = new RouteValueDictionary { { "Keywords", vm.Keywords }, { "LocationId", vm.LocationId }, { "MilitaryStatus", vm.MilitaryStatus }, { "EducationLevel", vm.EducationLevel }, { "SortBy", vm.SortBy } };
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id","Name", vm.LocationId);
@@ -61,7 +64,8 @@ namespace HrPortal.Controllers
             return View(vm);
 
         }
-        
+
+        [Route("ozgecmisler/detaylar")]
         public IActionResult Details(string id)
         {
             
@@ -74,6 +78,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Route("ozgecmisler/olustur")]
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Create()
         {
@@ -83,6 +88,8 @@ namespace HrPortal.Controllers
             ViewBag.Tags = new SelectList(tagRepository.GetAll().OrderBy(t => t.Name).ToList(), "Id", "Name");
             return View(resume);
         }
+
+        [Route("ozgecmisler/olustur")]
         [Authorize(Roles = "Candidate,Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Resume resume)
@@ -123,9 +130,9 @@ namespace HrPortal.Controllers
             return View(resume); // resume oluşturulduktan sonra edite yönlendirilse daha iyi olur
         }
 
-      
-    
 
+
+        [Route("ozgecmisler/duzenle")]
         [Authorize(Roles = "Candidate,Admin")]
         public IActionResult Edit(string id)
                     {
@@ -142,6 +149,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Route("ozgecmisler/duzenle")]
         [HttpPost]
         [Authorize(Roles = "Candidate,Admin")]
         public async Task<IActionResult> Edit(Resume resume)
@@ -188,6 +196,7 @@ namespace HrPortal.Controllers
             return View(resume);
         }
 
+        [Route("ozgecmisler/sil")]
         public IActionResult Delete(string id)
         {
             var resume = resumeRepository.GetMany(r => r.Id == id && (!User.IsInRole("Admin") ? r.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
@@ -399,6 +408,7 @@ namespace HrPortal.Controllers
             return Json(data);
         }
 
+        [Route("ozgecmislerim")]
         public async Task<IActionResult> MyResumes(ResumeSearchViewModel vm)
         {
             vm.SearchResults = await resumeRepository.GetPaged(s => s.CreatedBy == User.Identity.Name && (!String.IsNullOrEmpty(vm.Keywords) ? s.FullName.Contains(vm.Keywords) : true) && (!String.IsNullOrEmpty(vm.LocationId) ? s.LocationId == vm.LocationId : true) && (vm.MilitaryStatus.HasValue ? s.MilitaryStatus == vm.MilitaryStatus : true) && (vm.EducationLevel.HasValue ? s.EducationInfos.Any(e => e.EducationLevel == vm.EducationLevel) : true), s => s.Title, false, 10, vm.Page, "EducationInfos", "Location");
