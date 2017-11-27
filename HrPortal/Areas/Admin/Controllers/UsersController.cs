@@ -2,6 +2,7 @@
 using HrPortal.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,10 @@ namespace HrPortal.Areas.Admin.Controllers
                 return NotFound();
             }
             
+            users.RoleId = (await userManager.GetRolesAsync(users)).FirstOrDefault();
+
+            ViewBag.Roles = new SelectList(roleManager.Roles.ToList(), "Name", "Name", users.RoleId);
+            
             return View(users);
         }
 
@@ -53,7 +58,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("FirstName,LastName,Photo,OccupationId,LocationId,IsEmployer,CompanyName,IsApproved,ApproveDate,IsActive,CreateDate,UpdateDate,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser users)
+        public async Task<IActionResult> Edit(string id, [Bind("RoleId,FirstName,LastName,Photo,OccupationId,LocationId,IsEmployer,CompanyName,IsApproved,ApproveDate,IsActive,CreateDate,UpdateDate,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser users)
         {
             if (id != users.Id)
             {
@@ -64,8 +69,12 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
+                    
                    _context.Update(users);
-                   await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
+                    await userManager.RemoveFromRolesAsync(users, roleManager.Roles.Select(r => r.Name).ToList());
+                    await userManager.AddToRoleAsync(users, users.RoleId);
+              
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -79,7 +88,8 @@ namespace HrPortal.Areas.Admin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }         
+            }
+            ViewBag.Roles = new SelectList(roleManager.Roles.ToList(), "Name", "Name");
             return View(users);
         }
 

@@ -31,7 +31,7 @@ namespace HrPortal.Controllers
             this.sectorRepository = sectorRepository;
         }
 
-        [Route("firmalar")]
+        
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
 
