@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HrPortal.Data;
+﻿using HrPortal.Data;
 using HrPortal.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HrPortal.Areas.Admin.Controllers
 {
@@ -19,10 +16,11 @@ namespace HrPortal.Areas.Admin.Controllers
         private UserManager<ApplicationUser> userManager;
         private RoleManager<IdentityRole> roleManager;
 
-        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,ApplicationDbContext context)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -33,14 +31,15 @@ namespace HrPortal.Areas.Admin.Controllers
 
 
         // GET: Admin/Users/Edit/5
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var users = ViewBag.ApplicationUser.SingleOrDefaultAsync();
+            var users = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
+
             if (users == null)
             {
                 return NotFound();
@@ -54,7 +53,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(string id, [Bind("FirstName,LastName,Photo,OccupationId,LocationId,IsEmployer,CompanyName,IsApproved,ApproveDate,IsActive,CreateDate,UpdateDate,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser users)
+        public async Task<IActionResult> Edit(string id, [Bind("FirstName,LastName,Photo,OccupationId,LocationId,IsEmployer,CompanyName,IsApproved,ApproveDate,IsActive,CreateDate,UpdateDate,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser users)
         {
             if (id != users.Id)
             {
@@ -65,8 +64,8 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 try
                 {
-                    ViewBag.Update(users);
-                    ViewBag.SaveChangesAsync();
+                   _context.Update(users);
+                   await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -85,15 +84,14 @@ namespace HrPortal.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Delete/5
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var users =ViewBag.ApplicationUser             
-                .SingleOrDefaultAsync();
+            var users = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
             if (users == null)
             {
                 return NotFound();
