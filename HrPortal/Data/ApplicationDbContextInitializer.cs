@@ -96,8 +96,7 @@ namespace HrPortal.Data
         {
             if (!context.Locations.Any())
             {
-                var M1 = new Location() { Name="İstanbul", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com", };
-                context.Add(M1);
+                
                  var M2 = new Location() { Name = "İstanbul (Avrupa)", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(M2);
                 var M3 = new Location() { Name = "İstanbul (Asya)", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
