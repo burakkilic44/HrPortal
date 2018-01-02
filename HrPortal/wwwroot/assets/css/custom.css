@@ -191,3 +191,20 @@ body {
     background: -moz-linear-gradient(orange, lightgray); /* For Firefox 3.6 to 15 */
     background: linear-gradient(orange, lightgray); /* Standard syntax */
 }
+@media only screen and (min-width: 960px) {
+    .LocationSearch {
+        width: 300px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .header-job-search {
+        margin-left: 150px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .input-location {
+        width: 31% !important;
+    }
+}
