@@ -1,15 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<style>
+    @@media only screen and (min-width: 960px) {
+    .LocationSearch {
+        width: 300px;
+    }
 }
 
+@@media only screen and (min-width: 960px) {
+    .header-job-search {
+        margin-left: 150px;
+    }
+}
+
+@@media only screen and (min-width: 960px) {
+    .input-location {
+        width: 31% !important;
+    }
+}
 <header class="site-header size-lg text-center" style="background-image: url(http://www.sercantogrul.com/wp-content/uploads/2016/06/kariyer_bg.jpg)">
     <div class="container">
         <div class="col-xs-12">
             <br><br>
             <h2>Şu an sizlere <mark>@ViewBag.JobCount</mark> iş ilanı sunuyoruz!</h2>
-            <h5 class="font-alt">Aradığınızı dakikalar içinde bulun</h5>
+            <h5 class="font-alt">Kariyerinize Bir + Daha</h5>
             <br><br><br>
             <form class="header-job-search" method="get">
                 <div class="input-keyword"> 
@@ -17,15 +29,16 @@
                 </div>
 
                 <div class="input-location">
-                    <select class="form-control" name="LocationId">
-                        <option value="">Konum Seçiniz</option>
-                        @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
+                    <div class="LocationSearch">
+                        <select class="form-control" name="LocationId">
+                            <option value="">Konum Seçiniz</option>
+                            @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
 
-                    </select>
-                
+                        </select>
+                    </div>
                 </div>
 
                 <div class="btn-search">
