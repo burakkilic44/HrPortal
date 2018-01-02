@@ -12,77 +12,99 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+
+    ViewBag.FullName = user.FirstName + " " + user.LastName;
+
     <li class="dropdown pull-right">
-        <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span><span class="fa fa-chevron-down"></span></a>
+        <a href="#" class="menuitem dropdown-toggle" data-toggle="dropdown">@ViewBag.FullName <span class="fa fa-user"> </span><span class="fa fa-chevron-down"></span></a>
         <ul id="login-dp" class="dropdown-menu">
             <li>
                 <div class="container-fluid well span6">
                     <div class="row">
-                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
-                           @{
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                            @{
 
-                                var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                            }
+                            @{ if (user.Photo == null)
+        {
+                        <div class="span2" style="text-align:center;">
+                            <a asp-controller="Manage" asp-action="Index">
+                                <img src="~/uploads/account/profil.png" class="img-circle" style="text-align:center; width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
+                               </a>
+                                </div>
+                                
+                                }
 
-                               ViewBag.FullName = user.FirstName + " " + user.LastName;
-                        }
+
+                                else if (user.Photo != null)
+                                {
                                 <div class="span2" style="text-align:center;">
                                     <a asp-controller="Manage" asp-action="Index">
+
+
                                         <img src="/uploads/account/@user.Photo" class="img-circle" style=" width:150px; height:150px" alt="@(user.FirstName + " " + user.LastName)" />
                                     </a>
                                 </div>
+                                }
+                                }
+
+
+
 
                                 <div class="span8" style="text-align:center; padding-top:10px; color:black; ">
-                                   
-                                    <p class="text"><strong>@ViewBag.FullName</strong></p>
+
+                                    @*<p class="text"><strong>@ViewBag.FullName</strong></p>*@
                                     <p class="text-small">@User.Identity.Name</p>
-                                  
-                                 
+
+
                                 </div>
 
-                                <div class="span2"style="text-align:center;">
+                                <div class="span2" style="text-align:center;">
                                     <div class="btn-group">
                                         @{ if (User.Identity.Name != null)
-                                            {
-                                                var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
-                                                if (User.IsInRole("Admin"))
-                                                {
-                                                    <div class="form-group" style="text-align:center;margin-bottom:5px;">
-                                                       
-                                                        <a asp-controller="JobApplication" asp-action="Applications" style="margin-bottom:5px;" class="btn btn-sm btn-danger ">Başvuranlar</a>
-                                                        <a asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-primary ">Başvurularım</a>
-                                                        <a asp-controller="Resumes" asp-action="MyResumes" style="margin-bottom:5px;" class="btn btn-sm btn-warning">Özgeçmişlerim</a>
-                                                        <a style="margin-bottom:5px;" class="btn btn-sm  btn-success" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
-                                                        <a asp-controller="Jobs" asp-action="myAdsAsync" style="margin-bottom:5px; " class="btn btn-sm btn-info" >İlanlarım</a>
-                                                    </div>
+                    {
+                        var user2 = await UserManager.FindByNameAsync(User.Identity.Name);
+                        if (User.IsInRole("Admin"))
+                        {
+                            <div class="form-group" style="text-align:center;margin-bottom:5px;">
 
-                                                }
+                                <a asp-controller="JobApplication" asp-action="Applications" style="margin-bottom:5px;" class="btn btn-sm btn-danger ">Başvuranlar</a>
+                                <a asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-primary ">Başvurularım</a>
+                                <a asp-controller="Resumes" asp-action="MyResumes" style="margin-bottom:5px;" class="btn btn-sm btn-warning">Özgeçmişlerim</a>
+                                <a style="margin-bottom:5px;" class="btn btn-sm  btn-success" asp-controller="Companies" asp-action="MyCompanies">Firmalarım</a><br />
+                                <a asp-controller="Jobs" asp-action="myAdsAsync" style="margin-bottom:5px; " class="btn btn-sm btn-info">İlanlarım</a>
+                            </div>
 
-                                                else if (user.IsEmployer == true)
-                                                {
-                                                    <div style="text-align:center">
-                                            <a asp-controller="Companies" asp-action="MyCompanies" style="margin-top:5px;" class="btn-block btn btn-sm btn-success " >Firmalarım</a>
-                                            <a asp-controller="Jobs" asp-action="myAdsAsync" style="margin-top:5px;" class="btn-block btn btn-info btn-sm">İlanlarım</a>
-                                            <a asp-controller="JobApplication" asp-action="Applications" style="margin-top:5px;" class="btn-block btn btn-sm btn-warning ">Başvuranlar</a>
+}
 
-                                                           </div>
-                                                }
-                                                else if (user.IsEmployer == false)
-                                                { <div style="text-align:center">
-                                            <a asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-success ">Başvurularım</a>
-                                            <a asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-warning">Özgeçmişlerim</a>
-                                        </div>
-                                                }
-                                            }
+else if (user.IsEmployer == true)
+{
+                        <div style="text-align:center">
+                            <a asp-controller="Companies" asp-action="MyCompanies" style="margin-top:5px;" class="btn-block btn btn-sm btn-success ">Firmalarım</a>
+                            <a asp-controller="Jobs" asp-action="myAdsAsync" style="margin-top:5px;" class="btn-block btn btn-info btn-sm">İlanlarım</a>
+                            <a asp-controller="JobApplication" asp-action="Applications" style="margin-top:5px;" class="btn-block btn btn-sm btn-warning ">Başvuranlar</a>
+
+                        </div>
+}
+else if (user.IsEmployer == false)
+{ <div style="text-align:center">
+                            <a asp-controller="JobApplication" asp-action="MyApplications" style="margin-bottom:5px;" class="btn btn-sm btn-success ">Başvurularım</a>
+                            <a asp-controller="Resumes" asp-action="MyResumes" class="btn btn-sm btn-warning">Özgeçmişlerim</a>
+                        </div>
+}
+}
                                         }
-                                        <div style="text-align:center; margin-top:5px;" >
+                                        <div style="text-align:center; margin-top:5px;">
                                             <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="btn btn-primary btn-sm ">Profil</a>
                                             <button type="submit" class="btn btn-danger btn-sm">Çıkış</button>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                         </form>
-                        
+
                     </div>
                     
                 </div>
@@ -94,7 +116,7 @@
         </ul>
     </li>
 
-    }
+                                                }
 
                     else
                     {
