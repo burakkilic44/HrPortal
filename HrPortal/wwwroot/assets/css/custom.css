@@ -190,7 +190,7 @@ body {
     background: -moz-linear-gradient(orange, lightgray); /* For Firefox 3.6 to 15 */
     background: linear-gradient(orange, lightgray); /* Standard syntax */
 }
-
-::placeholder {
-    font-size: 13px;
+input::-webkit-input-placeholder {
+    font-size: 13px !important;
 }
+
