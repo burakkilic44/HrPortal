@@ -5,7 +5,13 @@
 @{
     ViewData["Title"] = "İş İlanları";
 }
+@*<style>
+    #keywords {
+        font-size:13px;
+    }
 
+
+</style>*@
 <header class="page-header bg-img">
     <div class="container page-name">
         <h1 class="text-center">İş Ara</h1>
@@ -16,10 +22,10 @@
 
     <div class="container">
         <form asp-action="Index" method="get">
-
+            
             <div class="row">
-                <div class="form-group col-xs-12 col-sm-4">
-                    <input asp-for="Keywords" type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
+                 <div class="form-group col-xs-12 col-sm-4">
+                    <input asp-for="Keywords" id="keywords" type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
