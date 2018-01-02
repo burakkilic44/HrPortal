@@ -1,8 +1,21 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<style>
+    @@media only screen and (min-width: 960px) {
+        .LocationSearch {
+            width: 300px;
+                }
+
+    }
+    @@media only screen and (min-width: 960px){
+        .header-job-search{
+         margin-left:150px;
+        }
+    }
+    @@media only screen and (min-width: 960px) {
+        .input-location {
+            width:31% !important;
+        }
+    }
+</style>
 <header class="site-header size-lg text-center" style="background-image: url(http://www.sercantogrul.com/wp-content/uploads/2016/06/kariyer_bg.jpg)">
     <div class="container">
         <div class="col-xs-12">
@@ -16,15 +29,16 @@
                 </div>
 
                 <div class="input-location">
-                    <select class="form-control" name="LocationId">
-                        <option value="">Konum Seçiniz</option>
-                        @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
+                    <div class="LocationSearch">
+                        <select class="form-control" name="LocationId">
+                            <option value="">Konum Seçiniz</option>
+                            @foreach (var item in (IEnumerable<Location>)ViewBag.Locations)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
 
-                    </select>
-                
+                        </select>
+                    </div>
                 </div>
 
                 <div class="btn-search">
