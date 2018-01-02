@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace HrPortal.Controllers
 {
@@ -31,7 +32,7 @@ namespace HrPortal.Controllers
             this.sectorRepository = sectorRepository;
         }
 
-        
+        [Route("firmalar")]
         public async Task<IActionResult> Index(CompanySearchViewModel cvm)
         {
 
@@ -70,7 +71,7 @@ namespace HrPortal.Controllers
             return View(company);
         }
 
-        
+        [Route("firmalar/olustur")]
         [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Company company)
@@ -117,6 +118,13 @@ namespace HrPortal.Controllers
             return View();
         }
 
+        [Route("firmalar/yetkisiz-erisim")]
+        [Authorize(Roles = "Employer,Admin")]
+        public IActionResult UnauthorizedAccess()
+        {
+            return View();
+        }
+
         [Route("firmalarim")]
         public async Task<IActionResult> MyCompanies(CompanySearchViewModel cvm)
         {
@@ -134,7 +142,7 @@ namespace HrPortal.Controllers
             var company = companyRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
             if (company == null)
             {
-                return NotFound();
+                return RedirectToAction("UnauthorizedAccess");
             }
             ViewBag.Sectors = new SelectList(sectorRepository.GetAll().OrderBy(p => p.Name).ToList(), "Id", "Name");
             ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(o => o.Name).ToList(), "Id", "Name");
@@ -155,7 +163,8 @@ namespace HrPortal.Controllers
                     ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
                 }
             }
-          
+            
+            
             if (company.AvatarImage != null && company.AvatarImage.Length > 0)
             {
 
@@ -174,7 +183,7 @@ namespace HrPortal.Controllers
 
             if (!(User.IsInRole("Employer") && company.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
             {
-                return NotFound();
+                return RedirectToAction("UnauthorizedAccess");
             }
             if (ModelState.IsValid)
             {
@@ -201,6 +210,6 @@ namespace HrPortal.Controllers
             return RedirectToAction("MyCompanies");
         }
 
-
+       
     }
 }

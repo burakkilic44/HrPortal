@@ -78,7 +78,18 @@
                             <div class="span2" style="text-align:center;">
 
                                 <a asp-controller="Manage" asp-action="Index">
-                                    <img src="/uploads/companies/@CompanyItem.Photo" class="img-circle" style=" width:150px; height:150px" />
+                                    @if (String.IsNullOrEmpty(CompanyItem.Photo))
+                                    {
+
+                                        <img class="logo" src="/uploads/background.jpg" />
+
+                                    }
+                                    else
+                                    {
+                                        <img src="/uploads/companies/@CompanyItem.Photo" class="img-circle" style=" width:150px; height:150px" />
+
+                                    }
+                                    
                                 </a>
                             </div>
                             <div class="hgroup">

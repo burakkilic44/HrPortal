@@ -1,4 +1,5 @@
 .demo-btn-margin .btn{margin-bottom:6px}
+
 .nav-menu2 {
     display: block;
     text-align: center;
@@ -92,7 +93,6 @@ margin-right:22px;
         box-shadow: 8px 0 10px 0 rgba(0,0,0,.05);
     }
 }
-
 
 
 #login-dp {
@@ -190,3 +190,7 @@ body {
     background: -moz-linear-gradient(orange, lightgray); /* For Firefox 3.6 to 15 */
     background: linear-gradient(orange, lightgray); /* Standard syntax */
 }
+input::-webkit-input-placeholder {
+    font-size: 13px !important;
+}
+

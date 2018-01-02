@@ -5,7 +5,13 @@
 @{
     ViewData["Title"] = "İş İlanları";
 }
+@*<style>
+    #keywords {
+        font-size:13px;
+    }
 
+
+</style>*@
 <header class="page-header bg-img">
     <div class="container page-name">
         <h1 class="text-center">İş Ara</h1>
@@ -16,10 +22,10 @@
 
     <div class="container">
         <form asp-action="Index" method="get">
-
+            
             <div class="row">
-                <div class="form-group col-xs-12 col-sm-4">
-                    <input asp-for="Keywords" type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
+                 <div class="form-group col-xs-12 col-sm-4">
+                    <input asp-for="Keywords" id="keywords" type="text" class="form-control" placeholder="İlan başlığı, Beceriler, Şirket Arayın">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
@@ -147,12 +153,12 @@
                     </div>
                     <div class="radio">
                         <input type="radio" name="sortby" id="sortby3" value="3">
-                        <label for="sortby3">Mesleğe göre artan</label>
+                        <label for="sortby3">Tarihe göre artan</label>
                     </div>
 
                     <div class="radio">
                         <input type="radio" name="sortby" id="sortby4" value="4">
-                        <label for="sortby4">Mesleğe göre azalan</label>
+                        <label for="sortby4">Tarihe göre azalan</label>
                     </div>
                     
                 </div>
@@ -190,8 +196,20 @@
                         <div class="col-xs-12">
                             <a class="item-block" asp-action="Details" asp-route-id="@jobItem.Id">
                                 <header>
-                                    <img src="/uploads/companies/@jobItem.Company.Photo" alt="@jobItem.Company.Name">
-                                    <div class="hgroup">
+                                    @if (String.IsNullOrEmpty(jobItem.Company.Photo))
+                                    {
+
+                                        <img class="logo" src="/uploads/background.jpg" />
+
+                                    }
+                                    else
+                                    {
+                                        <img src="/uploads/companies/@jobItem.Company.Photo" alt="@jobItem.Company.Name">
+
+                                    }
+
+
+                                             <div class="hgroup">
                                         <h4>@jobItem.Title</h4>
                                         <h5>@jobItem.Company.Name</h5>
                                     </div>
