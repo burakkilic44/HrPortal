@@ -95,7 +95,6 @@ margin-right:22px;
 }
 
 
-
 #login-dp {
     min-width: 300px;
     padding: 14px 14px 0;
@@ -191,3 +190,7 @@ body {
     background: -moz-linear-gradient(orange, lightgray); /* For Firefox 3.6 to 15 */
     background: linear-gradient(orange, lightgray); /* Standard syntax */
 }
+input::-webkit-input-placeholder {
+    font-size: 13px !important;
+}
+

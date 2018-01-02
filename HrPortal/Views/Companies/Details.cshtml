@@ -7,7 +7,18 @@
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
     <div class="container">
         <div class="header-detail">
-            <img class="logo" src="/uploads/@Model.Photo" alt="">
+            @if (String.IsNullOrEmpty(Model.Photo))
+            {
+
+                <img class="logo" src="/uploads/background.jpg"/>
+
+            }
+            else
+            {
+                <img class="logo" src="/uploads/@Model.Photo" alt="">
+
+            }
+       
             <div class="hgroup">
                 <h1>@Model.Name</h1>
                 <h3>@Model.Sector</h3>
