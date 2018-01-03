@@ -12,8 +12,8 @@ using System;
 namespace HrPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171121061035_ResumeName")]
-    partial class ResumeName
+    [Migration("20180103104447_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,6 +103,50 @@ namespace HrPortal.Migrations
                     b.HasIndex("OccupationId");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("HrPortal.Models.Audit", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Action")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Area")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Controller")
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("EntityId")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Ip")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("NewValue");
+
+                    b.Property<string>("OldValue");
+
+                    b.Property<DateTime>("UpdateDate");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<string>("Url");
+
+                    b.Property<string>("UserAgent");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(200);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Audits");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Certificate", b =>
@@ -242,12 +286,12 @@ namespace HrPortal.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<string>("EducationInfoNotes")
+                        .HasMaxLength(4000);
+
                     b.Property<int>("EducationLevel");
 
                     b.Property<DateTime?>("EndDate");
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(4000);
 
                     b.Property<string>("Photo")
                         .HasMaxLength(200);
@@ -286,7 +330,7 @@ namespace HrPortal.Migrations
 
                     b.Property<int?>("EndYear");
 
-                    b.Property<string>("Notes")
+                    b.Property<string>("ExperienceNotes")
                         .HasMaxLength(4000);
 
                     b.Property<string>("Photo")
@@ -380,7 +424,8 @@ namespace HrPortal.Migrations
 
                     b.Property<string>("Message");
 
-                    b.Property<string>("ResumeId");
+                    b.Property<string>("ResumeId")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdateDate");
 
@@ -602,9 +647,6 @@ namespace HrPortal.Migrations
 
                     b.Property<int>("MilitaryStatus");
 
-                    b.Property<string>("Notes")
-                        .HasMaxLength(4000);
-
                     b.Property<string>("OccupationId");
 
                     b.Property<string>("Phone")
@@ -623,6 +665,9 @@ namespace HrPortal.Migrations
                     b.Property<string>("ResumeName")
                         .IsRequired()
                         .HasMaxLength(200);
+
+                    b.Property<string>("ResumeNotes")
+                        .HasMaxLength(4000);
 
                     b.Property<int>("SmokingStatus");
 
@@ -978,12 +1023,13 @@ namespace HrPortal.Migrations
                 {
                     b.HasOne("HrPortal.Models.Job", "Job")
                         .WithMany("JobApplications")
-                        .HasForeignKey("JobId");
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HrPortal.Models.Resume", "Resume")
                         .WithMany("JobApplications")
                         .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HrPortal.Models.JobLocation", b =>

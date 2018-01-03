@@ -22,9 +22,9 @@ namespace HrPortal.Data
 
         public void Seed()
         {
-
-            context.Database.Migrate();
-
+            if (context.Database.EnsureCreated()) { 
+                context.Database.Migrate();
+            }
 
             CreateRoles();
             CreateDefaultUsers();
@@ -83,7 +83,6 @@ namespace HrPortal.Data
             {
                 var l1 = new Language() { Name = "Türkçe", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(l1);
-
                 var l2 = new Language() { Name = "İngilizce",CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(l2);
                 var l3 = new Language() { Name = "Almanca", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com", };
