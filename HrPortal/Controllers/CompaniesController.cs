@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace HrPortal.Controllers
 {
@@ -162,7 +163,8 @@ namespace HrPortal.Controllers
                     ModelState.AddModelError("AvatarImage", "Geçersiz dosya uzantısı, lütfen gif, png, jpg uzantılı bir resim dosyası yükleyin.");
                 }
             }
-          
+            
+            
             if (company.AvatarImage != null && company.AvatarImage.Length > 0)
             {
 
@@ -208,6 +210,6 @@ namespace HrPortal.Controllers
             return RedirectToAction("MyCompanies");
         }
 
-
+       
     }
 }

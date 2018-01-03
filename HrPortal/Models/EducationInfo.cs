@@ -31,7 +31,7 @@ namespace HrPortal.Models
         public DateTime? EndDate { get; set; }
         [Display(Name = "Notlar")]
         [StringLength(4000)]
-        public string Notes { get; set; }
+        public string EducationInfoNotes { get; set; }
         [StringLength(200)]
         [Display(Name = "Fotoğraf")]
         public string Photo { get; set; }
