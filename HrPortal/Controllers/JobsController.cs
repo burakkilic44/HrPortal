@@ -31,7 +31,7 @@ namespace HrPortal.Controllers
             this.occupationRepository = occupationRepository;
         }
 
-        
+        [Route("is-ilanlari")]
         public async Task<IActionResult> Index(JobSearchViewModel jvm)
         {
             
