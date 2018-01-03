@@ -142,34 +142,41 @@
 <!-- Main container -->
 <main class="container">
     <!--Eğitim durumu -->
+    @if (Model.EducationInfos != null && Model.EducationInfos.Count >= 1)
+    {
         <section class=" bg-alt">
-        <header class="section-header">
-            <span>Eğitim Durumu</span>
-            <h2>Eğitim Bilgileri</h2>
-        </header>
-        <div class="row">
-           <div class="col-xs-12">
-                @foreach (var item in Model.EducationInfos)
-                {
-                    <div class="item-block ">
-                        <header>
-                            <img src="@item.Photo" alt="logo">
-                            <div class="hgroup">
-                                <h4>@item.EducationLevel<small>@item.Department</small></h4>
-                                <h5>@item.SchoolName</h5>
+            <header class="section-header">
+                <span>Eğitim Durumu</span>
+                <h2>Eğitim Bilgileri</h2>
+            </header>
+            <div class="row">
+                <div class="col-xs-12">
+                    @foreach (var item in Model.EducationInfos)
+                    {
+                        <div class="item-block ">
+                            <header>
+                                <img src="@item.Photo" alt="logo">
+                                <div class="hgroup">
+                                    <h4>@item.EducationLevel<small>@item.Department</small></h4>
+                                    <h5>@item.SchoolName</h5>
+                                </div>
+                                <h6 class="time">@item.StartDate - @item.EndDate</h6>
+                            </header>
+                            <div class="item-body">
+                                <p>@item.EducationInfoNotes</p>
                             </div>
-                            <h6 class="time">@item.StartDate - @item.EndDate</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>@item.EducationInfoNotes</p>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    }
     <!--İş deneyimi-->
-    <section class="bg-alt">
+    @if (Model.Experiences != null && Model.Experiences.Count >= 1)
+    {
+        <section class="bg-alt">
+
+
             <header class="section-header">
                 <span>ÇALIŞILAN FİRMALAR</span>
                 <h2>İş Deneyimi</h2>
@@ -178,68 +185,69 @@
             <div class="row">
 
                 <!-- Work item -->
-                
                 <!-- END Work item -->
                 <!-- Work item -->
                 <div class="col-xs-12">
-                   @foreach (var workitem in Model.Experiences)
-                   {
-                    <div class="item-block">
-                        <header>
-                            <img src="@workitem.Photo" alt="">
-                            <div class="hgroup">
-                                <h4>@workitem.CompanyName</h4>
-                                <h5>@workitem.Position</h5>
+                    @foreach (var workitem in Model.Experiences)
+                    {
+                        <div class="item-block">
+                            <header>
+                                <img src="@workitem.Photo" alt="">
+                                <div class="hgroup">
+                                    <h4>@workitem.CompanyName</h4>
+                                    <h5>@workitem.Position</h5>
+                                </div>
+                                <h6 class="time">@workitem.StartYear - @workitem.EndYear</h6>
+                            </header>
+                            <div class="item-body">
+                                <p>@workitem.ExperienceNotes</p>
                             </div>
-                            <h6 class="time">@workitem.StartYear - @workitem.EndYear</h6>
-                        </header>
-                        <div class="item-body">
-                            <p>@workitem.ExperienceNotes</p>
                         </div>
-                    </div>
-                   }
+                    }
                 </div>
                 <!-- END Work item -->
-               
-
-
             </div>
-
-        
-    </section>
+        </section>
+    }
     <!--Yetenekler -->
-    <section class=" bg-alt">
-        <header class="section-header">
-            <span>Uzmanlık Alanları</span>
-            <h2>Yetenekler</h2>
-        </header>
-        <br>
-        @foreach (var item in Model.Skills)
-        {
-            <ul class="skills cols-3">
-                <li>
-                    <div>
-                        <span class="skill-name">@item.Name</span>
-                        <span class="skill-value">@item.Level</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" style="width:@(item.Level)%;"></div>
-                    </div>
-                </li>
-            </ul>
-        }
-    </section>
+    @if (Model.Skills != null && Model.Skills.Count >= 1)
+    {
+        <section class=" bg-alt">
+            <header class="section-header">
+                <span>Uzmanlık Alanları</span>
+                <h2>Yetenekler</h2>
+            </header>
+            <br>
+            @foreach (var item in Model.Skills)
+            {
+                <ul class="skills cols-3">
+                    <li>
+                        <div>
+                            <span class="skill-name">@item.Name</span>
+                            <span class="skill-value">@item.Level</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:@(item.Level)%;"></div>
+                        </div>
+                    </li>
+                </ul>
+            }
+        </section>
+    }
     <!--Sertifikalar -->
-    <section class=" bg-alt">
+    @if (Model.Certificates != null && Model.Certificates.Count >= 1)
+    {
+        <section class=" bg-alt">
             <header class="section-header">
                 <span>Sertifikalar</span>
                 <h2>Sertifika Bilgileri</h2>
             </header>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="item-form">
-                            <div class="col-xs-12">
-                                @foreach(var item in Model.Certificates) { 
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="item-form">
+                        <div class="col-xs-12">
+                            @foreach (var item in Model.Certificates)
+                            {
                                 <div class="item-block">
                                     <header>
                                         <div class="hgroup">
@@ -249,51 +257,55 @@
                                         <h6 class="time">@item.IssueDate</h6>
                                     </header>
                                     <div class="item-body section-header">
-                                        <p >Sertifika Dosyası</p>
+                                        <p>Sertifika Dosyası</p>
                                         <a href="@item.CertificateFile">Sertifika Dosyası</a>
                                     </div>
                                 </div>
-                                }
-                          </div>
-                     </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
-    </section>
+        </section>
+    }
     <!--Yabancı Diller -->
-    <section class=" bg-alt">
-        <header class="section-header">
-            <span>Yabancı Diller</span>
-            <h2>Yabancı Dil Bilgileri</h2>
-        </header>
-        @foreach (var item in Model.LanguageInfos)
-        {
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="item-block">
-                        <div class="item-form">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h5>@item.Language.Name</h5>
-                                    <div class="col-sm-6 col-md-4">
-                                        <h3 class="label label-default">Konuşma seviyesi:@item.SpeakingLevel</h3>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
+    @if (Model.LanguageInfos != null && Model.LanguageInfos.Count >= 1)
+    {
+        <section class=" bg-alt">
+            <header class="section-header">
+                <span>Yabancı Diller</span>
+                <h2>Yabancı Dil Bilgileri</h2>
+            </header>
+            @foreach (var item in Model.LanguageInfos)
+            {
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="item-block">
+                            <div class="item-form">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h5>@item.Language.Name</h5>
+                                        <div class="col-sm-6 col-md-4">
+                                            <h3 class="label label-default">Konuşma seviyesi:@item.SpeakingLevel</h3>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
 
-                                        <h3 class="label label-warning">Okuma seviyesi:@item.ReadingLevel</h3>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
+                                            <h3 class="label label-warning">Okuma seviyesi:@item.ReadingLevel</h3>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
 
 
-                                        <h3 class="label label-info">Yazma seviyesi:@item.WritingLevel</h3>
+                                            <h3 class="label label-info">Yazma seviyesi:@item.WritingLevel</h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </section>
+            }
+        </section>
+    }
 </main>
 <!-- END Main container -->
 
