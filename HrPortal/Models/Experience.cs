@@ -24,7 +24,7 @@ namespace HrPortal.Models
         public int? EndYear { get; set; }
         [StringLength(4000)]
         [Display(Name = "Notlar")]
-        public string Notes { get; set; }
+        public string ExperienceNotes { get; set; }
         [StringLength(200)]
         [Display(Name = "Fotoğraf")]
         public string Photo { get; set; }

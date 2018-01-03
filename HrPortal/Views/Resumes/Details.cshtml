@@ -16,7 +16,7 @@
                     <h3>@Model.FullName / @Model.Title</h3>
                 </div>
                 <hr>
-                <p class="lead">@Model.Notes</p>
+                <p class="lead">@Model.ResumeNotes</p>
 
                 <ul class="details cols-2">
                     <li>
@@ -150,7 +150,7 @@
                             <h6 class="time">@item.StartDate - @item.EndDate</h6>
                         </header>
                         <div class="item-body">
-                            <p>@item.Notes</p>
+                            <p>@item.EducationInfoNotes</p>
                         </div>
                     </div>
                 }
@@ -183,7 +183,7 @@
                             <h6 class="time">@workitem.StartYear - @workitem.EndYear</h6>
                         </header>
                         <div class="item-body">
-                            <p>@workitem.Notes</p>
+                            <p>@workitem.ExperienceNotes</p>
                         </div>
                     </div>
                    }
