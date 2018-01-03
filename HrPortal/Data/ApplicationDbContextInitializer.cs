@@ -273,12 +273,58 @@ namespace HrPortal.Data
         {
             if (!context.Sectors.Any())
             {
-                var S1 = new Sector() { Name = "Bilişim", CreateDate=DateTime.Now, UpdateDate=DateTime.Now, CreatedBy="bilisimkariyernet@gmail.com", UpdatedBy= "bilisimkariyernet@gmail.com" };
+                var S1 = new Sector() { Name = "Adalet ve Güvenlik", CreateDate=DateTime.Now, UpdateDate=DateTime.Now, CreatedBy="bilisimkariyernet@gmail.com", UpdatedBy= "bilisimkariyernet@gmail.com" };
                 context.Add(S1);
-                var S2 = new Sector() { Name = "Yazılım", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                var S2 = new Sector() { Name = "Ağaç İşleri, Kağıt ve Kağıt Ürünleri", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
                 context.Add(S2);
-                var S3 = new Sector() { Name = "Otomasyon", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com"};
+                var S3 = new Sector() { Name = "Bilim Teknolojileri", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com"};
                 context.Add(S3);
+                var S4 = new Sector() { Name = "Cam, Çimento ve Toprak", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S4);
+                var S5 = new Sector() { Name = "Çevre", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S5);
+                var S6 = new Sector() { Name = "Eğitim", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S6);
+                var S7 = new Sector() { Name = "Elektrik ve Elektronik", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S7);
+                var S8 = new Sector() { Name = "Enerji", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S8);
+                var S9 = new Sector() { Name = "Finans", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S9);
+                var S10 = new Sector() { Name = "Gıda", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S10);
+                var S11 = new Sector() { Name = "İnşaat", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S11);
+                var S12 = new Sector() { Name = "İş ve Yönetim", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S12);
+                var S13 = new Sector() { Name = "Kimya, Petrol, Lastik ve Plastik", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S13);
+                var S14 = new Sector() { Name = "Kültür, Sanat ve Tasarım", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S14);
+                var S15 = new Sector() { Name = "Maden", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S15);
+                var S16 = new Sector() { Name = "Medya, İletişim ve Yayıncılık", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S16);
+                var S17 = new Sector() { Name = "Metal", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S17);
+                var S18 = new Sector() { Name = "Otomotiv", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S18);
+                var S19 = new Sector() { Name = "Sağlık ve Sosyal Hizmetler", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S19);
+                var S20 = new Sector() { Name = "Spor ve Rekreasyon", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S20);
+                var S21 = new Sector() { Name = "Tarım, Avcılık ve Balıkçılık", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S21);
+                var S22 = new Sector() { Name = "Tekstil, Hazır Giyim, Deri", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S22);
+                var S23 = new Sector() { Name = "Ticaret(Satış ve Pazarlama)", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S23);
+                var S24 = new Sector() { Name = "Toplumsal ve Kişisel Hizmetler", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S24);
+                var S25 = new Sector() { Name = "Turizm, Konaklama, Yiyecek-İçecek Hizmetleri", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S25);
+                var S26 = new Sector() { Name = "Ulaştırma, Lojistik ve Haberleşme", CreateDate = DateTime.Now, UpdateDate = DateTime.Now, CreatedBy = "bilisimkariyernet@gmail.com", UpdatedBy = "bilisimkariyernet@gmail.com" };
+                context.Add(S26);                
 
                 context.SaveChanges();
 
