@@ -53,20 +53,16 @@
                             <div class="form-group">
                                 <textarea asp-for="@item.EducationInfoNotes" class="form-control" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
                                 <span asp-validation-for="@item.EducationInfoNotes" class="text-danger"></span>
-                            </div>
+                            </div> 
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
         <div class="col-xs-12 text-center">
             <br>
             <button type="button" onclick="EducationInfoEdit()"  asp-route-id="@item.Id" class="btn btn-primary">Eğitim Bilgisini Güncelle</button>
         </div>
-
-
     </div>
     }
 </div>
