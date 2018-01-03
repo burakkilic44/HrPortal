@@ -181,7 +181,7 @@ namespace HrPortal.Controllers
                 company.Photo = fileName + "." + extension.ToLower();
             }
 
-            if (!(User.IsInRole("Employer") && company.CreatedBy == User.Identity.Name) || User.IsInRole("Admin"))
+            if (!((User.IsInRole("Employer") && company.CreatedBy == User.Identity.Name) || User.IsInRole("Admin")))
             {
                 return RedirectToAction("UnauthorizedAccess");
             }
