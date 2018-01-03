@@ -194,3 +194,20 @@ input::-webkit-input-placeholder {
     font-size: 13px !important;
 }
 
+@media only screen and (min-width: 960px) {
+    .LocationSearch {
+        width: 300px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .header-job-search {
+        margin-left: 150px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .input-location {
+        width: 31% !important;
+    }
+}
