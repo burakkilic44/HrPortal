@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HrPortal.Models
 {
-    public class ApplicationSearchViewModel
+    public class ApplicationSearchViewModel : BaseEntity
     {
         public ApplicationSearchViewModel()
         {
