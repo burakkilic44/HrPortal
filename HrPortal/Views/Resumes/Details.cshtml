@@ -7,7 +7,18 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-4">
-                <img src="/uploads/resumes/@Model.Photo" alt="photo">
+                
+               @if (String.IsNullOrEmpty(Model.Photo))
+               {
+
+                <img class="logo" src="/uploads/background.jpg" />
+
+               }
+               else
+               {
+                <img src="/uploads/resumes/@Model.Photo" alt="@Model.Photo">
+
+               }
             </div>
 
             <div class="col-xs-12 col-sm-8 header-detail">

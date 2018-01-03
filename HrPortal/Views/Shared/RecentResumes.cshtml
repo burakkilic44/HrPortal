@@ -32,11 +32,10 @@
                 }
                 else
                 {
-                    <img src="/uploads/jobs/@Resumeitem.Photo" alt="@Resumeitem.Photo">
+                    <img src="/uploads/resumes/@Resumeitem.Photo" alt="@Resumeitem.Photo" style=" width:70px; height:70px">
 
                 }
-
-               
+                <br />
                 <div class="hgroup">
                     <h4>@Resumeitem.FullName</h4>
                     <h5>@Resumeitem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.SchoolName</h5>
