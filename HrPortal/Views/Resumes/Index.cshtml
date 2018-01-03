@@ -159,7 +159,18 @@
         <div class="col-xs-12">
             <a class="item-block" asp-action="Details" asp-route-id="@resumeItem.Id">
                 <header>
-                    <img src="/uploads/resumes/@resumeItem.Photo" alt="@resumeItem.FullName">
+                   
+                    @if (String.IsNullOrEmpty(resumeItem.Photo))
+                    {
+
+                        <img class="logo" src="/uploads/background.jpg" />
+
+                    }
+                    else
+                    {
+                        <img src="/uploads/resumes/@resumeItem.Photo" alt="@resumeItem.Photo" style=" width:70px; height:70px">
+
+                    }
                     <div class="hgroup">
                         <h4>@resumeItem.FullName</h4>
                         <h5>@resumeItem.Title</h5>
