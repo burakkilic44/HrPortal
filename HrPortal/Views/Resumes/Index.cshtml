@@ -161,14 +161,14 @@
                 <header>
                    
                     @if (String.IsNullOrEmpty(resumeItem.Photo))
-                {
+                    {
 
                         <img class="logo" src="/uploads/background.jpg" />
 
                     }
                     else
                     {
-                        <img src="/uploads/jobs/@resumeItem.Photo" alt="@resumeItem.Photo">
+                        <img src="/uploads/resumes/@resumeItem.Photo" alt="@resumeItem.Photo" style=" width:70px; height:70px">
 
                     }
                     <div class="hgroup">
