@@ -54,8 +54,8 @@
                         </div>
 
                         <div class="form-group">
-                            <textarea asp-for="Notes" class="form-control" value="" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
-                            <span asp-validation-for="Notes" class="text-danger"></span>
+                            <textarea asp-for="ResumeNotes" class="form-control" value="" rows="3" placeholder="Eklemek İstediğiniz Notlar"></textarea>
+                            <span asp-validation-for="ResumeNotes" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
@@ -378,7 +378,7 @@
                     Department: $("#Department").val(),
                     StartDate: $("#StartDate").val(),
                     EndDate: $("#EndDate").val(),
-                    Notes: $("#Notes").val(),
+                    EducationInfoNotes: $("#EducationInfoNotes").val(),
                 },
                 function(data) {
                     alert(data);
@@ -395,7 +395,7 @@
                     StartYear: $("#ExperienceStartYear").val(),
                     EndYear: $("#ExperienceEndYear").val(),
                     Position: $("#Position").val(),
-                    Notes: $("#Notes").val(),
+                    ExperienceNotes: $("#ExperienceNotes").val(),
                 },
                 function(data) {
                     alert(data);
