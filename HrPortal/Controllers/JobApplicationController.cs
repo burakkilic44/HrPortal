@@ -63,7 +63,7 @@ namespace HrPortal.Controllers
             return View(vm);
         }
 
-        [Authorize(Roles = "Employer,Admin")]
+        [Authorize(Roles = "Employer,Admin,Candidate")]
         public IActionResult Delete(string id)
         {
             var jobApplication = jobApplicationRepository.GetMany(c => c.Id == id && (!User.IsInRole("Admin") ? c.CreatedBy == User.Identity.Name : true)).FirstOrDefault();
