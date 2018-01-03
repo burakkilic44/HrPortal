@@ -12,6 +12,8 @@
 
             <h2>Güncel Özgeçmişler</h2>
             <p>Son yayınlanan Özgeçmişler</p>
+          
+
         </header>
 
         <div class="row item-blocks-condensed">
@@ -22,7 +24,19 @@
     <div class="col-xs-12">
         <a class="item-block" asp-controller="Resumes" asp-action="Details" asp-route-id="@Resumeitem.Id">
             <header>
-                <img src="/uploads/jobs/@Resumeitem.Photo" alt="@Resumeitem.Photo" />
+                @if (String.IsNullOrEmpty(Resumeitem.Photo))
+                {
+
+                    <img class="logo" src="/uploads/background.jpg" />
+
+                }
+                else
+                {
+                    <img src="/uploads/jobs/@Resumeitem.Photo" alt="@Resumeitem.Photo">
+
+                }
+
+               
                 <div class="hgroup">
                     <h4>@Resumeitem.FullName</h4>
                     <h5>@Resumeitem.EducationInfos.OrderByDescending(e => e.EndDate).FirstOrDefault()?.SchoolName</h5>
@@ -34,6 +48,7 @@
                         @**@
                         </span>
                 </div>
+
             </header>
         </a>
     </div>
