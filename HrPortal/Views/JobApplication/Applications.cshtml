@@ -70,7 +70,7 @@
                             </header>
 
                             <div class="item-body">
-                                <p>@item.Resume.Notes</p>
+                                <p>@item.Resume.ResumeNotes</p>
 
                                 <div class="tag-list">
 
@@ -100,7 +100,7 @@
                         </a>
                         <div class=" btn-group-xs text-right">
                             <div class="action-buttons">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="false">Mesaj Gönder </button>
+                                <button type="button" id="asd" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="false" onclick="document.getElementById('recepient').value='@item.Resume.Id'">Mesaj Gönder</button>
 
                             </div>
                         </div> 
@@ -118,14 +118,15 @@
                                     <form>
                                        
                                         <div class="form-group">
+                                            <input type="hidden" id="recepient" />
                                             <label for="message-text" class="control-label">Mesaj:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
+                                            <textarea  class="form-control" id="messageText"></textarea>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Gönder</button>
+                                    <button id="sendButton" type="button" onclick="SendMessage()" class="btn btn-primary">Gönder</button>
                                 </div>
                             </div>
                         </div>
@@ -149,3 +150,32 @@
 
 </div>
 
+    <script type="text/javascript">
+       function SendMessage() {
+           var recepient = $("#recepient").val();
+           var message = $("#messageText").val();
+               
+            $.ajax({
+                url: '/JobApplication/SendMessage',
+                data: { message: message, resumeid: recepient },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data)
+                {
+                    alert("Mesajınız gönderildi :)");
+                    $("#exampleModal").modal("hide");
+                }
+            });
+         
+      }
+        
+</script>
+
+
+
+
+
+
+
+
+</script>
