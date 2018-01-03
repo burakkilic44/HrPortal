@@ -33,7 +33,7 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
                        
-                        <input asp-for="Photo" name="AvatarImage" type="file" class="dropify" data-default-file="/uploads/resumes/@Model.Photo">
+                        <input asp-for="Photo" name="AvatarImage" type="file" id="input-file-events"  class="dropify" data-default-file="/uploads/resumes/@Model.Photo" >
                         <input type="hidden"  asp-for="Photo" />
                         <span class="help-block"></span>
                         <span asp-validation-for="Photo" class="text-danger"></span>
@@ -500,6 +500,8 @@
                 });
 
         }
+
+       
 
     </script>
 }

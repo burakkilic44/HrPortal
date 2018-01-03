@@ -186,7 +186,11 @@ namespace HrPortal.Controllers
                     }
                     resume.Photo = fileName + "." + extension.ToLower();
                 }
-                resumeRepository.Update(resume);
+                if(resume.AvatarImage == null)
+                {
+                    resume.Photo = null;
+                }
+                    resumeRepository.Update(resume);
                 return RedirectToAction("Myresumes");
             }
 

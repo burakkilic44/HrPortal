@@ -185,8 +185,12 @@ namespace HrPortal.Controllers
             {
                 return RedirectToAction("UnauthorizedAccess");
             }
-            if (ModelState.IsValid)
+            if (company.AvatarImage == null)
             {
+                company.Photo = null;
+            }
+            if (ModelState.IsValid)
+            {   
                 companyRepository.Update(company);
                 return RedirectToAction("MyCompanies");
             }
