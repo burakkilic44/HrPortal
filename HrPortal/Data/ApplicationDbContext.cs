@@ -75,7 +75,7 @@ namespace HrPortal.Data
                 .HasForeignKey(pt => pt.ResumeId).OnDelete(DeleteBehavior.Cascade);
 
         }
-        public DbSet<HrPortal.Models.ApplicationUser> ApplicationUser { get; set; }
+  
 
     }
 }

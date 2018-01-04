@@ -39,7 +39,7 @@ namespace HrPortal.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var users = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
+            var users = await userManager.Users.SingleOrDefaultAsync(m => m.Id == id);
 
             if (users == null)
             {
@@ -101,7 +101,7 @@ namespace HrPortal.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var users = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
+            var users = await userManager.Users.SingleOrDefaultAsync(m => m.Id == id);
             if (users == null)
             {
                 return NotFound();
@@ -115,15 +115,15 @@ namespace HrPortal.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var applicationUser = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
-            _context.ApplicationUser.Remove(applicationUser);
+            var applicationUser = await userManager.Users.SingleOrDefaultAsync(m => m.Id == id);
+            await userManager.DeleteAsync(applicationUser);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ApplicationUserExists(string id)
         {
-            return _context.ApplicationUser.Any(e => e.Id == id);
+            return userManager.Users.Any(e => e.Id == id);
         }
     }
 }
