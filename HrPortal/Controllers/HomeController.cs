@@ -16,15 +16,15 @@ namespace HrPortal.Controllers
     {
         private IRepository<Setting> settingRepository;
         private IRepository<Resume> resumeRepository;
-        private IRepository<Message> messageRepository;
+        private IRepository<Feedback> feedbackRepository;
         private IRepository<Job> jobRepository;
         private IRepository<Location> locationRepository;
 
-        public HomeController(IRepository<Resume> resumeRepository, IRepository<Message> messageRepository, IRepository<Job> jobRepository, IRepository<Location> locationRepository, IRepository<Setting> settingRepository)
+        public HomeController(IRepository<Resume> resumeRepository, IRepository<Feedback> feedbackRepository, IRepository<Job> jobRepository, IRepository<Location> locationRepository, IRepository<Setting> settingRepository)
         {
             this.settingRepository = settingRepository;
             this.resumeRepository = resumeRepository;
-            this.messageRepository = messageRepository;
+            this.feedbackRepository = feedbackRepository;
             this.jobRepository = jobRepository;
             this.locationRepository = locationRepository;
             
@@ -84,10 +84,10 @@ namespace HrPortal.Controllers
 
         
         [HttpPost]
-        public IActionResult Contact(Message message)
+        public IActionResult Contact(Feedback feedback)
         {
             if (ModelState.IsValid) { 
-            messageRepository.Insert(message);
+            feedbackRepository.Insert(feedback);
             }
             ViewBag.Result = "Mesajınız başarıyla iletilmiştir.";
             var setting = settingRepository.GetAll().FirstOrDefault();

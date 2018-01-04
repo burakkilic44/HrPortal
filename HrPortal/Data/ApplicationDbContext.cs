@@ -25,7 +25,7 @@ namespace HrPortal.Data
         public DbSet<Language> Languages { get; set; }
         public DbSet<LanguageInfo> LanguageInfos { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Resume> Resumes { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Skill> Skills { get; set; }

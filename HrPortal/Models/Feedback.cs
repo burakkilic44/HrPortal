@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HrPortal.Models
 {
-    public class Message:BaseEntity
+    public class Feedback:BaseEntity
     {
         [Required(ErrorMessage = "Tam Ad alanı gereklidir")]
         [Display(Name ="Tam Ad")]
@@ -28,7 +28,5 @@ namespace HrPortal.Models
         [StringLength(4000)]
         public string Content { get; set; }
        
-
-
     }
 }
