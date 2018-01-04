@@ -81,19 +81,23 @@
 
         </li>
         <li>
+           
+            
             <a class="menuitem" asp-controller="Jobs" asp-action="Index">İş ilanları</a>
-
+            
         </li>
     
         <li>
-            @if (User.IsInRole("Admin")|| (User.IsInRole("Employer")) )
-            {
+           
            <a class="menuitem" asp-controller="Resumes" asp-action="Index">Özgeçmişler</a>
-            }
+            
         </li>
         
         <li>
+          @if (User.IsInRole("Admin") || (User.IsInRole("Employer")))
+            {
             <a class="menuitem" asp-controller="Companies" asp-action="Index">Firmalar</a>
+            }
         </li>
         <li>
             <a class="menuitem" asp-controller="Home" asp-action="Contact">İletişim</a>
