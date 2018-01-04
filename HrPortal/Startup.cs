@@ -32,9 +32,8 @@ namespace HrPortal
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
-                
             {
-               
+                config.Password.RequireNonAlphanumeric = false;
                 config.SignIn.RequireConfirmedEmail = true;
                 config.User.RequireUniqueEmail = true;
 
@@ -57,7 +56,7 @@ namespace HrPortal
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient<ApplicationDbContextInitializer>();
+            services.AddScoped<ApplicationDbContextInitializer>();
             services.AddMvc();
             services.AddPaging();
         }
@@ -77,7 +76,7 @@ namespace HrPortal
             }
 
             app.UseStaticFiles();
-
+         
             app.UseAuthentication();
 
             app.UseMvc(routes =>

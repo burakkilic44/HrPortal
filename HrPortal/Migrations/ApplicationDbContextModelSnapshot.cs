@@ -354,6 +354,40 @@ namespace HrPortal.Migrations
                     b.ToTable("Experiences");
                 });
 
+            modelBuilder.Entity("HrPortal.Models.Feedback", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(4000);
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("SenderEmail")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("SenderPhone")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime>("UpdateDate");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedbacks");
+                });
+
             modelBuilder.Entity("HrPortal.Models.Job", b =>
                 {
                     b.Property<string>("Id")
@@ -530,40 +564,6 @@ namespace HrPortal.Migrations
                     b.HasIndex("ParentLocationId");
 
                     b.ToTable("Locations");
-                });
-
-            modelBuilder.Entity("HrPortal.Models.Message", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(4000);
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<string>("SenderEmail")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("SenderName")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("SenderPhone")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime>("UpdateDate");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Occupation", b =>

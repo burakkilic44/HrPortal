@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace HrPortal.Data.Migrations
+namespace HrPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171115083308_first")]
-    partial class first
+    [Migration("20180103104447_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -105,26 +105,48 @@ namespace HrPortal.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("HrPortal.Models.Category", b =>
+            modelBuilder.Entity("HrPortal.Models.Audit", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
+                    b.Property<string>("Action")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Area")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Controller")
+                        .HasMaxLength(200);
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("EntityId")
                         .HasMaxLength(200);
+
+                    b.Property<string>("Ip")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("NewValue");
+
+                    b.Property<string>("OldValue");
 
                     b.Property<DateTime>("UpdateDate");
 
                     b.Property<string>("UpdatedBy");
 
+                    b.Property<string>("Url");
+
+                    b.Property<string>("UserAgent");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(200);
+
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Audits");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Certificate", b =>
@@ -135,9 +157,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("CertificateFile")
                         .HasMaxLength(200);
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("IssueDate");
 
@@ -171,9 +193,9 @@ namespace HrPortal.Data.Migrations
 
                     b.Property<DateTime?>("ApproveDate");
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Dribbble")
                         .HasMaxLength(200);
@@ -221,6 +243,8 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Pinterest")
                         .HasMaxLength(200);
 
+                    b.Property<string>("SectorId");
+
                     b.Property<string>("ShortDescription")
                         .HasMaxLength(4000);
 
@@ -244,6 +268,8 @@ namespace HrPortal.Data.Migrations
 
                     b.HasIndex("LocationId");
 
+                    b.HasIndex("SectorId");
+
                     b.ToTable("Companies");
                 });
 
@@ -252,20 +278,20 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Department")
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<string>("EducationInfoNotes")
+                        .HasMaxLength(4000);
+
                     b.Property<int>("EducationLevel");
 
                     b.Property<DateTime?>("EndDate");
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(4000);
 
                     b.Property<string>("Photo")
                         .HasMaxLength(200);
@@ -298,13 +324,13 @@ namespace HrPortal.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<int?>("EndYear");
 
-                    b.Property<string>("Notes")
+                    b.Property<string>("ExperienceNotes")
                         .HasMaxLength(4000);
 
                     b.Property<string>("Photo")
@@ -337,9 +363,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("CompanyId")
                         .IsRequired();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Details")
                         .IsRequired();
@@ -348,11 +374,13 @@ namespace HrPortal.Data.Migrations
 
                     b.Property<DateTime>("EndDate");
 
-                    b.Property<int?>("Experience");
+                    b.Property<int>("Experience");
 
                     b.Property<bool>("IsActive");
 
                     b.Property<int>("MilitaryStatus");
+
+                    b.Property<string>("OccupationId");
 
                     b.Property<DateTime>("PublishDate");
 
@@ -370,13 +398,15 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("WebAddress")
                         .HasMaxLength(200);
 
-                    b.Property<int?>("WorkingHours");
+                    b.Property<int>("WorkingHours");
 
                     b.Property<int>("WorkingStyle");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("OccupationId");
 
                     b.ToTable("Jobs");
                 });
@@ -386,15 +416,16 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("JobId");
 
                     b.Property<string>("Message");
 
-                    b.Property<string>("ResumeId");
+                    b.Property<string>("ResumeId")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdateDate");
 
@@ -427,9 +458,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -446,19 +477,32 @@ namespace HrPortal.Data.Migrations
 
             modelBuilder.Entity("HrPortal.Models.LanguageInfo", b =>
                 {
-                    b.Property<string>("ResumeId");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("LanguageId");
 
                     b.Property<int>("ReadingLevel");
 
+                    b.Property<string>("ResumeId");
+
                     b.Property<int>("SpeakingLevel");
+
+                    b.Property<DateTime>("UpdateDate");
+
+                    b.Property<string>("UpdatedBy");
 
                     b.Property<int>("WritingLevel");
 
-                    b.HasKey("ResumeId", "LanguageId");
+                    b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
+
+                    b.HasIndex("ResumeId");
 
                     b.ToTable("LanguageInfos");
                 });
@@ -468,9 +512,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -498,9 +542,9 @@ namespace HrPortal.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(4000);
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("SenderEmail")
                         .IsRequired()
@@ -528,9 +572,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -554,9 +598,9 @@ namespace HrPortal.Data.Migrations
 
                     b.Property<DateTime?>("BirthDate");
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Dribbble")
                         .HasMaxLength(200);
@@ -603,8 +647,7 @@ namespace HrPortal.Data.Migrations
 
                     b.Property<int>("MilitaryStatus");
 
-                    b.Property<string>("Notes")
-                        .HasMaxLength(4000);
+                    b.Property<string>("OccupationId");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -619,7 +662,17 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("ResumeFile")
                         .HasMaxLength(200);
 
+                    b.Property<string>("ResumeName")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ResumeNotes")
+                        .HasMaxLength(4000);
+
                     b.Property<int>("SmokingStatus");
+
+                    b.Property<string>("Tags")
+                        .HasMaxLength(4000);
 
                     b.Property<string>("Title")
                         .HasMaxLength(200);
@@ -643,20 +696,29 @@ namespace HrPortal.Data.Migrations
 
                     b.HasIndex("LocationId");
 
+                    b.HasIndex("OccupationId");
+
                     b.ToTable("Resumes");
                 });
 
-            modelBuilder.Entity("HrPortal.Models.ResumeTag", b =>
+            modelBuilder.Entity("HrPortal.Models.Sector", b =>
                 {
-                    b.Property<string>("ResumeId");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("TagId");
+                    b.Property<DateTime>("CreateDate");
 
-                    b.HasKey("ResumeId", "TagId");
+                    b.Property<string>("CreatedBy");
 
-                    b.HasIndex("TagId");
+                    b.Property<string>("Name");
 
-                    b.ToTable("ResumeTags");
+                    b.Property<DateTime>("UpdateDate");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sectors");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Setting", b =>
@@ -669,9 +731,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Address")
                         .HasMaxLength(200);
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("CustomHtml");
 
@@ -749,9 +811,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<int>("Level");
 
@@ -777,9 +839,9 @@ namespace HrPortal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreateBy");
-
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -925,6 +987,10 @@ namespace HrPortal.Data.Migrations
                     b.HasOne("HrPortal.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+
+                    b.HasOne("HrPortal.Models.Sector", "Sector")
+                        .WithMany("Companies")
+                        .HasForeignKey("SectorId");
                 });
 
             modelBuilder.Entity("HrPortal.Models.EducationInfo", b =>
@@ -947,18 +1013,23 @@ namespace HrPortal.Data.Migrations
                         .WithMany("Jobs")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HrPortal.Models.Occupation", "Occupation")
+                        .WithMany("Jobs")
+                        .HasForeignKey("OccupationId");
                 });
 
             modelBuilder.Entity("HrPortal.Models.JobApplication", b =>
                 {
                     b.HasOne("HrPortal.Models.Job", "Job")
                         .WithMany("JobApplications")
-                        .HasForeignKey("JobId");
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HrPortal.Models.Resume", "Resume")
                         .WithMany("JobApplications")
                         .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HrPortal.Models.JobLocation", b =>
@@ -983,8 +1054,7 @@ namespace HrPortal.Data.Migrations
 
                     b.HasOne("HrPortal.Models.Resume", "Resume")
                         .WithMany("LanguageInfos")
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ResumeId");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Location", b =>
@@ -1004,19 +1074,10 @@ namespace HrPortal.Data.Migrations
                     b.HasOne("HrPortal.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
-                });
 
-            modelBuilder.Entity("HrPortal.Models.ResumeTag", b =>
-                {
-                    b.HasOne("HrPortal.Models.Resume", "Resume")
-                        .WithMany("ResumeTags")
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("HrPortal.Models.Tag", "Tag")
-                        .WithMany("ResumeTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                    b.HasOne("HrPortal.Models.Occupation", "Occupation")
+                        .WithMany("Resumes")
+                        .HasForeignKey("OccupationId");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Skill", b =>

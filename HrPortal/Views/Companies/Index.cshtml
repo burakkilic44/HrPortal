@@ -65,49 +65,45 @@
 
             <div class="row">
 
-                <div class="col-xs-12">
-                    <br>
-                    <h5><strong> @Model.SearchResults.Count</strong> eşleşme bulundu</h5>
-                </div>
-                @foreach (var CompanyItem in Model.SearchResults) {
+    <div class="col-xs-12">
+        <br>
+        <h5><strong> @Model.SearchResults.Count</strong> eşleşme bulundu</h5>
+    </div>
+    @foreach (var CompanyItem in Model.SearchResults)
+    {
                 <!-- Company detail -->
-                <div class="col-xs-12">
+        <div class="col-xs-12">
+            <a class="item-block" asp-action="Details" asp-route-id="@CompanyItem.Id">
+                <header>
 
-                    <div class="item-block">
-                        <header>
-                            <div class="span2" style="text-align:center;">
+                    @if (String.IsNullOrEmpty(CompanyItem.Photo))
+                {
 
-                                <a asp-controller="Companies" asp-action="Index">
-                                    @if (String.IsNullOrEmpty(CompanyItem.Photo))
-                                    {
+                        <img class="logo" src="/uploads/background.jpg" />
 
-                                        <img class="logo" src="/uploads/background.jpg" />
+                    }
+                    else
+                    {
+                        <img src="~/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Photo">
 
-                                    }
-                                    else
-                                    {
-                                        <img src="/uploads/companies/@CompanyItem.Photo" class="img-responsive" style=" width:70px; height:70px" />
+                    }
+                    <div class="hgroup">
+                        <h4>@CompanyItem.Name</h4>
 
-                                    }
-                                    <br />
-                                </a>
-                            </div>
-                            <div class="hgroup">
-                                <h4><a asp-action="Details" asp-route-id="@CompanyItem.Id">@CompanyItem.Name</a></h4>
-                            </div>
-                            <span class="open-position"></span>
-
-                        </header>
-
-
-                        <div class="item-body">
-
-                            <p>@Html.Raw(CompanyItem.ShortDescription)</p>
-
-                        </div>
                     </div>
+                    <span class="open-position"></span>
+                </header>
+
+
+                <div class="item-body">
+
+                    <p>@Html.Raw(CompanyItem.ShortDescription)</p>
+
                 </div>
-                }
+            </a>
+        </div>
+        
+    }
                 <!-- Page navigation -->
                 <div class="col-md-12">
                     <nav aria-label="Job navigation example">

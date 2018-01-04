@@ -58,16 +58,29 @@
                 {
                 <!-- Company detail -->
                     <div class="col-xs-12">
-
-                        <div class="item-block">
+                        <a class="item-block" asp-action="Details" asp-route-id="@CompanyItem.Id">
                             <header>
-                                <img src="/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Name">
-                                <div class="hgroup">
-                                    <h4><a asp-action="Details" asp-route-id="@CompanyItem.Id">@CompanyItem.Name</a></h4>
-                                </div>
-                                <span class="open-position"></span>
 
+                                @if (String.IsNullOrEmpty(CompanyItem.Photo))
+                {
+
+                                    <img class="logo" src="/uploads/background.jpg" />
+
+                                }
+                                else
+                                {
+                                    <img src="~/uploads/companies/@CompanyItem.Photo" alt="@CompanyItem.Photo">
+
+                                }
+                                <div class="hgroup">
+                                    <h4>@CompanyItem.Name</h4>
+                                    
+                                </div>
                             </header>
+
+                            <span class="open-position"></span>
+
+
 
 
                             <div class="item-body">
@@ -75,7 +88,7 @@
                                 <p>@CompanyItem.ShortDescription</p>
 
                             </div>
-                        </div>
+                        </a>
                     </div>
                 }
                 <!-- Page navigation -->
