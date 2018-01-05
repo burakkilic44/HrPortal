@@ -12,9 +12,10 @@ using System;
 namespace HrPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180105115957_MessageModelAdded")]
+    partial class MessageModelAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -566,45 +567,6 @@ namespace HrPortal.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("HrPortal.Models.Message", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ApplicationUserId");
-
-                    b.Property<string>("Body");
-
-                    b.Property<string>("CompanyId");
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<bool>("IsRead");
-
-                    b.Property<DateTime>("ReadDate");
-
-                    b.Property<string>("ResumeId");
-
-                    b.Property<string>("Subject")
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime>("UpdateDate");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("Messages");
-                });
-
             modelBuilder.Entity("HrPortal.Models.Occupation", b =>
                 {
                     b.Property<string>("Id")
@@ -1100,21 +1062,6 @@ namespace HrPortal.Migrations
                     b.HasOne("HrPortal.Models.Location", "ParentLocation")
                         .WithMany()
                         .HasForeignKey("ParentLocationId");
-                });
-
-            modelBuilder.Entity("HrPortal.Models.Message", b =>
-                {
-                    b.HasOne("HrPortal.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("HrPortal.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
-
-                    b.HasOne("HrPortal.Models.Resume", "Resume")
-                        .WithMany()
-                        .HasForeignKey("ResumeId");
                 });
 
             modelBuilder.Entity("HrPortal.Models.Resume", b =>
