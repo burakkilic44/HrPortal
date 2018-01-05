@@ -359,13 +359,14 @@
             $.post("/Resumes/EducationInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
-                    Photo: $("#Photo").val(),
-                    EducationLevel: $("#EducationLevel").val(),
-                    SchoolName: $("#SchoolName").val(),
-                    Department: $("#Department").val(),
-                    StartDate: $("#StartDate").val(),
-                    EndDate: $("#EndDate").val(),
-                    EducationInfoNotes: $("#EducationInfoNotes").val(),
+                    Photo: $("#item_Photo").val(),
+                    Id: $("#item_Id").val(),
+                    EducationLevel: $("#item_EducationLevel").val(),
+                    SchoolName: $("#item_SchoolName").val(),
+                    Department: $("#item_Department").val(),
+                    StartDate: $("#item_StartDate").val(),
+                    EndDate: $("#item_EndDate").val(),
+                    EducationInfoNotes: $("#item_EducationInfoNotes").val(),
                 },
                 function(data) {
                     alert(data);
