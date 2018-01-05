@@ -11,6 +11,7 @@ namespace HrPortal.Controllers
     public class MassagesController : Controller
     {
         // GET: /<controller>/
+        [Route("Mesajlar/Mesajlarim")]
         public IActionResult Index()
         {
             return View();
