@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HrPortal.Data;
 using HrPortal.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HrPortal.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class FeedbacksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -44,79 +46,8 @@ namespace HrPortal.Areas.Admin.Controllers
             return View(feedback);
         }
 
-        // GET: Admin/Feedbacks/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Feedbacks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SenderName,SenderEmail,SenderPhone,Content,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Feedback feedback)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(feedback);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(feedback);
-        }
-
-        // GET: Admin/Feedbacks/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var feedback = await _context.Feedbacks.SingleOrDefaultAsync(m => m.Id == id);
-            if (feedback == null)
-            {
-                return NotFound();
-            }
-            return View(feedback);
-        }
-
-        // POST: Admin/Feedbacks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("SenderName,SenderEmail,SenderPhone,Content,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Feedback feedback)
-        {
-            if (id != feedback.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(feedback);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FeedbackExists(feedback.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(feedback);
-        }
-
+       
+        
         // GET: Admin/Feedbacks/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
