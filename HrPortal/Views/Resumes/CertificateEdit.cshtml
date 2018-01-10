@@ -21,6 +21,7 @@
                                     <input id="CertificateName" asp-for="@item.Name" type="text" class="form-control" placeholder="Sertifika Adı">
                                     <span asp-validation-for="@item.Name" class="text-danger"></span>
                                 </div>
+                                <input type="hidden" asp-for="@item.Id" id="Certificate_item_Id">
                                 <div class="form-group">
                                     <input asp-for="@item.Issuer" type="text" class="form-control" placeholder="Alındığı Kurum">
                                     <span asp-validation-for="@item.Issuer" class="text-danger"></span>

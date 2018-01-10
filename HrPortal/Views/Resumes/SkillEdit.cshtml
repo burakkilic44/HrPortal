@@ -21,6 +21,7 @@
                                     <input asp-for="@item.Name" type="text" class="form-control" placeholder="Yetenek, bkz. HTML">
                                     <span asp-validation-for="@item.Name" class="text-danger"></span>
                                 </div>
+                                <input type="hidden" asp-for="@item.Id" id="Skill_item_Id">
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-group">
