@@ -19,8 +19,36 @@
                 <img src="/uploads/resumes/@Model.Photo" alt="@Model.Photo">
 
                }
+               
             </div>
+            <div class=" btn-group-xs text-right">
+                <div class="action-buttons">
+                    <button type="button" id="asd" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="false" onclick="document.getElementById('recepient').value='@Model.Id">Mesaj Gönder</button>
 
+                </div>
+            </div> 
+            <div class="modal" id="exampleModal">
+                <div class="modal-content modal-dialog">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title">Mesaj Gönder</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+
+                            <div class="form-group">
+                                <input type="hidden" id="recepient" />
+                                <label for="message-text" class="control-label">Mesaj:</label>
+                                <textarea class="form-control" id="messageText"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button id="sendButton" type="button" onclick="SendMessage()" class="btn btn-primary">Gönder</button>
+                    </div>
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-8 header-detail">
                 <div class="hgroup">
                     <h1>@Model.ResumeName</h1>
@@ -302,9 +330,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                  </div>
+
             }
         </section>
+
     }
 </main>
 <!-- END Main container -->
