@@ -27,6 +27,8 @@
                                     <input name="CompanyName" id="ExperienceCompanyName" value="@item.CompanyName" type="text" class="form-control" placeholder="Firma Adı">
                                     <span asp-validation-for="@item.CompanyName" class="text-danger"></span>
                                 </div>
+                                <input type="hidden" asp-for="@item.Id" id="Experience_item_Id">
+
                                 <div class="form-group">
                                     <input name="Position" id="ExperiencePosition" value="@item.Position" type="text" class="form-control" placeholder="Çalıştığı Pozisyon">
                                     <span asp-validation-for="@item.Position" class="text-danger"></span>

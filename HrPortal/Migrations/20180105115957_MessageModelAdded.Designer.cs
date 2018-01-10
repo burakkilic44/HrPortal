@@ -12,8 +12,8 @@ using System;
 namespace HrPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180104124951_changeToFeedback")]
-    partial class changeToFeedback
+    [Migration("20180105115957_MessageModelAdded")]
+    partial class MessageModelAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

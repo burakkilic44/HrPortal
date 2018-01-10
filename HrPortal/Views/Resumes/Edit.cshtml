@@ -359,13 +359,14 @@
             $.post("/Resumes/EducationInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
-                    Photo: $("#Photo").val(),
-                    EducationLevel: $("#EducationLevel").val(),
-                    SchoolName: $("#SchoolName").val(),
-                    Department: $("#Department").val(),
-                    StartDate: $("#StartDate").val(),
-                    EndDate: $("#EndDate").val(),
-                    EducationInfoNotes: $("#EducationInfoNotes").val(),
+                    Photo: $("#item_Photo").val(),
+                    Id: $("#EducationInfo_item_Id").val(),
+                    EducationLevel: $("#item_EducationLevel").val(),
+                    SchoolName: $("#item_SchoolName").val(),
+                    Department: $("#item_Department").val(),
+                    StartDate: $("#item_StartDate").val(),
+                    EndDate: $("#item_EndDate").val(),
+                    EducationInfoNotes: $("#item_EducationInfoNotes").val(),
                 },
                 function(data) {
                     alert(data);
@@ -390,6 +391,7 @@
                 {
                     ResumeId: "@(Model.Id)",
                     Photo: $("#ExperiencePhoto").val(),
+                    Id: $("#Experience_item_Id").val(),
                     CompanyName: $("#ExperienceCompanyName").val(),
                     StartYear: $("#ExperienceStartYear").val(),
                     EndYear: $("#ExperienceEndYear").val(),
@@ -422,8 +424,9 @@
             $.post("/Resumes/SkillEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
-                    Name: $("#Name").val(),
-                    Level: $("#Level").val(),
+                    Id: $("#Skill_item_Id").val(),
+                    Name: $("#item_Name").val(),
+                    Level: $("#item_Level").val(),
                 },
                 function(data) {
                     alert(data);
@@ -450,10 +453,11 @@
                 {
                     ResumeId: "@(Model.Id)",
                     Name: $("#CertificateName").val(),
-                    Issuer: $("#Issuer").val(),
-                    Issuer: $("#Issuer").val(),
-                    IssueDate: $("#IssueDate").val(),
-                    CertificateFile: $("#CertificateFile").val(),
+                    Id: $("#Certificate_item_Id").val(),
+                    Issuer: $("#item_Issuer").val(),
+                    Issuer: $("#item_Issuer").val(),
+                    IssueDate: $("#item_IssueDate").val(),
+                    CertificateFile: $("#item_CertificateFile").val(),
                 },
                 function(data) {
                     alert(data);
@@ -477,10 +481,11 @@
             $.post("/Resumes/LanguageInfoEdit?resumeId=@Model.Id",
                 {
                     ResumeId: "@(Model.Id)",
-                    LanguageId: $("#LanguageId").val(),
-                    SpeakingLevel: $("#SpeakingLevel").val(),
-                    ReadingLevel: $("#ReadingLevel").val(),
-                    WritingLevel: $("#WritingLevel").val(),
+                    LanguageId: $("#item_LanguageId").val(),
+                    //Id: $("#LanguageInfo_item_Id").val(),
+                    SpeakingLevel: $("#item_SpeakingLevel").val(),
+                    ReadingLevel: $("#item_ReadingLevel").val(),
+                    WritingLevel: $("#item_WritingLevel").val(),
                 },
                 function(data) {
                     alert(data);

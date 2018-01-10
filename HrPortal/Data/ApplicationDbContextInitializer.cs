@@ -1,6 +1,7 @@
 ﻿using HrPortal.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +11,19 @@ namespace HrPortal.Data
 {
     public class ApplicationDbContextInitializer
     {
-        private ApplicationDbContext context;
-        private RoleManager<IdentityRole> roleManager;
-        private UserManager<ApplicationUser> userManager;
-        public ApplicationDbContextInitializer(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public static void Seed(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
-            this.context = context;
-            this.roleManager = roleManager;
-            this.userManager = userManager;
+            
+            context.Database.Migrate();
+            CreateRoles(context, roleManager, userManager);
+            CreateDefaultUsers(context, roleManager, userManager);
+            CreateSettings(context);
+            CreateLanguages(context);
+            CreateLocations(context);
+            CreateSectors(context);
+            CreateOccupations(context);
         }
-
-        public void Seed()
-        {
-            if (context.Database.EnsureCreated()) { 
-                context.Database.Migrate();
-            }
-
-            CreateRoles();
-            CreateDefaultUsers();
-            CreateSettings();
-            CreateLanguages();
-            CreateLocations();
-            CreateSectors();
-            CreateOccupations();
-        }
-        private void CreateRoles()
+        private static void CreateRoles(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             string[] roles = { "Admin", "Employer", "Candidate" };
             string[] stamp = { "Admin", "Employer", "Candidate" };
@@ -46,7 +35,7 @@ namespace HrPortal.Data
                 task1.Wait();
             }
         }
-        private void CreateDefaultUsers()
+        private static void CreateDefaultUsers(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             var user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "bilisimkariyernet@gmail.com", Email = "bilisimkariyernet@gmail.com", EmailConfirmed = true, NormalizedEmail = "BILISIMKARIYERNET@GMAIL.COM", NormalizedUserName = "BILISIMKARIYERNET@GMAIL.COM", IsEmployer = true};
             var task1 = Task.Run(() => userManager.CreateAsync(user, "Hr123+"));
@@ -68,7 +57,7 @@ namespace HrPortal.Data
 
         }
 
-        private void CreateSettings()
+        private static void CreateSettings(ApplicationDbContext context)
         {
             if (!context.Settings.Any())
             {
@@ -77,7 +66,7 @@ namespace HrPortal.Data
                 context.SaveChanges();
             }
         }
-        private void CreateLanguages()
+        private static void CreateLanguages(ApplicationDbContext context)
         {
             if (!context.Languages.Any())
             {
@@ -91,7 +80,7 @@ namespace HrPortal.Data
 
             }
         }
-        private void CreateLocations()
+        private static void CreateLocations(ApplicationDbContext context)
         {
             if (!context.Locations.Any())
             {
@@ -268,7 +257,7 @@ namespace HrPortal.Data
 
        }
 
-        private void CreateSectors()
+        private static void CreateSectors(ApplicationDbContext context)
         {
             if (!context.Sectors.Any())
             {
@@ -330,7 +319,7 @@ namespace HrPortal.Data
             }
 
         }
-        private void CreateOccupations()
+        private static void CreateOccupations(ApplicationDbContext context)
         {
             if (!context.Occupations.Any())
             {

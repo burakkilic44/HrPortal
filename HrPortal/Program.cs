@@ -7,6 +7,10 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using HrPortal.Data;
+using Microsoft.AspNetCore.Identity;
+using HrPortal.Models;
 
 namespace HrPortal
 {
@@ -14,7 +18,25 @@ namespace HrPortal
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                try
+                {
+                    // Requires using RazorPagesMovie.Models;
+                    ApplicationDbContextInitializer.Seed(services.GetRequiredService<ApplicationDbContext>(), services.GetRequiredService<RoleManager<IdentityRole>>(), services.GetRequiredService<UserManager<ApplicationUser>>());
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
