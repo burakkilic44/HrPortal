@@ -23,7 +23,7 @@ namespace HrPortal.Areas.Admin.Controllers
         // GET: Admin/Messages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Messages.Include(m => m.ApplicationUser).Include(m => m.Company).Include(m => m.Resume);
+            var applicationDbContext = _context.Messages.Include(m => m.FromCompany).Include(m => m.ToCompany).Include(m => m.FromResume).Include(m=>m.ToResume);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,9 +36,7 @@ namespace HrPortal.Areas.Admin.Controllers
             }
 
             var message = await _context.Messages
-                .Include(m => m.ApplicationUser)
-                .Include(m => m.Company)
-                .Include(m => m.Resume)
+                .Include(m => m.FromCompany).Include(m => m.ToCompany).Include(m => m.FromResume).Include(m => m.ToResume)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (message == null)
             {
@@ -70,9 +68,9 @@ namespace HrPortal.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", message.ApplicationUserId);
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", message.CompanyId);
-            ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id", message.ResumeId);
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
+            ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id");
             return View(message);
         }
 
@@ -89,9 +87,9 @@ namespace HrPortal.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", message.ApplicationUserId);
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", message.CompanyId);
-            ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id", message.ResumeId);
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
+            ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id");
             return View(message);
         }
 
@@ -127,9 +125,9 @@ namespace HrPortal.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", message.ApplicationUserId);
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", message.CompanyId);
-            ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id", message.ResumeId);
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
+            ViewData["ResumeId"] = new SelectList(_context.Resumes, "Id", "Id");
             return View(message);
         }
 
@@ -142,9 +140,7 @@ namespace HrPortal.Areas.Admin.Controllers
             }
 
             var message = await _context.Messages
-                .Include(m => m.ApplicationUser)
-                .Include(m => m.Company)
-                .Include(m => m.Resume)
+               .Include(m => m.FromCompany).Include(m => m.ToCompany).Include(m => m.FromResume).Include(m => m.ToResume)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (message == null)
             {
