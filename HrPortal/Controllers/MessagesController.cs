@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HrPortal.Controllers
 {
-    public class MassagesController : Controller
+    public class MessagesController : Controller
     {
         // GET: /<controller>/
         [Route("Mesajlar/Mesajlarim")]
