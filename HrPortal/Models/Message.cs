@@ -9,17 +9,32 @@ namespace HrPortal.Models
 {
     public class Message: BaseEntity
     {
-        [Display(Name = "Firma")]
-        public string CompanyId { get; set; }
-        [Display(Name = "Firma")]
-        [ForeignKey("CompanyId")]
-        public Company Company { get; set; }
+        [Display(Name = "Gönderen Kullanıcı")]
+        public string From { get; set; }
+        [Display(Name = "Alıcı Kullanıcı")]
+        public string To { get; set; }
 
-        [Display(Name = "Kullanıcı")]
-        public string ApplicationUserId { get; set; }
-        [Display(Name = "Kullanıcı")]
-        [ForeignKey("ApplicationUserId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        [Display(Name = "Gönderen Firma")]
+        public string FromCompanyId { get; set; }
+        [Display(Name = "Gönderen Firma")]
+        [ForeignKey("FromCompanyId")]
+        public Company FromCompany { get; set; }
+        [Display(Name = "Alıcı Firma")]
+        public string ToCompanyId { get; set; }
+        [Display(Name = "Alıcı Firma")]
+        [ForeignKey("ToCompanyId")]
+        public Company ToCompany { get; set; }
+
+        [Display(Name = "Gönderen Özgeçmiş")]
+        public string FromResumeId { get; set; }
+        [Display(Name = "Gönderen Özgeçmiş")]
+        [ForeignKey("FromResumeId")]
+        public Resume FromResume { get; set; }
+        [Display(Name = "Alıcı Özgeçmiş")]
+        public string ToResumeId { get; set; }
+        [Display(Name = "Alıcı Özgeçmiş")]
+        [ForeignKey("ToResumeId")]
+        public Resume ToResume { get; set; }
 
         [StringLength(200)]
         [Display(Name = "Konu")]
@@ -33,12 +48,6 @@ namespace HrPortal.Models
         [Display(Name = "Okunma Tarihi")]
         public DateTime ReadDate { get; set; }
 
-        [Display(Name = "Özgeçmiş")]
-        public string ResumeId { get; set; }
-        [Display(Name = "Özgeçmiş")]
-        [ForeignKey("ResumeId")]
-        public Resume Resume { get; set; }
-
-       
+        public DateTime SendDate { get; set; }       
     }
 }

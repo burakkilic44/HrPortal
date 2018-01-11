@@ -66,24 +66,7 @@ namespace HrPortal.Controllers
         }
 
 
-        public JsonResult SendMessage(string message, string resumeid)
-        {
-            var recepientEmail = resumeRepository.Get(resumeid).Email;
-            SmtpClient client = new SmtpClient("mail.bilisimkariyer.net");
-            client.UseDefaultCredentials = false;
-            client.EnableSsl = false;
-            client.Port = 587;
-            client.Credentials = new NetworkCredential("cvhavuzu@bilisimkariyer.net", "waa6hl");
-
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.IsBodyHtml = true;
-            mailMessage.From = new MailAddress("cvhavuzu@bilisimkariyer.net");
-            mailMessage.To.Add(recepientEmail);
-            mailMessage.Body = message;
-            client.Send(mailMessage);
-
-            return Json(true);
-        }
+        
 
         [Authorize(Roles = "Employer,Admin,Candidate")]
         public IActionResult Delete(string id)

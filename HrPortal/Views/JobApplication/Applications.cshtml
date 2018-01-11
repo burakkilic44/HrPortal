@@ -119,13 +119,16 @@
                                        
                                         <div class="form-group">
                                             <input type="hidden" id="recepient" />
-                                            <label for="message-text" class="control-label">Mesaj:</label>
-                                            <textarea  class="form-control" id="messageText"></textarea>
+                                            <label for="subject" class="control-label">Konu:</label>
+                                            <input class="form-control" id="subject" />
+                                            <label for="messageText" class="control-label">Mesaj:</label>
+                                            <textarea class="form-control" id="messageText"></textarea>
+                                            
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
                                     <button id="sendButton" type="button" onclick="SendMessage()" class="btn btn-primary">Gönder</button>
                                 </div>
                             </div>
@@ -154,10 +157,12 @@
        function SendMessage() {
            var recepient = $("#recepient").val();
            var message = $("#messageText").val();
+           var subject = $("#subject").val();
+           
                
             $.ajax({
-                url: '/JobApplication/SendMessage',
-                data: { message: message, resumeid: recepient },
+                url: '/Applications/SendMessage',
+                data: { message: message, resumeid: recepient,sender:jobApplicationId},
                 type: 'POST',
                 dataType: 'json',
                 success: function (data)
