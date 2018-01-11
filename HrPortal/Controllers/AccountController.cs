@@ -241,8 +241,8 @@ namespace HrPortal.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            ViewBag.Locations = new SelectList(locationRepository.GetAll().ToList(), "Id", "Name");
-            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().ToList(), "Id", "Name");
+            ViewBag.Locations = new SelectList(locationRepository.GetAll().OrderBy(s=>s.Name), "Id", "Name");
+            ViewBag.Occupations = new SelectList(occupationRepository.GetAll().OrderBy(s=>s.Name), "Id", "Name");
             return View();
         }
 
